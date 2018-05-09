@@ -1,0 +1,134 @@
+version=53;
+class EditorData
+{
+	moveGridStep=1;
+	angleGridStep=0.2617994;
+	scaleGridStep=1;
+	autoGroupingDist=10;
+	toggles=13;
+	class ItemIDProvider
+	{
+		nextID=78;
+	};
+	class MarkerIDProvider
+	{
+		nextID=4;
+	};
+	class Camera
+	{
+		pos[]={14667.764,116.34233,20815.076};
+		dir[]={-0.45624799,-0.8702178,0.18603596};
+		up[]={-0.80580997,0.49266708,0.32856888};
+		aside[]={0.37757996,-1.0976219e-006,0.926009};
+	};
+};
+binarizationWanted=0;
+addons[]=
+{
+	"A3_Characters_F"
+};
+class AddonsMetaData
+{
+	class List
+	{
+		items=1;
+		class Item0
+		{
+			className="A3_Characters_F";
+			name="Arma 3 Alpha - Characters and Clothing";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+	};
+};
+randomSeed=3460971;
+class ScenarioData
+{
+	author="Genesis";
+};
+class CustomAttributes
+{
+	class Category0
+	{
+		name="Scenario";
+		class Attribute0
+		{
+			property="EnableDebugConsole";
+			expression="true";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"SCALAR"
+						};
+					};
+					value=1;
+				};
+			};
+		};
+		nAttributes=1;
+	};
+};
+class Mission
+{
+	class Intel
+	{
+		briefingName="Vcom AI 3.0 Showcase";
+		resistanceWest=0;
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=12;
+		minute=0;
+		startFogDecay=0.014;
+		forecastFogDecay=0.014;
+	};
+	class Entities
+	{
+		items=1;
+		class Item0
+		{
+			dataType="Group";
+			side="West";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={14611.534,52.928631,20813.127};
+						angles[]={0,4.9677863,0};
+					};
+					side="West";
+					flags=3;
+					class Attributes
+					{
+						isPlayer=1;
+					};
+					id=1;
+					type="B_Soldier_TL_F";
+					atlOffset=3.4674911;
+				};
+			};
+			class Attributes
+			{
+			};
+			id=0;
+			atlOffset=3.4674911;
+		};
+	};
+};
