@@ -38,7 +38,7 @@ if !(CBAACT) exitwith {};
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {  
         params ["_value"];
-        VCM_SIDEENABLED = _value;
+        VCM_SIDEENABLED = _this;
     } // function that will be executed once on mission start and every time the setting is changed.
 ] call CBA_Settings_fnc_init;
 

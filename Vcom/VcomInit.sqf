@@ -51,34 +51,34 @@ Vcm_PAN = compileFinal "(_this select 0) playActionNow (_this select 1);";
 //Below is loop to check for new AI spawning in to be added to the list
 [] spawn
 {
-sleep 2;
-if (hasInterface) then
-{
-//Event handlers for players	
-player addEventHandler ["Fired",{_this call VCM_fnc_HearingAids;}];
-player spawn VCM_fnc_IRCHECK;
-player addEventHandler ["Respawn",{_this spawn VCM_fnc_IRCHECK;}];
-};
-
-while {true} do 
-{
-	if (Vcm_ActivateAI) then
+	sleep 2;
+	if (hasInterface) then
 	{
-		{
-			if (local _x && {simulationEnabled (leader _x)} && {!(isplayer (leader _x))} && {(leader _x) isKindOf "Man"}) then 
-			{
-				private _Grp = _x;
-					if (!(_Grp in VcmAI_ActiveList) && {!(VCM_SIDEENABLED findIf {_x isEqualTo (side _Grp)} isEqualTo -1)}) then
-					{
-						if !(((units _Grp) findIf {alive _x}) isEqualTo -1) then
-						{
-							_x call VCM_fnc_SquadExc;
-						};
-					};
-			};
-			true;
-		} count allGroups;
+		//Event handlers for players	
+		player addEventHandler ["Fired",{_this call VCM_fnc_HearingAids;}];
+		player spawn VCM_fnc_IRCHECK;
+		player addEventHandler ["Respawn",{_this spawn VCM_fnc_IRCHECK;}];
 	};
-	sleep 10;
-};
+	
+	while {true} do 
+	{
+		if (Vcm_ActivateAI) then
+		{
+			{
+				if (local _x && {simulationEnabled (leader _x)} && {!(isplayer (leader _x))} && {(leader _x) isKindOf "Man"}) then 
+				{
+					private _Grp = _x;
+						if (!(_Grp in VcmAI_ActiveList) && {!(VCM_SIDEENABLED findIf {_x isEqualTo (side _Grp)} isEqualTo -1)}) then
+						{
+							if !(((units _Grp) findIf {alive _x}) isEqualTo -1) then
+							{
+								_x call VCM_fnc_SquadExc;
+							};
+						};
+				};
+				true;
+			} count allGroups;
+		};
+		sleep 10;
+	};
 };
