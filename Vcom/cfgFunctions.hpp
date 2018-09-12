@@ -1,13 +1,13 @@
-class VcomFunctions 
+class VcomFunctions
 {
 	tag = "VCM";
-	class VCMFnc 
+	class VCMFnc
 	{
 		file = "Vcom\Functions";
 		//[] call VCM_fnc_SquadExc
 		class SquadExc {};
 		//[] call VCM_fnc_KitChk
-		class KitChk {};	
+		class KitChk {};
 		//[] call VCM_fnc_RMedics
 		class RMedics {};
 		//[] call VCM_fnc_RStatics
@@ -15,7 +15,7 @@ class VcomFunctions
 		//[] call VCM_fnc_HasMine
 		class HasMine {};
 		//[] call VCM_fnc_Classname
-		class Classname {};			
+		class Classname {};
 		// [] call VCM_fnc_CheckArty
 		class CheckArty;
 		//[] call VCM_fnc_RearmSelf
@@ -72,7 +72,8 @@ class VcomFunctions
 		class ClearBuilding;
 		//[] call VCM_fnc_IRCHECK;
 		class IRCHECK;
-	};		
+		class regroup;
+	};
 
-	
+
 };
