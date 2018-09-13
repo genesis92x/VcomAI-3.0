@@ -72,7 +72,6 @@ class VcomFunctions
 		class ClearBuilding;
 		//[] call VCM_fnc_IRCHECK;
 		class IRCHECK;
-		class regroup;
 	};
 
 
