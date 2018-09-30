@@ -27,6 +27,7 @@ Vcm_Settings =
 	VCM_SIDEENABLED = [west,east,resistance]; //Sides that will activate Vcom AI
 	VCM_RAGDOLL = true; //Should AI ragdoll when hit
 	VCM_RAGDOLLCHC = 50; //CHANCE AI RAGDOLL	
+	VCM_FullSpeed = true; //Enforce full speedmode during combat (Does not reset after combat end)
 	VCM_HEARINGDISTANCE = 800; //Distance AI hear unsuppressed gunshots.
 	VCM_WARNDIST = 1000; //How far AI can request help from other groups.
 	VCM_WARNDELAY = 30; //How long the AI have to survive before they can call in for support. This activates once the AI enter combat.
