@@ -1,4 +1,4 @@
-/*%FSM<COMPILE "F:\Games\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, SQUADBEH">*/
+/*%FSM<COMPILE "E:\Games\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, SQUADBEH">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"Begin_State",0,250,50.000000,700.000000,150.000000,750.000000,0.000000,"Begin State"};
@@ -21,13 +21,13 @@ item16[] = {"Return",2,250,250.000000,200.000000,350.000000,250.000000,0.000000,
 item17[] = {"Full_Check",2,250,-100.000000,150.000000,0.000000,200.000000,0.000000,"Full Check"};
 item18[] = {"Continue2StartPo",8,218,0.000000,300.000000,100.000000,350.000000,0.000000,"Continue2StartPoint"};
 item19[] = {"Continue2StartPo",4,218,100.000000,300.000000,200.000000,350.000000,0.000000,"Continue2StartPoint2"};
-item20[] = {"Leader_Cycle_Beg",3,4346,475.000000,275.000000,575.000000,325.000000,0.000000,"Leader Cycle Beginning"};
+item20[] = {"Leader_Cycle_Beg",3,250,475.000000,275.000000,575.000000,325.000000,0.000000,"Leader Cycle Beginning"};
 item21[] = {"Continue2Return",8,218,350.000000,275.000000,450.000000,325.000000,0.000000,"Continue2Return"};
 item22[] = {"Combat",4,218,675.000000,225.000000,775.000000,275.000000,100.000000,"Combat"};
 item23[] = {"Combat_Brain",2,250,875.000000,275.000000,975.000000,325.000000,0.000000,"Combat Brain"};
 item24[] = {"Combat_BEGIN",4,218,675.000000,325.000000,775.000000,375.000000,110.000000,"Combat BEGIN"};
 item25[] = {"Return",8,218,475.000000,75.000000,575.000000,125.000000,0.000000,"Return"};
-item26[] = {"Arty_Check",4,218,1100.000000,250.000000,1200.000000,300.000000,84.000000,"Arty Check"};
+item26[] = {"Arty_Check",4,4314,1100.000000,250.000000,1200.000000,300.000000,84.000000,"Arty Check"};
 item27[] = {"",7,210,1258.500000,21.000000,1266.500000,29.000000,0.000000,""};
 item28[] = {"Flank_Orders",4,218,1050.000000,225.000000,1150.000000,275.000000,105.000000,"Flank Orders"};
 item29[] = {"",7,210,296.000000,21.000000,304.000000,29.000000,0.000000,""};
@@ -110,8 +110,8 @@ link61[] = {39,27};
 link62[] = {40,41};
 link63[] = {42,27};
 link64[] = {43,27};
-globals[] = {0.000000,0,0,0,0,640,480,2,621,6316128,1,445.535126,1463.297852,746.430176,-79.182831,784,782,1};
-window[] = {0,-1,-1,-32000,-32000,1036,1945,3413,82,1,802};
+globals[] = {0.000000,0,0,0,0,640,480,2,621,6316128,1,225.881149,1243.644531,746.430176,-79.182831,784,782,1};
+window[] = {0,-1,-1,-1,-1,987,341,1809,33,1,802};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -770,7 +770,7 @@ class FSM
                                         priority = 84.000000;
                                         to="Return";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"(_ArtyT + VCM_ARTYDELAY) < time && {count (units (group _NearestEnemy)) > 2}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_ArtyT + VCM_ARTYDELAY) < time && {group _NearestEnemy != grpNull} && {count (units (group _NearestEnemy)) > 2}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"[_Group,(group _NearestEnemy)] call VCM_fnc_ArtyCall;" \n
                                          "switch ((side _Group)) do {" \n
                                          "	case west: {VCM_ARTYWT = time;};" \n
