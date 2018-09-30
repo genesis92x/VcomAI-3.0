@@ -95,9 +95,11 @@ Vcm_Settings =
 	
 	*/
 
-		
+	//Set AI Skill levels
 	VCM_AIDIFSET =
 	{
+		//Skip if Vcom Skillchange is disabled
+		if (!VCM_SKILLCHANGE) exitWith {};
 		{
 			private _unit = _x;
 			_unit setSkill 0.9;
