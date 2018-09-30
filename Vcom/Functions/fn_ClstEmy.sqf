@@ -4,11 +4,7 @@ private _UnitSide = (side _this);
 private _A1 = [];
 {
 	private _TargetSide = side _x;
-<<<<<<< Updated upstream
-	if ([_UnitSide, _TargetSide] call BIS_fnc_sideIsEnemy) then {_A1 pushback _x;};
-=======
 	if ([_UnitSide, _TargetSide] call BIS_fnc_sideIsEnemy && {!(vehicle _X isKindOf "Air")} && {_this knowsAbout _x > 1}) then {_A1 pushback _x;};
->>>>>>> Stashed changes
 } forEach allUnits;
 
 private _Rtrn = [_A1,_this,true,"1"] call VCM_fnc_ClstObj;
