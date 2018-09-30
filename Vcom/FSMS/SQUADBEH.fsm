@@ -771,7 +771,7 @@ class FSM
                                         priority = 84.000000;
                                         to="Return";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"(_ArtyT + VCM_ARTYDELAY) < time && {group _NearestEnemy != grpNull} && {count (units (group _NearestEnemy)) > 2}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_ArtyT + VCM_ARTYDELAY) < time && {!(_NearestEnemy isequalto [0,0,0])} && {count (units (group _NearestEnemy)) > 2}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"[_Group,(group _NearestEnemy)] call VCM_fnc_ArtyCall;" \n
                                          "switch ((side _Group)) do {" \n
                                          "	case west: {VCM_ARTYWT = time;};" \n
