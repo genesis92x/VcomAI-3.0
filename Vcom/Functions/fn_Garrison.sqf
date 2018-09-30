@@ -3,7 +3,7 @@
 //Lets find the closest building
 
 private _Unit = (leader _this);
-private _nBuildingLst = nearestObjects [_Unit, ["House", "Building"], 50];
+private _nBuildingLst = nearestObjects [waypointPosition [_this, 1], ["House", "Building"], 50];
 private _nBuilding = [0,0,0];
 private _BuildingPositions = [];
 {
@@ -13,8 +13,8 @@ private _BuildingPositions = [];
 } count _nBuildingLst;
 
 
-//If the closest building is greate than 50 meters, exit
-if ((_nBuilding distance2D _Unit) > 50) exitWith {};
+//waitUntil unit is within 50m of building closest to waypoint
+waitUntil {isNull _Unit || _nBuilding distance2D _Unit < 50 || !alive _Unit};
 
 
 //If the array is not more than 0 - then exit.
