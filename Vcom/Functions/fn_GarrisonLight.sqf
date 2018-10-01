@@ -2,13 +2,14 @@
 
 private _Unit = (leader _this);
 private _nBuildingLst = nearestObjects [_Unit, ["House", "Building"], 50];
-private _nBuilding = [0,0,0];
 private _BuildingPositions = [];
 
 {
 	if (count ([_x] call BIS_fnc_buildingPositions) > 3) then {_BuildingPositions pushback _x;};
 } foreach _nBuildingLst;
 
+//Exit if no compatible buildings found
+if (_BuildingPositions isEqualTo []) exitWith {};
 
 private _TempA = [selectRandom _BuildingPositions] call BIS_fnc_buildingPositions;
 private _GroupUnits = units _this;
