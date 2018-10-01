@@ -7,6 +7,10 @@ if (count _Weaps < 0) exitWith {};
 private _FA = [];
 {
 private _Unit = [_UnitsA,_x,true,"W1"] call VCM_fnc_ClstObj;
+
+//VCM_fnc_ClstObj returns [0,0,0] if nothing found
+if (_Unit isEqualTo [0,0,0]) exitWith {};
+
 private _Foot = isNull objectParent _Unit;
 if (_Foot) then
 {
