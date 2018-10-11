@@ -1,4 +1,4 @@
-/*%FSM<COMPILE "E:\Games\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, SQUADBEH">*/
+/*%FSM<COMPILE "F:\Games\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, SQUADBEH">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"Begin_State",0,250,50.000000,700.000000,150.000000,750.000000,0.000000,"Begin State"};
@@ -110,8 +110,8 @@ link61[] = {39,27};
 link62[] = {40,41};
 link63[] = {42,27};
 link64[] = {43,27};
-globals[] = {0.000000,0,0,0,0,640,480,2,621,6316128,1,643.341736,1488.563965,918.691589,-32.334518,528,828,1};
-window[] = {2,-1,-1,-32162,-32000,1041,-1081,-226,87,3,546};
+globals[] = {0.000000,0,0,0,0,640,480,2,621,6316128,1,643.341736,1488.563965,918.691589,-32.334518,683,884,1};
+window[] = {2,-1,-1,-1,-1,994,43,898,40,3,701};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -771,7 +771,7 @@ class FSM
                                         priority = 84.000000;
                                         to="Return";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"(_ArtyT + VCM_ARTYDELAY) < time && {!(_NearestEnemy isequalto [0,0,0])} && {count (units (group _NearestEnemy)) > 2}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"VCM_ARTYENABLE && {(_ArtyT + VCM_ARTYDELAY) < time} && {!(_NearestEnemy isequalto [0,0,0])} && {count (units (group _NearestEnemy)) > 2}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"[_Group,(group _NearestEnemy)] call VCM_fnc_ArtyCall;" \n
                                          "switch ((side _Group)) do {" \n
                                          "	case west: {VCM_ARTYWT = time;};" \n
