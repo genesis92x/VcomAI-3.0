@@ -37,9 +37,7 @@ Vcm_Settings =
 	VCM_ADVANCEDMOVEMENT = true; //True means AI will actively generate waypoints if no other waypoints are generated for the AI group (2 or more). False disables this advanced movements.
 	VCM_FRMCHANGE = true; //AI GROUPS WILL CHANGE FORMATIONS TO THEIR BEST GUESS.
 	VCM_SKILLCHANGE = true; //AI Groups will have their skills changed by Vcom.
-	
-	VCM_ATTACHMENTIGNORE = []; //ADD WEAPON ATTACHMENT CLASSNAMES HERE THAT SHOULD 'NOT' COUNT AS A SUPPRESSOR. VCM_ATTACHMENTIGNORE = ["Atch1","Atch2","Atch3"];
-	
+		
 	//AI SKILL SETTINGS HERE!!!!!!!!!!!!
 	//LOW DIFFICULTY
 	//VCM_AIDIFA = [['aimingAccuracy',0.15],['aimingShake',0.1],['aimingSpeed',0.25],['commanding',1],['courage',1],['endurance',1],['general',0.5],['reloadSpeed',1],['spotDistance',0.8],['spotTime',0.8]];
