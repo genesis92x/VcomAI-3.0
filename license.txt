@@ -1,0 +1,5 @@
+Copyright 2018 genesis92x
+
+This work (VcomAI or the like) uses the license Arma Public License Share Alike (APL-SA)
+
+https://www.bohemia.net/community/licenses/arma-public-license-share-alike
