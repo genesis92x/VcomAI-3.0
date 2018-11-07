@@ -45,7 +45,7 @@ item40[] = {"Exit_Cond",4,218,675.000000,475.000000,775.000000,525.000000,700.00
 item41[] = {"Exit_FSM_2",1,250,700.000000,600.000000,775.000000,650.000000,0.000000,"Exit FSM"};
 item42[] = {"COVER2COVER",4,218,1150.000000,275.000000,1250.000000,325.000000,104.000000,"COVER2COVER"};
 item43[] = {"Clear_Building",4,218,1200.000000,300.000000,1300.000000,350.000000,50.000000,"Clear Building"};
-item44[] = {"Combat_END",4,218,684.709351,384.913361,784.709351,434.913361,90.000000,"Combat END"};
+item44[] = {"Combat_END",4,4314,684.709351,384.913361,784.709351,434.913361,90.000000,"Combat END"};
 link0[] = {0,1};
 link1[] = {0,3};
 link2[] = {1,2};
@@ -113,8 +113,8 @@ link63[] = {40,41};
 link64[] = {42,27};
 link65[] = {43,27};
 link66[] = {44,27};
-globals[] = {0.000000,0,0,0,0,640,480,2,622,6316128,1,367.805542,1242.845703,934.553467,-198.002197,683,884,1};
-window[] = {2,-1,-1,-1,-1,1073,2051,2906,119,3,701};
+globals[] = {0.000000,0,0,0,0,640,480,2,622,6316128,1,-347.084473,527.955444,1145.958984,13.402954,683,884,1};
+window[] = {2,-1,-1,-1,-1,1006,52,907,52,3,701};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -145,6 +145,8 @@ class FSM
                          "private _StaticList = [];" \n
                          "private _SatchelList = [];" \n
                          "private _MineList = [];" \n
+                         "private _StartingBehavior = behaviour _leader;" \n
+                         "" \n
                          "" \n
                          "_Group call VCM_AIDIFSET;" \n
                          "private _CurUnits = (units _Group);" \n
@@ -518,7 +520,7 @@ class FSM
                                         condition=/*%FSM<CONDITION""">*/"((behaviour _leader) isEqualTo ""COMBAT"") && {!(_VCOM_GARRISONED)} && {_leader distance (_leader findNearestEnemy _leader) > 400}" \n
                                          ""/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"// return behaviour and speed to normal" \n
-                                         "_Beh = ""SAFE"";	_leader setBehaviour ""SAFE"";" \n
+                                         "_leader setBehaviour _StartingBehavior;" \n
                                          "(group _leader) setSpeedMode ""NORMAL"";" \n
                                          "" \n
                                          "// delete waypoints" \n
@@ -528,7 +530,6 @@ class FSM
                                          "	{	deleteWaypoint ((waypoints (group _this)) select 0);	};" \n
                                          "};" \n
                                          "" \n
-                                         " debug msg" \n
                                          "if (VCM_Debug) then {systemchat ""COMBAT END"";};"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
