@@ -74,15 +74,17 @@ if (_mine isEqualTo "") exitWith {};
 	params ["_Mine","_UnitSide"];
 	
 	private _NotSafe = true;
-	_Mine enableSimulationGlobal false;
-	while {alive _mine && {_NotSafe}} do 
+	[_Mine, false] remoteExecCall ["enableSimulationGlobal",2];
+	waitUntil
 	{
 		private _Array1 = (allUnits select {!(side _x isEqualTo _UnitSide)});
 		private _ClosestEnemy = [0,0,0];
 		_ClosestEnemy = [_Array1,_Mine,true,"2"] call VCM_fnc_ClstObj;
 		if (_ClosestEnemy distance _Mine < 2.5) then {_NotSafe = false;};
-		sleep 0.15;	
+		uiSleep 0.1;	
+		(!(alive _mine) || {!(_NotSafe)})
 	};
-	_Mine enableSimulationGlobal true;
+	[_Mine, true] remoteExecCall ["enableSimulationGlobal",2];
+	uiSleep 0.25;
 	_Mine setdamage 1;
 };
