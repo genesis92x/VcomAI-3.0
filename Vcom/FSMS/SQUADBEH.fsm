@@ -1,4 +1,4 @@
-/*%FSM<COMPILE "E:\Games\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, SQUADBEH">*/
+/*%FSM<COMPILE "C:\Program Files (x86)\Steam\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, SQUADBEH">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"Begin_State",0,250,50.000000,700.000000,150.000000,750.000000,0.000000,"Begin State"};
@@ -110,8 +110,8 @@ link61[] = {39,27};
 link62[] = {40,41};
 link63[] = {42,27};
 link64[] = {43,27};
-globals[] = {0.000000,0,0,0,0,640,480,2,621,6316128,1,-304.428711,540.794067,918.691589,-32.334518,683,884,1};
-window[] = {2,-1,-1,-1,-1,1084,130,985,130,3,701};
+globals[] = {0.000000,0,0,0,0,640,480,2,621,6316128,1,-388.578857,456.643921,850.633179,-100.393188,683,884,1};
+window[] = {2,-1,-1,-1,-1,1110,156,1011,156,3,701};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -156,7 +156,7 @@ class FSM
                                         priority = 50.000000;
                                         to="Exit_FSM";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_Group getvariable [""Vcm_Disable"",false] || {side leader _group == civilian}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_Group getvariable [""Vcm_Disable"",false] || {!(side leader _group in VCM_SIDEENABLED)}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
