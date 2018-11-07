@@ -9,8 +9,7 @@ private _BuildingPositions = [];
 {
 	_BuildingPositions = [_x] call BIS_fnc_buildingPositions;
 	if ((count _BuildingPositions) > 2) exitWith {_nBuilding = _x;};
-	true;
-} count _nBuildingLst;
+} forEach _nBuildingLst;
 
 
 //waitUntil unit is within 50m of building closest to waypoint
@@ -51,8 +50,7 @@ while {_WaypointIs isEqualTo "HOLD"} do
 				_TempA deleteAt _RMV;
 				};
 			};
-			true;
-		} count _GroupUnits;		
+		} forEach _GroupUnits;		
 		
 		
 	};

@@ -38,13 +38,14 @@ item33[] = {"CheckIfStatic",4,218,950.000000,175.000000,1050.000000,225.000000,9
 item34[] = {"TwoMinuteChecks",4,218,-400.000000,300.000000,-300.000000,350.000000,940.000000,"TwoMinuteChecks"};
 item35[] = {"Two_Minute_Check",2,250,-400.000000,150.000000,-300.000000,200.000000,0.000000,"Two Minute Checks"};
 item36[] = {"SatchelPlant",4,218,900.000000,150.000000,1000.000000,200.000000,85.000000,"SatchelPlant"};
-item37[] = {"MinePlant",4,4314,850.000000,125.000000,950.000000,175.000000,86.000000,"MinePlant"};
+item37[] = {"MinePlant",4,218,850.000000,125.000000,950.000000,175.000000,86.000000,"MinePlant"};
 item38[] = {"ArmStatics",4,218,800.000000,100.000000,900.000000,150.000000,91.000000,"ArmStatics"};
 item39[] = {"True",8,218,750.000000,75.000000,850.000000,125.000000,0.000000,"True"};
 item40[] = {"Exit_Cond",4,218,675.000000,475.000000,775.000000,525.000000,700.000000,"Exit Cond"};
 item41[] = {"Exit_FSM_2",1,250,700.000000,600.000000,775.000000,650.000000,0.000000,"Exit FSM"};
 item42[] = {"COVER2COVER",4,218,1150.000000,275.000000,1250.000000,325.000000,104.000000,"COVER2COVER"};
 item43[] = {"Clear_Building",4,218,1200.000000,300.000000,1300.000000,350.000000,50.000000,"Clear Building"};
+item44[] = {"Combat_END",4,218,684.709351,384.913361,784.709351,434.913361,90.000000,"Combat END"};
 link0[] = {0,1};
 link1[] = {0,3};
 link2[] = {1,2};
@@ -77,41 +78,43 @@ link28[] = {20,22};
 link29[] = {20,24};
 link30[] = {20,25};
 link31[] = {20,40};
-link32[] = {21,16};
-link33[] = {22,23};
-link34[] = {23,25};
-link35[] = {23,26};
-link36[] = {23,28};
-link37[] = {23,30};
-link38[] = {23,33};
-link39[] = {23,36};
-link40[] = {23,37};
-link41[] = {23,38};
-link42[] = {23,39};
-link43[] = {23,40};
-link44[] = {23,42};
-link45[] = {23,43};
-link46[] = {24,23};
-link47[] = {25,16};
-link48[] = {26,27};
-link49[] = {27,29};
-link50[] = {28,27};
-link51[] = {29,16};
-link52[] = {30,27};
-link53[] = {31,32};
-link54[] = {32,18};
-link55[] = {33,27};
-link56[] = {34,35};
-link57[] = {35,18};
-link58[] = {36,27};
-link59[] = {37,27};
-link60[] = {38,27};
-link61[] = {39,27};
-link62[] = {40,41};
-link63[] = {42,27};
-link64[] = {43,27};
-globals[] = {0.000000,0,0,0,0,640,480,2,621,6316128,1,510.027344,1132.208496,625.518311,-179.764648,683,884,1};
-window[] = {2,-1,-1,-1,-1,1084,130,985,130,3,701};
+link32[] = {20,44};
+link33[] = {21,16};
+link34[] = {22,23};
+link35[] = {23,25};
+link36[] = {23,26};
+link37[] = {23,28};
+link38[] = {23,30};
+link39[] = {23,33};
+link40[] = {23,36};
+link41[] = {23,37};
+link42[] = {23,38};
+link43[] = {23,39};
+link44[] = {23,40};
+link45[] = {23,42};
+link46[] = {23,43};
+link47[] = {24,23};
+link48[] = {25,16};
+link49[] = {26,27};
+link50[] = {27,29};
+link51[] = {28,27};
+link52[] = {29,16};
+link53[] = {30,27};
+link54[] = {31,32};
+link55[] = {32,18};
+link56[] = {33,27};
+link57[] = {34,35};
+link58[] = {35,18};
+link59[] = {36,27};
+link60[] = {37,27};
+link61[] = {38,27};
+link62[] = {39,27};
+link63[] = {40,41};
+link64[] = {42,27};
+link65[] = {43,27};
+link66[] = {44,27};
+globals[] = {0.000000,0,0,0,0,640,480,2,622,6316128,1,367.805542,1242.845703,934.553467,-198.002197,683,884,1};
+window[] = {2,-1,-1,-1,-1,1073,2051,2906,119,3,701};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -503,6 +506,30 @@ class FSM
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"((behaviour _leader) isEqualTo ""COMBAT"") && {!(_VCOM_GARRISONED)}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Combat_END">*/
+                                class Combat_END
+                                {
+                                        itemno = 44;
+                                        priority = 90.000000;
+                                        to="Return";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((behaviour _leader) isEqualTo ""COMBAT"") && {!(_VCOM_GARRISONED)} && {_leader distance (_leader findNearestEnemy _leader) > 400}" \n
+                                         ""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"// return behaviour and speed to normal" \n
+                                         "_Beh = ""SAFE"";	_leader setBehaviour ""SAFE"";" \n
+                                         "(group _leader) setSpeedMode ""NORMAL"";" \n
+                                         "" \n
+                                         "// delete waypoints" \n
+                                         "_leader spawn" \n
+                                         "{" \n
+                                         "	while {(count (waypoints (group _this))) > 0} do" \n
+                                         "	{	deleteWaypoint ((waypoints (group _this)) select 0);	};" \n
+                                         "};" \n
+                                         "" \n
+                                         " debug msg" \n
+                                         "if (VCM_Debug) then {systemchat ""COMBAT END"";};"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                                 /*%FSM<LINK "Hold_WP">*/

@@ -5,9 +5,9 @@ if (_weapon isEqualTo "Put" || {_weapon isEqualTo "Throw"}) exitwith {};
 if ((group _unit) getVariable ["VCM_NOFLANK",false]) exitWith {};
 
 //Check if unit has suppressor on weapon.
-private _Mzl = currentMuzzle player;
+private _Mzl = currentMuzzle _unit;
 private _Mzl = if (_Mzl isEqualType "") then {_Mzl} else {""};
-private _Atch = player weaponAccessories _Mzl param [0, ""];
+private _Atch = _unit weaponAccessories _Mzl param [0, ""];
 private _Return = (!(_Atch isEqualTo "")) && {getNumber(configFile >> "CfgWeapons" >> _Atch >> "ItemInfo" >> "AmmoCoef" >> "audibleFire") < 1};
 
 //systemchat format ["%1",_Sup];
