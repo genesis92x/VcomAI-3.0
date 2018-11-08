@@ -23,7 +23,7 @@ if (isPlayer _Unit) exitWith {};
 //Check to see if unit has radio. If the unit does not have a radio, then it will not move to support
 private _CheckStatus = assignedItems _Unit;
 
-if ((_Unit getVariable ["Vcm_Disable",false]) || {!("ItemRadio" in _CheckStatus)}) exitWith {};
+if (isNil "_CheckStatus" || {(_Unit getVariable ["Vcm_Disable",false])} || {!("ItemRadio" in _CheckStatus)}) exitWith {};
 
 private _ArrayOrg = _Unit call VCM_fnc_FriendlyArray;
 _ArrayOrg = _ArrayOrg - VCM_ARTYLST;

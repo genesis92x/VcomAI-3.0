@@ -8,8 +8,6 @@ if ((group _unit) getVariable ["VCM_NOFLANK",false]) exitWith {};
 private _Mzl = currentMuzzle _unit;
 private _Mzl = if (_Mzl isEqualType "") then {_Mzl} else {""};
 private _Atch = _unit weaponAccessories _Mzl param [0, ""];
-
-//Part of me is not sure about the use of this - getNumber with configfile is a slow process.
 private _Return = (!(_Atch isEqualTo "")) && {getNumber(configFile >> "CfgWeapons" >> _Atch >> "ItemInfo" >> "AmmoCoef" >> "audibleFire") < 1};
 
 //systemchat format ["%1",_Sup];
