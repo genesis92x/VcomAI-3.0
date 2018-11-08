@@ -1,4 +1,4 @@
-/*%FSM<COMPILE "D:\Games\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, SQUADBEH">*/
+/*%FSM<COMPILE "C:\Program Files (x86)\Steam\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, SQUADBEH">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"Begin_State",0,250,50.000000,700.000000,150.000000,750.000000,0.000000,"Begin State"};
@@ -29,7 +29,7 @@ item24[] = {"Combat_BEGIN",4,218,675.000000,325.000000,775.000000,375.000000,110
 item25[] = {"Return",8,218,475.000000,75.000000,575.000000,125.000000,0.000000,"Return"};
 item26[] = {"Arty_Check",4,218,1100.000000,250.000000,1200.000000,300.000000,84.000000,"Arty Check"};
 item27[] = {"",7,210,1258.500000,21.000000,1266.500000,29.000000,0.000000,""};
-item28[] = {"Flank_Orders",4,4314,1050.000000,225.000000,1150.000000,275.000000,105.000000,"Flank Orders"};
+item28[] = {"Flank_Orders",4,218,1050.000000,225.000000,1150.000000,275.000000,105.000000,"Flank Orders"};
 item29[] = {"",7,210,296.000000,21.000000,304.000000,29.000000,0.000000,""};
 item30[] = {"GarrisonBuilding",4,218,1000.000000,200.000000,1100.000000,250.000000,88.000000,"GarrisonBuildingTemp"};
 item31[] = {"Five_Minute_Chec",4,218,-300.000000,300.000000,-200.000000,350.000000,950.000000,"Five Minute Checks"};
@@ -45,7 +45,7 @@ item40[] = {"Exit_Cond",4,218,675.000000,475.000000,775.000000,525.000000,700.00
 item41[] = {"Exit_FSM_2",1,250,700.000000,600.000000,775.000000,650.000000,0.000000,"Exit FSM"};
 item42[] = {"COVER2COVER",4,218,1150.000000,275.000000,1250.000000,325.000000,104.000000,"COVER2COVER"};
 item43[] = {"Clear_Building",4,218,1200.000000,300.000000,1300.000000,350.000000,50.000000,"Clear Building"};
-item44[] = {"Combat_END",4,218,684.709351,384.913361,784.709351,434.913361,90.000000,"Combat END"};
+item44[] = {"Combat_END",4,4314,684.709351,384.913361,784.709351,434.913361,90.000000,"Combat END"};
 link0[] = {0,1};
 link1[] = {0,3};
 link2[] = {1,2};
@@ -113,7 +113,7 @@ link63[] = {40,41};
 link64[] = {42,27};
 link65[] = {43,27};
 link66[] = {44,27};
-globals[] = {0.000000,0,0,0,0,640,480,2,622,6316128,1,659.162964,1284.372314,764.561279,-44.640896,683,884,1};
+globals[] = {0.000000,0,0,0,0,640,480,2,622,6316128,1,-347.084473,527.955444,1145.958984,13.402954,683,884,1};
 window[] = {2,-1,-1,-1,-1,1006,52,907,52,3,701};
 *//*%FSM</HEAD>*/
 class FSM
@@ -625,7 +625,7 @@ class FSM
                                         priority = 105.000000;
                                         to="Return";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_WaypointGen + 900 < time && {VCM_ADVANCEDMOVEMENT} && {hcLeader _Group isEqualTo objNull}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_WaypointGen + 900 < time && {VCM_ADVANCEDMOVEMENT}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"[_Leader] spawn VCM_fnc_FlankMove;_WaypointGen = time;" \n
                                          "" \n
                                          "if (VCM_Debug) then {systemchat ""WAYPOINT GENERATION"";};"/*%FSM</ACTION""">*/;
