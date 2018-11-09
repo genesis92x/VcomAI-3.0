@@ -14,16 +14,21 @@ Vcm_Settings =
 	Vcm_ActivateAI = true; //Set this to false to disable VcomAI. It can be set to true at any time to re-enable Vcom AI
 	VcmAI_ActiveList = []; //Leave this alone.
 	Vcm_ArtilleryArray = []; //Leave this alone
-	VCM_ARTYENABLE = true; //Enable improved artillery handling.
-	VCM_AIMagLimit = 5; //Number of mags remaining before AI looks for ammo.
-	VCM_Debug = false; //Enable debug mode.
-	VCM_MINECHANCE = 75; //Chance to lay a mine
+	
+	//VCOM ARTILLERY. Only one kind of advanced artillery can be used at a time.
+	VCM_ARTYENABLE = false; //Enable improved artillery handling from Vcom.
 	VCM_ARTYLST = []; //List of all AI inside of artillery pieces, leave this alone.
 	VCM_ARTYDELAY = 300; //Delay between squads requesting artillery
 	VCM_ARTYWT = -(VCM_ARTYDELAY);
 	VCM_ARTYET = -(VCM_ARTYDELAY);
 	VCM_ARTYRT = -(VCM_ARTYDELAY);
-	VCM_ARTYSPREAD = 400; //Spread of artillery rounds;	
+	VCM_ARTYSPREAD = 400; //Spread of artillery rounds;		
+	//Fire For Effect Artillery handling. Only one kind of advanced atrillery can be used at a time. - https://forums.bohemia.net/forums/topic/159152-fire-for-effect-the-god-of-war-smart-simple-ai-artillery/
+	VCM_FFEARTILLERY = true;
+
+	VCM_AIMagLimit = 5; //Number of mags remaining before AI looks for ammo.
+	VCM_Debug = false; //Enable debug mode.
+	VCM_MINECHANCE = 75; //Chance to lay a mine
 	VCM_SIDEENABLED = [west,east,resistance]; //Sides that will activate Vcom AI
 	VCM_RAGDOLL = true; //Should AI ragdoll when hit
 	VCM_RAGDOLLCHC = 50; //CHANCE AI RAGDOLL	

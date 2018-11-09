@@ -8,7 +8,7 @@ class EditorData
 	toggles=13;
 	class ItemIDProvider
 	{
-		nextID=79;
+		nextID=78;
 	};
 	class MarkerIDProvider
 	{
@@ -16,34 +16,26 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={14667.764,116.34233,20815.076};
-		dir[]={-0.75383526,-0.6547575,0.055532739};
-		up[]={-0.65301406,0.75582027,0.048104141};
-		aside[]={0.073468916,-7.4558557e-007,0.99733043};
+		pos[]={14625.77,100.17471,20672.441};
+		dir[]={0.58632445,-0.64768189,-0.48662868};
+		up[]={0.49842101,0.76188058,-0.41366819};
+		aside[]={-0.6386776,-5.6112185e-008,-0.76953018};
 	};
 };
 binarizationWanted=0;
 addons[]=
 {
-	"A3_Characters_F",
-	"A3_Modules_F_Curator_Curator"
+	"A3_Characters_F"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=2;
+		items=1;
 		class Item0
 		{
 			className="A3_Characters_F";
 			name="Arma 3 Alpha - Characters and Clothing";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
-		class Item1
-		{
-			className="A3_Modules_F_Curator";
-			name="Arma 3 Zeus Update - Scripted Modules";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
@@ -105,7 +97,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=2;
+		items=1;
 		class Item0
 		{
 			dataType="Group";
@@ -118,158 +110,25 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={14611.534,52.928478,20813.127};
-						angles[]={0,4.967783,0};
+						position[]={14611.534,52.928631,20813.127};
+						angles[]={0,4.9677863,0};
 					};
 					side="West";
 					flags=3;
 					class Attributes
 					{
-						name="player1";
 						isPlayer=1;
 					};
 					id=1;
 					type="B_Soldier_TL_F";
-					atlOffset=3.4673386;
-					class CustomAttributes
-					{
-						class Attribute0
-						{
-							property="speaker";
-							expression="_this setspeaker _value;";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"STRING"
-										};
-									};
-									value="Male10ENG";
-								};
-							};
-						};
-						class Attribute1
-						{
-							property="pitch";
-							expression="_this setpitch _value;";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"SCALAR"
-										};
-									};
-									value=0.99000001;
-								};
-							};
-						};
-						nAttributes=2;
-					};
+					atlOffset=3.4674911;
 				};
 			};
 			class Attributes
 			{
 			};
 			id=0;
-			atlOffset=3.4673386;
-		};
-		class Item1
-		{
-			dataType="Logic";
-			class PositionInfo
-			{
-				position[]={14773.848,58.553928,20828.242};
-			};
-			id=78;
-			type="ModuleCurator_F";
-			class CustomAttributes
-			{
-				class Attribute0
-				{
-					property="ModuleCurator_F_Owner";
-					expression="_this setVariable ['Owner',_value,true];";
-					class Value
-					{
-						class data
-						{
-							class type
-							{
-								type[]=
-								{
-									"STRING"
-								};
-							};
-							value="player1";
-						};
-					};
-				};
-				class Attribute1
-				{
-					property="ModuleCurator_F_Forced";
-					expression="_this setVariable ['Forced',_value,true];";
-					class Value
-					{
-						class data
-						{
-							class type
-							{
-								type[]=
-								{
-									"SCALAR"
-								};
-							};
-							value=0;
-						};
-					};
-				};
-				class Attribute2
-				{
-					property="ModuleCurator_F_Name";
-					expression="_this setVariable ['Name',_value,true];";
-					class Value
-					{
-						class data
-						{
-							class type
-							{
-								type[]=
-								{
-									"STRING"
-								};
-							};
-							value="";
-						};
-					};
-				};
-				class Attribute3
-				{
-					property="ModuleCurator_F_Addons";
-					expression="_this setVariable ['Addons',_value,true];";
-					class Value
-					{
-						class data
-						{
-							class type
-							{
-								type[]=
-								{
-									"SCALAR"
-								};
-							};
-							value=3;
-						};
-					};
-				};
-				nAttributes=4;
-			};
+			atlOffset=3.4674911;
 		};
 	};
 };
