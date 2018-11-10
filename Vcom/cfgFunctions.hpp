@@ -1,9 +1,9 @@
-class VcomFunctions 
+class VCOM
 {
 	tag = "VCM";
-	class VCMFnc 
+	class Functions 
 	{
-		file = "Vcom\Functions";
+		file = "Vcom\Functions\VCM_Functions";
 		//[] call VCM_fnc_SquadExc
 		class SquadExc {};
 		//[] call VCM_fnc_KitChk
@@ -76,5 +76,24 @@ class VcomFunctions
 		class KnowAbout {};
 	};		
 
-	
+};
+
+
+class RYD
+{
+	// Fire For Effect: The God of War
+	class FFE_Functions
+	{
+		file = "Vcom\Functions\FFE_Functions";
+		class AngTowards {};
+		class ArtyMission {};
+		class ArtyPrep {};
+		class AutoConfig {};
+		class CFF {};
+		class CFF_FFE {};
+		class CFF_Fire {};
+		class CFF_TGT {};
+		class PosTowards2D {};
+		class ShellsInRadius {};
+	};
 };
