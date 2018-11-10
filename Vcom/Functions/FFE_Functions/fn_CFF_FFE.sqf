@@ -613,7 +613,7 @@ _amount2 = _amount - _amount1;
 		while {(not (_rEta < 5) and not (_TOF > 200) and (_alive))} do
 		{
 			if (
-				({not (isNull _x)} count _batlead) < 1) ||
+				({not (isNull _x)} count _batlead) < 1 ||
 				{isNull _battery1} ||
 				{({(alive _x)} count _batlead) < 1} ||
 				{_battery1 getVariable ["RydFFE_Break",false]}
@@ -662,7 +662,7 @@ _amount2 = _amount - _amount1;
 
 			_available = true;
 			if (
-				{not (isNull _x)} count _batlead) < 1 ||
+				{not (isNull _x)} count _batlead < 1 ||
 				{isNull _battery1} ||
 				{({(alive _x)} count _batlead) < 1}
 			) then {_alive = false};
