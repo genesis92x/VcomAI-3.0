@@ -69,9 +69,15 @@ _UnitSide = (side _Unit);
 
 if (_mine isEqualTo "") exitWith {};
 
+VCOM_MINEARRAY pushBack [_Mine,_UnitSide];
+[_Mine, false] remoteExecCall ["enableSimulationGlobal",2];
+
+/*
 [_mine,_UnitSide] spawn 
 {
 	params ["_Mine","_UnitSide"];
+	
+	
 	
 	private _NotSafe = true;
 	[_Mine, false] remoteExecCall ["enableSimulationGlobal",2];
@@ -81,10 +87,10 @@ if (_mine isEqualTo "") exitWith {};
 		private _ClosestEnemy = [0,0,0];
 		_ClosestEnemy = [_Array1,_Mine,true,"2"] call VCM_fnc_ClstObj;
 		if (_ClosestEnemy distance _Mine < 2.5) then {_NotSafe = false;};
-		uiSleep 0.1;	
+		sleep 0.1;	
 		(!(alive _mine) || {!(_NotSafe)})
 	};
 	[_Mine, true] remoteExecCall ["enableSimulationGlobal",2];
-	uiSleep 0.25;
+	sleep 0.25;
 	_Mine setdamage 1;
 };
