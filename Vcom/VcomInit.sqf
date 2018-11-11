@@ -47,11 +47,11 @@ if (isClass(configFile >> "CfgPatches" >> "cba_main")) then {CBAACT = true;} els
 Vcm_PMN = compileFinal "(_this select 0) playMoveNow (_this select 1);";
 Vcm_SM = compileFinal "(_this select 0) switchMove (_this select 1);";
 Vcm_PAN = compileFinal "(_this select 0) playActionNow (_this select 1);";
+VCOM_MINEARRAY = [];
+
 
 //Begin Artillery function created by Rydygier - https://forums.bohemia.net/forums/topic/159152-fire-for-effect-the-god-of-war-smart-simple-ai-artillery/
 if (VCM_FFEARTILLERY) then {nul = [] execVM "Vcom\RYD_FFE\FFE.sqf";VCM_ARTYENABLE = false;};
-VCOM_MINEARRAY = [];
-
 
 //Below is loop to check for new AI spawning in to be added to the list
 [] spawn
