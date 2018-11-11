@@ -3,18 +3,16 @@ params ["_unit", "_source", "_damage", "_instigator"];
 if !(isNull objectParent _unit) exitWith {};
 
 //Lay down
-if (unitPos _unit == "AUTO") then
+if (unitPos _unit isEqualTo "AUTO") then
 {
 	_unit setUnitPos "DOWN";
 	_unit spawn {sleep 30; _this setUnitPos "AUTO";};
 };
 
-if (VCM_RAGDOLL && {_damage > 0.1} && {_unit distance2D _instigator > 20} && {lifestate _unit != "INCAPACITATED"} && {VCM_RAGDOLLCHC > (random 100)}) then
+if (VCM_RAGDOLL && {_damage > 0.1} && {!(lifestate _unit isEqualTo "INCAPACITATED")} && {VCM_RAGDOLLCHC > (random 100)}) then
 {
-
-	_unit setSuppression 1;
 	
-	if (stance _unit != "PRONE") then
+	if !(stance _unit isEqualTo "PRONE") then
 	{
 		//Ragdoll unit
 		_unit setUnconscious true;
@@ -31,6 +29,7 @@ if (VCM_RAGDOLL && {_damage > 0.1} && {_unit distance2D _instigator > 20} && {li
 		
 		switch (_currentWeaponType) do
 		{
+		
 			//Rifle animations
 			case 1: 
 			{
@@ -49,6 +48,7 @@ if (VCM_RAGDOLL && {_damage > 0.1} && {_unit distance2D _instigator > 20} && {li
 					};
 				};
 			};
+			
 			//Handgun animations
 			case 2:
 			{
@@ -67,6 +67,7 @@ if (VCM_RAGDOLL && {_damage > 0.1} && {_unit distance2D _instigator > 20} && {li
 					};
 				};
 			};
+			
 			//Binocular animations
 			case 3:
 			{
