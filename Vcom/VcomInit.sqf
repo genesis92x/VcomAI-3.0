@@ -50,6 +50,7 @@ Vcm_PAN = compileFinal "(_this select 0) playActionNow (_this select 1);";
 
 //Begin Artillery function created by Rydygier - https://forums.bohemia.net/forums/topic/159152-fire-for-effect-the-god-of-war-smart-simple-ai-artillery/
 if (VCM_FFEARTILLERY) then {nul = [] execVM "Vcom\RYD_FFE\FFE.sqf";VCM_ARTYENABLE = false;};
+VCOM_MINEARRAY = [];
 
 
 //Below is loop to check for new AI spawning in to be added to the list
@@ -82,6 +83,6 @@ if (VCM_FFEARTILLERY) then {nul = [] execVM "Vcom\RYD_FFE\FFE.sqf";VCM_ARTYENABL
 				};
 			} foreach allGroups;
 		};
-		uisleep 10;
+		sleep 10;
 	};
 };
