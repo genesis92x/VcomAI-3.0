@@ -74,6 +74,8 @@ class VCOM
 		class IRCHECK {};
 		//[] call VCM_fnc_KnowAbout
 		class KnowAbout {};
+		//[] spawn VCM_fnc_MineMonitor;
+		class MineMonitor {};		
 	};		
 
 };
