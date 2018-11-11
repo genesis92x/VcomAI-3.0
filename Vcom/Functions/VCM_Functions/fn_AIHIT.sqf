@@ -11,23 +11,69 @@ if (unitPos _unit == "AUTO") then
 
 if (VCM_RAGDOLL && {_damage > 0.1} && {_unit distance2D _instigator > 20} && {lifestate _unit != "INCAPACITATED"} && {VCM_RAGDOLLCHC > (random 100)}) then
 {
+
+	_unit setSuppression 1;
+	
 	if (stance _unit != "PRONE") then
 	{
 		//Ragdoll unit
 		_unit setUnconscious true;
 		_unit spawn {sleep 2;_this setUnconscious false;};
 	} else {
-		switch (floor random 3) do {
-			case 1: {_unit playMoveNow "AmovPpneMstpSrasWrflDnon_AmovPpneMevaSlowWrflDl";}; //Roll left
-			case 2: {_unit playMoveNow "AmovPpneMstpSrasWrflDnon_AmovPpneMevaSlowWrflDr";}; //Roll right
-			default 
+		//Apply animations instead of ragdoll when prone
+		
+		//Find current weapon type
+		private _currentWeapon = currentWeapon _unit;
+		private _currentWeaponType = 0;
+		if (_currentWeapon == primaryWeapon _unit) then {_currentWeaponType = 1};
+		if (_currentWeapon == handgunWeapon _unit) then {_currentWeaponType = 2};
+		if (_currentWeapon == Binocular _unit) then {_currentWeaponType = 3};
+		
+		switch (_currentWeaponType) do
+		{
+			//Rifle animations
+			case 1: 
 			{
-				_unit playMoveNow "AadjPpneMstpSrasWrflDdown"; //Go as low as possible
-				_unit spawn 
-				{
-					sleep 4;
-					//Return to normal
-					if (alive _this && {animationState _this == "aadjppnemstpsraswrflddown"}) then {_this playMoveNow "AadjPpneMstpSrasWrflDDown_AmovPpneMstpSrasWrflDnon"};
+				switch (floor random 3) do {
+					case 1: {_unit playMoveNow "AmovPpneMstpSrasWrflDnon_AmovPpneMevaSlowWrflDl";}; //Roll left
+					case 2: {_unit playMoveNow "AmovPpneMstpSrasWrflDnon_AmovPpneMevaSlowWrflDr";}; //Roll right
+					default 
+					{
+						_unit playMoveNow "amovppnemstpsraswrfldnon_aadjppnemstpsraswrflddown"; //Go as low as possible
+						_unit spawn 
+						{
+							sleep 4 + random 2;
+							//Return to normal
+							if (alive _this && {animationState _this isEqualTo "aadjppnemstpsraswrflddown"}) then {_this playMoveNow "aadjppnemstpsraswrflddown_amovppnemstpsraswrfldnon"};
+						};
+					};
+				};
+			};
+			//Handgun animations
+			case 2:
+			{
+				switch (floor random 3) do {
+					case 1: {_unit playMoveNow "amovppnemstpsraswpstdnon_amovppnemevaslowwpstdl";}; //Roll left
+					case 2: {_unit playMoveNow "amovppnemstpsraswpstdnon_amovppnemevaslowwpstdr";}; //Roll right
+					default 
+					{
+						_unit playMoveNow "amovppnemstpsraswpstdnon_aadjppnemstpsraswpstddown"; //Go as low as possible
+						_unit spawn 
+						{
+							sleep 4 + random 2;
+							//Return to normal
+							if (alive _this && {animationState _this isEqualTo "aadjppnemstpsraswpstddown"}) then {_this playMoveNow "aadjppnemstpsraswpstddown_amovppnemstpsraswpstdnon"};
+						};
+					};
+				};
+			};
+			//Binocular animations
+			case 3:
+			{
+				switch (floor random 2) do {
+					case 0: {_unit playMoveNow "amovppnemstpsoptwbindnon_amovppnemevasoptwbindl";}; //Roll left
+					case 1: {_unit playMoveNow "amovppnemstpsoptwbindnon_amovppnemevasoptwbindr";}; //Roll right
+					default {};
 				};
 			};
 		};
