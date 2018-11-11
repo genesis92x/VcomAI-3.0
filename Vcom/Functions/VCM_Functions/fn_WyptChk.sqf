@@ -1,16 +1,28 @@
-//This will tell our scripts if certain waypoints are set or not
-//_WaypointCheck = _group call VCOMAI_Waypointcheck;
-_GroupToInspect = _this;
 
-_WaypointsToIncriminate = [];
+/*
+	Author: Genesis
 
-_index = currentWaypoint _GroupToInspect;
-_WaypointIs = waypointType [_GroupToInspect,_index];
+	Description:
+		This will tell our scripts if certain waypoints are set or not
+
+	Parameter(s):
+		0: GROUP
+
+	Returns:
+		ARRAY
+*/
+
+_grp = _this;
+
+_waypointsToIncriminate = [];
+
+_index = currentWaypoint _grp;
+_waypointIs = waypointType [_grp,_index];
 {
-	if (_WaypointIs isEqualTo _x) then {_WaypointsToIncriminate pushback _x};
+	if (_waypointIs isEqualTo _x) then {_waypointsToIncriminate pushback _x};
 } foreach ["HOLD","GUARD","UNLOAD","LOAD","TR UNLOAD","SENTRY","DESTROY"];
 
 
 
-_WaypointsToIncriminate
+_waypointsToIncriminate
 

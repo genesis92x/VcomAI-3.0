@@ -1,56 +1,68 @@
-//Function for getting AI to garrison buildings and then move around inside them.
-//Variable passed is GROUP
+
+/*
+	Author: Genesis, tweaked by Freddo
+
+	Description:
+		Function for getting AI to garrison buildings and then move around inside them.
+
+	Parameter(s):
+		0: GROUP
+
+	Returns:
+		NOTHING
+*/
+
 //Lets find the closest building
 
-private _Unit = (leader _this);
+private _unit = (leader _this);
 private _nBuildingLst = nearestObjects [waypointPosition [_this, 1], ["House", "Building"], 50];
 private _nBuilding = [0,0,0];
-private _BuildingPositions = [];
+private _buildingPositions = [];
 {
-	_BuildingPositions = [_x] call BIS_fnc_buildingPositions;
-	if ((count _BuildingPositions) > 2) exitWith {_nBuilding = _x;};
+	_buildingPositions = [_x] call BIS_fnc_buildingPositions;
+	if ((count _buildingPositions) > 2) exitWith {_nBuilding = _x;};
 } forEach _nBuildingLst;
 
 
 //waitUntil unit is within 50m of building closest to waypoint
-waitUntil {isNull _Unit || _nBuilding distance2D _Unit < 50 || !alive _Unit};
+waitUntil {isNull _unit || {!alive _unit} || {_nBuilding distance2D _unit < 50}};
 
 
 //If the array is not more than 0 - then exit.
 
 
 //Find the units in the group!
-_GroupUnits = units _this;
+_groupUnits = units _this;
 _this setVariable ["VCOM_GARRISONED",true,false];	
-private _WaypointIs = "HOLD";
-while {_WaypointIs isEqualTo "HOLD"} do
+private _waypointIs = "HOLD";
+while {_waypointIs isEqualTo "HOLD"} do
 {
 	private _index = currentWaypoint _this;
-	private _WaypointIs = waypointType [_this,_index];		
-	private _TempA = _BuildingPositions;
-	if (count _TempA > 0) then
+	private _waypointIs = waypointType [_this,_index];		
+	private _tempA = _buildingPositions;
+	if (count _tempA > 0) then
 	{
 		{
-			private _Foot = isNull objectParent _x;
-			if (_Foot) then
+			private _foot = isNull objectParent _x;
+			if (_foot) then
 			{		
-			private _BuildingLocation = selectRandom _TempA;
-			if !(isNil "_BuildingLocation") then
+			private _buildingLocation = selectRandom _tempA;
+			if !(isNil "_buildingLocation") then
 			{
-				_x doMove _BuildingLocation;
+				_x doMove _buildingLocation;
 				_x setUnitPos "UP";
-				[_x,_BuildingLocation] spawn 
+				[_x,_buildingLocation] spawn 
 				{
-					params ["_unit","_BuildingLocation"];
-					if (isNil "_BuildingLocation") exitWith {};
-					waitUntil {!alive _unit || {_unit distance _BuildingLocation < 1.3}};
+					params ["_unit","_buildingLocation"];
+					if (isNil "_buildingLocation") exitWith {};
+					waitUntil {!alive _unit || {_unit distance _buildingLocation < 1.3}};
 					_unit disableAI "PATH";
 				};
-				private _RMV = _TempA findIf {_BuildingLocation isEqualTo _x};
-				_TempA deleteAt _RMV;
+				private _RMV = _tempA findIf {_buildingLocation isEqualTo _x};
+				_tempA deleteAt _RMV;
 				};
 			};
-		} forEach _GroupUnits;		
+		} forEach _groupUnits;		
 		
 		
 	};

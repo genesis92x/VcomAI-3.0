@@ -1,4 +1,4 @@
-/*%FSM<COMPILE "C:\Program Files (x86)\Steam\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, SQUADBEH">*/
+/*%FSM<COMPILE "D:\Games\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, SQUADBEH">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"Begin_State",0,250,50.000000,700.000000,150.000000,750.000000,0.000000,"Begin State"};
@@ -38,7 +38,7 @@ item33[] = {"CheckIfStatic",4,218,949.004028,175.000031,1050.000122,225.996094,9
 item34[] = {"TwoMinuteChecks",4,218,-400.000000,300.000000,-300.000000,350.000000,940.000000,"TwoMinuteChecks"};
 item35[] = {"Two_Minute_Check",2,250,-400.000000,150.000000,-300.000000,200.000000,0.000000,"Two Minute Checks"};
 item36[] = {"SatchelPlant",4,218,900.000000,150.000000,1000.000000,200.000000,85.000000,"SatchelPlant"};
-item37[] = {"MinePlant",4,218,850.000000,125.000000,950.000000,175.000000,86.000000,"MinePlant"};
+item37[] = {"MinePlant",4,4314,850.000000,125.000000,950.000000,175.000000,86.000000,"MinePlant"};
 item38[] = {"ArmStatics",4,218,800.000000,100.000000,900.000000,150.000000,91.000000,"ArmStatics"};
 item39[] = {"True",8,218,750.000000,75.000000,850.000000,125.000000,0.000000,"True"};
 item40[] = {"Exit_Cond",4,218,675.000000,475.000000,775.000000,525.000000,700.000000,"Exit Cond"};
@@ -114,7 +114,7 @@ link64[] = {42,27};
 link65[] = {43,27};
 link66[] = {44,27};
 globals[] = {0.000000,0,0,0,0,640,480,2,622,6316128,1,403.502502,966.001648,671.977112,-59.271748,680,884,1};
-window[] = {2,-1,-1,-1,-1,1058,2024,3325,104,3,698};
+window[] = {2,-1,-1,-1,-1,1006,52,1353,52,3,698};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -741,7 +741,7 @@ class FSM
                                         priority = 91.000000;
                                         to="Return";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"(_BackbkC7 + 30 < time) && {((_NearestEnemy distance2D _leader) < 800)} && {_Group call VCM_fnc_EmptyStatic};"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_BackbkC7 + 30 < time) && {((_NearestEnemy distance2D _leader) < 800)} && {[_Group] call VCM_fnc_EmptyStatic};"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"_Group call VCM_fnc_ArmStatics;_BackbkC7 = time;" \n
                                          "" \n
                                          "if (VCM_Debug) then {systemchat ""ARM STATICS"";};"/*%FSM</ACTION""">*/;
@@ -778,9 +778,9 @@ class FSM
                                          "{" \n
                                          "private _Foot = isNull objectParent (_x select 0);" \n
                                          "if (_Foot) then" \n
-                                         "{	" \n
-                                         "	[(_x select 0),(_x select 1)] spawn VCM_fnc_MinePlant;" \n
-                                         "};" \n
+                                         "	{	" \n
+                                         "		[(_x select 0),(_x select 1)] spawn VCM_fnc_MinePlant;" \n
+                                         "	};" \n
                                          "} foreach _MineList;" \n
                                          "_BackbkC6 = time;" \n
                                          "" \n

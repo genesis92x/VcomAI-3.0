@@ -1,36 +1,50 @@
-//This function will constantly monitor the unit and see if the static weapon needs to be dissassembled or not. The amount of time on a static will be a base variable with additional time every time an enemy is spotted.
-//Edited on: 8/8/2017 @ 0011
 
-params ["_Unit","_Backpack","_StaticCreated"];
+/*
+	Author: Genesis
+
+	Description:
+		This function will constantly monitor the unit and see if the static weapon needs to be dissassembled or not. 
+		The amount of time on a static will be a base variable with additional time every time an enemy is spotted.
+
+	Parameter(s):
+		0: OBJECT - Gunner
+		1: STRING - Backpack classname
+		2: OBJECT - Static weapon
+
+	Returns:
+		NOTHING
+*/
+
+params ["_unit","_backpack","_staticCreated"];
 
 sleep 10;
 
-private _StaticGreen = true;
-private _Statictime = 180;
+private _staticGreen = true;
+private _statictime = 180;
 
-while {_StaticGreen && {alive _unit} && {alive _StaticCreated} && {!(isNull (gunner _StaticCreated))}} do
+while {_staticGreen && {alive _unit} && {alive _staticCreated} && {!(isNull (gunner _staticCreated))}} do
 {
 	sleep 5;
-	private _Enemy = _Unit findNearestEnemy _Unit;
-	if (!(isNull _Enemy)) then 
+	private _enemy = _unit findNearestEnemy _unit;
+	if (!(isNull _enemy)) then 
 	{
-			private _cansee = [_Unit, "VIEW"] checkVisibility [eyePos _Unit, eyePos _Enemy];
-			if (_cansee > 0) then {_Statictime = _Statictime + 3;} else {_Statictime = _Statictime - 5;};
+			private _cansee = [_unit, "VIEW"] checkVisibility [eyePos _unit, eyePos _enemy];
+			if (_cansee > 0) then {_statictime = _statictime + 3;} else {_statictime = _statictime - 5;};
 	}
 	else
 	{
-		_Statictime = _Statictime - 5;
+		_statictime = _statictime - 5;
 	};
-	if (_Statictime < 1) then {_StaticGreen = false;};
+	if (_statictime < 1) then {_staticGreen = false;};
 };
 
 //Okay, time to move!
-if (alive _Unit) then
+if (alive _unit) then
 {
-	_Unit leaveVehicle _StaticCreated;
-	[_Unit,"AinvPknlMstpSnonWnonDnon_Putdown_AmovPknlMstpSnonWnonDnon"] remoteExec ["Vcm_PMN",0];
+	_unit leaveVehicle _staticCreated;
+	[_unit,"AinvPknlMstpSnonWnonDnon_Putdown_AmovPknlMstpSnonWnonDnon"] remoteExec ["Vcm_PMN",0];
 	sleep 3;
-	deleteVehicle _StaticCreated;
+	deleteVehicle _staticCreated;
 	sleep 1;
-	_Unit addBackpackGlobal _Backpack;
+	_unit addBackpackGlobal _backpack;
 };

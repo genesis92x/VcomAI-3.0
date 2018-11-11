@@ -1,13 +1,26 @@
-//Function for finding the closest enemy to the passed unit 
-//_this
-private _UnitSide = (side _this);
-private _A1 = [];
+
+/*
+	Author: Genesis, tweaked by Freddo
+
+	Description:
+		Finds closest known enemy to unit
+
+	Parameter(s):
+		0: OBJECT - Unit to search from
+
+	Returns:
+		OBJECT
+		if none found, ARRAY
+*/
+
+private _unitSide = (side _this);
+private _a1 = [];
 {
-	private _TargetSide = side _x;
-	if ([_UnitSide, _TargetSide] call BIS_fnc_sideIsEnemy && {!(vehicle _X isKindOf "Air")} && {_this knowsAbout _x > 1}) then {_A1 pushback _x;};
+	private _targetSide = side _x;
+	if ([_unitSide, _targetSide] call BIS_fnc_sideIsEnemy && {!(vehicle _X isKindOf "Air")} && {_this knowsAbout _x > 1}) then {_a1 pushback _x;};
 } forEach allUnits;
 
-private _Rtrn = [_A1,_this,true,"1"] call VCM_fnc_ClstObj;
-if (isNil "_Rtrn") then {_Rtrn = [0,0,0]};
+private _rtrn = [_a1,_this,true,"1"] call VCM_fnc_ClstObj;
+if (isNil "_rtrn") then {_rtrn = [0,0,0]};
 
-_Rtrn
+_rtrn
