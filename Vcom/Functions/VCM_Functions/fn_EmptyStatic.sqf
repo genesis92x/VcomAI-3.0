@@ -1,3 +1,4 @@
+
 /*
 	Author: Genesis
 
@@ -11,6 +12,7 @@
 	Returns:
 		BOOLEAN
 */
+
 params ["_grp","_searchDist"];
 if (isNil "_searchDist") then {_searchDist = 100};
 private _returned = false;

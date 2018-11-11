@@ -1,8 +1,9 @@
+
 /*
 	Author: Genesis
 
 	Description:
-	Function for AI calling in artillery support.
+		Function for AI calling in artillery support.
 
 	Parameter(s):
 		0: GROUP - Group calling for support
@@ -15,8 +16,8 @@
 		Deprecated in favour of Rydigiers "Fire for Effect: The God Of War"
 */
 
-params ["_callGroup","_enemyG"];
-private _CallSide = (side _callGroup);
+params ["_callGrp","_enemyGrp"];
+private _CallSide = (side _callGrp);
 
 //First let's remove any AI not actively in artillery pieces. Just in case something changed for them.
 
@@ -46,7 +47,7 @@ private _artyArray = [];
 if (_artyArray isEqualTo []) exitWith {};
 
 //Now with our completed array, lets find positions that can support.
-private _clstGrp = [_artyArray,(leader _callGroup),true,"Arty1"] call VCM_fnc_ClstObj;
+private _clstGrp = [_artyArray,(leader _callGrp),true,"Arty1"] call VCM_fnc_ClstObj;
 if (isNil "_clstGrp") exitWith {};
 
 private _aGrpUnits = units (group _clstGrp);
@@ -60,13 +61,13 @@ private _randomAmmoArray = selectRandom _ammoArray;
 if (isNil "_randomAmmoArray") exitWith {};
 
 
-private _leaderE = leader _enemyG;
+private _leaderE = leader _enemyGrp;
 private _continueFiring = (getPos _leaderE) inRangeOfArtillery [_aVehGrpUnits,_randomAmmoArray];
 
 if !(_continueFiring) exitWith {};
 
-private _enemyGroup = _enemyG;
-private _RoundsToFire = round (count (units _enemyGroup)/4);
+private _enemyGrproup = _enemyGrp;
+private _RoundsToFire = round (count (units _enemyGrproup)/4);
 
 if (_RoundsToFire < 2) then {_RoundsToFire = 2};
 

@@ -1,4 +1,4 @@
-//Function that executes when AI are hit.
+
 /*
 	Author: Genesis, improved by Freddo
 

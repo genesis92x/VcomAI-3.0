@@ -12,8 +12,8 @@
 		NOTHING
 */
 
-private _unit = (leader _this);
-private _nBuildingLst = nearestObjects [_unit, ["House", "Building"], 50];
+private _leader = (leader _this);
+private _nBuildingLst = nearestObjects [_leader, ["House", "Building"], 50];
 private _buildingPositions = [];
 
 {
@@ -35,18 +35,18 @@ if (count _tempA > 0) then
 			_x doMove _buildingLocation;
 			[_x,_buildingLocation] spawn 
 			{
-				params ["_unit","_buildingLocation"];
+				params ["_leader","_buildingLocation"];
 				if (isNil "_buildingLocation") exitWith {};
-				while {(alive _unit) && {_unit distance _buildingLocation < 1.3}} do
+				while {(alive _leader) && {_leader distance _buildingLocation < 1.3}} do
 				{
 					sleep 3;
-					_unit doMove _buildingLocation;
+					_leader doMove _buildingLocation;
 				};
-				_unit disableAI "PATH";
+				_leader disableAI "PATH";
 				sleep 120;
-				if (alive _unit) then
+				if (alive _leader) then
 				{
-					_unit enableAI "PATH";
+					_leader enableAI "PATH";
 				};
 			};
 			private _rmv = _tempA findIf {_buildingLocation isEqualTo _x};

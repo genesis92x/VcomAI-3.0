@@ -1,3 +1,4 @@
+
 /*
 	Author: Genesis
 
@@ -14,6 +15,7 @@
 	Example:
 		[unit1, getPos deadUnit] call VCM_fnc_ActRearm;
 */
+
 params ["_unitToRearm","_rearmLocation"];
 
 while {(_unitToRearm distance _rearmLocation) > 5 && {(_unitToRearm distance _rearmLocation) < 200}} do
