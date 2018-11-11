@@ -106,7 +106,7 @@ while {RydFFE_Active} do
 			{
 				_gp = _x;
 
-				if ((side _gp) == _side || {not (_gp in RydFFE_NoControl)}) then
+				if ((side _gp) == _side && {not (_gp in RydFFE_NoControl)}) then
 				{
 					{
 						if ((toLower (typeOf (vehicle _x))) in _allArty) exitWith
