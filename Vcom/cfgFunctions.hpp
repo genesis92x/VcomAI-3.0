@@ -96,4 +96,9 @@ class RYD
 		class PosTowards2D {};
 		class ShellsInRadius {};
 	};
+	class FFE_Shellview
+	{
+		file = "Vcom\Functions\FFE_Shellview";
+		class Shellview {};
+	};
 };
