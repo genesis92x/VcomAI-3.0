@@ -1,7 +1,7 @@
 //Function for getting AI in a squad to arm any nearby statics
 
 private _Leader = (leader _this);
-private _Weaps = nearestObjects [_Leader, ["StaticWeapon"], 250];
+private _Weaps = nearestObjects [_Leader, ["StaticWeapon"], 150];
 private _UnitsA = units _this;
 if (count _Weaps < 0) exitWith {};
 private _FA = [];
@@ -46,7 +46,7 @@ if (count _FA < 0) exitWith {};
 				private _StaticGreen = true;
 				private _Statictime = VCM_STATICARMT;
 				
-				while {_StaticGreen && {alive _unit} && {alive _Weap} && {!(isNull (gunner _Weap))} && {_Unit distance2D (leader (group _Unit)) < 500}} do
+				while {_StaticGreen && {alive _unit} && {alive _Weap} && {!(isNull (gunner _Weap))} && {_Unit distance2D (leader (group _Unit)) < 500} && {_Unit behaviour isEqualTo "COMBAT"}} do
 				{
 					sleep 5;
 					private _Enemy = _Unit findNearestEnemy _Unit;
