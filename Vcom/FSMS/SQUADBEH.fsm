@@ -24,7 +24,7 @@ item19[] = {"Continue2StartPo",4,218,100.000000,300.000000,200.000000,350.000000
 item20[] = {"Leader_Cycle_Beg",3,250,475.000000,275.000000,575.000000,325.000000,0.000000,"Leader Cycle Beginning"};
 item21[] = {"Continue2Return",8,218,350.000000,275.000000,450.000000,325.000000,0.000000,"Continue2Return"};
 item22[] = {"Combat",4,218,675.000000,225.000000,775.000000,275.000000,100.000000,"Combat"};
-item23[] = {"Combat_Brain",2,250,875.000000,275.000000,975.000000,325.000000,0.000000,"Combat Brain"};
+item23[] = {"Combat_Brain",2,250,870.650879,303.704590,970.650879,353.704590,0.000000,"Combat Brain"};
 item24[] = {"Combat_BEGIN",4,218,675.000000,325.000000,775.000000,375.000000,110.000000,"Combat BEGIN"};
 item25[] = {"Return",8,218,475.000000,75.000000,575.000000,125.000000,0.000000,"Return"};
 item26[] = {"Arty_Check",4,218,1100.000000,250.000000,1200.000000,300.000000,84.000000,"Arty Check"};
@@ -34,7 +34,7 @@ item29[] = {"",7,210,296.000000,21.000000,304.000000,29.000000,0.000000,""};
 item30[] = {"GarrisonBuilding",4,218,1000.000000,200.000000,1100.000000,250.000000,88.000000,"GarrisonBuildingTemp"};
 item31[] = {"Five_Minute_Chec",4,218,-300.000000,300.000000,-200.000000,350.000000,950.000000,"Five Minute Checks"};
 item32[] = {"Five_Minute_Chec",2,250,-300.000000,150.000000,-200.000000,200.000000,0.000000,"Five Minute Checks"};
-item33[] = {"CheckIfStatic",4,218,950.000000,175.000000,1050.000000,225.000000,92.000000,"CheckIfStatic"};
+item33[] = {"CheckIfStatic",4,218,949.004028,175.000031,1050.000122,225.996094,92.000000,"CheckIfStatic"};
 item34[] = {"TwoMinuteChecks",4,218,-400.000000,300.000000,-300.000000,350.000000,940.000000,"TwoMinuteChecks"};
 item35[] = {"Two_Minute_Check",2,250,-400.000000,150.000000,-300.000000,200.000000,0.000000,"Two Minute Checks"};
 item36[] = {"SatchelPlant",4,218,900.000000,150.000000,1000.000000,200.000000,85.000000,"SatchelPlant"};
@@ -45,7 +45,7 @@ item40[] = {"Exit_Cond",4,218,675.000000,475.000000,775.000000,525.000000,700.00
 item41[] = {"Exit_FSM_2",1,250,700.000000,600.000000,775.000000,650.000000,0.000000,"Exit FSM"};
 item42[] = {"COVER2COVER",4,218,1150.000000,275.000000,1250.000000,325.000000,104.000000,"COVER2COVER"};
 item43[] = {"Clear_Building",4,218,1200.000000,300.000000,1300.000000,350.000000,50.000000,"Clear Building"};
-item44[] = {"Combat_END",4,4314,684.709351,384.913361,784.709351,434.913361,90.000000,"Combat END"};
+item44[] = {"Combat_END",4,218,684.709351,384.913361,784.709351,434.913361,90.000000,"Combat END"};
 link0[] = {0,1};
 link1[] = {0,3};
 link2[] = {1,2};
@@ -113,8 +113,8 @@ link63[] = {40,41};
 link64[] = {42,27};
 link65[] = {43,27};
 link66[] = {44,27};
-globals[] = {0.000000,0,0,0,0,640,480,2,622,6316128,1,-347.084473,527.955444,1145.958984,13.402954,683,884,1};
-window[] = {2,-1,-1,-1,-1,1006,52,907,52,3,701};
+globals[] = {0.000000,0,0,0,0,640,480,2,622,6316128,1,873.519287,1279.480713,811.393738,99.596008,446,782,1};
+window[] = {0,-1,-1,-1,-1,1137,393,1694,183,1,464};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -128,28 +128,16 @@ class FSM
                         itemno = 0;
                         init = /*%FSM<STATEINIT""">*/"private _Group = _this;" \n
                          "private _leader = leader _group;" \n
-                         "private _BackbkC = -60;" \n
-                         "private _BackbkC2 = -60;" \n
-                         "private _BackbkC3 = -300;" \n
-                         "private _BackbkC4 = -120;" \n
-                         "private _BackbkC5 = -120;" \n
-                         "private _BackbkC6 = -120;" \n
-                         "private _BackbkCC4 = -120;" \n
-                         "private _BackbkC7 = -30;" \n
-                         "private _BackbkC8 = -120;" \n
-                         "private _CurLGar = false;" \n
-                         "private _VCOM_GARRISONED = false;" \n
-                         "private _Beh = (behaviour _leader);" \n
-                         "private _Cover2Cover = -60;" \n
-                         "private _WaypointGen = -910;" \n
-                         "private _StaticList = [];" \n
-                         "private _SatchelList = [];" \n
-                         "private _MineList = [];" \n
-                         "private _StartingBehavior = behaviour _leader;" \n
+                         "" \n
+                         "{" \n
+                         "	if (!(isPlayer _x) && {VCM_SKILLCHANGE} && {!(_Group getVariable [""VCM_Skilldisable"",false])}) then" \n
+                         "	{" \n
+                         "		_x addEventHandler [""Fired"",{_this call VCM_fnc_HearingAids;}];" \n
+                         "	};" \n
+                         "} foreach (units _Group);" \n
                          "" \n
                          "" \n
-                         "_Group call VCM_AIDIFSET;" \n
-                         "private _CurUnits = (units _Group);" \n
+                         "" \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -173,17 +161,40 @@ class FSM
                                         to="Start_Point";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/"_Group call VCM_fnc_ArtyManage;" \n
+                                        action=/*%FSM<ACTION""">*/"private _BackbkC = -60;" \n
+                                         "private _BackbkC2 = -60;" \n
+                                         "private _BackbkC3 = -300;" \n
+                                         "private _BackbkC4 = -120;" \n
+                                         "private _BackbkC5 = -120;" \n
+                                         "private _BackbkC6 = -120;" \n
+                                         "private _BackbkCC4 = -120;" \n
+                                         "private _BackbkC7 = -30;" \n
+                                         "private _BackbkC8 = -120;" \n
+                                         "private _CurLGar = false;" \n
+                                         "private _VCOM_GARRISONED = false;" \n
+                                         "private _Beh = (behaviour _leader);" \n
+                                         "private _Cover2Cover = -60;" \n
+                                         "private _WaypointGen = -910;" \n
+                                         "private _StaticList = [];" \n
+                                         "private _SatchelList = [];" \n
+                                         "private _MineList = [];" \n
+                                         "private _StartingBehavior = behaviour _leader;" \n
+                                         "private _CurUnits = (units _Group);" \n
+                                         "" \n
+                                         "" \n
+                                         "_Group call VCM_fnc_ArtyManage;" \n
+                                         "_Group call VCM_AIDIFSET;" \n
                                          "" \n
                                          "{" \n
                                          "	if (!(isPlayer _x) && {VCM_SKILLCHANGE} && {!(_Group getVariable [""VCM_Skilldisable"",false])}) then" \n
                                          "	{" \n
                                          "		_x disableAI ""SUPPRESSION"";" \n
                                          "		_x addEventHandler [""Killed"",{_this spawn VCM_fnc_ClstWarn;}];" \n
-                                         "		_x addEventHandler [""Fired"",{_this call VCM_fnc_HearingAids;}];" \n
                                          "		_x addEventHandler [""Hit"",{_this call VCM_fnc_AIHIT;}];" \n
                                          "	};" \n
-                                         "} foreach (units _Group);"/*%FSM</ACTION""">*/;
+                                         "} foreach (units _Group);" \n
+                                         "" \n
+                                         "if (VCM_Debug) then {diag_log (format [""%1: VCOM INITILZIED SCRIPTS"",_Group])};"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                         };
@@ -195,7 +206,9 @@ class FSM
                         name = "Exit_FSM";
                         itemno = 2;
                         init = /*%FSM<STATEINIT""">*/"private _N = VcmAI_ActiveList findIf {_x isEqualTo _Group};" \n
-                         "VcmAI_ActiveList deleteAt _N;"/*%FSM</STATEINIT""">*/;
+                         "VcmAI_ActiveList deleteAt _N;" \n
+                         "" \n
+                         "if (VCM_Debug) then {diag_log (format [""%1: EXITED VCOM SCRIPTS"",_Group])};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -320,7 +333,9 @@ class FSM
                         name = "Exit_FSM_1";
                         itemno = 6;
                         init = /*%FSM<STATEINIT""">*/"private _N = VcmAI_ActiveList findIf {_x isEqualTo _Group};" \n
-                         "VcmAI_ActiveList deleteAt _N;"/*%FSM</STATEINIT""">*/;
+                         "VcmAI_ActiveList deleteAt _N;" \n
+                         "" \n
+                         "if (VCM_Debug) then {diag_log (format [""%1: EXITED VCOM SCRIPTS"",_Group])};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -517,9 +532,10 @@ class FSM
                                         priority = 90.000000;
                                         to="Return";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"((behaviour _leader) isEqualTo ""COMBAT"") && {!(_VCOM_GARRISONED)} && {_leader distance (_leader findNearestEnemy _leader) > 400}" \n
+                                        condition=/*%FSM<CONDITION""">*/"((behaviour _leader) isEqualTo ""COMBAT"") && {!(_VCOM_GARRISONED)} && {_leader distance (_leader call VCM_fnc_ClstEmy) > 400}" \n
                                          ""/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"// return behaviour and speed to normal" \n
+                                         "_Beh = ""SAFE"";" \n
                                          "_leader setBehaviour _StartingBehavior;" \n
                                          "(group _leader) setSpeedMode ""NORMAL"";" \n
                                          "" \n
@@ -655,7 +671,7 @@ class FSM
                                         condition=/*%FSM<CONDITION""">*/"(count _StaticList > 0) && {_BackbkC4 + 120 < time}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"//[_x,_CurrentBackPack,_VCOM_HASUAV]" \n
                                          "" \n
-                                         "if (VCM_Debug) then {systemchat ""STATIC WEAPON CHECK"";};" \n
+                                         "if (VCM_Debug) then {diag_log ""Static Weapon Check""};" \n
                                          "" \n
                                          "private [""_t"", ""_wait""];" \n
                                          "_t = time;" \n
@@ -703,7 +719,7 @@ class FSM
                                          "			_Unit moveInGunner _StaticCreated;" \n
                                          "			removeBackpackGlobal _Unit;" \n
                                          "" \n
-                                         "			private _dirTo = [position _StaticCreated,position _NearestEnemy] call BIS_fnc_dirTo;" \n
+                                         "			private _dirTo = _StaticCreated getDir _NearestEnemy;" \n
                                          "			_StaticCreated setDir _dirTo;" \n
                                          "			(Vehicle _Unit) setDir _dirTo;" \n
                                          "		};" \n
@@ -725,7 +741,7 @@ class FSM
                                         priority = 91.000000;
                                         to="Return";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"(_BackbkC7 + 30 < time) && {((_NearestEnemy distance2D _leader) < 800)}  && {_Group call VCM_fnc_EmptyStatic};"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_BackbkC7 + 30 < time) && {((_NearestEnemy distance2D _leader) < 800)} && {[_Group] call VCM_fnc_EmptyStatic};"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"_Group call VCM_fnc_ArmStatics;_BackbkC7 = time;" \n
                                          "" \n
                                          "if (VCM_Debug) then {systemchat ""ARM STATICS"";};"/*%FSM</ACTION""">*/;
@@ -762,9 +778,9 @@ class FSM
                                          "{" \n
                                          "private _Foot = isNull objectParent (_x select 0);" \n
                                          "if (_Foot) then" \n
-                                         "{	" \n
-                                         "	[(_x select 0),(_x select 1)] spawn VCM_fnc_MinePlant;" \n
-                                         "};" \n
+                                         "	{	" \n
+                                         "		[(_x select 0),(_x select 1)] spawn VCM_fnc_MinePlant;" \n
+                                         "	};" \n
                                          "} foreach _MineList;" \n
                                          "_BackbkC6 = time;" \n
                                          "" \n
@@ -904,7 +920,9 @@ class FSM
                         name = "Exit_FSM_2";
                         itemno = 41;
                         init = /*%FSM<STATEINIT""">*/"private _N = VcmAI_ActiveList findIf {_x isEqualTo _Group};" \n
-                         "VcmAI_ActiveList deleteAt _N;"/*%FSM</STATEINIT""">*/;
+                         "VcmAI_ActiveList deleteAt _N;" \n
+                         "" \n
+                         "if (VCM_Debug) then {diag_log (format [""%1: EXITED VCOM SCRIPTS"",_Group])};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {

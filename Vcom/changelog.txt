@@ -1,0 +1,41 @@
+# Changelog
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+
+## [3.1] - 2018-11-13
+### Added
+- Changelog
+- Rydigiers "Fire For Effect" artillery system
+- CBA settings support for "Fire For Effect" artillery system
+- Parameter for forcing speedMode "FULL"
+- Descriptive header for all Vcom functions
+- VCOM is now licensed under the ArmA Public License - Share Alike
+- Zeus to mission.sqm
+
+### Changed
+- Vcom will not give flanking orders to AI with a commander
+- Suppressors are now dynamically checked
+- Mines are now handled differently (Placed mines are added to an array)
+- AI will no longer ragdoll when prone, will instead perform animations
+- AI will not ragdoll when within a certain distance of a player
+- VCom functions have been moved to Vcom\Functions\VCM_Functions
+- Hold waypoints now define what building to garrison
+- AI will not generate flanking waypoints targetting unknown units
+
+### Deprecated
+- VCom artillery (Replaced by "Fire For Effect")
+
+### Removed
+
+### Fixed
+- VCM_SKILLCHANGE had no effect
+- AI taking control when player incapacitated
+- AI attempting to flank aircraft
+- Building clearing behaviour did not check distance to target
+- Civilians being affected by VCOM
+- VCM_SIDEENABLED had no effect
+- VCM_ARTYENABLE had no effect
+
+### Security
+- Whitelisted remote execution for VCOM
