@@ -1,7 +1,20 @@
-private ["_UnitSide"];
-_UnitSide = side (group _this);
 
-_Array1 = [];
+/*
+	Author: Genesis
+
+	Description:
+		Returns an array containing all of units friendlies.
+
+	Parameter(s):
+		0: OBJECT - object whose side to check for friendlies
+
+	Returns:
+		ARRAY
+*/
+
+private _UnitSide = side (group _this);
+
+private _Array1 = [];
 {
 	private _TargetSide = side _x;
 	if (!([_UnitSide, _TargetSide] call BIS_fnc_sideIsEnemy) && {!(_x in (units (group _this)))}) then {_Array1 pushback _x;};

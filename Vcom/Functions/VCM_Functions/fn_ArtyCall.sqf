@@ -1,64 +1,81 @@
-//Function for AI calling in artillery support.
-params ["_CallGroup","_EnemyG"];
-private _CallSide = (side _CallGroup);
+
+/*
+	Author: Genesis
+
+	Description:
+		Function for AI calling in artillery support.
+
+	Parameter(s):
+		0: GROUP - Group calling for support
+		1: GROUP - Enemy group to be targetted
+
+	Returns:
+		NOTHING
+		
+	Note:
+		Deprecated in favour of Rydigiers "Fire for Effect: The God Of War"
+*/
+
+params ["_callGrp","_enemyGrp"];
+private _CallSide = (side _callGrp);
 
 //First let's remove any AI not actively in artillery pieces. Just in case something changed for them.
 
 {
-	private _Veh = _x;
-	private _class = typeOf _Veh;
+	private _veh = _x;
+	private _class = typeOf _veh;
 	if !(isNil ("_class")) then 
 	{
-		private _ArtyChk = getNumber(configfile/"CfgVehicles"/_class/"artilleryScanner");	
-		if !(_ArtyChk isEqualTo 1) then
+		private _artyChk = getNumber(configfile/"CfgVehicles"/_class/"artilleryScanner");	
+		if !(_artyChk isEqualTo 1) then
 		{
-			VCM_ARTYLST deleteAt (VCM_ARTYLST findif {_Veh isEqualTo _x});
+			VCM_ARTYLST deleteAt (VCM_ARTYLST findif {_veh isEqualTo _x});
 		};		
 	};
 	
 } foreach VCM_ARTYLST;
 
 //Next let's only select AI units who are on our side or friendly.
-private _ArtyArray = [];
+private _artyArray = [];
 {
 	if ([(side _x),_CallSide] call BIS_fnc_sideIsFriendly) then
 	{
-		_ArtyArray pushback _x;
+		_artyArray pushback _x;
 	};	
 } foreach VCM_ARTYLST;
 
-if (_ArtyArray isEqualTo []) exitWith {};
+if (_artyArray isEqualTo []) exitWith {};
 
 //Now with our completed array, lets find positions that can support.
-private _ClstGrp = [_ArtyArray,(leader _CallGroup),true,"Arty1"] call VCM_fnc_ClstObj;
-if (isNil "_ClstGrp") exitWith {};
+private _clstGrp = [_artyArray,(leader _callGrp),true,"Arty1"] call VCM_fnc_ClstObj;
+if (isNil "_clstGrp") exitWith {};
 
-private _AGrpUnits = units (group _ClstGrp);
-private _AVehGrpUnits = [];
-{_AVehGrpUnits pushback (vehicle _x)} foreach _AGrpUnits;
+private _aGrpUnits = units (group _clstGrp);
+private _aVehGrpUnits = [];
+{_aVehGrpUnits pushback (vehicle _x)} foreach _aGrpUnits;
 
-private _AmmoArray = getArtilleryAmmo _AVehGrpUnits;
-if (isNil "_AmmoArray") exitWith {};
+private _ammoArray = getArtilleryAmmo _aVehGrpUnits;
+if (isNil "_ammoArray") exitWith {};
 
-private _RandomAmmoArray = selectRandom _AmmoArray;
-if (isNil "_RandomAmmoArray") exitWith {};
+private _randomAmmoArray = selectRandom _ammoArray;
+if (isNil "_randomAmmoArray") exitWith {};
 
 
-private _LeaderE = leader _EnemyG;
-private _ContinueFiring = (getPos _LeaderE) inRangeOfArtillery [_AVehGrpUnits,_RandomAmmoArray];
+private _leaderE = leader _enemyGrp;
+private _continueFiring = (getPos _leaderE) inRangeOfArtillery [_aVehGrpUnits,_randomAmmoArray];
 
-if !(_ContinueFiring) exitWith {};
+if !(_continueFiring) exitWith {};
 
-private _EnemyGroup = _EnemyG;
-private _RoundsToFire = round (count (units _EnemyGroup)/4);
+private _enemyGrproup = _enemyGrp;
+private _RoundsToFire = round (count (units _enemyGrproup)/4);
 
 if (_RoundsToFire < 2) then {_RoundsToFire = 2};
 
 {
 	private _dist = random (15 + (random VCM_ARTYSPREAD));
 	private _dir = random 360;
-	private _pos = getpos _LeaderE;
+	private _pos = getpos _leaderE;
 	private _positions = [(_pos select 0) + (sin _dir) * _dist, (_pos select 1) + (cos _dir) * _dist, 0];
-	_x doArtilleryFire [_positions,_RandomAmmoArray,_RoundsToFire];
+	_x doArtilleryFire [_positions,_randomAmmoArray,_RoundsToFire];
 	
-} foreach _AVehGrpUnits;
+} foreach _aVehGrpUnits;

@@ -1,4 +1,27 @@
-//Function that executes when AI are hit.
+
+/*
+	Author: Genesis, improved by Freddo
+
+	Description:
+		Plays appropiate hit reactions on unit
+
+	Parameter(s):
+		0: OBJECT - Object affected
+		1 (Optional): OBJECT - Object that caused damage
+		2: NUMBER - Level of damage caused
+		3: OBJECT - Object that pulled the trigger
+
+	Returns:
+		NOTHING
+
+	Example1:
+		this addEventHandler ["Hit", {
+			_this call VCM_fnc_AIHIT;
+		}];
+	
+	NOTE:
+		Meant to be called from a "HIT" eventhandler
+*/
 params ["_unit", "_source", "_damage", "_instigator"];
 if !(isNull objectParent _unit) exitWith {};
 

@@ -1,44 +1,56 @@
-//Function for telling all AI to temporarily garrison a structure. The AI will leave it shortly after.
 
-private _Unit = (leader _this);
-private _nBuildingLst = nearestObjects [_Unit, ["House", "Building"], 50];
-private _BuildingPositions = [];
+/*
+	Author: Genesis
+
+	Description:
+		Function for telling a group to temporarily garrison a structure. The group will leave it shortly after.
+
+	Parameter(s):
+		0: GROUP
+
+	Returns:
+		NOTHING
+*/
+
+private _leader = (leader _this);
+private _nBuildingLst = nearestObjects [_leader, ["House", "Building"], 50];
+private _buildingPositions = [];
 
 {
-	if (count ([_x] call BIS_fnc_buildingPositions) > 3) then {_BuildingPositions pushback _x;};
+	if (count ([_x] call BIS_fnc_buildingPositions) > 3) then {_buildingPositions pushback _x;};
 } foreach _nBuildingLst;
 
 //Exit if no compatible buildings found
-if (_BuildingPositions isEqualTo []) exitWith {};
+if (_buildingPositions isEqualTo []) exitWith {};
 
-private _TempA = [selectRandom _BuildingPositions] call BIS_fnc_buildingPositions;
-private _GroupUnits = units _this;
-if (count _TempA > 0) then
+private _tempA = [selectRandom _buildingPositions] call BIS_fnc_buildingPositions;
+private _groupUnits = units _this;
+if (count _tempA > 0) then
 {
 	{
-		private _Foot = isNull objectParent _x;
-		if (_Foot) then
+		private _foot = isNull objectParent _x;
+		if (_foot) then
 		{
-			private _BuildingLocation = selectRandom _TempA;
-			_x doMove _BuildingLocation;
-			[_x,_BuildingLocation] spawn 
+			private _buildingLocation = selectRandom _tempA;
+			_x doMove _buildingLocation;
+			[_x,_buildingLocation] spawn 
 			{
-				params ["_unit","_BuildingLocation"];
-				if (isNil "_BuildingLocation") exitWith {};
-				while {(alive _unit) && {_unit distance _BuildingLocation < 1.3}} do
+				params ["_leader","_buildingLocation"];
+				if (isNil "_buildingLocation") exitWith {};
+				while {(alive _leader) && {_leader distance _buildingLocation < 1.3}} do
 				{
 					sleep 3;
-					_unit doMove _BuildingLocation;
+					_leader doMove _buildingLocation;
 				};
-				_unit disableAI "PATH";
+				_leader disableAI "PATH";
 				sleep 120;
-				if (alive _unit) then
+				if (alive _leader) then
 				{
-					_unit enableAI "PATH";
+					_leader enableAI "PATH";
 				};
 			};
-			private _RMV = _TempA findIf {_BuildingLocation isEqualTo _x};
-			_TempA deleteAt _RMV;
+			private _rmv = _tempA findIf {_buildingLocation isEqualTo _x};
+			_tempA deleteAt _rmv;
 		};
-	} foreach _GroupUnits;
+	} foreach _groupUnits;
 };
