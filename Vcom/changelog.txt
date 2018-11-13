@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Parameter for forcing speedMode "FULL"
 - Descriptive header for all Vcom functions
 - VCOM is now licensed under the ArmA Public License - Share Alike
+- Zeus to mission.sqm
 
 ### Changed
 - Vcom will not give flanking orders to AI with a commander
