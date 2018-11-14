@@ -71,6 +71,8 @@ class VCOM
 		// unit call VCM_fnc_HasMine;
 		class HasMine {};
 		
+		// unit call VCM_fnc_HealSelf;
+		
 		// [unit, weapon, muzzle, mode, ammo, magazine, bullet, gunner] call VCM_fnc_HearingAids;
 		class HearingAids {};
 		
@@ -86,7 +88,7 @@ class VCOM
 		// [array, unitToReveal, revealAmount] call VCM_fnc_KnowAbout;
 		class KnowAbout {};
 		
-		//[medic, injuredUnit] spawn VCM_fnc_MedicHeal
+		//[medic, injuredUnit] spawn VCM_fnc_MedicHeal;
 		class MedicHeal {};
 		
 		// [] spawn VCM_fnc_MineMonitor;
