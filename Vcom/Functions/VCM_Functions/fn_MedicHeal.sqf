@@ -32,10 +32,18 @@ doStop _unit;
 
 _medic action ["HealSoldier", _unit];
 
-sleep 5;
+sleep 3;
 
-//Rerun script if medic didn't manage to heal
+// Rerun script if medic didn't manage to heal
 if (damage _unit != 0) then {breakTo "main"};
+
+// Medic puts those first aid kits in his backpack to use
+if (not ("FirstAidKit" in items _unit) && "FirstAidKit" in backpackItems _medic && _medic distance2D _unit < 3) then 
+{
+	// TODO: Add animation
+	_medic removeItemFromBackpack "FirstAidKit";
+	_unit addItem "FirstAidKit";
+};
 
 _unit doFollow leader _unit;
 _medic doFollow leader _medic;
