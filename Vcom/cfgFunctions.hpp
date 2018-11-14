@@ -86,6 +86,9 @@ class VCOM
 		// [array, unitToReveal, revealAmount] call VCM_fnc_KnowAbout;
 		class KnowAbout {};
 		
+		//[medic, injuredUnit] spawn VCM_fnc_MedicHeal
+		class MedicHeal {};
+		
 		// [] spawn VCM_fnc_MineMonitor;
 		class MineMonitor {};
 		
