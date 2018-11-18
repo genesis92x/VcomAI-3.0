@@ -25,8 +25,9 @@ if (isNil "_medics") then {private _medics = []};
 		{
 			params ["_unit", "_medicArr"];
 			sleep random 10;
-			if !(_unit call VCM_fnc_HealSelf && {count _medicArr isEqualTo 0}) then // VCM_fnc_HealSelf returns false if unit unable to heal self
+			if !(_unit call VCM_fnc_HealSelf) then // VCM_fnc_HealSelf returns false if unit unable to heal self
 			{
+				if (count _medicArr == 0) exitWith {};
 				private _medic = selectRandom _medicArr;
 				if !(_medic getVariable ["VCM_MBUSY", false]) then // Check if medic is busy
 				{
