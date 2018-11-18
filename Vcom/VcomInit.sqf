@@ -39,7 +39,7 @@ waitUntil {!(isNil "VCM_AIMagLimit")};
 
 //Mod checks
 //ACE CHECK
-if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {ACEACTIVATED = true;} else {ACEACTIVATED = false;};
+if (not isNil "ACE_Medical_enableFor" && {ACE_Medical_enableFor == 1}) then {VCM_MEDICALACTIVE = false;} else {VCM_MEDICALACTIVE = true;};
 //CBA CHECK
 if (isClass(configFile >> "CfgPatches" >> "cba_main")) then {CBAACT = true;} else {CBAACT = false;};
 
