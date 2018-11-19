@@ -23,7 +23,7 @@ item18[] = {"Continue2StartPo",8,218,0.000000,300.000000,100.000000,350.000000,0
 item19[] = {"Continue2StartPo",4,218,100.000000,300.000000,200.000000,350.000000,0.000000,"Continue2StartPoint2"};
 item20[] = {"Leader_Cycle_Beg",3,250,475.000000,275.000000,575.000000,325.000000,0.000000,"Leader Cycle Beginning"};
 item21[] = {"Continue2Return",8,218,350.000000,275.000000,450.000000,325.000000,0.000000,"Continue2Return"};
-item22[] = {"Combat",4,218,675.000000,225.000000,775.000000,275.000000,100.000000,"Combat"};
+item22[] = {"Combat",4,218,675.000000,275.000000,775.000000,325.000000,100.000000,"Combat"};
 item23[] = {"Combat_Brain",2,250,870.650879,303.704590,970.650879,353.704590,0.000000,"Combat Brain"};
 item24[] = {"Combat_BEGIN",4,218,675.000000,325.000000,775.000000,375.000000,110.000000,"Combat BEGIN"};
 item25[] = {"Return",8,218,475.000000,75.000000,575.000000,125.000000,0.000000,"Return"};
@@ -41,11 +41,11 @@ item36[] = {"SatchelPlant",4,218,900.000000,150.000000,1000.000000,200.000000,85
 item37[] = {"MinePlant",4,218,850.000000,125.000000,950.000000,175.000000,86.000000,"MinePlant"};
 item38[] = {"ArmStatics",4,218,800.000000,100.000000,900.000000,150.000000,91.000000,"ArmStatics"};
 item39[] = {"True",8,218,750.000000,75.000000,850.000000,125.000000,0.000000,"True"};
-item40[] = {"Exit_Cond",4,218,675.000000,475.000000,775.000000,525.000000,700.000000,"Exit Cond"};
-item41[] = {"Exit_FSM_2",1,250,700.000000,600.000000,775.000000,650.000000,0.000000,"Exit FSM"};
+item40[] = {"Exit_Cond",4,218,675.000000,425.000000,775.000000,475.000000,700.000000,"Exit Cond"};
+item41[] = {"Exit_FSM_2",1,4346,675.000000,525.000000,750.000000,575.000000,0.000000,"Exit FSM"};
 item42[] = {"COVER2COVER",4,218,1150.000000,275.000000,1250.000000,325.000000,104.000000,"COVER2COVER"};
 item43[] = {"Clear_Building",4,218,1200.000000,300.000000,1300.000000,350.000000,50.000000,"Clear Building"};
-item44[] = {"Combat_END",4,4314,684.709351,384.913361,784.709351,434.913361,120.000000,"Combat END"};
+item44[] = {"Combat_END",4,218,675.000000,375.000000,775.000000,425.000000,120.000000,"Combat END"};
 link0[] = {0,1};
 link1[] = {0,3};
 link2[] = {1,2};
@@ -113,8 +113,8 @@ link63[] = {40,41};
 link64[] = {42,27};
 link65[] = {43,27};
 link66[] = {44,27};
-globals[] = {0.000000,0,0,0,0,640,480,2,622,6316128,1,408.611816,927.655029,921.225647,11.154083,446,782,1};
-window[] = {0,-1,-1,-1,-1,1005,359,1660,51,1,464};
+globals[] = {0.000000,0,0,0,0,640,480,2,622,6316128,1,372.537964,891.581177,900.278320,-9.793182,446,782,1};
+window[] = {0,-1,-1,-1,-1,1162,208,1509,208,1,464};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -507,19 +507,12 @@ class FSM
                                         priority = 120.000000;
                                         to="Return";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"((behaviour _leader) isEqualTo ""COMBAT"") && {!(_VCOM_GARRISONED)} && {_leader distance (_leader call VCM_fnc_ClstEmy) > 400}" \n
+                                        condition=/*%FSM<CONDITION""">*/"((behaviour _leader) isEqualTo ""COMBAT"") && {!(_VCOM_GARRISONED)} && {_leader distance (_leader call VCM_fnc_ClstEmy) > 500}" \n
                                          ""/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"// return behaviour and speed to normal" \n
                                          "_Beh = ""SAFE"";" \n
                                          "_leader setBehaviour _StartingBehavior;" \n
                                          "(group _leader) setSpeedMode ""NORMAL"";" \n
-                                         "" \n
-                                         "// delete waypoints" \n
-                                         "_leader spawn" \n
-                                         "{" \n
-                                         "	while {(count (waypoints (group _this))) > 0} do" \n
-                                         "	{	deleteWaypoint ((waypoints (group _this)) select 0);	};" \n
-                                         "};" \n
                                          "" \n
                                          "if (VCM_Debug) then {systemchat ""COMBAT END"";};"/*%FSM</ACTION""">*/;
                                 };
