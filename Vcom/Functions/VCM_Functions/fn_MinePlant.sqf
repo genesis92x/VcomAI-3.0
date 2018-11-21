@@ -14,10 +14,7 @@
 
 params ["_unit", "_mineArray"];
 
-if (VCM_MINECHANCE < (round (random 100))) exitWith {};
-
-private _unit = _this select 0;
-private _mineArray = _this select 1;
+if (VCM_MINECHANCE < (round (random 100)) || {isPlayer _unit}) exitWith {};
 
 private _mineType = _mineArray select 0;
 
