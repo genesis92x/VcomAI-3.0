@@ -6,7 +6,7 @@ class VCOM
 	{
 		file = "Vcom\FSMS";
 		
-		// group spawn 
+		// group spawn VCM_fnc_SQUADBEH
 		class SQUADBEH 
 		{
 			ext = ".fsm";
