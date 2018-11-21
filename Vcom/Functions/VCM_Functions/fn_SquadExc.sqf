@@ -13,5 +13,5 @@
 		NOTHING
 */
 
-_this execFSM "Vcom\FSMS\SQUADBEH.fsm";
+_this spawn VCM_fnc_SQUADBEH;
 VcmAI_ActiveList pushback _this;

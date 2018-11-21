@@ -1,6 +1,18 @@
 class VCOM
 {
 	tag = "VCM";
+	
+	class FSM
+	{
+		file = "Vcom\FSMS";
+		
+		// group spawn 
+		class SQUADBEH 
+		{
+			ext = ".fsm";
+		};
+	};
+	
 	class Functions 
 	{
 		file = "Vcom\Functions\VCM_Functions";
