@@ -5,8 +5,8 @@ item0[] = {"Begin_State",0,250,50.000000,700.000000,150.000000,750.000000,0.0000
 item1[] = {"Cond",4,218,-100.000000,700.000000,0.000000,750.000000,50.000000,"Cond"};
 item2[] = {"Exit_FSM",1,250,-250.000000,700.000000,-175.000000,750.000000,0.000000,"Exit FSM"};
 item3[] = {"Continue",8,218,50.000000,575.000000,150.000000,625.000000,0.000000,"Continue"};
-item4[] = {"Start_Point",2,4346,50.000000,400.000000,150.000000,450.000000,0.000000,"Start Point"};
-item5[] = {"Exit_Cond",4,218,-100.000000,475.000000,0.000000,525.000000,700.000000,"Exit Cond"};
+item4[] = {"Start_Point",2,250,50.000000,400.000000,150.000000,450.000000,0.000000,"Start Point"};
+item5[] = {"Exit_Cond",4,4314,-100.000000,475.000000,0.000000,525.000000,700.000000,"Exit Cond"};
 item6[] = {"Exit_FSM_1",1,250,-250.000000,475.000000,-175.000000,525.000000,0.000000,"Exit FSM"};
 item7[] = {"Simulation_Pause",4,218,250.000000,475.000000,350.000000,525.000000,990.000000,"Simulation Pause"};
 item8[] = {"Simulation_Pause",2,250,325.000000,525.000000,425.000000,575.000000,0.000000,"Simulation Pause"};
@@ -142,7 +142,7 @@ class FSM
                                         priority = 50.000000;
                                         to="Exit_FSM";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_Group getvariable [""Vcm_Disable"",false] || {!(side leader _group in VCM_SIDEENABLED)}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_Group getvariable [""Vcm_Disable"",false] || {!(side _group in VCM_SIDEENABLED)}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -321,7 +321,7 @@ class FSM
                                         priority = 700.000000;
                                         to="Exit_FSM_1";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"(_Group getvariable [""Vcm_Disable"",false]) || (((units _Group) findIf {alive _x}) isEqualTo -1)"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_Group getvariable [""Vcm_Disable"",false]) || {(((units _Group) findIf {alive _x}) isEqualTo -1)} || {!(side _group in VCM_SIDEENABLED)}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
