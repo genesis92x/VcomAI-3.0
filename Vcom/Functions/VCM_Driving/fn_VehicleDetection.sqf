@@ -68,9 +68,9 @@ while {!isNull _unit && {alive _unit} && {!isNull objectParent _unit}} do
 		_obstacles = _predictPos nearObjects ["ALL", 10];
 		
 		//Add terrain objects (Rocks) to obstacles array
-		{
-			_obstacles pushBackUnique _x;
-		} forEach nearestTerrainObjects [_predictPos, ["ROCK", "ROCKS"], 10, false]; //TODO: Find way to avoid walls without breaking them with physics
+		//{
+		//	_obstacles pushBackUnique _x;
+		//} forEach nearestTerrainObjects [_predictPos, ["ROCK", "ROCKS"], 10, false]; //TODO: Find way to avoid walls without breaking them with physics
 		
 		//Remove gates, bridges and units vehicle from obstacles
 		{
