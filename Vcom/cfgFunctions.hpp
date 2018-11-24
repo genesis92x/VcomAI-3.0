@@ -134,7 +134,14 @@ class VCOM
 		// group call VCM_fnc_WyptChk;
 		class WyptChk {};	
 		
-	};		
+	};
+	
+	class Driving
+	{
+		file = "Vcom\Functions\VCM_Driving";
+		class vehicleDetection {};
+		class isDriver {};
+	};
 
 };
 

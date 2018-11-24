@@ -1,4 +1,4 @@
-/*%FSM<COMPILE "E:\Games\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, SQUADBEH">*/
+/*%FSM<COMPILE "D:\Games\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, SQUADBEH">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"Begin_State",0,250,50.000000,700.000000,150.000000,750.000000,0.000000,"Begin State"};
@@ -113,8 +113,8 @@ link63[] = {40,41};
 link64[] = {42,27};
 link65[] = {43,27};
 link66[] = {44,27};
-globals[] = {0.000000,0,0,0,0,640,480,2,623,6316128,1,-338.047516,376.205017,886.674744,80.290009,783,884,1};
-window[] = {2,-1,-1,-1,-1,1006,52,1353,52,3,801};
+globals[] = {0.000000,0,0,0,0,640,480,2,623,6316128,1,-338.047516,376.205017,886.674744,80.290009,605,854,1};
+window[] = {2,-1,-1,-1,-1,1080,2022,3323,126,3,623};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -187,7 +187,13 @@ class FSM
                                          "		_ehList pushBack [_x, ""Killed"", _x addEventHandler [""Killed"",{_this spawn VCM_fnc_ClstWarn;}]];" \n
                                          "		_ehList pushBack [_x, ""Hit"", _x addEventHandler [""Hit"",{_this call VCM_fnc_AIHIT;}]];" \n
                                          "		_ehList pushBack [_x, ""Fired"", _x addEventHandler [""Fired"",{_this call VCM_fnc_HearingAids;}]];" \n
-                                         "" \n
+                                         "		_ehList pushBack [_x, ""GetInMan"", _x addEventHandler [""GetInMan"", " \n
+                                         "		{" \n
+                                         "			params [""_unit"", ""_role"", ""_vehicle"", ""_turret""];" \n
+                                         "			if (_role isEqualTo ""driver"" && {VCM_Driving}) then {[_unit] spawn VCM_fnc_VehicleDetection};" \n
+                                         "		}" \n
+                                         "		]];" \n
+                                         "		if ([_x] call VCM_fnc_IsDriver && {VCM_Driving}) then {[_x] spawn VCM_fnc_VehicleDetection};" \n
                                          "	};" \n
                                          "} foreach (units _Group);" \n
                                          "" \n
@@ -234,7 +240,14 @@ class FSM
                          "			_ehList pushBack [_x, ""Killed"", _x addEventHandler [""Killed"",{_this spawn VCM_fnc_ClstWarn;}]];" \n
                          "			_ehList pushBack [_x, ""Fired"", _x addEventHandler [""Fired"",{_this call VCM_fnc_HearingAids;}]];" \n
                          "			_ehList pushBack [_x, ""Hit"", _x addEventHandler [""Hit"",{_this call VCM_fnc_AIHIT;}]];" \n
-                         "" \n
+                         "			" \n
+                         "			_ehList pushBack [_x, ""GetInMan"", _x addEventHandler [""GetInMan"", " \n
+                         "			{" \n
+                         "				params [""_unit"", ""_role"", ""_vehicle"", ""_turret""];" \n
+                         "				if (_role isEqualTo ""driver"" && {VCM_Driving}) then {[_unit] spawn VCM_fnc_VehicleDetection};" \n
+                         "			}" \n
+                         "			]];" \n
+                         "			if ([_x] call VCM_fnc_IsDriver && {VCM_Driving}) then {[_x] spawn VCM_fnc_VehicleDetection};" \n
                          "		};" \n
                          "	} foreach (units _Group);" \n
                          "" \n
