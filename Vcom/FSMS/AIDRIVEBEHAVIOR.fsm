@@ -1,0 +1,100 @@
+/*%FSM<COMPILE "C:\Program Files (x86)\Steam\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, AIDRIVEBEHAVIOR">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"Begin_State",0,250,27.230743,932.382141,117.230728,982.382141,0.000000,"Begin State"};
+item1[] = {"True",8,218,25.000000,850.000000,125.000000,900.000000,0.000000,"True"};
+item2[] = {"Base_Rotation",2,250,25.000000,750.000000,125.000000,800.000000,0.000000,"Base Rotation"};
+item3[] = {"Wait",4,218,150.000000,750.000000,250.000000,800.000000,0.000000,"Wait"};
+item4[] = {"Driver_Check",4,4314,25.000000,675.000000,125.000000,725.000000,1.000000,"Driver Check"};
+link0[] = {0,1};
+link1[] = {1,2};
+link2[] = {2,3};
+link3[] = {2,4};
+link4[] = {3,2};
+link5[] = {4,2};
+globals[] = {0.000000,0,0,0,0,640,480,2,311,6316128,1,-355.467682,359.618988,1009.446472,559.648926,779,490,1};
+window[] = {0,-1,-1,-1,-1,844,182,1579,182,1,797};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "AIDRIVEBEHAVIOR";
+        class States
+        {
+                /*%FSM<STATE "Begin_State">*/
+                class Begin_State
+                {
+                        name = "Begin_State";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "True">*/
+                                class True
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Base_Rotation";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Base_Rotation">*/
+                class Base_Rotation
+                {
+                        name = "Base_Rotation";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/"//We want to set all the important variables here." \n
+                         "//We want to filter through all the vehicles in the map, and check which ones have drivers." \n
+                         "//This is a better method than filtering through every units, typically there are less vehicles than AI." \n
+                         "_t = time;" \n
+                         "private _DriverArray = [];" \n
+                         "" \n
+                         "private _Driver = objNull;" \n
+                         "{" \n
+                         "	_Driver = (driver _x);" \n
+                         "	if (!(isNull _Driver) && {local _Driver} && {!((group _Driver) getvariable [""Vcm_Disable"",false])} ) then" \n
+                         "	{" \n
+                         "		_DriverArray pushback _x;" \n
+                         "	};" \n
+                         "} foreach vehicles;" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Driver_Check">*/
+                                class Driver_Check
+                                {
+                                        itemno = 4;
+                                        priority = 1.000000;
+                                        to="Base_Rotation";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"count _DriverArray > 0 && {time > _t + 2}"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_DriverArray call VCM_fnc_VehicleDetection"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Wait">*/
+                                class Wait
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="Base_Rotation";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _t + 2"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="Begin_State";
+        finalStates[] =
+        {
+        };
+};
+/*%FSM</COMPILE>*/
