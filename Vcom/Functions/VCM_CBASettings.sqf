@@ -416,4 +416,6 @@ if !(CBAACT) exitwith {};
     } // function that will be executed once on mission start and every time the setting is changed.
 ] call CBA_Settings_fnc_init;
 
+diag_log "VCOM: Loaded CBA settings";
+
 };

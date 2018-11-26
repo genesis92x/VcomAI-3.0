@@ -134,4 +134,5 @@ Vcm_Settings =
 		} forEach (units _this);
 	};	
 	
+	diag_log "VCOM: Loaded Default Settings";
 };
