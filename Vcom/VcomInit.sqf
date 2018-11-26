@@ -10,21 +10,18 @@ if (isServer) then
 
 		if !(_FileCheck isEqualTo "") then
 		{
-			private _Settings = compile preprocessFileLineNumbers "\userconfig\VCOM_AI\AISettingsV3.hpp";
-			[] call _Settings;
+			[] call compile preprocessFileLineNumbers "\userconfig\VCOM_AI\AISettingsV3.hpp";
 			[Vcm_Settings] remoteExec ["VCM_PublicScript",0,false];
 		}
 		else
 		{
-			private _Settings = compile preprocessFileLineNumbers "Vcom\Functions\VCOMAI_DefaultSettings.sqf";
-			[] call _Settings;
+			[] call compile preprocessFileLineNumbers "Vcom\Functions\VCOMAI_DefaultSettings.sqf";
 			[Vcm_Settings] remoteExec ["VCM_PublicScript",0,false];
 		};
 	}
 	else
 	{
-			private _Settings = compile preprocessFileLineNumbers "Vcom\Functions\VCOMAI_DefaultSettings.sqf";
-			[] call _Settings;
+			[] call compile preprocessFileLineNumbers "Vcom\Functions\VCOMAI_DefaultSettings.sqf";
 			[Vcm_Settings] remoteExec ["VCM_PublicScript",0,false];
 	};
 }
