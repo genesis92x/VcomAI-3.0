@@ -19,7 +19,7 @@
 		private _GetVehicleVelocity = velocity _x;
 		if (!(_GetVehicleVelocity isEqualTo [0,0,0])) then 
 		{
-			private _PredictPos = [_x,2.5] call VCM_fnc_MovePrediction;
+			private _PredictPos = [_x,3] call VCM_fnc_MovePrediction;
 			_PredictPos set [2,0.1];
 			if (VCM_Debug) then 
 			{
@@ -31,7 +31,7 @@
 			
 			//Lets check for obstacles and make sure the vehicle does not hit them
 			//Create an array of objects near predicted path
-			private _obstacles = _predictPos nearObjects ["ALL", 15];
+			private _obstacles = _predictPos nearObjects ["ALL", 25];
 			
 			
 			//Remove gates, bridges and units vehicle from obstacles
@@ -81,12 +81,15 @@
 					
 					// Spawn helper objects (These act as additional points of contact that the AI will attempt to avoid)
 					{
-						private _hlpObj = "Steel_Plate_S_F" createVehicleLocal _x;
-						_hlpObj setVariable ["VCM_AVOID", true];
-						_hlpObj setPosATL _x;
-						_hlpObj setDamage 1;
-						_hlpObj setObjectTextureGlobal [0, ""];
-						_hlprArray pushBack _hlpObj;
+						if ([_hlprArray, _x, true,"Driving"] call VCM_fnc_ClstObj distance2D _x > 1) then
+						{
+							private _hlpObj = "Steel_Plate_S_F" createVehicleLocal _x;
+							_hlpObj setVariable ["VCM_AVOID", true];
+							_hlpObj setPos _x;
+							_hlpObj setDamage 1;
+							_hlpObj setObjectTextureGlobal [0, ""];
+							_hlprArray pushBack _hlpObj;
+						};
 					} forEach _hlpPosArray;
 					
 					//Spawn debug objects
@@ -94,8 +97,8 @@
 					{
 						
 						{
-							
-							[_x select 0, _x select 1, 0.2] spawn 
+							private _ObjPos = getpos _x;
+							[_ObjPos select 0, _ObjPos select 1, 0.2] spawn 
 							{
 								private _arrow = "Sign_Arrow_Large_F" createVehicle [0,0,0];
 								_arrow setPos _this;
@@ -103,7 +106,7 @@
 								deleteVehicle _arrow;
 							};
 							
-						} forEach _hlpPosArray;
+						} forEach _hlprArray;
 						
 					};
 				
@@ -124,19 +127,22 @@
 				
 				};
 				
-			} forEach _obstacles;			
+			} forEach _obstacles;
 			
 			
 			
 			//Avoid units.
-			private _Livingobstacles = _predictPos nearObjects ["MAN", 50];
+			private _Livingobstacles = _predictPos nearObjects ["MAN", 25];
+			private _Unit = _x;
+			_LivingObstacles deleteAt (_Livingobstacles findIf {_x isEqualTo _Unit}); 
+			
 			private _NearestUnit = [_Livingobstacles, _x, true,"Driving"] call VCM_fnc_ClstObj;
 			if (_NearestUnit distance2D _x < 50) then
 			{
-				private _hlpObj = "Steel_Plate_S_F" createVehicleLocal _x;
+				private _hlpObj = "Steel_Plate_S_F" createVehicleLocal [0,0,0];
 				_hlpObj setDamage 1;
 				_hlpObj setVariable ["VCM_AVOID", true];
-				_hlpObj setPosATL (getpos _NearestUnit);
+				_hlpObj setPos (getpos _NearestUnit);
 				_hlpObj setObjectTextureGlobal [0, ""];
 				_hlpObj spawn {sleep 2; deletevehicle _this};
 			};

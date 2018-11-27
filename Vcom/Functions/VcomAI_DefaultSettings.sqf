@@ -11,6 +11,7 @@ Vcm_Settings =
 		
 	*/	
 
+	Vcm_DrivingActivated = false;//Set this to false to disable VcomAI driving from executing.
 	Vcm_ActivateAI = true; //Set this to false to disable VcomAI. It can be set to true at any time to re-enable Vcom AI
 	VcmAI_ActiveList = []; //Leave this alone.
 	Vcm_ArtilleryArray = []; //Leave this alone

@@ -1,24 +1,28 @@
 /*
-	Author: Genesis, revamped by Freddo
+	Author: Genesis
 
 	Description:
-		Checks if a unit is driver
+		Function for checking if AI is the driver.
 
 	Parameter(s):
-		0: OBJECT - Unit to check
+		0: Unit
 
 	Returns:
-		BOOLEAN
-	
+		NOTHING
+	Example1:  unit call VCM_fnc_IsDriver;
 */
 
-params ["_unit"];
-private _rtrn = false;
+_NotDriver = 0;
 
-if (!isNull objectParent _unit && {driver vehicle _unit isEqualTo _unit}) exitWith 
+_Vehicle = (vehicle _this);
+
+_ActualDriver = driver _Vehicle;
+
+if (_this isEqualTo _ActualDriver) then 
 {
-	_rtrn = true;
-	_rtrn
+  
+  _NotDriver = 1;
+  
 };
 
-_rtrn
+_NotDriver
