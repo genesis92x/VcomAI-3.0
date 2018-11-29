@@ -11,6 +11,12 @@ class VCOM
 		{
 			ext = ".fsm";
 		};
+		
+		// [] spawn VCM_fnc_AIDRIVEBEHAVIOR
+		class AIDRIVEBEHAVIOR
+		{
+			ext = ".fsm";
+		};
 	};
 	
 	class Functions 

@@ -62,7 +62,7 @@ if (VCM_FFEARTILLERY) then {nul = [] execVM "Vcom\RYD_FFE\FFE.sqf";VCM_ARTYENABL
 		player addEventHandler ["Respawn",{_this spawn VCM_fnc_IRCHECK;}];
 	};
 	
-	[] execFSM "Vcom\FSMS\AIDRIVEBEHAVIOR.fsm";
+	[] spawn VCM_fnc_AIDRIVEBEHAVIOR;
 	
 	
 	while {true} do 
