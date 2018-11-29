@@ -10,21 +10,18 @@ if (isServer) then
 
 		if !(_FileCheck isEqualTo "") then
 		{
-			private _Settings = compile preprocessFileLineNumbers "\userconfig\VCOM_AI\AISettingsV3.hpp";
-			[] call _Settings;
+			[] call compile preprocessFileLineNumbers "\userconfig\VCOM_AI\AISettingsV3.hpp";
 			[Vcm_Settings] remoteExec ["VCM_PublicScript",0,false];
 		}
 		else
 		{
-			private _Settings = compile preprocessFileLineNumbers "Vcom\Functions\VCOMAI_DefaultSettings.sqf";
-			[] call _Settings;
+			[] call compile preprocessFileLineNumbers "Vcom\Functions\VCOMAI_DefaultSettings.sqf";
 			[Vcm_Settings] remoteExec ["VCM_PublicScript",0,false];
 		};
 	}
 	else
 	{
-			private _Settings = compile preprocessFileLineNumbers "Vcom\Functions\VCOMAI_DefaultSettings.sqf";
-			[] call _Settings;
+			[] call compile preprocessFileLineNumbers "Vcom\Functions\VCOMAI_DefaultSettings.sqf";
 			[Vcm_Settings] remoteExec ["VCM_PublicScript",0,false];
 	};
 }
@@ -39,7 +36,7 @@ waitUntil {!(isNil "VCM_AIMagLimit")};
 
 //Mod checks
 //ACE CHECK
-if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {ACEACTIVATED = true;} else {ACEACTIVATED = false;};
+if (not isNil "ACE_Medical_enableFor" && {ACE_Medical_enableFor == 1}) then {VCM_MEDICALACTIVE = false;} else {VCM_MEDICALACTIVE = true;};
 //CBA CHECK
 if (isClass(configFile >> "CfgPatches" >> "cba_main")) then {CBAACT = true;} else {CBAACT = false;};
 
