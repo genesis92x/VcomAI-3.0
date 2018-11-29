@@ -11,7 +11,6 @@ Vcm_Settings =
 		
 	*/	
 
-	Vcm_DrivingActivated = false;//Set this to false to disable VcomAI driving from executing.
 	Vcm_ActivateAI = true; //Set this to false to disable VcomAI. It can be set to true at any time to re-enable Vcom AI
 	VcmAI_ActiveList = []; //Leave this alone.
 	Vcm_ArtilleryArray = []; //Leave this alone
@@ -43,6 +42,12 @@ Vcm_Settings =
 	VCM_ADVANCEDMOVEMENT = true; //True means AI will actively generate waypoints if no other waypoints are generated for the AI group (2 or more). False disables this advanced movements.
 	VCM_FRMCHANGE = true; //AI GROUPS WILL CHANGE FORMATIONS TO THEIR BEST GUESS.
 	VCM_SKILLCHANGE = true; //AI Groups will have their skills changed by Vcom.
+	
+	//VCOM DRIVING. Experimental feature
+	
+	Vcm_DrivingActivated = false; //Set this to false to disable VcomAI driving from executing.
+	VCM_DrivingDist = 25; // Distance from predicted path to search for objects. High numbers may cause instability.
+	VCM_DrivingDelay = 1; // How often the script should look for obstacles
 		
 	//AI SKILL SETTINGS HERE!!!!!!!!!!!!
 	//LOW DIFFICULTY

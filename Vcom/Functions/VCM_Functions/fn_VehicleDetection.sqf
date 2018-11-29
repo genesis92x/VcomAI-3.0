@@ -31,7 +31,7 @@
 			
 			//Lets check for obstacles and make sure the vehicle does not hit them
 			//Create an array of objects near predicted path
-			private _obstacles = _predictPos nearObjects ["ALL", 25];
+			private _obstacles = _predictPos nearObjects ["ALL", VCM_DrivingDist]; // VCM_DrivingDist is search distance
 			
 			
 			//Remove gates, bridges and units vehicle from obstacles
