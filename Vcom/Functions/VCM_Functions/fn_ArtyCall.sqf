@@ -30,7 +30,7 @@ private _CallSide = (side _callGrp);
 		if !(_artyChk isEqualTo 1) then
 		{
 			VCM_ARTYLST deleteAt (VCM_ARTYLST findif {_veh isEqualTo _x});
-		};		
+		};
 	};
 	
 } foreach VCM_ARTYLST;
@@ -38,7 +38,7 @@ private _CallSide = (side _callGrp);
 //Next let's only select AI units who are on our side or friendly.
 private _artyArray = [];
 {
-	if ([(side _x),_CallSide] call BIS_fnc_sideIsFriendly) then
+	if ([(side _x),_CallSide] call BIS_fnc_sideIsFriendly && {side _x in VCM_ARTYSIDES}) then
 	{
 		_artyArray pushback _x;
 	};	

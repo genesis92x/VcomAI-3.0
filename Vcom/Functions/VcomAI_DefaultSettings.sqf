@@ -21,6 +21,7 @@ Vcm_Settings =
 	
 	//VCOM ARTILLERY. Only one kind of advanced artillery can be used at a time.
 	VCM_ARTYENABLE = false; //Enable improved artillery handling from Vcom.
+	VCM_ARTYSIDES = [west,east,resistance];  //Sides that will use VCOM/FFE artillery
 	VCM_ARTYLST = []; //List of all AI inside of artillery pieces, leave this alone.
 	VCM_ARTYDELAY = 300; //Delay between squads requesting artillery
 	VCM_ARTYWT = -(VCM_ARTYDELAY);
