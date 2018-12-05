@@ -4,7 +4,7 @@
 item0[] = {"Begin_State",0,250,27.230743,932.382141,117.230728,982.382141,0.000000,"Begin State"};
 item1[] = {"True",8,218,25.000000,850.000000,125.000000,900.000000,0.000000,"True"};
 item2[] = {"Base_Rotation",2,250,25.000000,750.000000,125.000000,800.000000,0.000000,"Base Rotation"};
-item3[] = {"Wait",4,4314,150.000000,750.000000,250.000000,800.000000,0.000000,"Wait"};
+item3[] = {"Wait",4,218,150.000000,750.000000,250.000000,800.000000,0.000000,"Wait"};
 item4[] = {"Driver_Check",4,218,25.000000,675.000000,125.000000,725.000000,1.000000,"Driver Check"};
 item5[] = {"Disabled",4,218,125.000000,825.000000,225.000000,875.000000,100.000000,"Disabled"};
 item6[] = {"Waiting",2,250,225.000000,850.000000,325.000000,900.000000,0.000000,"Waiting"};
@@ -23,7 +23,7 @@ link9[] = {6,8};
 link10[] = {7,6};
 link11[] = {8,2};
 globals[] = {0.000000,0,0,0,0,640,480,2,315,6316128,1,-218.693237,496.393402,1020.462097,570.664734,779,490,1};
-window[] = {0,-1,-1,-1,-1,896,234,1631,234,1,797};
+window[] = {0,-1,-1,-1,-1,907,381,1778,245,1,797};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -62,16 +62,7 @@ class FSM
                          "//We want to filter through all the vehicles in the map, and check which ones have drivers." \n
                          "//This is a better method than filtering through every units, typically there are less vehicles than AI." \n
                          "_t = time;" \n
-                         "private _DriverArray = [];" \n
-                         "" \n
-                         "private _Driver = objNull;" \n
-                         "{" \n
-                         "	_Driver = (driver _x);" \n
-                         "	if (_x isKindOf ""allvehicles"" && {!(_x isKindOf ""AIR"")} && {!(isNull _Driver)} && {local _Driver} && {!((group _Driver) getvariable [""Vcm_Disable"",false])} ) then" \n
-                         "	{" \n
-                         "		_DriverArray pushback _x;" \n
-                         "	};" \n
-                         "} foreach vehicles;" \n
+                         "private _DriverArray = ([] call VCM_fnc_UpdateDrivers);" \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links

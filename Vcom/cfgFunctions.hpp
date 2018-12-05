@@ -148,6 +148,9 @@ class VCOM
 		
 		//[unit,4] call VCM_fnc_MovePrediction;
 		class MovePrediction {};
+		
+		//[] call VCM_fnc_UpdateDrivers;
+		class UpdateDrivers {};
 	};		
 
 };

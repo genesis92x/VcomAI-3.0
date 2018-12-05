@@ -48,6 +48,7 @@ Vcm_Settings =
 	Vcm_DrivingActivated = false; //Set this to false to disable VcomAI driving from executing.
 	VCM_DrivingDist = 25; // Distance from predicted path to search for objects. High numbers may cause instability.
 	VCM_DrivingDelay = 1; // How often the script should look for obstacles
+	VCM_DRIVERLIMIT = 4; // How many drivers should be calculated at each cycle
 		
 	//AI SKILL SETTINGS HERE!!!!!!!!!!!!
 	//LOW DIFFICULTY
