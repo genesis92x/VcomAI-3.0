@@ -72,14 +72,13 @@ Vcm_Settings =
 	VCM_AISKILL_AIMINGSPEED_E = 0.35;
 	VCM_AISKILL_AIMINGSPEED_R = 0.35;
 
-
-	//SIDE SPECIFIC
-	VCM_AIDIFWEST = [['aimingAccuracy',VCM_AISKILL_AIMINGACCURACY_W],['aimingShake',VCM_AISKILL_AIMINGSHAKE_W],['aimingSpeed',VCM_AISKILL_AIMINGSPEED_W],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
-	VCM_AIDIFEAST = [['aimingAccuracy',VCM_AISKILL_AIMINGACCURACY_E],['aimingShake',VCM_AISKILL_AIMINGSHAKE_E],['aimingSpeed',VCM_AISKILL_AIMINGSPEED_E],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
-	VCM_AIDIFRESISTANCE = [['aimingAccuracy',VCM_AISKILL_AIMINGACCURACY_R],['aimingShake',VCM_AISKILL_AIMINGSHAKE_R],['aimingSpeed',VCM_AISKILL_AIMINGSPEED_R],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
-
 	VCM_AISIDESPEC =
 	{
+		//Reallocates skill variables before group skill settings are applied
+		VCM_AIDIFWEST = [['aimingAccuracy',VCM_AISKILL_AIMINGACCURACY_W],['aimingShake',VCM_AISKILL_AIMINGSHAKE_W],['aimingSpeed',VCM_AISKILL_AIMINGSPEED_W],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
+		VCM_AIDIFEAST = [['aimingAccuracy',VCM_AISKILL_AIMINGACCURACY_E],['aimingShake',VCM_AISKILL_AIMINGSHAKE_E],['aimingSpeed',VCM_AISKILL_AIMINGSPEED_E],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
+		VCM_AIDIFRESISTANCE = [['aimingAccuracy',VCM_AISKILL_AIMINGACCURACY_R],['aimingShake',VCM_AISKILL_AIMINGSHAKE_R],['aimingSpeed',VCM_AISKILL_AIMINGSPEED_R],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
+		
 		private _Side = (side (group _this));
 		switch (_Side) do {
 			case west:
@@ -105,7 +104,7 @@ Vcm_Settings =
 
 
 	VCM_CLASSNAMESPECIFIC = false; //Do you want the AI to have classname specific skill settings?
-	VCM_SIDESPECIFICSKILL = false; //Do you want the AI to have side specific skill settings? This overrides classname specific skills.
+	VCM_SIDESPECIFICSKILL = true; //Do you want the AI to have side specific skill settings? This overrides classname specific skills.
 	VCM_SKILL_CLASSNAMES = []; //Here you can assign certain unit classnames to specific skill levels. This will override the AI skill level above.
 
 	/*

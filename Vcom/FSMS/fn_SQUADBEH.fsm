@@ -176,7 +176,8 @@ class FSM
                                          "private _ehList = [];" \n
                                          "" \n
                                          "_Group call VCM_fnc_ArtyManage;" \n
-                                         "if (VCM_SKILLCHANGE && {_Group getVariable [""VCM_Skilldisable"", false]}) then {_Group call VCM_AIDIFSET};" \n
+                                         "private _isskilldisabled = _Group getVariable ""VCM_Skilldisable"";" \n
+                                         "if (VCM_SKILLCHANGE && isnil ""_isskilldisabled"") then {_Group call VCM_AIDIFSET};" \n
                                          "" \n
                                          "" \n
                                          "{" \n
