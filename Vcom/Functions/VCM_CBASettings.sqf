@@ -10,7 +10,7 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     true, // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_ActivateAI = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -23,7 +23,7 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
 	false,// data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_Debug = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -36,7 +36,7 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     [[[west,east,resistance],[west,east],[west],[east],[resistance],[resistance,west],[resistance,east]],[["West, East, Resistance"],["West, East"],["West"],["East"],["Resistance"],["Resistance, West"],["Resistance, East"]],0], // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_SIDEENABLED = _this;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -49,7 +49,7 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     false, // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_ARTYENABLE = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -62,7 +62,7 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     [[[west,east,resistance],[west,east],[west],[east],[resistance],[resistance,west],[resistance,east]],[["West, East, Resistance"],["West, East"],["West"],["East"],["Resistance"],["Resistance, West"],["Resistance, East"]],0], // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_ARTYSIDES = _this;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -75,7 +75,7 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
 	true,// data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_StealVeh = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -88,7 +88,7 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
 	true,// data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_FullSpeed = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -101,7 +101,7 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
 	true,// data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_ADVANCEDMOVEMENT = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -114,24 +114,12 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
 	true,// data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_FRMCHANGE = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
 ] call CBA_Settings_fnc_init;
 
-[
-    "VCM_SKILLCHANGE", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
-    "CHECKBOX", // setting type
-    "AI impacted by Vcom skill settings.", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
-    "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
-	true,// data for this setting:
-    true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
-        params ["_value"];
-        VCM_SKILLCHANGE = _value;
-    } // function that will be executed once on mission start and every time the setting is changed.
-] call CBA_Settings_fnc_init;
 
 [
     "VCM_AIDISTANCEVEHPATH", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
@@ -140,7 +128,7 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     [0,1000,100,0], // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_AIDISTANCEVEHPATH = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -153,7 +141,7 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
 	true,// data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_RAGDOLL = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -166,7 +154,7 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     [0,100,50,0], // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_RAGDOLLCHC = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -180,7 +168,7 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     [0,10000,800,0], // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_HEARINGDISTANCE = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -193,7 +181,7 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     [0,10000,1000,0], // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_WARNDIST = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -206,7 +194,7 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     [0,10000,30,0], // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_WARNDELAY = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -219,7 +207,7 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     [0,10000,300,0], // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_STATICARMT = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -233,7 +221,7 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     [0,100,75,0], // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_MINECHANCE = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -246,7 +234,7 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     [0,5000,300,0], // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_ARTYDELAY = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -259,7 +247,7 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     [0,5000,400,0], // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_ARTYSPREAD = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -273,7 +261,7 @@ if !(CBAACT) exitwith {};
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     [2,10,5,0], // data for this setting: [min, max, default, number of shown trailing decimals]
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
         VCM_AIMagLimit = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -288,7 +276,7 @@ if !(CBAACT) exitwith {};
     "Fire For Effect", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     true, // data for this setting: [min, max, default, number of shown trailing decimals]
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
 		VCM_FFEARTILLERY = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -301,7 +289,7 @@ if !(CBAACT) exitwith {};
     "Fire For Effect", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     false, // data for this setting: [min, max, default, number of shown trailing decimals]
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
 		RydFFE_Debug = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -314,7 +302,7 @@ if !(CBAACT) exitwith {};
     "Fire For Effect", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     "", // data for this setting: [min, max, default, number of shown trailing decimals]
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
 		RydFFE_FO = [];
 		{RydFFE_FO pushBack (missionNamespace getVariable _x)} forEach (_value splitstring ", ");
@@ -328,7 +316,7 @@ if !(CBAACT) exitwith {};
     "Fire For Effect", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     "i_spotter_f, o_spotter_f, b_spotter_f, o_recon_jtac_f, b_recon_jtac_f, i_sniper_f, o_sniper_f, b_sniper_f, i_soldier_m_f, o_soldier_m_f, b_g_soldier_m_f, b_soldier_m_f, o_recon_m_f, b_recon_m_f, o_soldieru_m_f, i_uav_01_f, i_uav_02_cas_f, i_uav_02_f, o_uav_01_f, o_uav_02_cas_f, o_uav_02_f, b_uav_01_f, b_uav_02_cas_f, b_uav_02_f", // data for this setting: [min, max, default, number of shown trailing decimals]
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
 		RydFFE_FOClass = _value splitstring ", ";
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -341,7 +329,7 @@ if !(CBAACT) exitwith {};
     "Fire For Effect", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     false, // data for this setting: [min, max, default, number of shown trailing decimals]
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
 		RydFFE_OnePhase = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -354,7 +342,7 @@ if !(CBAACT) exitwith {};
     "Fire For Effect", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     false, // data for this setting: [min, max, default, number of shown trailing decimals]
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
 		RydFFE_2PhWithoutFO = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -367,7 +355,7 @@ if !(CBAACT) exitwith {};
     "Fire For Effect", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     [1, 4, 2, 0], // data for this setting: [min, max, default, number of shown trailing decimals]
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
 		RydFFE_Acc = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -380,7 +368,7 @@ if !(CBAACT) exitwith {};
     "Fire For Effect", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     [20, 300, 100, 0], // data for this setting: [min, max, default, number of shown trailing decimals]
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
 		RydFFE_Safe = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -393,7 +381,7 @@ if !(CBAACT) exitwith {};
     "Fire For Effect", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     true, // data for this setting: [min, max, default, number of shown trailing decimals]
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
 		RydFFE_Monogamy = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -406,7 +394,7 @@ if !(CBAACT) exitwith {};
     "Fire For Effect", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     [1, 12, 6, 0], // data for this setting: [min, max, default, number of shown trailing decimals]
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
 		RydFFE_Amount = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -419,7 +407,7 @@ if !(CBAACT) exitwith {};
     "Fire For Effect", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     false, // data for this setting: [min, max, default, number of shown trailing decimals]
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
 		RydFFE_ShellView = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
@@ -432,11 +420,147 @@ if !(CBAACT) exitwith {};
     "Fire For Effect", // Pretty name of the category where the setting can be found. Can be stringtable entry.
     [0.5,3,1,1], // data for this setting: [min, max, default, number of shown trailing decimals]
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
-    {  
+    {
         params ["_value"];
 		RydFFE_FoAccGain = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
 ] call CBA_Settings_fnc_init;
+
+//AI SKILL SETTINGS
+[
+    "VCM_SKILLCHANGE", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+    "CHECKBOX", // setting type
+    "AI impacted by Vcom skill settings.", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    "VCOM SKILL SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+	true,// data for this setting:
+    true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {
+        params ["_value"];
+        VCM_SKILLCHANGE = _value;
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call CBA_Settings_fnc_init;
+
+//Aiming Accuracy
+[
+    "VCM_AISKILL_AIMINGACCURACY_W", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+    "SLIDER", // setting type
+    "AI Aiming Accuracy (West)", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    "VCOM SKILL SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+    [0,1,0.25,2], // data for this setting: [min, max, default, number of shown trailing decimals]
+    true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {
+        params ["_value"];
+        VCM_AISKILL_AIMINGACCURACY_W = _value;
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call CBA_Settings_fnc_init;
+
+[
+    "VCM_AISKILL_AIMINGACCURACY_E", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+    "SLIDER", // setting type
+    "AI Aiming Accuracy (East)", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    "VCOM SKILL SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+    [0,1,0.25,2], // data for this setting: [min, max, default, number of shown trailing decimals]
+    true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {
+        params ["_value"];
+        VCM_AISKILL_AIMINGACCURACY_E = _value;
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call CBA_Settings_fnc_init;
+
+[
+    "VCM_AISKILL_AIMINGACCURACY_R", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+    "SLIDER", // setting type
+    "AI Aiming Accuracy (Ind)", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    "VCOM SKILL SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+    [0,1,0.25,2], // data for this setting: [min, max, default, number of shown trailing decimals]
+    true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {
+        params ["_value"];
+        VCM_AISKILL_AIMINGACCURACY_R = _value;
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call CBA_Settings_fnc_init;
+
+//Aiming Shake
+[
+    "VCM_AISKILL_AIMINGSHAKE_W", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+    "SLIDER", // setting type
+    "AI Aiming Shake (West)", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    "VCOM SKILL SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+    [0,1,0.15,2], // data for this setting: [min, max, default, number of shown trailing decimals]
+    true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {
+        params ["_value"];
+        VCM_AISKILL_AIMINGSHAKE_W = _value;
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call CBA_Settings_fnc_init;
+
+[
+    "VCM_AISKILL_AIMINGSHAKE_E", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+    "SLIDER", // setting type
+    "AI Aiming Shake (East)", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    "VCOM SKILL SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+    [0,1,0.15,2], // data for this setting: [min, max, default, number of shown trailing decimals]
+    true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {
+        params ["_value"];
+        VCM_AISKILL_AIMINGSHAKE_E = _value;
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call CBA_Settings_fnc_init;
+
+[
+    "VCM_AISKILL_AIMINGSHAKE_R", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+    "SLIDER", // setting type
+    "AI Aiming Shake (Ind)", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    "VCOM SKILL SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+    [0,1,0.15,2], // data for this setting: [min, max, default, number of shown trailing decimals]
+    true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {
+        params ["_value"];
+        VCM_AISKILL_AIMINGSHAKE_R = _value;
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call CBA_Settings_fnc_init;
+
+//Aiming Speed
+[
+    "VCM_AISKILL_AIMINGSPEED_W", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+    "SLIDER", // setting type
+    "AI Aiming Speed (West)", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    "VCOM SKILL SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+    [0,1,0.35,2], // data for this setting: [min, max, default, number of shown trailing decimals]
+    true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {
+        params ["_value"];
+        VCM_AISKILL_AIMINGSPEED_W = _value;
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call CBA_Settings_fnc_init;
+
+[
+    "VCM_AISKILL_AIMINGSPEED_E", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+    "SLIDER", // setting type
+    "AI Aiming Speed (East)", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    "VCOM SKILL SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+    [0,1,0.35,2], // data for this setting: [min, max, default, number of shown trailing decimals]
+    true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {
+        params ["_value"];
+        VCM_AISKILL_AIMINGSPEED_E = _value;
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call CBA_Settings_fnc_init;
+
+[
+    "VCM_AISKILL_AIMINGSPEED_R", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+    "SLIDER", // setting type
+    "AI Aiming Speed (Ind)", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    "VCOM SKILL SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+    [0,1,0.35,2], // data for this setting: [min, max, default, number of shown trailing decimals]
+    true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {
+        params ["_value"];
+        VCM_AISKILL_AIMINGSPEED_R = _value;
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call CBA_Settings_fnc_init;
+
+
 
 diag_log "VCOM: Loaded CBA settings";
 
