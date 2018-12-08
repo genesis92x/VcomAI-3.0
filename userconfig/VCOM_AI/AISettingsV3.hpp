@@ -14,22 +14,24 @@ Vcm_Settings =
 	Vcm_ActivateAI = true; //Set this to false to disable VcomAI. It can be set to true at any time to re-enable Vcom AI
 	VcmAI_ActiveList = []; //Leave this alone.
 	Vcm_ArtilleryArray = []; //Leave this alone
+	VCM_ARTYENABLE = true; //Enable improved artillery handling.
+	VCM_AIMagLimit = 5; //Number of mags remaining before AI looks for ammo.
+	VCM_Debug = false; //Enable debug mode.
+	VCM_MINECHANCE = 75; //Chance to lay a mine
 
 	//VCOM ARTILLERY. Only one kind of advanced artillery can be used at a time.
 	VCM_ARTYENABLE = false; //Enable improved artillery handling from Vcom.
+	VCM_ARTYSIDES = [west,east,resistance];  //Sides that will use VCOM/FFE artillery
 	VCM_ARTYLST = []; //List of all AI inside of artillery pieces, leave this alone.
 	VCM_ARTYDELAY = 300; //Delay between squads requesting artillery
 	VCM_ARTYWT = -(VCM_ARTYDELAY);
 	VCM_ARTYET = -(VCM_ARTYDELAY);
 	VCM_ARTYRT = -(VCM_ARTYDELAY);
-	VCM_ARTYSIDES = [west,east,resistance];  //Sides that will use VCOM/FFE artillery
 	VCM_ARTYSPREAD = 400; //Spread of artillery rounds;
-	//Fire For Effect Artillery handling. Only one kind of advanced atrillery can be used at a time. - https://forums.bohemia.net/forums/topic/159152-fire-for-effect-the-god-of-war-smart-simple-ai-artillery/
+
+	//Fire For Effect Artillery handling. Only one kind of advanced artillery can be used at a time. - https://forums.bohemia.net/forums/topic/159152-fire-for-effect-the-god-of-war-smart-simple-ai-artillery/
 	VCM_FFEARTILLERY = true;
 
-	VCM_AIMagLimit = 5; //Number of mags remaining before AI looks for ammo.
-	VCM_Debug = false; //Enable debug mode.
-	VCM_MINECHANCE = 75; //Chance to lay a mine
 	VCM_SIDEENABLED = [west,east,resistance]; //Sides that will activate Vcom AI
 	VCM_RAGDOLL = true; //Should AI ragdoll when hit
 	VCM_RAGDOLLCHC = 50; //CHANCE AI RAGDOLL
@@ -49,7 +51,7 @@ Vcm_Settings =
 	//VCM_AIDIFA = [['aimingAccuracy',0.15],['aimingShake',0.1],['aimingSpeed',0.25],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
 
 	//MEDIUM DIFFICULTY
-	//VCM_AIDIFA = [['aimingAccuracy',0.25],['aimingShake',0.15],['aimingSpeed',0.35],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
+	VCM_AIDIFA = [['aimingAccuracy',0.25],['aimingShake',0.15],['aimingSpeed',0.35],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
 
 	//HIGH DIFFICULTY
 	//VCM_AIDIFA = [['aimingAccuracy',0.35],['aimingShake',0.4],['aimingSpeed',0.45],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
@@ -70,14 +72,13 @@ Vcm_Settings =
 	VCM_AISKILL_AIMINGSPEED_E = 0.35;
 	VCM_AISKILL_AIMINGSPEED_R = 0.35;
 
-
-	//SIDE SPECIFIC
-	VCM_AIDIFWEST = [['aimingAccuracy',VCM_AISKILL_AIMINGACCURACY_W],['aimingShake',VCM_AISKILL_AIMINGSHAKE_W],['aimingSpeed',VCM_AISKILL_AIMINGSPEED_W],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
-	VCM_AIDIFEAST = [['aimingAccuracy',VCM_AISKILL_AIMINGACCURACY_E],['aimingShake',VCM_AISKILL_AIMINGSHAKE_E],['aimingSpeed',VCM_AISKILL_AIMINGSPEED_E],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
-	VCM_AIDIFRESISTANCE = [['aimingAccuracy',VCM_AISKILL_AIMINGACCURACY_R],['aimingShake',VCM_AISKILL_AIMINGSHAKE_R],['aimingSpeed',VCM_AISKILL_AIMINGSPEED_R],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
-
 	VCM_AISIDESPEC =
 	{
+		//Reallocates skill variables before group skill settings are applied
+		VCM_AIDIFWEST = [['aimingAccuracy',VCM_AISKILL_AIMINGACCURACY_W],['aimingShake',VCM_AISKILL_AIMINGSHAKE_W],['aimingSpeed',VCM_AISKILL_AIMINGSPEED_W],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
+		VCM_AIDIFEAST = [['aimingAccuracy',VCM_AISKILL_AIMINGACCURACY_E],['aimingShake',VCM_AISKILL_AIMINGSHAKE_E],['aimingSpeed',VCM_AISKILL_AIMINGSPEED_E],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
+		VCM_AIDIFRESISTANCE = [['aimingAccuracy',VCM_AISKILL_AIMINGACCURACY_R],['aimingShake',VCM_AISKILL_AIMINGSHAKE_R],['aimingSpeed',VCM_AISKILL_AIMINGSPEED_R],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
+		
 		private _Side = (side (group _this));
 		switch (_Side) do {
 			case west:
@@ -103,7 +104,7 @@ Vcm_Settings =
 
 
 	VCM_CLASSNAMESPECIFIC = false; //Do you want the AI to have classname specific skill settings?
-	VCM_SIDESPECIFICSKILL = false; //Do you want the AI to have side specific skill settings? This overrides classname specific skills.
+	VCM_SIDESPECIFICSKILL = true; //Do you want the AI to have side specific skill settings? This overrides classname specific skills.
 	VCM_SKILL_CLASSNAMES = []; //Here you can assign certain unit classnames to specific skill levels. This will override the AI skill level above.
 
 	/*
@@ -117,9 +118,11 @@ Vcm_Settings =
 
 	*/
 
-
+	//Set AI Skill levels
 	VCM_AIDIFSET =
 	{
+		//Skip if Vcom Skillchange is disabled
+		if (!VCM_SKILLCHANGE) exitWith {};
 		{
 			private _unit = _x;
 			_unit setSkill 0.9;
@@ -148,5 +151,5 @@ Vcm_Settings =
 		} forEach (units _this);
 	};
 
-	diag_log "VCOM: Loaded Userconfig";
+	diag_log "VCOM: Loaded Default Settings";
 };
