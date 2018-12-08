@@ -19,6 +19,7 @@ Vcm_Settings =
 	VCM_Debug = false; //Enable debug mode.
 	VCM_MINECHANCE = 75; //Chance to lay a mine
 
+
 	//VCOM ARTILLERY. Only one kind of advanced artillery can be used at a time.
 	VCM_ARTYENABLE = false; //Enable improved artillery handling from Vcom.
 	VCM_ARTYSIDES = [west,east,resistance];  //Sides that will use VCOM/FFE artillery
@@ -118,6 +119,7 @@ Vcm_Settings =
 
 	*/
 
+
 	//Set AI Skill levels
 	VCM_AIDIFSET =
 	{
@@ -151,5 +153,5 @@ Vcm_Settings =
 		} forEach (units _this);
 	};
 
-	diag_log "VCOM: Loaded Default Settings";
+	diag_log "VCOM: Loaded Userconfig";
 };
