@@ -17,11 +17,11 @@
 */
 
 params ["_unitToRearm","_rearmLocation"];
-
-while {(_unitToRearm distance _rearmLocation) > 5 && {(_unitToRearm distance _rearmLocation) < 200}} do
+private _time = time;
+while {(_unitToRearm distance _rearmLocation) > 8 && {(_unitToRearm distance _rearmLocation) < 50} && {_time + 60 > time}} do
 {
 	_unitToRearm domove (getpos _rearmLocation);
 	sleep 4;
 };
 
-	_unitToRearm action ["rearm", _rearmLocation];
+_unitToRearm action ["rearm", _rearmLocation];

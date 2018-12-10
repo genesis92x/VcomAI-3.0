@@ -13,53 +13,59 @@
 */
 
 private _magLimit = VCM_AIMagLimit;
+
 {
 	private _orgUnit = _x;
-if !(vehicle _x isEqualTo _x) exitWith {};
+	if !(isNull objectParent _x) exitWith {};
 
-//The first thing we want to do. Is figure out what ammo this unit is using.
-private _curMag = currentMagazine _x;
+	//The first thing we want to do. Is figure out what ammo this unit is using.
+	private _curMag = currentMagazine _x;
 
-//Now, we want to compare this classname to all the other ammo classnames this unit may have and count the number.
-private _mags = magazines _x;
+	//Now, we want to compare this classname to all the other ammo classnames this unit may have and count the number.
+	private _mags = magazines _x;
 
-//Count the total number of mags.
-private _magCount = 0;
-{ if (_x isEqualTo _curMag) then {_magCount = _magCount + 1};true;} count _mags;
+	//Count the total number of mags.
+	private _magCount = {_x isEqualTo _curMag}count _mags;
 
-//If unit has less than the wanted limit, then make the unit find ammo!
-if (_magCount < _magLimit) then {
-	//Find closest men!
-	_potRearm = _x nearEntities [["WeaponHolderSimulated", "Man", "Air", "Car", "Motorcycle", "Tank"], 200];
-	_potRearm = _potRearm - [_x];
-	{
-		if (alive _x && {_x isKindOf "Man"}) then {_potRearm = _potRearm - [_x];};
-		true;
-	} count _potRearm;
-	
-	//If men are around see if we can take ammo from them first.
-	_stop = false;
-	if (count _potRearm != 0) then {
+	//If unit has less than the wanted limit, then make the unit find ammo!
+	if (_magCount < _magLimit) then {
+		//Find closest men!
+		_potRearm = _x nearEntities [["WeaponHolderSimulated", "Man", "Air", "Car", "Motorcycle", "Tank"], 50];
+		_potRearm = _potRearm - [_x];
 		{
-			_mags = [];
-			_unit = _x;
-			if (_unit isKindOf "Man") then {
-				_mags = magazines _unit;
-			} else {
-				_mags = magazineCargo _unit;
-			};
-			if (isNil "_mags") then {_mags = [];};
+			if (alive _x && {_x isKindOf "Man"}) then 
 			{
-				if (_x isEqualTo _curMag) exitwith {
-					[_orgUnit,_unit] spawn VCM_fnc_ActRearm; 
-					_stop = true;
+				_potRearm = _potRearm - [_x];
+			};
+		} forEach _potRearm;
+		
+		//If men are around see if we can take ammo from them first.
+		_stop = false;
+		if (count _potRearm > 0) then {
+			{
+				_mags = [];
+				_unit = _x;
+				
+				if (_unit isKindOf "Man") then {
+					_mags = magazines _unit;
+				}
+				else
+				{
+					_mags = magazineCargo _unit;
 				};
-				true;
-			} count _mags;
-			if ( _stop ) exitwith {};
-			true;
-		} count _potRearm;
+				
+				if (isNil "_mags") then {_mags = [];};
+				
+				{
+					if (_x isEqualTo _curMag) exitwith {
+						[_orgUnit,_unit] spawn VCM_fnc_ActRearm; 
+						_stop = true;
+					};
+				} forEach _mags;
+				
+				if (_stop) exitwith {};
+				
+			} forEach _potRearm;
+		};
 	};
-};
-true;
-} count (units _this);
+} forEach (units _this);

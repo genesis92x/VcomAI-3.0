@@ -15,7 +15,7 @@ Vcm_Settings =
 	VcmAI_ActiveList = []; //Leave this alone.
 	Vcm_ArtilleryArray = []; //Leave this alone
 	VCM_ARTYENABLE = true; //Enable improved artillery handling.
-	VCM_AIMagLimit = 5; //Number of mags remaining before AI looks for ammo.
+	VCM_AIMagLimit = 2; //Number of mags remaining before AI looks for ammo.
 	VCM_Debug = false; //Enable debug mode.
 	VCM_MINECHANCE = 75; //Chance to lay a mine
 
@@ -49,8 +49,8 @@ Vcm_Settings =
 	//VCOM DRIVING. Experimental feature
 	
 	Vcm_DrivingActivated = false; //Set this to false to disable VcomAI driving from executing.
-	VCM_DrivingDist = 25; // Distance from predicted path to search for objects. High numbers may cause instability.
-	VCM_DrivingDelay = 1; // How often the script should look for obstacles
+	VCM_DrivingDist = 10; // Distance from predicted path to search for objects. High numbers may cause instability.
+	VCM_DrivingDelay = 0.75; // How often the script should look for obstacles
 	VCM_DRIVERLIMIT = 4; // How many drivers should be calculated at each cycle
 	
 	//AI SKILL SETTINGS HERE!!!!!!!!!!!!

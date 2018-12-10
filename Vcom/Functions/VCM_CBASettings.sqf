@@ -257,9 +257,9 @@ if !(CBAACT) exitwith {};
 [
     "VCM_AIMagLimit", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
     "SLIDER", // setting type
-    "Mag count AI begin to look for additional mags.", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    ["Mag count AI begin to look for additional mags.","Set to 0 to disable"], // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
-    [2,10,5,0], // data for this setting: [min, max, default, number of shown trailing decimals]
+    [0,5,2,0], // data for this setting: [min, max, default, number of shown trailing decimals]
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {
         params ["_value"];
@@ -289,7 +289,7 @@ if !(CBAACT) exitwith {};
     "SLIDER", // setting type
     ["Script cycle time", "How often the script will look for obstacles"], // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
     "VCOM DRIVING", // Pretty name of the category where the setting can be found. Can be stringtable entry.
-    [0.5,5,1,1], // data for this setting: [min, max, default, number of shown trailing decimals]
+    [0.5,3,0.75,2], // data for this setting: [min, max, default, number of shown trailing decimals]
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {  
         params ["_value"];
@@ -300,9 +300,9 @@ if !(CBAACT) exitwith {};
 [
     "VCM_DrivingDist", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
     "SLIDER", // setting type
-    ["Distance to search for obstacles", "How far from predicted position to search for obstacles"], // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    ["Distance to search for obstacles", "How far from predicted position to search for obstacles. Predicted position varies depending on vehicle speed."], // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
     "VCOM DRIVING", // Pretty name of the category where the setting can be found. Can be stringtable entry.
-    [5,30,25,1], // data for this setting: [min, max, default, number of shown trailing decimals]
+    [5,30,10,1], // data for this setting: [min, max, default, number of shown trailing decimals]
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {  
         params ["_value"];
