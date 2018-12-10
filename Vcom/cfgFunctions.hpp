@@ -11,6 +11,12 @@ class VCOM
 		{
 			ext = ".fsm";
 		};
+		
+		// [] spawn VCM_fnc_AIDRIVEBEHAVIOR
+		class AIDRIVEBEHAVIOR
+		{
+			ext = ".fsm";
+		};
 	};
 	
 	class Functions 
@@ -134,6 +140,17 @@ class VCOM
 		// group call VCM_fnc_WyptChk;
 		class WyptChk {};	
 		
+		// unit call VCM_fnc_IsDriver;
+		class IsDriver {};			
+
+		//unit call VCM_fnc_VehicleDetection;
+		class VehicleDetection {};
+		
+		//[unit,4] call VCM_fnc_MovePrediction;
+		class MovePrediction {};
+		
+		//[] call VCM_fnc_UpdateDrivers;
+		class UpdateDrivers {};
 	};		
 
 };

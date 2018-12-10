@@ -46,7 +46,14 @@ Vcm_Settings =
 	VCM_ADVANCEDMOVEMENT = true; //True means AI will actively generate waypoints if no other waypoints are generated for the AI group (2 or more). False disables this advanced movements.
 	VCM_FRMCHANGE = true; //AI GROUPS WILL CHANGE FORMATIONS TO THEIR BEST GUESS.
 	VCM_SKILLCHANGE = true; //AI Groups will have their skills changed by Vcom.
-
+	
+	//VCOM DRIVING. Experimental feature
+	
+	Vcm_DrivingActivated = false; //Set this to false to disable VcomAI driving from executing.
+	VCM_DrivingDist = 25; // Distance from predicted path to search for objects. High numbers may cause instability.
+	VCM_DrivingDelay = 1; // How often the script should look for obstacles
+	VCM_DRIVERLIMIT = 4; // How many drivers should be calculated at each cycle
+		
 	//AI SKILL SETTINGS HERE!!!!!!!!!!!!
 	//LOW DIFFICULTY
 	//VCM_AIDIFA = [['aimingAccuracy',0.15],['aimingShake',0.1],['aimingSpeed',0.25],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];

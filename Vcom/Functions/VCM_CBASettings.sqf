@@ -267,7 +267,65 @@ if !(CBAACT) exitwith {};
     } // function that will be executed once on mission start and every time the setting is changed.
 ] call CBA_Settings_fnc_init;
 
-//Ryd FFE settings
+//////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////VCOM Driving Settings////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+[
+    "VCM_DrivingActivated", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+    "CHECKBOX", // setting type
+    "Enable Enhanced AI Driving (Experimental)", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    "VCOM DRIVING", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+	false,// data for this setting:
+    true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {  
+        params ["_value"];
+        VCM_DrivingActivated = _value;
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call CBA_Settings_fnc_init;
+
+[
+    "VCM_DrivingDelay", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+    "SLIDER", // setting type
+    ["Script cycle time", "How often the script will look for obstacles"], // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    "VCOM DRIVING", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+    [0.5,5,1,1], // data for this setting: [min, max, default, number of shown trailing decimals]
+    true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {  
+        params ["_value"];
+        VCM_DrivingDelay = _value;
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call CBA_Settings_fnc_init;
+
+[
+    "VCM_DrivingDist", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+    "SLIDER", // setting type
+    ["Distance to search for obstacles", "How far from predicted position to search for obstacles"], // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    "VCOM DRIVING", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+    [5,30,25,1], // data for this setting: [min, max, default, number of shown trailing decimals]
+    true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {  
+        params ["_value"];
+        VCM_DrivingDist = _value;
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call CBA_Settings_fnc_init;
+
+[
+    "VCM_DRIVERLIMIT", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+    "SLIDER", // setting type
+    ["Driver execution limit", "How many drivers the code should run for at every cycle"], // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    "VCOM DRIVING", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+    [1,10,4,0], // data for this setting: [min, max, default, number of shown trailing decimals]
+    true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {  
+        params ["_value"];
+        VCM_DRIVERLIMIT = _value;
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call CBA_Settings_fnc_init;
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////Ryd FFE settings/////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
 
 [
     "RydFFE_Active", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
