@@ -22,6 +22,6 @@ if (isNil "_toAdd") then {_toAdd = 0.25};
 	{
 		private _kv = _x knowsAbout _unit;
 		_x reveal [_unit,(_kv + _toAdd)];
-		if (VCM_Debug) then {diag_log (format ["%1 knowledge of %2 is at %3",_x,_unit,(_kv + _toAdd)])};
+		if (VCM_Debug) then {diag_log (format ["VCOM: %1 knowledge of %2 is at %3",_x,_unit,(_kv + _toAdd)])};
 	};
 } foreach _snda;
