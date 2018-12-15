@@ -46,6 +46,7 @@ Vcm_SM = compileFinal "(_this select 0) switchMove (_this select 1);";
 Vcm_PAN = compileFinal "(_this select 0) playActionNow (_this select 1);";
 VCOM_MINEARRAY = [];
 [] spawn VCM_fnc_MineMonitor;
+[] spawn VCM_fnc_HANDLECURATORS;
 
 //Begin Artillery function created by Rydygier - https://forums.bohemia.net/forums/topic/159152-fire-for-effect-the-god-of-war-smart-simple-ai-artillery/
 if (VCM_FFEARTILLERY) then {nul = [] execVM "Vcom\RYD_FFE\FFE.sqf";VCM_ARTYENABLE = false;};
