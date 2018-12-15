@@ -17,6 +17,12 @@ class VCOM
 		{
 			ext = ".fsm";
 		};
+		
+		// [] spawn VCM_fnc_HANDLECURATORS
+		class HANDLECURATORS
+		{
+			ext = ".fsm";
+		};
 	};
 	
 	class Functions 
