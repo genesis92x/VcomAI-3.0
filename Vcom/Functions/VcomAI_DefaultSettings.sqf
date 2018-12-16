@@ -13,8 +13,6 @@ Vcm_Settings =
 
 	Vcm_ActivateAI = true; //Set this to false to disable VcomAI. It can be set to true at any time to re-enable Vcom AI
 	VcmAI_ActiveList = []; //Leave this alone.
-	Vcm_ArtilleryArray = []; //Leave this alone
-	VCM_ARTYENABLE = true; //Enable improved artillery handling.
 	VCM_AIMagLimit = 2; //Number of mags remaining before AI looks for ammo.
 	VCM_Debug = false; //Enable debug mode.
 	VCM_MINECHANCE = 10; //Chance to lay a mine
@@ -29,6 +27,7 @@ Vcm_Settings =
 	VCM_ARTYET = -(VCM_ARTYDELAY);
 	VCM_ARTYRT = -(VCM_ARTYDELAY);
 	VCM_ARTYSPREAD = 400; //Spread of artillery rounds;
+	Vcm_ArtilleryArray = []; //Leave this alone
 
 	//Fire For Effect Artillery handling. Only one kind of advanced artillery can be used at a time. - https://forums.bohemia.net/forums/topic/159152-fire-for-effect-the-god-of-war-smart-simple-ai-artillery/
 	VCM_FFEARTILLERY = true;
