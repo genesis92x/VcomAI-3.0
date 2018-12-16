@@ -29,7 +29,7 @@ item24[] = {"Combat_BEGIN",4,218,675.000000,325.000000,775.000000,375.000000,110
 item25[] = {"Return",8,218,475.000000,75.000000,575.000000,125.000000,0.000000,"Return"};
 item26[] = {"Arty_Check",4,218,1100.000000,250.000000,1200.000000,300.000000,84.000000,"Arty Check"};
 item27[] = {"",7,210,1258.500000,21.000000,1266.500000,29.000000,0.000000,""};
-item28[] = {"Flank_Orders",4,4314,1050.000000,225.000000,1150.000000,275.000000,105.000000,"Flank Orders"};
+item28[] = {"Flank_Orders",4,218,1050.000000,225.000000,1150.000000,275.000000,105.000000,"Flank Orders"};
 item29[] = {"",7,210,296.000000,21.000000,304.000000,29.000000,0.000000,""};
 item30[] = {"GarrisonBuilding",4,218,1000.000000,200.000000,1100.000000,250.000000,88.000000,"GarrisonBuildingTemp"};
 item31[] = {"Five_Minute_Chec",4,218,-300.000000,300.000000,-200.000000,350.000000,950.000000,"Five Minute Checks"};
@@ -43,7 +43,7 @@ item38[] = {"ArmStatics",4,218,800.000000,100.000000,900.000000,150.000000,91.00
 item39[] = {"True",8,218,750.000000,75.000000,850.000000,125.000000,0.000000,"True"};
 item40[] = {"Exit_Cond",4,218,675.000000,475.000000,775.000000,525.000000,700.000000,"Exit Cond"};
 item41[] = {"Exit_FSM_2",1,250,700.000000,600.000000,775.000000,650.000000,0.000000,"Exit FSM"};
-item42[] = {"COVER2COVER",4,218,1150.000000,275.000000,1250.000000,325.000000,104.000000,"COVER2COVER"};
+item42[] = {"MOVE_UP",4,218,1150.000000,275.000000,1250.000000,325.000000,104.000000,"MOVE UP"};
 item43[] = {"Clear_Building",4,218,1200.000000,300.000000,1300.000000,350.000000,50.000000,"Clear Building"};
 item44[] = {"Combat_END",4,218,684.709351,384.913361,784.709351,434.913361,90.000000,"Combat END"};
 link0[] = {0,1};
@@ -113,8 +113,8 @@ link63[] = {40,41};
 link64[] = {42,27};
 link65[] = {43,27};
 link66[] = {44,27};
-globals[] = {0.000000,0,0,0,0,640,480,2,623,6316128,1,710.397644,1382.855103,830.991211,-192.085358,436,828,1};
-window[] = {2,-1,-1,-32180,-32000,1069,-1224,-479,115,3,454};
+globals[] = {0.000000,0,0,0,0,640,480,2,623,6316128,1,782.369873,1310.882690,948.285583,-55.403885,436,828,1};
+window[] = {2,-1,-1,-181,-1,1060,-1228,-483,106,3,454};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -668,8 +668,8 @@ class FSM
                                          "if (VCM_Debug) then {systemchat ""VCOM: WAYPOINT GENERATION"";};"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
-                                /*%FSM<LINK "COVER2COVER">*/
-                                class COVER2COVER
+                                /*%FSM<LINK "MOVE_UP">*/
+                                class MOVE_UP
                                 {
                                         itemno = 42;
                                         priority = 104.000000;
@@ -679,7 +679,7 @@ class FSM
                                         action=/*%FSM<ACTION""">*/"_Cover2Cover = time;" \n
                                          "[_Leader,100] call VCM_fnc_ForceMove;" \n
                                          "" \n
-                                         "if (VCM_Debug) then {systemchat ""VCOM: MOVE TO COVER"";};"/*%FSM</ACTION""">*/;
+                                         "if (VCM_Debug) then {systemchat format [""VCOM: %1 MOVING UP"", _Group];};"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                                 /*%FSM<LINK "CheckIfStatic">*/
@@ -870,7 +870,7 @@ class FSM
                                         priority = 0.000000;
                                         to="Return";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"if (VCM_Debug) then {systemchat ""VCOM: CONTINUE"";};"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/

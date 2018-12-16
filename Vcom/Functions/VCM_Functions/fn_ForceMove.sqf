@@ -14,18 +14,21 @@
 */
 
 params ["_leader","_moveDist"];
+private ["_movePosition"];
+
 if (isNil "_moveDist") then {private _moveDist = 100};
+
 private _grp = (group _leader);
 private _units = (units _grp) select {alive _x};
 private _nearestEnemy = _leader findNearestEnemy _leader;
+
 if (isNull _nearestEnemy) then
 {
 	_nearestEnemy = _leader call VCM_fnc_ClstEmy;	
 };
 
 
-private _curwp = currentWaypoint _grp;
-private _wPos = waypointPosition [_grp,_curwp];
+private _wPos = waypointPosition [_grp, (currentWaypoint _grp)];
 private _dir = _wPos;
 if (_wPos isEqualTo [0,0,0]) then
 {
@@ -33,7 +36,14 @@ if (_wPos isEqualTo [0,0,0]) then
 	_dir = _nearestEnemy;
 };
 
-private _movePosition = [_leader,_moveDist,([_leader, _dir] call BIS_fnc_dirTo)] call BIS_fnc_relPos;
+if !((_wPos distance2D _dir) < _moveDist) then
+{
+	_movePosition = [_leader,_moveDist,([_leader, _dir] call BIS_fnc_dirTo)] call BIS_fnc_relPos;
+}
+else
+{
+	_movePosition = _wPos; //Don't move further than necessary
+};
 
 {
 	if (isNull objectParent _x) then
