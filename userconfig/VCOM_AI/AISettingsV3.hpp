@@ -18,6 +18,7 @@ Vcm_Settings =
 	VCM_AIMagLimit = 2; //Number of mags remaining before AI looks for ammo.
 	VCM_Debug = false; //Enable debug mode.
 	VCM_MINECHANCE = 75; //Chance to lay a mine
+	VCM_LGARRISONCHANCE = 20; //Chance to perform a temporary garrison. 0 = disabled
 
 
 	//VCOM ARTILLERY. Only one kind of advanced artillery can be used at a time.
