@@ -44,16 +44,19 @@ else
 {
 	_movePosition = _wPos; //Don't move further than necessary
 };
-
+if ((_wPos distance2D _leader) > 20 && {(_wPos distance2D _leader) < 500}) then 
 {
-	if (isNull objectParent _x) then
+	if (VCM_Debug) then {systemchat format ["VCOM: %1 MOVING UP", _grp];};
 	{
-		[_x,_movePosition] spawn
+		if (isNull objectParent _x) then
 		{
-			params ["_unit","_movePos"];
-			sleep (1 + (random 10));
-			dostop _unit;
-			_unit domove _movePos;
-		};		
-	};
-} foreach _units;
+			[_x,_movePosition] spawn
+			{
+				params ["_unit","_movePos"];
+				sleep (1 + (random 10));
+				dostop _unit;
+				_unit domove _movePos;
+			};
+		};
+	} foreach _units;
+};
