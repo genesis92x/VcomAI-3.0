@@ -31,14 +31,14 @@ item26[] = {"Arty_Check",4,218,1100.000000,250.000000,1200.000000,300.000000,84.
 item27[] = {"",7,210,1258.500000,21.000000,1266.500000,29.000000,0.000000,""};
 item28[] = {"Flank_Orders",4,218,1050.000000,225.000000,1150.000000,275.000000,105.000000,"Flank Orders"};
 item29[] = {"",7,210,296.000000,21.000000,304.000000,29.000000,0.000000,""};
-item30[] = {"Light_Garrison",4,4314,1000.000000,200.000000,1100.000000,250.000000,88.000000,"Light Garrison"};
+item30[] = {"Light_Garrison",4,218,1000.000000,200.000000,1100.000000,250.000000,88.000000,"Light Garrison"};
 item31[] = {"Five_Minute_Chec",4,218,-300.000000,300.000000,-200.000000,350.000000,950.000000,"Five Minute Checks"};
 item32[] = {"Five_Minute_Chec",2,250,-300.000000,150.000000,-200.000000,200.000000,0.000000,"Five Minute Checks"};
 item33[] = {"CheckIfStatic",4,218,949.004028,175.000031,1050.000122,225.996094,92.000000,"CheckIfStatic"};
 item34[] = {"TwoMinuteChecks",4,218,-400.000000,300.000000,-300.000000,350.000000,940.000000,"TwoMinuteChecks"};
 item35[] = {"Two_Minute_Check",2,250,-400.000000,150.000000,-300.000000,200.000000,0.000000,"Two Minute Checks"};
 item36[] = {"SatchelPlant",4,218,900.000000,150.000000,1000.000000,200.000000,85.000000,"SatchelPlant"};
-item37[] = {"MinePlant",4,218,850.000000,125.000000,950.000000,175.000000,86.000000,"MinePlant"};
+item37[] = {"MinePlant",4,4314,850.000000,125.000000,950.000000,175.000000,86.000000,"MinePlant"};
 item38[] = {"ArmStatics",4,218,800.000000,100.000000,900.000000,150.000000,91.000000,"ArmStatics"};
 item39[] = {"True",8,218,750.000000,75.000000,850.000000,125.000000,0.000000,"True"};
 item40[] = {"Exit_Cond",4,218,675.000000,475.000000,775.000000,525.000000,700.000000,"Exit Cond"};
@@ -114,7 +114,7 @@ link64[] = {42,27};
 link65[] = {43,27};
 link66[] = {44,27};
 globals[] = {0.000000,0,0,0,0,640,480,2,623,6316128,1,790.898010,1363.081055,769.759888,-88.514755,552,828,1};
-window[] = {2,-1,-1,-32180,-32000,1034,-1254,-509,80,3,570};
+window[] = {2,-1,-1,-181,-1,1034,-1254,-509,80,3,570};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -807,18 +807,26 @@ class FSM
                                         priority = 86.000000;
                                         to="Return";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"(count _MineList > 0) && {_BackbkC6 + 30 < time}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_BackbkC6 + 30 < time &&" \n
+                                         "{" \n
+                                         "	private _rtrn = false;" \n
+                                         "	if ((random 100) > VCM_MINECHANCE) then" \n
+                                         "	{" \n
+                                         "		_BackbkC6 = time;" \n
+                                         "	} else" \n
+                                         "	{" \n
+                                         "		_rtrn = true;" \n
+                                         "	};" \n
+                                         "	_rtrn" \n
+                                         "} &&" \n
+                                         "{count _MineList > 0}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"//[_x,(_Vcom_MineObject select 0)]" \n
                                          "{" \n
-                                         "private _Foot = isNull objectParent (_x select 0);" \n
-                                         "if (_Foot) then" \n
+                                         "	if (isNull objectParent (_x select 0)) then" \n
                                          "	{	" \n
                                          "		[(_x select 0),(_x select 1)] spawn VCM_fnc_MinePlant;" \n
                                          "	};" \n
-                                         "} foreach _MineList;" \n
-                                         "_BackbkC6 = time;" \n
-                                         "" \n
-                                         "if (VCM_Debug) then {systemchat ""VCOM: MINE PLACE"";};"/*%FSM</ACTION""">*/;
+                                         "} foreach _MineList;"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                                 /*%FSM<LINK "SatchelPlant">*/
