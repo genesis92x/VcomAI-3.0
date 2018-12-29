@@ -110,7 +110,7 @@ class VCOM
 		// group call VCM_fnc_KitChk;
 		class KitChk {};
 		
-		// [array, unitToReveal, revealAmount] call VCM_fnc_KnowAbout;
+		// [array, unitToReveal, revealAmount, _revealLimit] call VCM_fnc_KnowAbout;
 		class KnowAbout {};
 		
 		// group call VCM_fnc_MedicalHandler
