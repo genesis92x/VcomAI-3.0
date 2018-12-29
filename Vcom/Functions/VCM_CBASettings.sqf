@@ -178,7 +178,7 @@ if !(CBAACT) exitwith {};
     "SLIDER", // setting type
     "Distance AI can hear gunfire.", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
-    [0,10000,800,0], // data for this setting:
+    [0,1500,800,0], // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {
         params ["_value"];
@@ -191,7 +191,7 @@ if !(CBAACT) exitwith {};
     "SLIDER", // setting type
     "Distance AI will call for reinforcements from.", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
-    [0,10000,1000,0], // data for this setting:
+    [0,2500,1000,0], // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {
         params ["_value"];
@@ -204,7 +204,7 @@ if !(CBAACT) exitwith {};
     "SLIDER", // setting type
     "Time (seconds) AI wait before support called.", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
-    [0,10000,30,0], // data for this setting:
+    [0,300,30,0], // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {
         params ["_value"];
