@@ -2,6 +2,24 @@ class VCOM
 {
 	tag = "VCM";
 	
+	class Init
+	{
+		class VcomInit
+		{
+			file = "Vcom\VcomInit.sqf";
+			postInit = 1;
+		};
+		class VcomInitClient
+		{
+			file = "Vcom\VcomInitClient.sqf";
+			postInit = 1;
+		};
+		class CBA_Settings
+		{
+			file = "Vcom\Functions\VCM_CBASettings.sqf";
+		};
+	};
+	
 	class FSM
 	{
 		file = "Vcom\FSMS";
