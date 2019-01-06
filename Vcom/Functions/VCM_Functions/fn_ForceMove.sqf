@@ -55,6 +55,7 @@ if ((_wPos distance2D _leader) > 20 && {(_wPos distance2D _leader) < 500}) then
 				params ["_unit","_movePos"];
 				sleep (1 + (random 10));
 				dostop _unit;
+				_unit forceSpeed -1;
 				_unit domove _movePos;
 			};
 		};
