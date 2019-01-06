@@ -10,9 +10,9 @@ if !(isServer) exitWith {};
 
 //Parameters
 [] call compile preprocessFileLineNumbers "Vcom\Functions\VCOMAI_DefaultSettings.sqf"; //Load default settings
-if (isFilePatchingEnabled && {"" != loadFile "\userconfig\VCOM_AI\AISettingsV3.hpp"}) then
+if (isFilePatchingEnabled && {"" != loadFile "\userconfig\VCOM_AI\AISettingsV4.hpp"}) then
 {
-	[] call compile preprocessFileLineNumbers "\userconfig\VCOM_AI\AISettingsV3.hpp"; //Overwrite with userconfig
+	[] call compile preprocessFileLineNumbers "\userconfig\VCOM_AI\AISettingsV4.hpp"; //Overwrite with userconfig
 };
 [] call VCM_fnc_CBA_Settings; //Overwrite with CBA settings
 
