@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [3.2] - 2018-12-15
+## [3.2] - 2019-01-11
 ### Added
 - VCOM Driving (Experimental)
 - AI accuracy settings can be tweaked in CBA
@@ -27,6 +27,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - VCM skill settings wouldn't apply to units.
 - Infantry would get stuck in a rearm loop, chasing large vehicles.
 - Hit reactions compatibility with ACE
+- VCOM will not affect squads with player squad leaders
 
 ### Security
 - Loaded config files are logged in .rpt

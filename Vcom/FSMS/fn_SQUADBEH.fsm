@@ -1,8 +1,8 @@
-/*%FSM<COMPILE "E:\Games\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, SQUADBEH">*/
+/*%FSM<COMPILE "D:\Games\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, SQUADBEH">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"Begin_State",0,250,50.000000,700.000000,150.000000,750.000000,0.000000,"Begin State"};
-item1[] = {"Cond",4,218,-100.000000,700.000000,0.000000,750.000000,50.000000,"Cond"};
+item1[] = {"Cond",4,4314,-100.000000,700.000000,0.000000,750.000000,50.000000,"Cond"};
 item2[] = {"Exit_FSM",1,250,-250.000000,700.000000,-175.000000,750.000000,0.000000,"Exit FSM"};
 item3[] = {"Continue",8,218,50.000000,575.000000,150.000000,625.000000,0.000000,"Continue"};
 item4[] = {"Start_Point",2,250,50.000000,400.000000,150.000000,450.000000,0.000000,"Start Point"};
@@ -31,7 +31,7 @@ item26[] = {"Arty_Check",4,218,1100.000000,250.000000,1200.000000,300.000000,84.
 item27[] = {"",7,210,1258.500000,21.000000,1266.500000,29.000000,0.000000,""};
 item28[] = {"Flank_Orders",4,218,1050.000000,225.000000,1150.000000,275.000000,105.000000,"Flank Orders"};
 item29[] = {"",7,210,296.000000,21.000000,304.000000,29.000000,0.000000,""};
-item30[] = {"Light_Garrison",4,4314,1000.000000,200.000000,1100.000000,250.000000,88.000000,"Light Garrison"};
+item30[] = {"Light_Garrison",4,218,1000.000000,200.000000,1100.000000,250.000000,88.000000,"Light Garrison"};
 item31[] = {"Five_Minute_Chec",4,218,-300.000000,300.000000,-200.000000,350.000000,950.000000,"Five Minute Checks"};
 item32[] = {"Five_Minute_Chec",2,250,-300.000000,150.000000,-200.000000,200.000000,0.000000,"Five Minute Checks"};
 item33[] = {"CheckIfStatic",4,218,949.004028,175.000031,1050.000122,225.996094,92.000000,"CheckIfStatic"};
@@ -113,8 +113,8 @@ link63[] = {40,41};
 link64[] = {42,27};
 link65[] = {43,27};
 link66[] = {44,27};
-globals[] = {0.000000,0,0,0,0,640,480,2,623,6316128,1,741.142639,1313.325439,769.759888,-88.514755,552,828,1};
-window[] = {2,-1,-1,-32180,-32000,1034,-1254,-509,80,3,570};
+globals[] = {0.000000,0,0,0,0,640,480,2,623,6316128,1,-602.326355,300.841248,816.916199,6.357727,985,884,1};
+window[] = {2,-1,-1,-1,-1,1036,136,881,82,3,1003};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -142,7 +142,9 @@ class FSM
                                         priority = 50.000000;
                                         to="Exit_FSM";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_Group getvariable [""Vcm_Disable"",false] || {!(side _group in VCM_SIDEENABLED)}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"isPlayer _leader || " \n
+                                         "{_Group getvariable [""Vcm_Disable"",false]} || " \n
+                                         "{!(side _group in VCM_SIDEENABLED)}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -312,7 +314,10 @@ class FSM
                                         priority = 700.000000;
                                         to="Exit_FSM_1";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"(_Group getvariable [""Vcm_Disable"",false]) || {(((units _Group) findIf {alive _x}) isEqualTo -1)} || {!(side _group in VCM_SIDEENABLED)}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"isPlayer _leader || " \n
+                                         "{_Group getvariable [""Vcm_Disable"",false]} || " \n
+                                         "{(((units _Group) findIf {alive _x}) isEqualTo -1)} || " \n
+                                         "{!(side _group in VCM_SIDEENABLED)}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
