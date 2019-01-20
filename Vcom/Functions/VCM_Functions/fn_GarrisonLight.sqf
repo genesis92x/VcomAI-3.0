@@ -1,6 +1,6 @@
 
 /*
-	Author: Genesis
+	Author: Genesis, overhauled by Freddo
 
 	Description:
 		Function for telling a group to temporarily garrison a structure. The group will leave it shortly after.
@@ -12,45 +12,69 @@
 		NOTHING
 */
 
-private _leader = (leader _this);
-private _nBuildingLst = nearestObjects [_leader, ["House", "Building"], 50];
-private _buildingPositions = [];
+private _group = _this;
+private _leader = (leader _group);
+private _foundBuildings = [];
+private _units = units _group;
 
 {
-	if (count ([_x] call BIS_fnc_buildingPositions) > 3) then {_buildingPositions pushback _x;};
-} foreach _nBuildingLst;
+	if (count ([_x] call BIS_fnc_buildingPositions) > count _units) then {_foundBuildings pushback _x;};
+} foreach (nearestObjects [_leader, ["House", "Building"], 50]);
 
 //Exit if no compatible buildings found
-if (_buildingPositions isEqualTo []) exitWith {};
+if (_foundBuildings isEqualTo []) exitWith {(_group getVariable "VCM_SQUADFSM") setFSMVariable ["_CurLGar", false];};
 
-private _tempA = [selectRandom _buildingPositions] call BIS_fnc_buildingPositions;
-private _groupUnits = units _this;
-if (count _tempA > 0) then
+private _buildingPositions = [_foundBuildings select 0] call BIS_fnc_buildingPositions;
+
+if VCM_DEBUG then {systemChat format ["VCOM: %1 PERFORMING LIGHT GARRISON", _group]};
 {
+	if (isNull objectParent _x) then
 	{
-		private _foot = isNull objectParent _x;
-		if (_foot) then
+		private _buildingPos = selectRandom _buildingPositions;
+		_x doMove _buildingPos;
+		[_x,_buildingPos] spawn 
 		{
-			private _buildingLocation = selectRandom _tempA;
-			_x doMove _buildingLocation;
-			[_x,_buildingLocation] spawn 
+			params ["_unit","_buildingPos"];
+			private _group = group _unit;
+			if (isNil "_buildingPos") exitWith {};
+			private _t = time; // Break out of loop if time passes certain amount
+			// Move to building position
+			while 
 			{
-				params ["_leader","_buildingLocation"];
-				if (isNil "_buildingLocation") exitWith {};
-				while {(alive _leader) && {_leader distance _buildingLocation < 1.3}} do
-				{
-					sleep 3;
-					_leader doMove _buildingLocation;
-				};
-				_leader disableAI "PATH";
-				sleep 120;
-				if (alive _leader) then
-				{
-					_leader enableAI "PATH";
-				};
+				(alive _unit) && 
+				{_t + 60 > time} && 
+				{_unit distance _buildingPos > 1.3} &&
+				{(_group getVariable "VCM_SQUADFSM") getFSMVariable ["_CurLGar", false]}
+			} do
+			{
+				sleep 3;
+				_unit doMove _buildingPos;
 			};
-			private _rmv = _tempA findIf {_buildingLocation isEqualTo _x};
-			_tempA deleteAt _rmv;
+			
+			// If move times out or unit dies, skip.
+			if 
+			(
+				(alive _unit) && 
+				{_t + 60 > time} &&
+				{(_group getVariable "VCM_SQUADFSM") getFSMVariable ["_CurLGar", false]} 
+			) then
+			{
+				_unit disableAI "PATH";
+				sleep 120;
+			};
+			
+			// if unit is leader, ungarrison entire group.
+			if (leader _unit isEqualTo _unit) then
+			{
+				private _group = group _unit;
+				(_group getVariable "VCM_SQUADFSM") setFSMVariable ["_CurLGar", false];
+				{
+					_x enableAI "PATH";
+				} forEach units _group;
+				if VCM_DEBUG then {systemChat format ["VCOM: %1 UN-L-GARRISONING BUILDING", _group]};
+			};
 		};
-	} foreach _groupUnits;
-};
+		private _rmv = _buildingPositions findIf {_buildingPos isEqualTo _x};
+		_buildingPositions deleteAt _rmv;
+	};
+} foreach _units;

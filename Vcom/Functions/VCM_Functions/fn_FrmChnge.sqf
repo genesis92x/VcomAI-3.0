@@ -2,7 +2,7 @@
 	Author: Genesis
 
 	Description:
-		Changes group formation dependent on surroundings.
+		Changes group formation dependent on surroundings and behaviour
 
 	Parameter(s):
 		0: OBJECT - Unit whose group to change formation
@@ -19,6 +19,15 @@ _unit = _this;
 //Grab the group of the unit
 _group = group _unit;
 
+//Vehicular groups in "SAFE" behaviour will move in convoys
+if (!isNull objectParent _unit && {behaviour _unit == "SAFE"}) exitWith 
+{
+	_group setFormation "FILE";
+	//Set the units variable so they dont try changing formations too frequently.
+	_VCOM_CHANGEDFORMATION = true;
+	_VCOM_CHANGEDFORMATION
+};
+
 //Grab the nearest "City" from the unit
 _nearestCity = nearestLocation [getPosASL _unit, "nameCity"];
 
@@ -30,7 +39,7 @@ if ((_locationPos distance _unit) < 500) exitWith
 {
 	
 	//Check if the unit is in a vehicle or not
-	if ((vehicle _unit) != _unit) then
+	if (!isNull objectParent _unit) then
 	{
 		_group setFormation "COLUMN"; 
 	}

@@ -1,18 +1,18 @@
 //_bArr = [_tgtPos,RydFFE_ArtG,"SADARM",6,leaderHQ] call RYD_fnc_ArtyMission;
 params ["_pos","_arty","_ammoG","_amount","_FO"];
-private ["_pos","_arty","_ammoG","_amount","_FO","_ammo","_possible","_battery","_agp","_artyAv","_vehs","_gp","_hasAmmo","_checked","_vh","_tp","_inRange","_pX","_pY","_pZ","_ammoArr","_allAmmo"];
+private ["_pos","_arty","_ammoG","_amount","_FO","_gp","_checked","_vh","_tp","_inRange","_pX","_pY","_pZ"];
 
-_ammo = "";
-_ammoArr = [];
+private _ammo = "";
+private _ammoArr = [];
 
-_hasAmmo = 0;
-_possible = false;
-_battery = [];
-_agp = [];
+private _hasAmmo = 0;
+private _possible = false;
+private _battery = [];
+private _agp = [];
 
-_artyAv = [];
-_vehs = 0;
-_allAmmo = 0;
+private _artyAv = [];
+private _vehs = 0;
+private _allAmmo = 0;
 
 {
 	_gp = _x; 
@@ -47,14 +47,29 @@ _allAmmo = 0;
 						
 						case (_tp in RydFFE_SPMortar) : 
 						{
-							switch (_ammoG) do
+							_side = configfile >> "CfgVehicles" >> _tp >> "side";
+							if ((not (isNumber _side)) or {not ((getNumber _side) == 0)}) then
 							{
-								case ("HE") : {_ammo = "32Rnd_155mm_Mo_shells"};
-								case ("SPECIAL") : {_ammo = "2Rnd_155mm_Mo_Cluster"};
-								case ("SECONDARY") : {_ammo = "2Rnd_155mm_Mo_guided"};
-								case ("SMOKE") : {_ammo = "6Rnd_155mm_Mo_smoke"};
-								case ("ILLUM") : {_ammo = ""};
-							};
+								switch (_ammoG) do
+								{
+									case ("HE") : {_ammo = "32Rnd_155mm_Mo_shells"};
+									case ("SPECIAL") : {_ammo = "2Rnd_155mm_Mo_Cluster"};
+									case ("SECONDARY") : {_ammo = "2Rnd_155mm_Mo_guided"};
+									case ("SMOKE") : {_ammo = "6Rnd_155mm_Mo_smoke"};
+									case ("ILLUM") : {_ammo = ""};
+								};
+							}
+							else
+							{
+								switch (_ammoG) do
+								{
+									case ("HE") : {_ammo = "32Rnd_155mm_Mo_shells_O"};
+									case ("SPECIAL") : {_ammo = "2Rnd_155mm_Mo_Cluster_O"};
+									case ("SECONDARY") : {_ammo = "2Rnd_155mm_Mo_guided_O"};
+									case ("SMOKE") : {_ammo = "6Rnd_155mm_Mo_smoke_O"};
+									case ("ILLUM") : {_ammo = ""};
+								};
+							}
 						};
 						
 						case (_tp in RydFFE_Rocket) :

@@ -23,7 +23,11 @@
 		Meant to be called from a "HIT" eventhandler
 */
 params ["_unit", "_source", "_damage", "_instigator"];
-if !(isNull objectParent _unit) exitWith {};
+if 
+(
+	!(isNull objectParent _unit) || 
+	{(missionNamespace getvariable ["ace_medical_enableUnconsciousnessAI", 0]) != 0} //Check if ACE3 makes AI go unconscious
+) exitWith {};
 
 //Lay down
 if (unitPos _unit isEqualTo "AUTO") then

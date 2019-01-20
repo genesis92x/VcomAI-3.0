@@ -1,6 +1,48 @@
 class VCOM
 {
 	tag = "VCM";
+	
+	class Init
+	{
+		class VcomInit
+		{
+			file = "Vcom\VcomInit.sqf";
+			postInit = 1;
+		};
+		class VcomInitClient
+		{
+			file = "Vcom\VcomInitClient.sqf";
+			postInit = 1;
+		};
+		class CBA_Settings
+		{
+			file = "Vcom\Functions\VCM_CBASettings.sqf";
+		};
+	};
+	
+	class FSM
+	{
+		file = "Vcom\FSMS";
+		
+		// group spawn VCM_fnc_SQUADBEH
+		class SQUADBEH 
+		{
+			ext = ".fsm";
+		};
+		
+		// [] spawn VCM_fnc_AIDRIVEBEHAVIOR
+		class AIDRIVEBEHAVIOR
+		{
+			ext = ".fsm";
+		};
+		
+		// [] spawn VCM_fnc_HANDLECURATORS
+		class HANDLECURATORS
+		{
+			ext = ".fsm";
+		};
+	};
+	
 	class Functions 
 	{
 		file = "Vcom\Functions\VCM_Functions";
@@ -71,6 +113,9 @@ class VCOM
 		// unit call VCM_fnc_HasMine;
 		class HasMine {};
 		
+		// unit call VCM_fnc_HealSelf;
+		class HealSelf {};
+		
 		// [unit, weapon, muzzle, mode, ammo, magazine, bullet, gunner] call VCM_fnc_HearingAids;
 		class HearingAids {};
 		
@@ -83,8 +128,14 @@ class VCOM
 		// group call VCM_fnc_KitChk;
 		class KitChk {};
 		
-		// [array, unitToReveal, revealAmount] call VCM_fnc_KnowAbout;
+		// [array, unitToReveal, revealAmount, _revealLimit] call VCM_fnc_KnowAbout;
 		class KnowAbout {};
+		
+		// group call VCM_fnc_MedicalHandler
+		class MedicalHandler {};
+		
+		//[medic, injuredUnit] spawn VCM_fnc_MedicHeal;
+		class MedicHeal {};
 		
 		// [] spawn VCM_fnc_MineMonitor;
 		class MineMonitor {};
@@ -113,6 +164,17 @@ class VCOM
 		// group call VCM_fnc_WyptChk;
 		class WyptChk {};	
 		
+		// unit call VCM_fnc_IsDriver;
+		class IsDriver {};			
+
+		//unit call VCM_fnc_VehicleDetection;
+		class VehicleDetection {};
+		
+		//[unit,4] call VCM_fnc_MovePrediction;
+		class MovePrediction {};
+		
+		//[] call VCM_fnc_UpdateDrivers;
+		class UpdateDrivers {};
 	};		
 
 };

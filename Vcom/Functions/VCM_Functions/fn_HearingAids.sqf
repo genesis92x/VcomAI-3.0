@@ -44,7 +44,7 @@ if ((_timeShot + 20) < time) then
 	private _atch = _unit weaponAccessories _mzl param [0, ""];
 	private _return = (!(_atch isEqualTo "")) && {getNumber(configFile >> "CfgWeapons" >> _atch >> "ItemInfo" >> "AmmoCoef" >> "audibleFire") < 1};
 	
-	if (VCM_Debug) then {diag_log (format ["%2: WEAPON SUPRRESSED - %1",_return,_unit])};
+	if (VCM_Debug) then {diag_log (format ["VCOM: %2: WEAPON SUPRRESSED - %1",_return,_unit])};
 	
 	//systemchat format ["%1",_sup];
 	if !(_return) then 
