@@ -117,7 +117,7 @@ class FSM
                          "			VCM_IGNOREWAYPOINTS pushBack _waypoint;" \n
                          "" \n
                          "			if (VCM_DEBUG) then {" \n
-                         "				systemChat format [""%1 placed waypoint for %2, will not overwrite"", _curator, _grp];" \n
+                         "				systemChat format [""VCOM: %1 placed waypoint for %2, will not overwrite"", _curator, _grp];" \n
                          "			};" \n
                          "		}" \n
                          "		]);" \n

@@ -3,6 +3,37 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [3.2] - 2019-01-20
+### Added
+- VCOM Driving (Experimental)
+- AI accuracy settings can be tweaked in CBA
+
+### Changed
+- AI in "safe" behaviour will prefer forming convoys/columns
+- Disabling sides option now works with RydFFE
+- Number of mags before considering rearm is lower by default
+- Rearm search radius has been lowered
+- VCOM Advanced Movement will no longer overwrite zeus placed waypoints
+- FSM files were moved to functions library
+- Initialization files are now stored as functions with `preinit = 1´ tags
+- Config files no longer produce functions and are instead directly called
+- RydFFE was updated from 1.14 to 1.16
+
+### Deprecated
+
+### Removed
+- init.sqf
+
+### Fixed
+- VCM skill settings wouldn't apply to units.
+- Infantry would get stuck in a rearm loop, chasing large vehicles.
+- Hit reactions compatibility with ACE
+- VCOM will not affect squads with player squad leaders
+
+### Security
+- Loaded config files are logged in .rpt
+
+
 ## [3.1] - 2018-11-13
 ### Added
 - Changelog

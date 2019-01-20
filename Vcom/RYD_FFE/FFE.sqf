@@ -61,6 +61,11 @@ RydFFE_Other = [] + RydFFE_Add_Other;
 
 _allArty = RydFFE_SPMortar + RydFFE_Mortar + RydFFE_Rocket;
 
+{
+	_allArty = _allArty + (_x select 0)
+}
+foreach RydFFE_Other;
+
 _allArty = [_allArty] call RYD_fnc_AutoConfig;
 
 _civF = ["civ_f","civ","civ_ru","bis_tk_civ","bis_civ_special"];

@@ -17,6 +17,7 @@ VCM_Debug = false; //Enable debug mode.
 VCM_MINECHANCE = 10; //Chance to lay a mine
 VCM_LGARRISONCHANCE = 20; //Chance to perform a temporary garrison. 0 = disabled
 
+
 //VCOM ARTILLERY. Only one kind of advanced artillery can be used at a time.
 VCM_ARTYENABLE = false; //Enable improved artillery handling from Vcom.
 VCM_ARTYSIDES = [west,east,resistance];  //Sides that will use VCOM/FFE artillery
@@ -49,10 +50,10 @@ VCM_SKILLCHANGE = true; //AI Groups will have their skills changed by Vcom.
 //VCOM DRIVING. Experimental feature
 
 Vcm_DrivingActivated = false; //Set this to false to disable VcomAI driving from executing.
-VCM_DrivingDist = 10; // Distance from predicted path to search for objects. High numbers may cause instability.
+VCM_DrivingDist = 15; // Distance from predicted path to search for objects. High numbers may cause instability.
 VCM_DrivingDelay = 0.75; // How often the script should look for obstacles
 VCM_DRIVERLIMIT = 4; // How many drivers should be calculated at each cycle
-
+	
 //AI SKILL SETTINGS HERE!!!!!!!!!!!!
 //LOW DIFFICULTY
 //VCM_AIDIFA = [['aimingAccuracy',0.15],['aimingShake',0.1],['aimingSpeed',0.25],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
@@ -125,6 +126,7 @@ VCM_SKILL_CLASSNAMES = 	[
 
 */
 
+
 //Set AI Skill levels
 VCM_AIDIFSET =
 {
@@ -158,4 +160,4 @@ VCM_AIDIFSET =
 	} forEach (units _this);
 };
 
-diag_log "VCOM: Loaded Default Settings";
+diag_log "VCOM: Loaded Userconfig";

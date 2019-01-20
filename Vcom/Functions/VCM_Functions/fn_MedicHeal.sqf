@@ -18,7 +18,7 @@ scopeName "main";
 params ["_medic","_unit"];
 if (not (isNull objectParent _unit) || {alive _unit} || {alive _medic} || {_medic distance2D _unit > 50}) exitWith {};
 
-if (VCM_DEBUG) then {systemChat format ["%1 attempting to heal %2", _medic, _unit];};
+if (VCM_DEBUG) then {systemChat format ["VCOM: %1 attempting to heal %2", _medic, _unit];};
 
 _medic setVariable ["VCM_MBUSY", true, false];
 

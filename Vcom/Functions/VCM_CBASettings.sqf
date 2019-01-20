@@ -1,7 +1,3 @@
-[] spawn
-{
-waitUntil {!isNil "CBAACT"};
-if !(CBAACT) exitwith {};
 
 [
     "VCM_ActivateAI", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
@@ -160,13 +156,25 @@ if !(CBAACT) exitwith {};
     } // function that will be executed once on mission start and every time the setting is changed.
 ] call CBA_Settings_fnc_init;
 
+[
+    "VCM_AIHEALING", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+    "CHECKBOX", // setting type
+    ["VCOM handle healing", "Makes AI heal themselves without being ordered. Disabled when ACE medical for AI is active"], // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+	true,// data for this setting:
+    true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {
+        params ["_value"];
+        VCM_AIHEALING = _value;
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call CBA_Settings_fnc_init;
 
 [
     "VCM_HEARINGDISTANCE", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
     "SLIDER", // setting type
     "Distance AI can hear gunfire.", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
-    [0,10000,800,0], // data for this setting:
+    [0,1500,800,0], // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {
         params ["_value"];
@@ -179,7 +187,7 @@ if !(CBAACT) exitwith {};
     "SLIDER", // setting type
     "Distance AI will call for reinforcements from.", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
-    [0,10000,1000,0], // data for this setting:
+    [0,2500,1000,0], // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {
         params ["_value"];
@@ -192,7 +200,7 @@ if !(CBAACT) exitwith {};
     "SLIDER", // setting type
     "Time (seconds) AI wait before support called.", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
-    [0,10000,30,0], // data for this setting:
+    [0,300,30,0], // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {
         params ["_value"];
@@ -217,13 +225,26 @@ if !(CBAACT) exitwith {};
 [
     "VCM_MINECHANCE", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
     "SLIDER", // setting type
-    "Chance for AI to place a mine, once in combat.", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    ["AI mine placing chance", "This is checked every 30 seconds while in combat. 0 = disabled"], // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
     "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
-    [0,100,75,0], // data for this setting:
+    [0,100,10,0], // data for this setting:
     true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {
         params ["_value"];
         VCM_MINECHANCE = _value;
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call CBA_Settings_fnc_init;
+
+[
+    "VCM_LGARRISONCHANCE", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+    "SLIDER", // setting type
+    ["Chance for AI to temporarily garrison buildings", "This is checked every five minutes. 0 = Disabled."], // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    "VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+    [0,100,20,0], // data for this setting:
+    true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {
+        params ["_value"];
+        VCM_LGARRISONCHANCE = _value;
     } // function that will be executed once on mission start and every time the setting is changed.
 ] call CBA_Settings_fnc_init;
 
@@ -631,8 +652,4 @@ if !(CBAACT) exitwith {};
     } // function that will be executed once on mission start and every time the setting is changed.
 ] call CBA_Settings_fnc_init;
 
-
-
 diag_log "VCOM: Loaded CBA settings";
-
-};

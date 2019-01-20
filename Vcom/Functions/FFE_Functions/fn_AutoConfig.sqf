@@ -115,9 +115,9 @@ params ["_allArty"];
 						_ammoC = configfile >> "CfgAmmo" >> _ammo;
 						_subAmmo = _ammoC >> "subMunitionAmmo";
 						
-						if not (_subAmmo isEqualTo "") then
+						if ((isText _subAmmo) and {not ((getText _subAmmo) isEqualTo "")}) then
 						{
-							_ammoC = configfile >> "CfgAmmo" >> _subAmmo
+							_ammoC = configfile >> "CfgAmmo" >> (getText _subAmmo);
 						};
 					
 						_actHit = getNumber (_ammoC >> "indirectHit");
