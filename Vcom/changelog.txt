@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [3.2] - 2019-01-11
+## [3.2] - 2019-01-20
 ### Added
 - VCOM Driving (Experimental)
 - AI accuracy settings can be tweaked in CBA
@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - FSM files were moved to functions library
 - Initialization files are now stored as functions with `preinit = 1´ tags
 - Config files no longer produce functions and are instead directly called
+- RydFFE was updated from 1.14 to 1.16
 
 ### Deprecated
 
