@@ -14,7 +14,7 @@ if (isFilePatchingEnabled && {"" != loadFile "\userconfig\VCOM_AI\AISettingsV4.h
 {
 	[] call compile preprocessFileLineNumbers "\userconfig\VCOM_AI\AISettingsV4.hpp"; //Overwrite with userconfig
 };
-[] call VCM_fnc_CBA_Settings; //Overwrite with CBA settings
+if (isClass (configfile >> "CfgPatches" >> "cba_settings")) then {[] call VCM_fnc_CBA_Settings}; //Overwrite with CBA settings
 
 //Mod checks
 //ACE CHECK
