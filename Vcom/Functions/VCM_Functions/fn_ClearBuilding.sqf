@@ -18,6 +18,8 @@ params ["_group","_enemy"];
 private _nBuildingLst = nearestObjects [_enemy, ["House", "Building"], 25];
 if (count _nBuildingLst < 1) exitWith {};
 
+if VCM_Debug then {systemChat format ["VCOM: %1 clearing out %2", _group, _enemy]};
+
 private _buildingPositions = [];
 
 {
@@ -46,5 +48,5 @@ private _clstP = [_tempA,_enemy,true,"Clear1"] call VCM_fnc_ClstObj;
 
 {
 	doStop _x;
-	_x doMove _clstP;	
+	_x doMove _clstP;
 } foreach (units _group);

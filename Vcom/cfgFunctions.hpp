@@ -104,12 +104,6 @@ class VCOM
 		// unit call VCM_fnc_FrmChnge;
 		class FrmChnge {};
 		
-		// group spawn VCM_fnc_Garrison;
-		class Garrison {};
-		
-		// group call VCM_fnc_GarrisonLight;
-		class GarrisonLight {};
-		
 		// unit call VCM_fnc_HasMine;
 		class HasMine {};
 		
@@ -175,8 +169,32 @@ class VCOM
 		
 		//[] call VCM_fnc_UpdateDrivers;
 		class UpdateDrivers {};
-	};		
-
+	};
+	
+	class Garrison
+	{
+		file = "Vcom\Functions\VCM_Functions\garrison";
+		
+		// group call VCM_fnc_GarrisonLight;
+		class GarrisonLight {};
+		
+		// group spawn VCM_fnc_Garrison;
+		class Garrison {};
+		
+		// group call VCM_fnc_UnGarrisonL;
+		class UnGarrisonL {};
+	};
+	
+	class Situation_Framework
+	{
+		file = "Vcom\Functions\VCM_Functions\situation";
+		
+		// group call CheckSituation;
+		class CheckSituation {};
+		
+		// group call SetSituation;
+		class SetSituation {};
+	};
 };
 
 
