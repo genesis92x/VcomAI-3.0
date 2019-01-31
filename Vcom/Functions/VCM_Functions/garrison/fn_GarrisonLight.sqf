@@ -22,7 +22,7 @@ private _units = units _group;
 } foreach (nearestObjects [_leader, ["House", "Building"], 50]);
 
 //Exit if no compatible buildings found
-if (_foundBuildings isEqualTo []) exitWith {(_group getVariable "VCM_SQUADFSM") setFSMVariable ["_CurLGar", false];};
+if (_foundBuildings isEqualTo []) exitWith {false};
 
 private _buildingPositions = [_foundBuildings select 0] call BIS_fnc_buildingPositions;
 
@@ -44,7 +44,7 @@ if VCM_DEBUG then {systemChat format ["VCOM: %1 PERFORMING LIGHT GARRISON", _gro
 				(alive _unit) && 
 				{_t + 60 > time} && 
 				{_unit distance _buildingPos > 1.3} &&
-				{(_group getVariable "VCM_SQUADFSM") getFSMVariable ["_CurLGar", false]}
+				{(_group call VCM_fnc_CheckSituation) isEqualTo "LGARRISON"}
 			} do
 			{
 				sleep 3;
@@ -54,27 +54,27 @@ if VCM_DEBUG then {systemChat format ["VCOM: %1 PERFORMING LIGHT GARRISON", _gro
 			// If move times out or unit dies, skip.
 			if 
 			(
-				(alive _unit) && 
-				{_t + 60 > time} &&
-				{(_group getVariable "VCM_SQUADFSM") getFSMVariable ["_CurLGar", false]} 
+				(_unit distance _buildingPos < 1.3)
 			) then
 			{
 				_unit disableAI "PATH";
-				sleep 120;
+				waitUntil 
+				{
+					sleep 10; 
+					!((_group call VCM_fnc_CheckSituation) isEqualTo "LGARRISON") && 
+					{
+						if (leader _unit isEqualTo _unit && {_t + 150 > time}) then 
+						{
+							_group call VCM_fnc_UnGarrisonL;
+						};
+					}
+				};
 			};
 			
-			// if unit is leader, ungarrison entire group.
-			if (leader _unit isEqualTo _unit) then
-			{
-				private _group = group _unit;
-				(_group getVariable "VCM_SQUADFSM") setFSMVariable ["_CurLGar", false];
-				{
-					_x enableAI "PATH";
-				} forEach units _group;
-				if VCM_DEBUG then {systemChat format ["VCOM: %1 UN-L-GARRISONING BUILDING", _group]};
-			};
 		};
 		private _rmv = _buildingPositions findIf {_buildingPos isEqualTo _x};
 		_buildingPositions deleteAt _rmv;
 	};
 } foreach _units;
+
+true
