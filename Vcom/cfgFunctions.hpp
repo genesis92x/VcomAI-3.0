@@ -225,6 +225,12 @@ class VCOM
 		// unit call VCM_fnc_KnownEnemyArray
 		class KnownEnemyArray {};
 		
+		// unit call VCM_fnc_EnemyGroupArray
+		class EnemyGroupArray {};
+		
+		// unit call VCM_fnc_KnownEnemyGroupArray
+		class KnownEnemyGroupArray {};
+		
 		// [] call VCM_fnc_IRCHECK;
 		class IRCHECK {};
 		
