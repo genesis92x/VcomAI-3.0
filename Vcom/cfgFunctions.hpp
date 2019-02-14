@@ -2,6 +2,7 @@ class VCOM
 {
 	tag = "VCM";
 	
+	// Initialization functions. These should only run once on startup.
 	class Init
 	{
 		class VcomInit
@@ -14,7 +15,7 @@ class VCOM
 			file = "Vcom\VcomInitClient.sqf";
 			postInit = 1;
 		};
-		class CBA_Settings
+		class CBA_Settings // Only executed if CBA is present
 		{
 			file = "Vcom\Functions\VCM_CBASettings.sqf";
 		};
@@ -43,9 +44,61 @@ class VCOM
 		};
 	};
 	
+	// Generic functions
 	class Functions 
 	{
 		file = "Vcom\Functions\VCM_Functions";
+		
+		// [string] call VCM_fnc_Classname;
+		class Classname {};
+		
+		// unit call VCM_fnc_FriendlyArray;
+		class FriendlyArray {};
+		
+		// [unit, weapon, muzzle, mode, ammo, magazine, bullet, gunner] call VCM_fnc_HearingAids;
+		class HearingAids {};
+		
+		// group call VCM_fnc_KitChk;
+		class KitChk {};
+		
+		// group call VCM_fnc_MedicalHandler
+		class MedicalHandler {};
+		
+		// group call VCM_fnc_RMedics;
+		class RMedics {};
+		
+		// group call VCM_fnc_RStatics;
+		class RStatics {};
+		
+		// group call VCM_fnc_SquadExc;
+		class SquadExc {};
+		
+		// group call VCM_fnc_WyptChk;
+		class WyptChk {};	
+		
+		// unit call VCM_fnc_IsDriver;
+		class IsDriver {};
+	};
+	
+	// Artillery related functions. Deprecated
+	class Artillery
+	{
+		file = "Vcom\Functions\VCM_Functions\artillery";
+		
+		// unit call VCM_fnc_CheckArty;
+		class CheckArty {};
+		
+		// [callGroup, enemyGroup] call VCM_fnc_ArtyCall;
+		class ArtyCall {};
+		
+		// group call VCM_fnc_ArtyManage;
+		class ArtyManage {};
+	};
+	
+	// Acttions that can be undertaken by groups/units
+	class Actions
+	{
+		file = "Vcom\Functions\VCM_Functions\actions";
 		
 		// [unitToRearm, rearmLocation] spawn VCM_fnc_ActRearm
 		class ActRearm {};
@@ -56,111 +109,30 @@ class VCOM
 		// [group] call VCM_fnc_ArmStatics;
 		class ArmStatics {};
 		
-		// [callGroup, enemyGroup] call VCM_fnc_ArtyCall;
-		class ArtyCall {};
-		
-		// group call VCM_fnc_ArtyManage;
-		class ArtyManage {};
-		
-		// [entity, unit] call VCM_fnc_BoxNrst;
-		class BoxNrst {};
-		
-		// unit call VCM_fnc_CheckArty;
-		class CheckArty {};
-		
-		// [string] call VCM_fnc_Classname;
-		class Classname {};
-		
 		// [group, enemy] call VCM_fnc_ClearBuilding;
 		class ClearBuilding {};
-		
-		// unit call VCM_fnc_ClstEmy;
-		class ClstEmy {};
-		
-		// [list, object, order, script] call VCM_fnc_ClstObj;
-		class ClstObj {};
 		
 		// [unit, killer] call VCM_fnc_ClstWarn;
 		class ClstWarn {};
 		
-		// [group, searchDistance] call VCM_fnc_EmptyStatic;
-		class EmptyStatic {};
-		
-		// unit call VCM_fnc_EnemyArray;
-		class EnemyArray {};
-		
-		// [groupLeader, moveDistance] call VCM_fnc_FindCover;
-		class FindCover {};
-		
-		// [groupLeader] spawn VCM_fnc_FlankMove;
-		class FlankMove {};
-		
-		// [groupLeader, moveDistance] call VCM_fnc_ForceMove;
-		class ForceMove {};
-		
-		// unit call VCM_fnc_FriendlyArray;
-		class FriendlyArray {};
-		
-		// unit call VCM_fnc_FrmChnge;
-		class FrmChnge {};
-		
-		// unit call VCM_fnc_HasMine;
-		class HasMine {};
-		
 		// unit call VCM_fnc_HealSelf;
 		class HealSelf {};
 		
-		// [unit, weapon, muzzle, mode, ammo, magazine, bullet, gunner] call VCM_fnc_HearingAids;
-		class HearingAids {};
-		
-		// [object, searchRadius, precision, sortingOrder] call VCM_fnc_Heights;
-		class Heights {};
-		
-		// [] call VCM_fnc_IRCHECK;
-		class IRCHECK {};
-		
-		// group call VCM_fnc_KitChk;
-		class KitChk {};
-		
-		// [array, unitToReveal, revealAmount, _revealLimit] call VCM_fnc_KnowAbout;
-		class KnowAbout {};
-		
-		// group call VCM_fnc_MedicalHandler
-		class MedicalHandler {};
-		
 		//[medic, injuredUnit] spawn VCM_fnc_MedicHeal;
 		class MedicHeal {};
-		
-		// [] spawn VCM_fnc_MineMonitor;
-		class MineMonitor {};
-		
-		// [unit, mineArray] spawn VCM_fnc_MinePlant;
-		class MinePlant {};
 		
 		// [gunner, backpackClassname, staticWeapon] call VCM_fnc_PackStatic;
 		class PackStatic {};
 		
 		// group call VCM_fnc_RearmSelf;
 		class RearmSelf {};
+	};
+	
+	// Driving related functions
+	class Driving
+	{
+		file = "Vcom\Functions\VCM_Functions\driving";
 		
-		// group call VCM_fnc_RMedics;
-		class RMedics {};
-		
-		// group call VCM_fnc_RStatics;
-		class RStatics {};
-		
-		// [unit, satchelArray] spawn VCM_fnc_SatchelPlant;
-		class SatchelPlant {};
-		
-		// group call VCM_fnc_SquadExc;
-		class SquadExc {};
-		
-		// group call VCM_fnc_WyptChk;
-		class WyptChk {};	
-		
-		// unit call VCM_fnc_IsDriver;
-		class IsDriver {};			
-
 		//unit call VCM_fnc_VehicleDetection;
 		class VehicleDetection {};
 		
@@ -171,6 +143,25 @@ class VCOM
 		class UpdateDrivers {};
 	};
 	
+	// Explosives related functions
+	class Explosives
+	{
+		file = "Vcom\Functions\VCM_Functions\explosives";
+		
+		// unit call VCM_fnc_HasMine;
+		class HasMine {};
+		
+		// [] spawn VCM_fnc_MineMonitor;
+		class MineMonitor {};
+		
+		// [unit, mineArray] spawn VCM_fnc_MinePlant;
+		class MinePlant {};
+		
+		// [unit, satchelArray] spawn VCM_fnc_SatchelPlant;
+		class SatchelPlant {};
+	};
+	
+	// Garrison related functions
 	class Garrison
 	{
 		file = "Vcom\Functions\VCM_Functions\garrison";
@@ -185,6 +176,24 @@ class VCOM
 		class UnGarrisonL {};
 	};
 	
+	class Movement
+	{
+		file = "Vcom\Functions\VCM_Functions\movement";
+		
+		// [groupLeader, moveDistance] call VCM_fnc_ForceMove;
+		class ForceMove {};
+		
+		// [groupLeader, moveDistance] call VCM_fnc_FindCover;
+		class FindCover {};
+		
+		// unit call VCM_fnc_FrmChnge;
+		class FrmChnge {};
+		
+		// [groupLeader] spawn VCM_fnc_FlankMove;
+		class FlankMove {};
+	};
+	
+	// Commands related to the task/situation that the AI is currently in
 	class Situation_Framework
 	{
 		file = "Vcom\Functions\VCM_Functions\situation";
@@ -194,6 +203,42 @@ class VCOM
 		
 		// group call SetSituation;
 		class SetSituation {};
+	};
+	
+	// These functions are generally used to scan for nearby objects, units, groups, etc
+	class Scanning
+	{
+		file = "Vcom\Functions\VCM_Functions\scanning";
+		
+		// [entity, unit] call VCM_fnc_BoxNrst;
+		class BoxNrst {};
+		
+		// [array, unitToReveal, revealAmount, _revealLimit] call VCM_fnc_KnowAbout;
+		class KnowAbout {};
+		
+		// unit call VCM_fnc_ClstEmy;
+		class ClstEmy {};
+		
+		// unit call VCM_fnc_EnemyArray;
+		class EnemyArray {};
+		
+		// [] call VCM_fnc_IRCHECK;
+		class IRCHECK {};
+		
+		// [list, object, order, script] call VCM_fnc_ClstObj;
+		class ClstObj {};
+		
+		// [object, searchRadius, precision, sortingOrder] call VCM_fnc_Heights;
+		class Heights {};
+		
+		// [group, searchDistance] call VCM_fnc_EmptyStatic;
+		class EmptyStatic {};
+	};
+	
+	// Suppression related functions
+	class Suppression
+	{
+		file = "Vcom\Functions\VCM_Functions\suppression";
 	};
 };
 
