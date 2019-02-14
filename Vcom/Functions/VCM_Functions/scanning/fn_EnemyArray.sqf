@@ -1,6 +1,6 @@
 
 /*
-	Author: Freddo
+	Author: Genesis, overhauled by Freddo
 
 	Description:
 		Return array containing all enemies of unit.

@@ -1,5 +1,5 @@
 /*
-	Author: Genesis
+	Author: Freddo
 
 	Description:
 		Return array of known enemies.
