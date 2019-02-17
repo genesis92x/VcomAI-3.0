@@ -52,9 +52,6 @@ class VCOM
 		// [string] call VCM_fnc_Classname;
 		class Classname {};
 		
-		// unit call VCM_fnc_FriendlyArray;
-		class FriendlyArray {};
-		
 		// [unit, weapon, muzzle, mode, ammo, magazine, bullet, gunner] call VCM_fnc_HearingAids;
 		class HearingAids {};
 		
@@ -230,6 +227,12 @@ class VCOM
 		
 		// unit call VCM_fnc_KnownEnemyGroupArray
 		class KnownEnemyGroupArray {};
+		
+		// unit call VCM_fnc_FriendlyArray;
+		class FriendlyArray {};
+		
+		// [unit, boolean] call VCM_fnc_FriendlyGroupArray
+		class FriendlyGroupArray {};
 		
 		// [] call VCM_fnc_IRCHECK;
 		class IRCHECK {};
