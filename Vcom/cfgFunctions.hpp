@@ -240,6 +240,12 @@ class VCOM
 		// [list, object, order, script] call VCM_fnc_ClstObj;
 		class ClstObj {};
 		
+		// unit call VCM_fnc_HasRadio;
+		class HasRadio {};
+		
+		// group call VCM_fnc_GroupHasRadio
+		class GroupHasRadio {};
+		
 		// [object, searchRadius, precision, sortingOrder] call VCM_fnc_Heights;
 		class Heights {};
 		
