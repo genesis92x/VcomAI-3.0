@@ -75,6 +75,9 @@ class VCOM
 		
 		// unit call VCM_fnc_IsDriver;
 		class IsDriver {};
+		
+		// group call VCM_fnc_GroupValue
+		class GroupValue {};
 	};
 	
 	// Artillery related functions. Deprecated
@@ -123,6 +126,9 @@ class VCOM
 		
 		// group call VCM_fnc_RearmSelf;
 		class RearmSelf {};
+		
+		// group call VCM_fnc_RqstReinforce
+		class RqstReinforce {};
 	};
 	
 	// Driving related functions
@@ -213,8 +219,14 @@ class VCOM
 		// [array, unitToReveal, revealAmount, _revealLimit] call VCM_fnc_KnowAbout;
 		class KnowAbout {};
 		
+		// group call VCM_fnc_CanReinforce
+		class CanReinforce {};
+		
 		// unit call VCM_fnc_ClstEmy;
 		class ClstEmy {};
+		
+		// [list, object, order, script] call VCM_fnc_ClstObj;
+		class ClstObj {};
 		
 		// unit call VCM_fnc_EnemyArray;
 		class EnemyArray {};
@@ -236,9 +248,6 @@ class VCOM
 		
 		// [] call VCM_fnc_IRCHECK;
 		class IRCHECK {};
-		
-		// [list, object, order, script] call VCM_fnc_ClstObj;
-		class ClstObj {};
 		
 		// unit call VCM_fnc_HasRadio;
 		class HasRadio {};

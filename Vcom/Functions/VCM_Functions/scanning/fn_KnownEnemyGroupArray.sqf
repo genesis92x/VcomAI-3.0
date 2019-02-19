@@ -23,7 +23,7 @@
 private _arr = _this call VCM_fnc_KnownEnemyArray;
 private _rtrn = [];
 {
-	_arr pushBackUnique (group _x);
+	_rtrn pushBackUnique (group _x);
 } forEach _arr;
 
 _rtrn

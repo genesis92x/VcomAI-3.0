@@ -11,11 +11,11 @@
 		BOOLEAN
 */
 
-private _group = group _this;
-private _units = units _this;
+private _group = _this;
+private _units = units _group;
 private _rtrn = false;
 
-if !((_units findIf {_x call VCM_fnc_HasRadio}) isEqualTo -1) then
+if !((_units findIf {_x call VCM_fnc_HasRadio}) == -1) then
 {
 	_rtrn = true;
 };

@@ -40,7 +40,7 @@ if _toSort then
 else
 {
 	{
-		if ([side _x, _side] call BIS_fnc_sideIsFriendly && {!(_x isEqualTo _group)} && {0 <= _range && {_x distance2D _unit < _range}}) then
+		if ([side _x, _side] call BIS_fnc_sideIsFriendly && {!(_x isEqualTo _group)} && {0 <= _range && {leader _x distance2D _unit < _range}}) then
 		{
 			_friendlyArray pushBack _x;
 		};

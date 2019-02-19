@@ -16,6 +16,6 @@
 
 private _unit = _this;
 
-_rtrn = ("itemRadio" in (assignedItems _unit));
+_rtrn = ("ItemRadio" in (assignedItems _unit));
 
 _rtrn

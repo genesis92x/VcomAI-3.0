@@ -33,7 +33,7 @@ item28[] = {"Flank_Orders",4,218,1050.000000,225.000000,1150.000000,275.000000,1
 item29[] = {"",7,210,296.000000,21.000000,304.000000,29.000000,0.000000,""};
 item30[] = {"Light_Garrison",4,218,1000.000000,200.000000,1100.000000,250.000000,88.000000,"Light Garrison"};
 item31[] = {"Five_Minute_Chec",4,218,-300.000000,300.000000,-200.000000,350.000000,950.000000,"Five Minute Checks"};
-item32[] = {"Five_Minute_Chec",2,250,-300.000000,150.000000,-200.000000,200.000000,0.000000,"Five Minute Checks"};
+item32[] = {"Reinforcement_Ch",2,4346,-300.000000,150.000000,-200.000000,200.000000,0.000000,"Reinforcement" \n "Check"};
 item33[] = {"CheckIfStatic",4,218,949.004028,175.000031,1050.000122,225.996094,92.000000,"CheckIfStatic"};
 item34[] = {"TwoMinuteChecks",4,218,-400.000000,300.000000,-300.000000,350.000000,940.000000,"TwoMinuteChecks"};
 item35[] = {"Two_Minute_Check",2,250,-400.000000,150.000000,-300.000000,200.000000,0.000000,"Two Minute Checks"};
@@ -44,7 +44,7 @@ item39[] = {"True",8,218,750.000000,75.000000,850.000000,125.000000,0.000000,"Tr
 item40[] = {"Exit_Cond",4,218,675.000000,475.000000,775.000000,525.000000,700.000000,"Exit Cond"};
 item41[] = {"Exit_FSM_2",1,250,700.000000,600.000000,775.000000,650.000000,0.000000,"Exit FSM"};
 item42[] = {"MOVE_UP",4,218,1150.000000,275.000000,1250.000000,325.000000,104.000000,"MOVE UP"};
-item43[] = {"Clear_Building",4,4314,1200.000000,300.000000,1300.000000,350.000000,50.000000,"Clear Building"};
+item43[] = {"Clear_Building",4,218,1200.000000,300.000000,1300.000000,350.000000,50.000000,"Clear Building"};
 item44[] = {"Combat_END",4,218,684.709351,384.913361,784.709351,434.913361,90.000000,"Combat END"};
 link0[] = {0,1};
 link1[] = {0,3};
@@ -113,8 +113,8 @@ link63[] = {40,41};
 link64[] = {42,27};
 link65[] = {43,27};
 link66[] = {44,27};
-globals[] = {0.000000,0,0,0,0,640,480,2,623,6316128,1,378.398834,1562.328491,774.864380,-69.844208,1239,884,1};
-window[] = {2,-1,-1,-1,-1,1006,52,797,52,3,1257};
+globals[] = {0.000000,0,0,0,0,640,480,2,623,6316128,1,-341.180847,1163.171631,1047.220947,-26.102501,1254,884,1};
+window[] = {2,-1,-1,-1,-1,1009,91,836,55,3,1272};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -158,7 +158,7 @@ class FSM
                                         condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"private _BackbkC = -60;" \n
                                          "private _BackbkC2 = -60;" \n
-                                         "private _BackbkC3 = -300;" \n
+                                         "private _BackbkC3 = -300 + VCM_WARNDELAY;" \n
                                          "private _BackbkC4 = -120;" \n
                                          "private _BackbkC5 = -120;" \n
                                          "private _BackbkC6 = -120;" \n
@@ -289,7 +289,7 @@ class FSM
                                 {
                                         itemno = 31;
                                         priority = 950.000000;
-                                        to="Five_Minute_Chec";
+                                        to="Reinforcement_Ch";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"(_BackbkC3 + 300) < time"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
@@ -501,18 +501,7 @@ class FSM
                          "{" \n
                          "	_situation = ""READY"";" \n
                          "};" \n
-                         "" \n
-                         "" \n
-                         "//See if we can take any vehicles." \n
-                         "if (VCM_StealVeh) then" \n
-                         "{" \n
-                         "{" \n
-                         "	if (_x iskindof ""LandVehicle"" && {crew _x isEqualTo []} && {_x distance _Leader < VCM_AIDISTANCEVEHPATH} && {locked _x != 2}) then" \n
-                         "	{" \n
-                         "		_Group addvehicle _x;" \n
-                         "	};" \n
-                         "} foreach vehicles;" \n
-                         "};"/*%FSM</STATEINIT""">*/;
+                         ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -538,7 +527,8 @@ class FSM
                                         action=/*%FSM<ACTION""">*/"//[_Leader,50] call VCM_fnc_FindCover;" \n
                                          "_Cover2Cover = time;" \n
                                          "_Beh = ""COMBAT"";" \n
-                                         "if (VCM_FullSpeed) then {_Group setSpeedMode ""FULL"";};"/*%FSM</ACTION""">*/;
+                                         "if (VCM_FullSpeed) then {_Group setSpeedMode ""FULL"";};" \n
+                                         "_BackbkC3 = (time + 300 - VCM_WARNDELAY);"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                                 /*%FSM<LINK "Combat">*/
@@ -669,7 +659,7 @@ class FSM
                                         to="Return";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"_WaypointGen + 900 < time && " \n
-                                         "{_situation isEqualTo ""READY""} &&" \n
+                                         "{_situation isEqualTo ""READY"" || _situation isEqualTo ""REINFORCE""} &&" \n
                                          "{VCM_ADVANCEDMOVEMENT} &&" \n
                                          "{" \n
                                          "	isNil {(waypoints _Group) select 1} ||" \n
@@ -938,12 +928,13 @@ class FSM
                         };
                 };
                 /*%FSM</STATE>*/
-                /*%FSM<STATE "Five_Minute_Chec">*/
-                class Five_Minute_Chec
+                /*%FSM<STATE "Reinforcement_Ch">*/
+                class Reinforcement_Ch
                 {
-                        name = "Five_Minute_Chec";
+                        name = "Reinforcement_Ch";
                         itemno = 32;
-                        init = /*%FSM<STATEINIT""">*/"_BackbkC3 = time;"/*%FSM</STATEINIT""">*/;
+                        init = /*%FSM<STATEINIT""">*/"if !(_Group getVariable [""VCM_TOUGHSQUAD"", false]) then {_Group call VCM_fnc_RqstReinforce};" \n
+                         "_BackbkC3 = time;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
