@@ -183,6 +183,9 @@ class VCOM
 	{
 		file = "Vcom\Functions\VCM_Functions\movement";
 		
+		// [group, closestEnemy] call VCM_fnc_CQCMovement;
+		class CQCMovement {};
+		
 		// [groupLeader, moveDistance] call VCM_fnc_ForceMove;
 		class ForceMove {};
 		
@@ -203,6 +206,9 @@ class VCOM
 		
 		// group call CheckSituation;
 		class CheckSituation {};
+		
+		// group call SetCQC;
+		class SetCQC {};
 		
 		// group call SetSituation;
 		class SetSituation {};

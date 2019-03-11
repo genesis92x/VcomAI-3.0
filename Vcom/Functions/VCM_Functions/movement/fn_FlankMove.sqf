@@ -7,12 +7,13 @@
 
 	Parameter(s):
 		0: OBJECT - Group leader who will generate waypoints
+		1: OPTIONAL: STRING - Movetype, avilable options: "Assault", "High", "Low", "Retreat", "Flank", "FlankL"
 
 	Returns:
 		NOTHING
 */
 
-params ["_leader"];
+params ["_leader", "_moveType"];
 
 private _grp = group _leader;
 if (_grp getVariable ["VCM_NOFLANK",false]) exitWith {};

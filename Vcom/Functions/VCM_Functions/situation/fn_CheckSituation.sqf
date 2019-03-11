@@ -5,7 +5,7 @@
 		Returns current situation/task of the unit
 
 	Parameter(s):
-		0: GROUP - Group to check the situation of
+		GROUP - Group to check the situation of
 
 	Returns:
 		STRING
