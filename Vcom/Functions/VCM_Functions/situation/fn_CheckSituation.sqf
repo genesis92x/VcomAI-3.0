@@ -19,5 +19,5 @@ if !(isNil "_fsm") then
 {
 	_rtrn = _fsm getFSMVariable "_situation";
 };
-
+if (isNil "_rtrn") then {_rtrn = "ERROR"}; //This generally occurs when the FSM has been suddenly stopped
 _rtrn
