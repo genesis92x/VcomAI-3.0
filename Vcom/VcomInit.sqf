@@ -1,3 +1,4 @@
+if (!isNil "VCMINITHANDLE" && {!scriptDone VCMINITHANDLE}) exitWith {};
 
 //Global actions compiles
 Vcm_PMN = compileFinal "(_this select 0) playMoveNow (_this select 1);";
@@ -24,32 +25,60 @@ VCOM_MINEARRAY = [];
 [] spawn VCM_fnc_MineMonitor;
 [] spawn VCM_fnc_HANDLECURATORS;
 
-[] spawn
+VCMINITHANDLE = [] spawn
 {
 	waitUntil {time > 2};
 	sleep 2;
 	
 	//Begin Artillery function created by Rydygier - https://forums.bohemia.net/forums/topic/159152-fire-for-effect-the-god-of-war-smart-simple-ai-artillery/
-	if (VCM_FFEARTILLERY) then {nul = [] spawn (compile preprocessFileLineNumbers "Vcom\RYD_FFE\FFE.sqf");VCM_ARTYENABLE = false;};
+	if (VCM_FFEARTILLERY) then {VCM_FFEHANDLE = [] spawn (compile preprocessFileLineNumbers "Vcom\RYD_FFE\FFE.sqf");VCM_ARTYENABLE = false;};
 	
 	[] spawn VCM_fnc_AIDRIVEBEHAVIOR;
 	
 	//Below is loop to check for new AI spawning in to be added to the list
 	while {true} do 
 	{
-		if (Vcm_ActivateAI) then
+		waitUntil {Vcm_ActivateAI};
+		
+		{
+			private _fsmHandle = _x getVariable "VCM_SQUADFSM";
+			if 
+			(
+				(isNil {completedFSM _fsmHandle} || {completedFSM _fsmHandle}) && 
+				{local _x} && 
+				{simulationEnabled (leader _x)} && 
+				{(units _x) findIf {isPlayer _x} == -1} && 
+				{(leader _x) isKindOf "Man"}
+			) then
+			{
+				private _grp = _x;
+				if !(((units _grp) findIf {alive _x}) isEqualTo -1) then
+				{
+					_grp spawn VCM_fnc_SQUADBEH;
+				};
+			};
+		} foreach allGroups;
+		
+		if (VCM_SUPPRESSACTIVE) then
 		{
 			{
-				if (local _x && {simulationEnabled (leader _x)} && {(units _x) findIf {isPlayer _x} == -1} && {(leader _x) isKindOf "Man"}) then 
+				private _fsmHandle = _x getVariable "VCMSUPPRESSION";
+				if
+				(
+					(isNil {completedFSM _fsmHandle} || {completedFSM _fsmHandle}) &&
+					{isNull objectParent _x} &&
+					{local _x} &&
+					{simulationEnabled _x} &&
+					{!isPlayer _x} &&
+					{_x isKindOf "Man"} &&
+					{alive _x}
+				) then
 				{
-					private _Grp = _x;
-					if !(((units _Grp) findIf {alive _x}) isEqualTo -1) then
-					{
-						_x call VCM_fnc_SquadExc;
-					};
+					_x spawn VCM_fnc_UNITSUPPRESSION;
 				};
-			} foreach allGroups;
+			} foreach allUnits;
 		};
-		sleep 10;
+		
+		sleep 15;
 	};
 };

@@ -23,19 +23,21 @@
 		Meant to be called from a "HIT" eventhandler
 */
 params ["_unit", "_source", "_damage", "_instigator"];
+
+/*
 if 
 (
 	!(isNull objectParent _unit) || 
 	{(missionNamespace getvariable ["ace_medical_enableUnconsciousnessAI", 0]) != 0} //Check if ACE3 makes AI go unconscious
 ) exitWith {};
-
-//Lay down
-if (unitPos _unit isEqualTo "AUTO") then
+*/
+if (_damage > 0.1 && !(lifestate _unit isEqualTo "INCAPACITATED")) then 
 {
-	_unit setUnitPos "DOWN";
-	_unit spawn {sleep 30; _this setUnitPos "AUTO";};
+	[_unit, 0.5] call VCM_fnc_AddSuppressionNow;
 };
 
+// Deprecated
+/*
 if (VCM_RAGDOLL && {_damage > 0.1} && {!(lifestate _unit isEqualTo "INCAPACITATED")} && {VCM_RAGDOLLCHC > (random 100)}) then
 {
 	
@@ -107,3 +109,4 @@ if (VCM_RAGDOLL && {_damage > 0.1} && {!(lifestate _unit isEqualTo "INCAPACITATE
 		};
 	};
 };
+*/

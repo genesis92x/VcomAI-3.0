@@ -42,6 +42,12 @@ class VCOM
 		{
 			ext = ".fsm";
 		};
+		
+		// unit spawn VCM_fnc_UNITSUPPRESSION
+		class UNITSUPPRESSION
+		{
+			ext = ".fsm";
+		};
 	};
 	
 	// Generic functions
@@ -102,9 +108,6 @@ class VCOM
 		
 		// [unitToRearm, rearmLocation] spawn VCM_fnc_ActRearm
 		class ActRearm {};
-		
-		// [unit, source, damage, instigator] call VCM_fnc_AIHIT;
-		class AIHIT {};
 		
 		// [group] call VCM_fnc_ArmStatics;
 		class ArmStatics {};
@@ -258,7 +261,7 @@ class VCOM
 		// unit call VCM_fnc_HasRadio;
 		class HasRadio {};
 		
-		// group call VCM_fnc_GroupHasRadio
+		// group call VCM_fnc_GroupHasRadio;
 		class GroupHasRadio {};
 		
 		// [object, searchRadius, precision, sortingOrder] call VCM_fnc_Heights;
@@ -272,6 +275,27 @@ class VCOM
 	class Suppression
 	{
 		file = "Vcom\Functions\VCM_Functions\suppression";
+		
+		// [unit, number] call VCM_fnc_AddSuppression;
+		class AddSuppression {};
+		
+		// [unit, number] call VCM_fnc_AddSuppressionNow;
+		class AddSuppressionNow {};
+		
+		// [unit, source, damage, instigator] call VCM_fnc_AIHIT;
+		class AIHIT {};
+		
+		// _group call VCM_fnc_FSMGetSuppression;
+		class FSMGetSuppression {};
+		
+		// _unit call VCM_fnc_GetSuppression
+		class GetSuppression {};
+		
+		// _group call VCM_fnc_GroupGetSuppression;
+		class GroupGetSuppression {};
+		
+		// _unit spawn VCM_fnc_SuppressionDebug;
+		class SuppressionDebug {};
 	};
 };
 

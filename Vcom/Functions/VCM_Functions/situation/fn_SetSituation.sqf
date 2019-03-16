@@ -15,7 +15,7 @@
 params ["_grp", "_newSituation"];
 
 private _fsm = _grp getVariable "VCM_SQUADFSM";
-if !(isNull _fsm) then 
+if !(isNil "_fsm") then 
 {
 	_fsm setFSMVariable ["_situation", _newSituation];
 };

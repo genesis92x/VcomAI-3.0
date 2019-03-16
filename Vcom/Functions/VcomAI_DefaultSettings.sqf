@@ -11,6 +11,7 @@
 */
 
 Vcm_ActivateAI = true; //Set this to false to disable VcomAI. It can be set to true at any time to re-enable Vcom AI
+VCM_SUPPRESSACTIVE = true; //Set to false to disable AI suppression system
 VcmAI_ActiveList = []; //Leave this alone.
 VCM_AIMagLimit = 2; //Number of mags remaining before AI looks for ammo.
 VCM_Debug = false; //Enable debug mode.

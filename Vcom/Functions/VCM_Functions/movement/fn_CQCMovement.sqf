@@ -18,6 +18,9 @@ if (isNil "_closestEnemy") then
 	_closestEnemy = _leader findNearestEnemy _leader;
 };
 
+// Zeus placed waypoints
+if (!isNil {(waypoints _Group) select 1} && {!(((waypoints _Group) select 1) in VCM_IGNOREWAYPOINTS)}) exitWith {};
+
 if (_leader distance _closestEnemy < 150) then 
 { 
 	for "_i" from ((count waypoints _group) - 1) to 1 do {deleteWaypoint [_group, _i]};

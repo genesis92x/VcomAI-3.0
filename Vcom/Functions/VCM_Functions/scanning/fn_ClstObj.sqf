@@ -21,7 +21,7 @@ if (isNil "_order") then {_order = true};
 if (isNil "_script") then {_script = "Nil";};
 
 private _position = [0,0,0];
-if (isNil "_object" || {isNil "_list"}) exitWith {_closestObject = [0,0,0];_closestObject};
+if (isNil "_object" || {isNil "_list"}) exitWith {_closestObject = objNull;_closestObject};
 
 switch (TypeName _object) do 
 {
@@ -54,5 +54,5 @@ _distanceArray sort _order;
 
 private _closestObject = ((_distanceArray select 0) select 1);
 
-if (isNil "_closestObject") then {_closestObject = [0,0,0];};
+if (isNil "_closestObject") then {_closestObject = objNull;};
 _closestObject
