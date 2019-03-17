@@ -7,7 +7,12 @@ Vcm_PAN = compileFinal "(_this select 0) playActionNow (_this select 1);";
 VCM_PublicScript = compileFinal "[] call (_this select 0);";
 VCM_ServerAsk = compileFinal "if (isServer) then {publicvariable (_this select 0);};";
 
-if !(isServer) exitWith {};
+if 
+!(
+	isServer || 
+	!hasInterface || 
+	allCurators findIf {getAssignedCuratorUnit _x == player} == -1
+) exitWith {};
 
 //Parameters
 [] call compile preprocessFileLineNumbers "Vcom\Functions\VCOMAI_DefaultSettings.sqf"; //Load default settings
