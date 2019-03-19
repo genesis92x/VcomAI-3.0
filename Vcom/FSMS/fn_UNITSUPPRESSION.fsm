@@ -58,7 +58,7 @@ link15[] = {11,12};
 link16[] = {11,13};
 link17[] = {12,4};
 link18[] = {13,11};
-globals[] = {0.000000,0,0,0,0,640,480,1,23,6316128,1,-379.981201,140.035645,285.095734,-597.236328,521,884,1};
+globals[] = {0.000000,0,0,0,0,640,480,1,23,6316128,1,-479.895294,240.639130,537.254700,-607.855713,521,884,1};
 window[] = {2,-1,-1,-1,-1,769,52,726,52,3,539};
 *//*%FSM</HEAD>*/
 class FSM
@@ -201,7 +201,7 @@ class FSM
                                         to="TIMER";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"(_group call VCM_fnc_CheckSituation) isEqualTo ""CQC"" || behaviour _unit isEqualTo ""STEALTH"""/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/"_unit setUnitPosWeak ""AUTO"";" \n
+                                        action=/*%FSM<ACTION""">*/"_unit setUnitPos ""AUTO"";" \n
                                          "" \n
                                          "_t = time;"/*%FSM</ACTION""">*/;
                                 };
