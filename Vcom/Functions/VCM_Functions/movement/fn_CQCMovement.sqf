@@ -19,9 +19,10 @@ if (isNil "_closestEnemy") then
 };
 
 // Zeus placed waypoints
-if (!isNil {(waypoints _Group) select 1} && {!(((waypoints _Group) select 1) in VCM_IGNOREWAYPOINTS)}) exitWith {};
+if !((waypoints _group) findIf {_x in VCM_IGNOREWAYPOINTS} isEqualTo -1) exitWith {};
+if (_group getVariable ["VCM_NOFLANK", false]) exitWith {};
 
-if (_leader distance _closestEnemy < 150) then 
+if (_leader distance _closestEnemy < 120) then 
 { 
 	for "_i" from ((count waypoints _group) - 1) to 1 do {deleteWaypoint [_group, _i]};
 	
@@ -57,7 +58,8 @@ if (_leader distance _closestEnemy < 150) then
 	{
 		// Fall back
 		private _direction = _closestEnemy getDir _leader;
-		private _wp = _group addWaypoint [position _leader getPos [_direction, 200], 25];
+		private _position = position _leader getPos [200, _direction];
+		private _wp = _group addWaypoint [_position, 25];
 		_wp setWaypointSpeed "FULL";
 		_wp setWaypointStatements ["this", "[group this call VCM_fnc_CQCMovement]"];
 		_group setCurrentWaypoint _wp;

@@ -33,7 +33,7 @@ _group spawn //Handle to eventually exit script
 			{_x doFollow _leader} forEach _units;
 		};
 		private _nearestEnemy = _leader findNearestEnemy _leader;
-		if (!isNull _nearestEnemy && {_nearestEnemy distance _leader > 200}) exitWith 
+		if (!isNull _nearestEnemy && {_nearestEnemy distance _leader > 120}) exitWith 
 		{
 			[_group, "READY"] call VCM_fnc_SetSituation;
 			_group enableAttack false;
