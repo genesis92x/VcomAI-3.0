@@ -27,7 +27,7 @@ _group spawn //Handle to eventually exit script
 		sleep (15 + random 10);
 		private _situation = _group call VCM_fnc_CheckSituation;
 		private _leader = leader _group;
-		if (_units findIf {alive _x} == -1 || _situation isEqualTo "BREAKING") exitWith 
+		if (_units findIf {alive _x} isEqualTo -1 || _situation isEqualTo "BREAKING") exitWith 
 		{
 			_group enableAttack false; 
 			{_x doFollow _leader} forEach _units;

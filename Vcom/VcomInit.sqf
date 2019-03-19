@@ -7,12 +7,17 @@ Vcm_PAN = compileFinal "(_this select 0) playActionNow (_this select 1);";
 VCM_PublicScript = compileFinal "[] call (_this select 0);";
 VCM_ServerAsk = compileFinal "if (isServer) then {publicvariable (_this select 0);};";
 
+
+/*
+Reasoning for removal: It's best to have Vcom running for ALL clients. Vcom was designed from the ground up to ONLY run on AI LOCAL to the machine running the commands. This enables HC support, hotswapping of AI between CPUS, and better consistency over several hours with multiple disconnects/changes of HC's or AI owners.
+
 if 
 !(
 	isServer || 
 	!hasInterface || 
 	allCurators findIf {getAssignedCuratorUnit _x == player} == -1
 ) exitWith {};
+*/
 
 //Parameters
 [] call compile preprocessFileLineNumbers "Vcom\Functions\VCOMAI_DefaultSettings.sqf"; //Load default settings
@@ -52,7 +57,7 @@ VCMINITHANDLE = [] spawn
 				(isNil {completedFSM _fsmHandle} || {completedFSM _fsmHandle}) && 
 				{local _x} && 
 				{simulationEnabled (leader _x)} && 
-				{(units _x) findIf {isPlayer _x} == -1} && 
+				{(units _x) findIf {isPlayer _x} isEqualTo -1} && 
 				{(leader _x) isKindOf "Man"}
 			) then
 			{
@@ -64,6 +69,8 @@ VCMINITHANDLE = [] spawn
 			};
 		} foreach allGroups;
 		
+		
+		//This system is definitely a cool idea - however running an FSM per AI is going to be heavy. I would like to take a further look into performance impact.
 		if (VCM_SUPPRESSACTIVE) then
 		{
 			{
