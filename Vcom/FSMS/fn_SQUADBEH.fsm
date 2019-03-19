@@ -23,7 +23,7 @@ item18[] = {"Continue2StartPo",8,218,0.000000,300.000000,100.000000,350.000000,0
 item19[] = {"Continue2StartPo",4,218,100.000000,300.000000,200.000000,350.000000,0.000000,"Continue2StartPoint2"};
 item20[] = {"Leader_Cycle_Beg",3,250,508.062805,372.976349,608.062805,422.976349,0.000000,"Leader" \n "Cycle" \n "Beginning"};
 item21[] = {"Combat",4,218,671.022705,372.075439,761.022705,422.075439,100.000000,"Combat"};
-item22[] = {"Combat_Brain",2,250,870.650879,303.704590,970.650879,353.704590,0.000000,"Combat Brain"};
+item22[] = {"Combat_Brain",2,4346,870.650879,303.704590,970.650879,353.704590,0.000000,"Combat Brain"};
 item23[] = {"Combat_BEGIN",4,218,665.427063,321.335602,765.427063,371.335632,110.000000,"Combat BEGIN"};
 item24[] = {"Return",8,218,573.508484,193.429855,673.508484,243.429855,0.000000,"Return"};
 item25[] = {"Arty_Check",4,218,1100.000000,250.000000,1200.000000,300.000000,84.000000,"Arty Check"};
@@ -109,8 +109,8 @@ link60[] = {40,26};
 link61[] = {41,16};
 link62[] = {42,6};
 link63[] = {43,39};
-globals[] = {0.000000,0,0,0,0,640,480,2,624,6316128,1,112.155273,1383.402954,801.801514,-178.812408,1146,884,1};
-window[] = {2,-1,-1,-1,-1,1084,130,875,130,3,1164};
+globals[] = {0.000000,0,0,0,0,640,480,2,624,6316128,1,504.794159,1408.691162,1043.839111,-121.934799,1146,884,1};
+window[] = {2,-1,-1,-1,-1,1162,208,953,208,3,1164};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -629,7 +629,7 @@ class FSM
                          "" \n
                          "_suppression = _group call VCM_fnc_GroupGetSuppression;" \n
                          "" \n
-                         "if (_nearestEnemy distance _leader <= 150 && _situation != ""CQC"" && _situation != ""BREAKING"") then " \n
+                         "if (_nearestEnemy distance _leader <= 100 && {_situation == ""READY"" || _situation == ""FLANKING"" || _situation == ""REINFORCE""}) then " \n
                          "{" \n
                          "	_situation = ""CQC"";" \n
                          "	[_group, _nearestEnemy] call VCM_fnc_SetCQC;" \n
