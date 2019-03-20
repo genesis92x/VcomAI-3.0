@@ -1,4 +1,4 @@
-/*%FSM<COMPILE "C:\Program Files (x86)\Steam\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, fn_UNITSUPPRESSION">*/
+/*%FSM<COMPILE "D:\Games\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, fn_UNITSUPPRESSION">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"START",0,250,75.331299,-78.655457,165.331299,-28.655457,0.000000,"START"};
@@ -9,11 +9,11 @@ item4[] = {"CHECK_SUPPRESSIO",2,250,-37.794777,-170.197464,52.205238,-120.197456
 item5[] = {"_",-1,250,-107.927109,-146.077637,0.000000,-146.077637,0.000000,""};
 item6[] = {"UP",8,218,-219.143295,-290.917419,-129.143295,-240.917435,10.000000,"UP"};
 item7[] = {"MIDDLE",4,218,-128.628998,-290.745880,-38.628998,-240.745880,20.000000,"MIDDLE"};
-item8[] = {"DOWN",4,4314,53.077332,-290.569855,143.077332,-240.569855,30.000000,"DOWN"};
+item8[] = {"DOWN",4,218,53.077332,-290.569855,143.077332,-240.569855,30.000000,"DOWN"};
 item9[] = {"CQC",4,218,-308.165314,-290.831512,-218.165314,-240.831512,80.000000,"CQC"};
 item10[] = {"PINNED",4,218,143.853180,-290.668243,233.853180,-240.668243,40.000000,"PINNED"};
 item11[] = {"TIMER",2,250,-37.913712,-394.222229,52.086319,-344.222229,0.000000,"TIMER"};
-item12[] = {"EXIT_TIMER",4,218,-37.505798,-290.169312,52.494202,-240.169312,1.000000,"EXIT" \n "TIMER"};
+item12[] = {"EXIT_TIMER",4,4314,-37.505798,-290.169312,52.494202,-240.169312,1.000000,"EXIT" \n "TIMER"};
 item13[] = {"DO_NOTHING",8,218,-34.893127,-485.660553,55.106873,-435.660553,0.000000,"DO" \n "NOTHING"};
 item14[] = {"VCOM_SUPPRESSION",-1,250,-275.000000,-150.000000,-125.000000,150.000000,0.000000,"VCOM SUPPRESSION" \n "" \n "//TODO - INSERT INFO"};
 version=1;
@@ -58,8 +58,8 @@ link15[] = {11,12};
 link16[] = {11,13};
 link17[] = {12,4};
 link18[] = {13,11};
-globals[] = {0.000000,0,0,0,0,640,480,1,23,6316128,1,-479.895294,240.639130,537.254700,-607.855713,521,884,1};
-window[] = {2,-1,-1,-1,-1,769,52,726,52,3,539};
+globals[] = {0.000000,0,0,0,0,640,480,1,23,6316128,1,-423.130829,414.361237,107.706512,-538.317017,1146,884,1};
+window[] = {2,-1,-1,-1,-1,769,53,727,52,3,1164};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -162,10 +162,10 @@ class FSM
                          "if !(_dead) then" \n
                          "{" \n
                          "	// Apply group average suppression" \n
-                         "	if (!isNil ""_suppression"" && {_groupSuppression - 0.2 > _suppression}) then" \n
+                         "	if (!isNil ""_suppression"" && {_groupSuppression - 0.3 > _suppression}) then" \n
                          "	{" \n
-                         "		_unit setSuppression _groupSuppression;" \n
-                         "		_suppression = _groupSuppression;" \n
+                         "		_unit setSuppression (_groupSuppression - 0.3);" \n
+                         "		_suppression = (_groupSuppression - 0.3);" \n
                          "	};" \n
                          "	" \n
                          "	// Update slowSuppression" \n
@@ -391,7 +391,7 @@ class FSM
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"(_t < time - 2 || _exitNow) &&" \n
                                          "{!(lifestate _unit isEqualTo ""INCAPACITATED"")}"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/"_slowSuppression = _slowSuppression - 0.05;"/*%FSM</ACTION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_slowSuppression = _slowSuppression - (0.025 + random 0.025);"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                                 /*%FSM<LINK "DO_NOTHING">*/

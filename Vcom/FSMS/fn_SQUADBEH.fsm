@@ -109,8 +109,8 @@ link60[] = {40,26};
 link61[] = {41,16};
 link62[] = {42,6};
 link63[] = {43,39};
-globals[] = {0.000000,0,0,0,0,640,480,2,624,6316128,1,241.991943,1000.233398,975.413818,-52.121349,1089,884,1};
-window[] = {2,-1,-1,-32000,-32000,1029,86,831,75,3,1107};
+globals[] = {0.000000,0,0,0,0,640,480,2,624,6316128,1,-176.980988,1007.904419,903.668335,-58.167114,610,828,1};
+window[] = {2,-1,-1,-181,-1,1125,-1206,-461,171,3,628};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -491,6 +491,11 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"private _t = time;" \n
                          "private _Wait = 5;" \n
                          "" \n
+                         "private _nearestEnemy = _leader findNearestEnemy _leader;" \n
+                         "if (isNull _nearestEnemy) then" \n
+                         "{" \n
+                         "	_nearestEnemy = _leader call VCM_fnc_ClstEmy;	" \n
+                         "};" \n
                          "" \n
                          "private _index = currentWaypoint _Group;" \n
                          "private _WaypointIs = waypointType [_Group,_index];" \n
@@ -507,7 +512,7 @@ class FSM
                          "" \n
                          "if (_situation == ""CQC"" && {isNull _nearestEnemy || {_leader distance2D _nearestEnemy > 175}}) then " \n
                          "{" \n
-                         "	_situation == ""READY"";" \n
+                         "	_situation = ""READY"";" \n
                          "	_group enableAttack false;" \n
                          "	{" \n
                          "		_x disableAI ""AUTOCOMBAT"";" \n
@@ -622,12 +627,6 @@ class FSM
                         itemno = 22;
                         init = /*%FSM<STATEINIT""">*/"private _t = time;" \n
                          "private _Wait = 3;" \n
-                         "" \n
-                         "private _nearestEnemy = _leader findNearestEnemy _leader;" \n
-                         "if (isNull _nearestEnemy) then" \n
-                         "{" \n
-                         "	_nearestEnemy = _leader call VCM_fnc_ClstEmy;	" \n
-                         "};" \n
                          "" \n
                          "_suppression = _group call VCM_fnc_GroupGetSuppression;" \n
                          "" \n
