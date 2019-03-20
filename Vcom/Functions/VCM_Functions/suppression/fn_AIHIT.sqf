@@ -36,19 +36,11 @@ if (_damage > 0.1 && !(lifestate _unit isEqualTo "INCAPACITATED")) then
 	[_unit, 0.5] call VCM_fnc_AddSuppressionNow;
 };
 
-// Deprecated
-/*
-if (VCM_RAGDOLL && {_damage > 0.1} && {!(lifestate _unit isEqualTo "INCAPACITATED")} && {VCM_RAGDOLLCHC > (random 100)}) then
+if (!(lifestate _unit isEqualTo "INCAPACITATED") && {5 < (random 10)}) then
 {
 	
-	if !(stance _unit isEqualTo "PRONE") then
+	if (stance _unit isEqualTo "PRONE") then
 	{
-		//Ragdoll unit
-		_unit setUnconscious true;
-		_unit spawn {sleep 2;_this setUnconscious false;};
-	} else {
-		//Apply animations instead of ragdoll when prone
-		
 		//Find current weapon type
 		private _currentWeapon = currentWeapon _unit;
 		private _currentWeaponType = 0;
@@ -62,19 +54,9 @@ if (VCM_RAGDOLL && {_damage > 0.1} && {!(lifestate _unit isEqualTo "INCAPACITATE
 			//Rifle animations
 			case 1: 
 			{
-				switch (floor random 3) do {
-					case 1: {_unit playMoveNow "AmovPpneMstpSrasWrflDnon_AmovPpneMevaSlowWrflDl";}; //Roll left
-					case 2: {_unit playMoveNow "AmovPpneMstpSrasWrflDnon_AmovPpneMevaSlowWrflDr";}; //Roll right
-					default 
-					{
-						_unit playMoveNow "amovppnemstpsraswrfldnon_aadjppnemstpsraswrflddown"; //Go as low as possible
-						_unit spawn 
-						{
-							sleep 4 + random 2;
-							//Return to normal
-							if (alive _this && {animationState _this isEqualTo "aadjppnemstpsraswrflddown"}) then {_this playMoveNow "aadjppnemstpsraswrflddown_amovppnemstpsraswrfldnon"};
-						};
-					};
+				switch (floor random 2) do {
+					case 0: {_unit playMoveNow "AmovPpneMstpSrasWrflDnon_AmovPpneMevaSlowWrflDl";}; //Roll left
+					case 1: {_unit playMoveNow "AmovPpneMstpSrasWrflDnon_AmovPpneMevaSlowWrflDr";}; //Roll right
 				};
 			};
 			
@@ -82,18 +64,8 @@ if (VCM_RAGDOLL && {_damage > 0.1} && {!(lifestate _unit isEqualTo "INCAPACITATE
 			case 2:
 			{
 				switch (floor random 3) do {
-					case 1: {_unit playMoveNow "amovppnemstpsraswpstdnon_amovppnemevaslowwpstdl";}; //Roll left
-					case 2: {_unit playMoveNow "amovppnemstpsraswpstdnon_amovppnemevaslowwpstdr";}; //Roll right
-					default 
-					{
-						_unit playMoveNow "amovppnemstpsraswpstdnon_aadjppnemstpsraswpstddown"; //Go as low as possible
-						_unit spawn 
-						{
-							sleep 4 + random 2;
-							//Return to normal
-							if (alive _this && {animationState _this isEqualTo "aadjppnemstpsraswpstddown"}) then {_this playMoveNow "aadjppnemstpsraswpstddown_amovppnemstpsraswpstdnon"};
-						};
-					};
+					case 0: {_unit playMoveNow "amovppnemstpsraswpstdnon_amovppnemevaslowwpstdl";}; //Roll left
+					case 1: {_unit playMoveNow "amovppnemstpsraswpstdnon_amovppnemevaslowwpstdr";}; //Roll right
 				};
 			};
 			
@@ -103,10 +75,8 @@ if (VCM_RAGDOLL && {_damage > 0.1} && {!(lifestate _unit isEqualTo "INCAPACITATE
 				switch (floor random 2) do {
 					case 0: {_unit playMoveNow "amovppnemstpsoptwbindnon_amovppnemevasoptwbindl";}; //Roll left
 					case 1: {_unit playMoveNow "amovppnemstpsoptwbindnon_amovppnemevasoptwbindr";}; //Roll right
-					default {};
 				};
 			};
 		};
 	};
 };
-*/
