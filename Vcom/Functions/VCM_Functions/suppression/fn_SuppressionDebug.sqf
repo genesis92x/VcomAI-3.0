@@ -21,10 +21,10 @@ while {alive _unit && isNull objectParent _unit} do
 	
 	switch true do
 	{
+		case (group _unit call VCM_fnc_CheckSituation == "CQC"): {_ball setObjectTexture [0, "#(argb,8,8,3)color(1,0,1,1)"]};
 		case (_suppression > 0.9): {_ball setObjectTexture [0, "#(argb,8,8,3)color(0,0,1,1)"]};
 		case (_suppression > 0.5): {_ball setObjectTexture [0, "#(argb,8,8,3)color(1,0,0,1)"]};
 		case (_suppression > 0.1): {_ball setObjectTexture [0, "#(argb,8,8,3)color(1,1,0,1)"]};
-		case (group _unit call VCM_fnc_CheckSituation == "CQC"): {_ball setObjectTexture [0, "#(argb,8,8,3)color(1,0,1,1)"]};
 		default {_ball setObjectTexture [0, "#(argb,8,8,3)color(0,1,0,1)"]};
 	};
 };
