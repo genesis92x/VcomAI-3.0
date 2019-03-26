@@ -14,8 +14,6 @@
 		Need to add TFAR and ACRE vehicle rack compatibility
 */
 
-private _unit = _this;
-
-private _rtrn = ("ItemRadio" in (assignedItems _unit));
+private _rtrn = ("ItemRadio" in (assignedItems _this));
 
 _rtrn
