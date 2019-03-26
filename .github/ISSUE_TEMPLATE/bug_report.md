@@ -26,6 +26,9 @@ If applicable, add screenshots to help explain your problem.
 **VCOM Version:**
  - Branch: [e.g. Master, Develop]
  - Version [e.g. 3.2.1]
+ 
+**Additional mods used:**
+ - e.g CBA_A3 (v3.10.1.190316)
 
 **Additional context**
 Add any other context about the problem here.
