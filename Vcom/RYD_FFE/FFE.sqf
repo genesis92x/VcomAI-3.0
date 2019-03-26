@@ -112,7 +112,7 @@ while {RydFFE_Active} do
 				
 				_gp = _x;
 
-				if ((side _gp) == _side && {!(_gp in RydFFE_NoControl)} && {(side _gp) in VCM_ARTYSIDES}) then
+				if ((side _gp) == _side && {!(_gp in RydFFE_NoControl)}) then
 				{
 					
 					{

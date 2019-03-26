@@ -14,7 +14,7 @@ private _ball = "Sign_Sphere25cm_Geometry_F" createVehicleLocal [random 5, rando
 private _suppression = 0;
 _ball attachTo [_unit, [0, 0, 2]];
 
-while {alive _unit && isNull objectParent _unit} do
+while {alive _unit && isNull objectParent _unit && !(group _unit getVariable ["Vcm_Disable", false])} do
 {
 	sleep 2.5;
 	_suppression = _unit call VCM_fnc_GetSuppression;
