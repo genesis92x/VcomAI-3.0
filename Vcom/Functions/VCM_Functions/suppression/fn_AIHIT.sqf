@@ -44,7 +44,7 @@ _unit spawn
 	{
 		_this setVariable ["VCMDEAD", true];
 		{
-			[_x, 0.1 + random 0.15] call VCM_fnc_AddSuppression;
+			if (side _x isEqualTo (side _this)) then {[_x, 0.1 + random 0.15] call VCM_fnc_AddSuppression};
 		} forEach (_this nearEntities ["Man", 10]);
 	};
 };
@@ -57,9 +57,9 @@ if (!(lifestate _unit isEqualTo "INCAPACITATED") && {5 < (random 10)}) then
 		//Find current weapon type
 		private _currentWeapon = currentWeapon _unit;
 		private _currentWeaponType = 0;
-		if (_currentWeapon == primaryWeapon _unit) then {_currentWeaponType = 1};
-		if (_currentWeapon == handgunWeapon _unit) then {_currentWeaponType = 2};
-		if (_currentWeapon == Binocular _unit) then {_currentWeaponType = 3};
+		if (_currentWeapon isEqualTo primaryWeapon _unit) then {_currentWeaponType = 1};
+		if (_currentWeapon isEqualTo handgunWeapon _unit) then {_currentWeaponType = 2};
+		if (_currentWeapon isEqualTo Binocular _unit) then {_currentWeaponType = 3};
 		
 		switch (_currentWeaponType) do
 		{
