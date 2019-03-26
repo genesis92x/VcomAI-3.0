@@ -36,6 +36,19 @@ if (_damage > 0.1 && !(lifestate _unit isEqualTo "INCAPACITATED")) then
 	[_unit, 0.5] call VCM_fnc_AddSuppressionNow;
 };
 
+// If unit died, add suppression
+_unit spawn 
+{
+	sleep 0.5; 
+	if (!alive _this && {!(_this getVariable ["VCMDEAD", false])}) then
+	{
+		_this setVariable ["VCMDEAD", true];
+		{
+			[_x, 0.1 + random 0.15] call VCM_fnc_AddSuppression;
+		} forEach (_this nearEntities ["Man", 10]);
+	};
+};
+
 if (!(lifestate _unit isEqualTo "INCAPACITATED") && {5 < (random 10)}) then
 {
 	
