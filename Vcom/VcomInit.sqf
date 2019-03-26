@@ -41,7 +41,7 @@ VCMINITHANDLE = [] spawn
 	sleep 2;
 	
 	//Begin Artillery function created by Rydygier - https://forums.bohemia.net/forums/topic/159152-fire-for-effect-the-god-of-war-smart-simple-ai-artillery/
-	if (VCM_FFEARTILLERY) then {VCM_FFEHANDLE = [] spawn (compile preprocessFileLineNumbers "Vcom\RYD_FFE\FFE.sqf");VCM_ARTYENABLE = false;};
+	if (VCM_FFEARTILLERY) then {VCM_FFEHANDLE = [] spawn (compile preprocessFileLineNumbers "Vcom\RYD_FFE\FFE.sqf");};
 	
 	[] spawn VCM_fnc_AIDRIVEBEHAVIOR;
 	

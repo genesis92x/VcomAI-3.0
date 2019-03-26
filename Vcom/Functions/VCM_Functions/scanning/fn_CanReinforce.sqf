@@ -35,7 +35,6 @@ if _rtrn then
 		if 
 		(
 			!(canMove _x) ||
-			{_x in VCM_ARTYLST} ||
 			{vehicle _x isKindOf "StaticWeapon"}
 		) exitWith {_rtrn = false; _rtrn};
 	} forEach _units;

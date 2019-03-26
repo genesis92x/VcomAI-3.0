@@ -86,21 +86,6 @@ class VCOM
 		class GroupValue {};
 	};
 	
-	// Artillery related functions. Deprecated
-	class Artillery
-	{
-		file = "Vcom\Functions\VCM_Functions\artillery";
-		
-		// unit call VCM_fnc_CheckArty;
-		class CheckArty {};
-		
-		// [callGroup, enemyGroup] call VCM_fnc_ArtyCall;
-		class ArtyCall {};
-		
-		// group call VCM_fnc_ArtyManage;
-		class ArtyManage {};
-	};
-	
 	// Acttions that can be undertaken by groups/units
 	class Actions
 	{

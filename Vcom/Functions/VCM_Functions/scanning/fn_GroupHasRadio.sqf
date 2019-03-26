@@ -15,9 +15,6 @@ private _group = _this;
 private _units = units _group;
 private _rtrn = false;
 
-if !((_units findIf {_x call VCM_fnc_HasRadio}) == -1) then
-{
-	_rtrn = true;
-};
+private _rtrn = !((_units findIf {_x call VCM_fnc_HasRadio}) == -1;
 
 _rtrn

@@ -54,7 +54,6 @@ private _mineList = [];
 			_satchelList pushback [_x,(_satchelArray select 0)];
 		};
 		
-		if (VCM_ARTYENABLE) then {_x call VCM_fnc_CheckArty;};
 	};
 	true;
 } count (units _this);

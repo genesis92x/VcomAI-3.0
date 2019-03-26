@@ -40,7 +40,7 @@ private _checkStatus = assignedItems _unit;
 if (isNil "_checkStatus" || {(_unit getVariable ["Vcm_Disable",false])} || {!("ItemRadio" in _checkStatus)}) exitWith {};
 
 private _arrayOrg = _unit call VCM_fnc_FriendlyArray;
-_arrayOrg = _arrayOrg - VCM_ARTYLST;
+
 //Remove players 
 {
 	if (isPlayer _x) then 
@@ -50,7 +50,6 @@ _arrayOrg = _arrayOrg - VCM_ARTYLST;
 } foreach _arrayOrg;
 
 private _array2 = _killer call VCM_fnc_FriendlyArray;
-_array2 = _array2 - VCM_ARTYLST;
 
 {
 	if (_x distance _killer > 501) then {_array2 = _array2 - [_x];};
