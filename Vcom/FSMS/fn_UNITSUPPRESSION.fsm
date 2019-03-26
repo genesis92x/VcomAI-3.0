@@ -8,14 +8,17 @@ item3[] = {"EXIT",1,250,181.850510,-172.492142,271.850525,-122.492157,0.000000,"
 item4[] = {"CHECK_SUPPRESSIO",2,250,-37.794777,-170.197464,52.205238,-120.197456,0.000000,"CHECK" \n "SUPPRESSION"};
 item5[] = {"_",-1,250,-107.927109,-146.077637,0.000000,-146.077637,0.000000,""};
 item6[] = {"UP",8,218,-219.143295,-290.917419,-129.143295,-240.917435,10.000000,"UP"};
-item7[] = {"MIDDLE",4,4314,-128.628998,-290.745880,-38.628998,-240.745880,20.000000,"MIDDLE"};
-item8[] = {"DOWN",4,218,53.077332,-290.569855,143.077332,-240.569855,30.000000,"DOWN"};
-item9[] = {"CQC",4,218,-308.165314,-290.831512,-218.165314,-240.831512,80.000000,"CQC"};
-item10[] = {"PINNED",4,218,143.853180,-290.668243,233.853180,-240.668243,40.000000,"PINNED"};
-item11[] = {"TIMER",2,250,-37.913712,-394.222229,52.086319,-344.222229,0.000000,"TIMER"};
-item12[] = {"EXIT_TIMER",4,218,-37.505798,-290.169312,52.494202,-240.169312,1.000000,"EXIT" \n "TIMER"};
-item13[] = {"DO_NOTHING",8,218,-34.893127,-485.660553,55.106873,-435.660553,0.000000,"DO" \n "NOTHING"};
+item7[] = {"MIDDLE",4,218,-128.628998,-290.745880,-38.628998,-240.745880,20.000000,"MIDDLE"};
+item8[] = {"DOWN",4,218,-37.522278,-291.324860,52.477722,-241.324860,30.000000,"DOWN"};
+item9[] = {"CQC",4,218,144.832779,-290.831512,234.832764,-240.831512,80.000000,"CQC"};
+item10[] = {"PINNED",4,218,53.253540,-291.423279,143.253540,-241.423279,40.000000,"PINNED"};
+item11[] = {"TIMER",2,250,144.795547,-403.282227,234.795578,-353.282227,0.000000,"TIMER"};
+item12[] = {"EXIT_TIMER",4,218,287.142822,-289.414276,377.142822,-239.414276,1.000000,"EXIT" \n "TIMER"};
+item13[] = {"DO_NOTHING",8,218,144.796112,-510.575348,234.796112,-460.575378,0.000000,"DO" \n "NOTHING"};
 item14[] = {"VCOM_SUPPRESSION",-1,250,-275.000000,-150.000000,-125.000000,150.000000,0.000000,"VCOM SUPPRESSION" \n "" \n "//TODO - INSERT INFO"};
+item15[] = {"__1",2,250,-128.349396,-401.721527,-38.349380,-351.721527,0.000000,""};
+item16[] = {"REGROUP",4,4314,11.324982,-453.061310,101.324982,-403.061310,10.000000,"REGROUP"};
+item17[] = {"REGROUPED",8,218,11.624779,-402.561615,101.624786,-352.561646,0.000000,"REGROUPED"};
 version=1;
 class LayoutItems
 {
@@ -49,17 +52,21 @@ link6[] = {4,7};
 link7[] = {4,8};
 link8[] = {4,9};
 link9[] = {4,10};
-link10[] = {6,11};
-link11[] = {7,11};
-link12[] = {8,11};
-link13[] = {9,11};
-link14[] = {10,11};
+link10[] = {6,15};
+link11[] = {7,15};
+link12[] = {8,15};
+link13[] = {9,15};
+link14[] = {10,15};
 link15[] = {11,12};
 link16[] = {11,13};
 link17[] = {12,4};
 link18[] = {13,11};
-globals[] = {0.000000,0,0,0,0,640,480,1,23,6316128,1,-423.130829,414.361237,107.706512,-538.317017,642,828,1};
-window[] = {2,-1,-1,-1,-1,915,-1218,-544,198,3,660};
+link19[] = {15,16};
+link20[] = {15,17};
+link21[] = {16,11};
+link22[] = {17,11};
+globals[] = {0.000000,0,0,0,0,640,480,1,27,6316128,1,-272.326263,379.311554,387.528198,-619.106262,536,828,1};
+window[] = {2,-1,-1,-1,-1,829,-1253,-579,112,3,554};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -114,6 +121,7 @@ class FSM
                                          "private _exitNow = false;" \n
                                          "private _situation = """";" \n
                                          "private _isGarrisoned = false;" \n
+                                         "private _leader = objNull;" \n
                                          "" \n
                                          "if VCM_DEBUG then {_unit spawn VCM_fnc_SuppressionDebug};" \n
                                          "" \n
@@ -141,6 +149,7 @@ class FSM
                         name = "CHECK_SUPPRESSIO";
                         itemno = 4;
                         init = /*%FSM<STATEINIT""">*/"_group = group _unit;" \n
+                         "_leader = leader _group;" \n
                          "_suppression = getSuppression _unit;" \n
                          "_velocity = velocity _unit;" \n
                          "_stance = stance _unit;" \n
@@ -198,7 +207,7 @@ class FSM
                                 {
                                         itemno = 9;
                                         priority = 80.000000;
-                                        to="TIMER";
+                                        to="__1";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"(_group call VCM_fnc_CheckSituation) isEqualTo ""CQC"" || behaviour _unit isEqualTo ""STEALTH"""/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"_unit setUnitPos ""AUTO"";" \n
@@ -211,7 +220,7 @@ class FSM
                                 {
                                         itemno = 10;
                                         priority = 40.000000;
-                                        to="TIMER";
+                                        to="__1";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"_slowSuppression > 0.9" \n
                                          ""/*%FSM</CONDITION""">*/;
@@ -278,7 +287,7 @@ class FSM
                                 {
                                         itemno = 8;
                                         priority = 30.000000;
-                                        to="TIMER";
+                                        to="__1";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"_slowSuppression > 0.5"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"if ((_stance isEqualTo ""STAND"" || _stance isEqualTo ""CROUCH"") && !(_isGarrison)) then " \n
@@ -330,7 +339,7 @@ class FSM
                                 {
                                         itemno = 7;
                                         priority = 20.000000;
-                                        to="TIMER";
+                                        to="__1";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"_slowSuppression > 0.1 ||" \n
                                          "{((_unit getVariable [""VCMLASTFIRED"", -7]) + 7) > time}"/*%FSM</CONDITION""">*/;
@@ -358,7 +367,7 @@ class FSM
                                 {
                                         itemno = 6;
                                         priority = 10.000000;
-                                        to="TIMER";
+                                        to="__1";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"if (random 10 > 7 && {!(_isGarrison)} && {_stance isEqualTo ""PRONE""} && {_weaponType isEqualTo ""primary""}) then " \n
@@ -404,6 +413,46 @@ class FSM
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "__1">*/
+                class __1
+                {
+                        name = "__1";
+                        itemno = 15;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "REGROUP">*/
+                                class REGROUP
+                                {
+                                        itemno = 16;
+                                        priority = 10.000000;
+                                        to="TIMER";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_unit distance _leader) > 70 && " \n
+                                         "{_suppression < 0.3} &&" \n
+                                         "/*{isNull objectParent _unit} &&*///already checked for" \n
+                                         "{_unit distance (_unit findNearestEnemy _unit) > 150}"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_unit disableAI ""AUTOTARGET"";" \n
+                                         "_unit disableAI ""TARGET"";" \n
+                                         "_unit doWatch ObjNull;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "REGROUPED">*/
+                                class REGROUPED
+                                {
+                                        itemno = 17;
+                                        priority = 0.000000;
+                                        to="TIMER";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_unit enableAI ""AUTOTARGET"";" \n
+                                         "_unit enableAI ""TARGET"";"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                         };
