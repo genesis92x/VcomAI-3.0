@@ -52,12 +52,12 @@ private _eligibleSquadsValue = 0;
 	};
 } forEach ([_leader, true, VCM_WARNDIST] call VCM_fnc_FriendlyGroupArray);
 
-if (count _eligibleSquads == 0) exitWith {_rtrn};
+if (count _eligibleSquads isEqualTo 0) exitWith {_rtrn};
 
 //Create waypoints
 {
 	if !(_x call VCM_fnc_CheckSituation isEqualTo "REINFORCE") then {
-		private _leader == leader _x;
+		private _leader = leader _x;
 		if VCM_DEBUG then {systemChat format ["VCOM: %1 moving to reinforce %2", _x, _group]};
 		private _wp = (_x addWaypoint [position _leader, 100]);
 		_wp setWaypointSpeed "FULL";
