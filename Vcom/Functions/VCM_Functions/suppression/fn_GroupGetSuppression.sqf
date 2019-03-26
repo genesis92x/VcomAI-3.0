@@ -23,6 +23,9 @@ private _totalSuppression = 0;
 	};
 } forEach _units;
 
+//Set suppression to 0 if value is nil
+if (isNil "_totalSuppression") then {_totalSuppression = 0};
+
 _rtrn = _totalSuppression / ({!isNull _x && alive _x} count _units);
 
 _rtrn
