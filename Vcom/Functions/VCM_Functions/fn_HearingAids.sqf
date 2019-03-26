@@ -32,6 +32,8 @@ params ["_unit","_weapon","_muzzle","_mode","_ammo","_magazine","_bullet","_gunn
 if (_weapon isEqualTo "Put" || {_weapon isEqualTo "Throw"}) exitwith {};
 
 private _timeShot = _unit getVariable ["VCM_FTH",-60];
+_unit setVariable ["VCMLASTFIRED", time, false];
+[_unit, 0] call VCM_fnc_AddSuppressionNow; //Immediately set stance
 
 if ((_timeShot + 20) < time) then 
 {
