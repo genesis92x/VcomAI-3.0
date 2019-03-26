@@ -60,7 +60,11 @@ if ((_timeShot + 20) < time) then
 		
 		if (count _snda > 0) then
 		{
-			[_snda,_unit] remoteExec ["VCM_fnc_KnowAbout",0];	
+			[_snda,_unit, random 0.15 + 0.1, 0.5] remoteExec ["VCM_fnc_KnowAbout",0];
+			{
+				if (behaviour _x isEqualTo "SAFE") then {_x setBehaviour "AWARE"};
+			} foreach _snda;
+			
 		};
 		
 		_unit setVariable ["VCM_FTH",time];

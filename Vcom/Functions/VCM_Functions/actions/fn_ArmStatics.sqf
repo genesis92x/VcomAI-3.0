@@ -45,6 +45,7 @@ if (count _assignedPairs isEqualTo 0) exitWith {};
 		private _assignedGunner = assignedGunner _weap;
 		if (isNull _assignedGunner) then
 		{
+			_unit enableAI "PATH"; //Overwrites garrison
 			_unit doMove (getposATL _weap);
 			_unit assignAsGunner _weap;
 			[_unit] orderGetIn true;
