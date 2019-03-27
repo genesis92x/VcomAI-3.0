@@ -15,6 +15,7 @@ private _group = _this;
 private _leader = leader _group;
 private _rtrn = false;
 
+if !(side _leader in [west, east, resistance]) exitWith {_rtrn};
 if (!(_group call VCM_fnc_GroupHasRadio) || _group getVariable ["VCM_TOUGHSQUAD", false]) exitWith {_rtrn};
 
 private _enemyValue = (([_leader, true, 300] call VCM_fnc_EnemyValue) * (random 0.5 + 0.9));

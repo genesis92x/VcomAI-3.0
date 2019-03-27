@@ -12,13 +12,8 @@
 */
 
 private _grp = _this;
-private _situation = "READY";
 
-if (count waypoints _grp > 1) then
-{
-	_situation = "FLANKING";
-};
-[_grp, _flanking] call VCM_fnc_SetSituation; 
+[_grp, "READY"] call VCM_fnc_SetSituation; 
 
 {
 	_x enableAI "PATH";

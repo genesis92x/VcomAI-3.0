@@ -14,17 +14,15 @@
 
 private _group = _this;
 private _leader = (leader _group);
-private _foundBuildings = [];
 private _units = units _group;
 
-{
-	if (count ([_x] call BIS_fnc_buildingPositions) > count _units) then {_foundBuildings pushback _x;};
-} foreach (nearestObjects [_leader, ["House", "Building"], 50]);
+private _nearbyBuildings = nearestObjects [_leader, ["House", "Building"], 50];
+private _foundBuilding = _nearbyBuildings findIf {count ([_x] call BIS_fnc_buildingPositions) > count _units};
 
 //Exit if no compatible buildings found
-if (_foundBuildings isEqualTo []) exitWith {false};
+if (_foundBuilding isEqualTo -1) exitWith {false};
 
-private _buildingPositions = [_foundBuildings select 0] call BIS_fnc_buildingPositions;
+private _buildingPositions = [_nearbyBuildings select _foundBuilding] call BIS_fnc_buildingPositions;
 
 if VCM_DEBUG then {systemChat format ["VCOM: %1 PERFORMING LIGHT GARRISON", _group]};
 {
@@ -49,31 +47,11 @@ if VCM_DEBUG then {systemChat format ["VCOM: %1 PERFORMING LIGHT GARRISON", _gro
 			{
 				sleep 3;
 				_unit doMove _buildingPos;
-			};
-			
-			// If move times out or unit dies, skip.
-			if 
-			(
-				(_unit distance _buildingPos < 1.3)
-			) then
-			{
-				_unit disableAI "PATH";
-				waitUntil 
-				{
-					sleep 10; 
-					!((_group call VCM_fnc_CheckSituation) isEqualTo "LGARRISON") && 
-					{
-						if (leader _unit isEqualTo _unit && {_t + 150 > time}) then 
-						{
-							_group call VCM_fnc_UnGarrisonL;
-						};
-					}
-				};
+				if (_unit distance _buildingPos < 1.3) exitWith {_unit disableAI "PATH"};
 			};
 			
 		};
-		private _rmv = _buildingPositions findIf {_buildingPos isEqualTo _x};
-		_buildingPositions deleteAt _rmv;
+		_buildingPositions deleteAt (_buildingPositions findIf {_buildingPos isEqualTo _x});
 	};
 } foreach _units;
 

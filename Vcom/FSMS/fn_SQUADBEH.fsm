@@ -106,7 +106,7 @@ link58[] = {39,25};
 link59[] = {40,16};
 link60[] = {41,6};
 link61[] = {42,38};
-globals[] = {0.000000,0,0,0,0,640,480,2,624,6316128,1,-114.368240,1228.449341,794.481567,-394.948181,998,884,1};
+globals[] = {0.000000,0,0,0,0,640,480,2,624,6316128,1,466.160522,1044.199585,803.867859,-53.867435,998,884,1};
 window[] = {2,-1,-1,-1,-1,1029,86,831,75,3,1016};
 *//*%FSM</HEAD>*/
 class FSM
@@ -448,7 +448,7 @@ class FSM
                                         to="Start_Point";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"time > _t + _Wait"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                        action=/*%FSM<ACTION""">*/"if (_situation isEqualTo ""LGARRISON"") then {_group call VCM_fnc_UnGarrisonL};"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                         };
@@ -646,7 +646,7 @@ class FSM
                          "	" \n
                          "};" \n
                          "" \n
-                         "if (_nearestEnemy distance _leader <= 100 && {_situation != ""LGARRISON""} && {_situation != ""GARRISON""}) then " \n
+                         "if (_nearestEnemy distance _leader <= 100 && {_situation in [""CQC"", ""GARRISON"", ""LGARRISON""]}) then " \n
                          "{" \n
                          "	_situation = ""CQC"";" \n
                          "	[_group, _nearestEnemy] call VCM_fnc_SetCQC;" \n
@@ -809,7 +809,7 @@ class FSM
                                          ""/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"_BackbkC9 = time;" \n
                                          "private _t = time;" \n
-                                         "//private _Wait = 120;" \n
+                                         "private _Wait = 120;" \n
                                          "if (_Group call VCM_fnc_GarrisonLight) then" \n
                                          "{" \n
                                          "	_situation = ""LGARRISON"";" \n
