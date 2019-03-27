@@ -23,8 +23,8 @@ item18[] = {"Continue2StartPo",8,218,0.000000,300.000000,100.000000,350.000000,0
 item19[] = {"Continue2StartPo",4,218,100.000000,300.000000,200.000000,350.000000,0.000000,"Continue2StartPoint2"};
 item20[] = {"Leader_Cycle_Beg",3,250,508.062805,372.976349,608.062805,422.976349,0.000000,"Leader" \n "Cycle" \n "Beginning"};
 item21[] = {"Combat",4,218,671.022705,372.075439,761.022705,422.075439,100.000000,"Combat"};
-item22[] = {"Combat_Brain",2,250,870.650879,303.704590,970.650879,353.704590,0.000000,"Combat Brain"};
-item23[] = {"Combat_BEGIN",4,4314,665.427063,321.335602,765.427063,371.335632,110.000000,"Combat BEGIN"};
+item22[] = {"Combat_Brain",2,4346,870.650879,303.704590,970.650879,353.704590,0.000000,"Combat Brain"};
+item23[] = {"Combat_BEGIN",4,218,665.427063,321.335602,765.427063,371.335632,110.000000,"Combat BEGIN"};
 item24[] = {"Return",8,218,573.508484,193.429855,673.508484,243.429855,0.000000,"Return"};
 item25[] = {"",7,210,1258.500000,21.000000,1266.500000,29.000000,0.000000,""};
 item26[] = {"Flank_Orders",4,218,1050.000000,225.000000,1150.000000,275.000000,105.000000,"Flank Orders"};
@@ -106,7 +106,7 @@ link58[] = {39,25};
 link59[] = {40,16};
 link60[] = {41,6};
 link61[] = {42,38};
-globals[] = {0.000000,0,0,0,0,640,480,2,624,6316128,1,166.123779,1140.295166,631.213379,-231.679718,998,884,1};
+globals[] = {0.000000,0,0,0,0,640,480,2,624,6316128,1,-114.368240,1228.449341,794.481567,-394.948181,998,884,1};
 window[] = {2,-1,-1,-1,-1,1029,86,831,75,3,1016};
 *//*%FSM</HEAD>*/
 class FSM
@@ -634,7 +634,7 @@ class FSM
                         name = "Combat_Brain";
                         itemno = 22;
                         init = /*%FSM<STATEINIT""">*/"private _t = time;" \n
-                         "private _Wait = 3;" \n
+                         "//private _Wait = 3;" \n
                          "" \n
                          "if (_suppression > 0.3 && {behaviour _leader != ""STEALTH""}) then " \n
                          "{" \n
@@ -646,7 +646,7 @@ class FSM
                          "	" \n
                          "};" \n
                          "" \n
-                         "if (_nearestEnemy distance _leader <= 100 && {_situation == ""READY"" || _situation == ""FLANKING"" || _situation == ""REINFORCE""}) then " \n
+                         "if (_nearestEnemy distance _leader <= 100 && {_situation != ""LGARRISON""} && {_situation != ""GARRISON""}) then " \n
                          "{" \n
                          "	_situation = ""CQC"";" \n
                          "	[_group, _nearestEnemy] call VCM_fnc_SetCQC;" \n
@@ -809,7 +809,7 @@ class FSM
                                          ""/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"_BackbkC9 = time;" \n
                                          "private _t = time;" \n
-                                         "private _Wait = 120;" \n
+                                         "//private _Wait = 120;" \n
                                          "if (_Group call VCM_fnc_GarrisonLight) then" \n
                                          "{" \n
                                          "	_situation = ""LGARRISON"";" \n

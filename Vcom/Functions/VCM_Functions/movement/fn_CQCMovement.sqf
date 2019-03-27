@@ -26,31 +26,20 @@ if (_leader distance _closestEnemy < 120) then
 { 
 	for "_i" from ((count waypoints _group) - 1) to 1 do {deleteWaypoint [_group, _i]};
 	
-	// Copied from VCM_fnc_RqstReinforce
 	// Checks if friendlies outnumber the enemy
-	private _knownEnemyG = ([_leader, 200, false] call VCM_fnc_KnownEnemyGroupArray);
-	private _enemyValue = 0;
-	{
-		_enemyValue = _enemyValue + (_x call VCM_fnc_GroupValue);
-	}forEach _knownEnemyG;
-
+	private _enemyValue = ([_leader, true, 200] call VCM_fnc_EnemyValue);
 	// Add a bit of +- inaccuracy
-	_enemyValue = (_enemyValue * (0.75 + random 0.5));
+	_enemyValue = (_enemyValue * (0.85 + random 0.5));
 
 	// Calculate friendly forces value in vincinity
-	private _knownFriendlyG = ([_leader, false, 200] call VCM_fnc_FriendlyGroupArray);
-	private _friendlyValue = 0;
-	{
-		_friendlyValue = _friendlyValue + (_x call VCM_fnc_GroupValue);
-	}forEach _knownFriendlyG;
-	
-	if ((_friendlyValue * 1.25) > _enemyValue) then
+	private _friendlyValue = ([_leader, 200] call VCM_fnc_FriendlyValue);
+	if (_friendlyValue > (_enemyValue * 1.25)) then
 	{
 		// Push the advantage
 		private _wp = _group addWaypoint [position _closestEnemy, 25];
 		_wp setWaypointType "SAD";
 		_wp setWaypointSpeed "FULL";
-		_wp setWaypointStatements ["this", "[group this] call VCM_fnc_CQCMovement"];
+		_wp setWaypointStatements ["true", "[group this] call VCM_fnc_CQCMovement"];
 		_group setCurrentWaypoint _wp;
 		_group enableAttack true;
 	}
@@ -61,7 +50,7 @@ if (_leader distance _closestEnemy < 120) then
 		private _position = position _leader getPos [200, _direction];
 		private _wp = _group addWaypoint [_position, 25];
 		_wp setWaypointSpeed "FULL";
-		_wp setWaypointStatements ["this", "[group this call VCM_fnc_CQCMovement]"];
+		_wp setWaypointStatements ["true", "[group this] call VCM_fnc_CQCMovement"];
 		_group setCurrentWaypoint _wp;
 		_group enableAttack false;
 		private _units = units _group;

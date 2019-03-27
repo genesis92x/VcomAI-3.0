@@ -231,6 +231,9 @@ class VCOM
 		// unit call VCM_fnc_EnemyGroupArray
 		class EnemyGroupArray {};
 		
+		// [unit, knownonly, distance] call VCM_fnc_EnemyValue
+		class EnemyValue {};
+		
 		// unit call VCM_fnc_KnownEnemyGroupArray
 		class KnownEnemyGroupArray {};
 		
@@ -239,6 +242,9 @@ class VCOM
 		
 		// [unit, boolean] call VCM_fnc_FriendlyGroupArray
 		class FriendlyGroupArray {};
+		
+		// [unit, distance] call VCM_fnc_FriendlyValue
+		class FriendlyValue {};
 		
 		// [] call VCM_fnc_IRCHECK;
 		class IRCHECK {};

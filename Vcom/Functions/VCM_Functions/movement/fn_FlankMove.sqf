@@ -16,6 +16,7 @@
 params ["_leader", "_moveType"];
 
 private _grp = group _leader;
+if !((waypoints _grp) findIf {_x in VCM_IGNOREWAYPOINTS} isEqualTo -1) exitWith {};
 if (_grp getVariable ["VCM_NOFLANK",false]) exitWith {};
 
 //Lets define types of attack we can do.
