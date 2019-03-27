@@ -14,7 +14,7 @@
 
 private _rtrn = false;
 
-if (alive _this && {"FirstAidKit" in items _this} && {{_x > 0.25} count (getAllHitPointsDamage _this select 2) != 0} && {((_this getVariable ["VCM_LASTFIRED", -15]) + 15) < time }) then 
+if (alive _this && {"FirstAidKit" in items _this} && {{_x > 0.25} count (getAllHitPointsDamage _this select 2) != 0} && {((_this getVariable ["VCMLASTFIRED", -15]) + 15) < time }) then 
 {
 	_this action ["HealSoldierSelf", _this];
 	if VCM_DEBUG then {systemChat format ["VCOM: %1 healing self", _this]};
