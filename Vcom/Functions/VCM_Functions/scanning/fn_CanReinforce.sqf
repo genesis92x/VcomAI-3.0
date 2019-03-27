@@ -28,7 +28,8 @@ _rtrn =
 		}
 	) &&
 	!(count waypoints _group > 1) &&
-	((waypoints _group) findIf {_x in VCM_IGNOREWAYPOINTS} isEqualTo -1)
+	((waypoints _group) findIf {_x in VCM_IGNOREWAYPOINTS} isEqualTo -1) &&
+	_units findIf {alive _x} != -1
 );
 
 
