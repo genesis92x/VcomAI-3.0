@@ -289,7 +289,7 @@ class FSM
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"(_BackbkC3 + 300) < time"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"{" \n
-                                         "	if (getText (configFile >> ""CfgWeapons"" >> primaryWeapon _x >> ""cursor"") isEqualTo ""mg""}) then" \n
+                                         "	if ((getText (configFile >> ""CfgWeapons"" >> primaryWeapon _x >> ""cursor"")) isEqualTo ""mg"") then" \n
                                          "	{" \n
                                          "		_x setVariable [""VCM_MGGUNNER"", true];" \n
                                          "	};" \n

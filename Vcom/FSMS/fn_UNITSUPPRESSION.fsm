@@ -10,14 +10,14 @@ item5[] = {"_",-1,250,-107.927109,-146.077637,0.000000,-146.077637,0.000000,""};
 item6[] = {"UP",8,218,-219.143295,-290.917419,-129.143295,-240.917435,10.000000,"UP"};
 item7[] = {"MIDDLE",4,218,-128.628998,-290.745880,-38.628998,-240.745880,20.000000,"MIDDLE"};
 item8[] = {"DOWN",4,218,-37.522278,-291.324860,52.477722,-241.324860,30.000000,"DOWN"};
-item9[] = {"CQC",4,218,144.832779,-290.831512,234.832764,-240.831512,80.000000,"CQC"};
+item9[] = {"CQC",4,4314,144.832779,-290.831512,234.832764,-240.831512,80.000000,"CQC"};
 item10[] = {"PINNED",4,218,53.253540,-291.423279,143.253540,-241.423279,40.000000,"PINNED"};
 item11[] = {"TIMER",2,250,144.795547,-403.282227,234.795578,-353.282227,0.000000,"TIMER"};
 item12[] = {"EXIT_TIMER",4,218,287.142822,-289.414276,377.142822,-239.414276,1.000000,"EXIT" \n "TIMER"};
 item13[] = {"DO_NOTHING",8,218,144.796112,-510.575348,234.796112,-460.575378,0.000000,"DO" \n "NOTHING"};
 item14[] = {"VCOM_SUPPRESSION",-1,250,-275.000000,-150.000000,-125.000000,150.000000,0.000000,"VCOM SUPPRESSION" \n "" \n "//TODO - INSERT INFO"};
 item15[] = {"__1",2,250,-128.349396,-401.721527,-38.349380,-351.721527,0.000000,""};
-item16[] = {"REGROUP",4,4314,11.324982,-453.061310,101.324982,-403.061310,10.000000,"REGROUP"};
+item16[] = {"REGROUP",4,218,11.324982,-453.061310,101.324982,-403.061310,10.000000,"REGROUP"};
 item17[] = {"REGROUPED",8,218,11.624779,-402.561615,101.624786,-352.561646,0.000000,"REGROUPED"};
 version=1;
 class LayoutItems
@@ -65,8 +65,8 @@ link19[] = {15,16};
 link20[] = {15,17};
 link21[] = {16,11};
 link22[] = {17,11};
-globals[] = {0.000000,0,0,0,0,640,480,1,27,6316128,1,-272.326263,379.311554,387.528198,-619.106262,536,828,1};
-window[] = {2,-1,-1,-1,-1,829,-1253,-579,112,3,554};
+globals[] = {0.000000,0,0,0,0,640,480,1,27,6316128,1,-340.748230,447.733398,46.027222,-682.309021,957,884,1};
+window[] = {2,-1,-1,-1,-1,780,152,826,63,3,975};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -209,7 +209,9 @@ class FSM
                                         priority = 80.000000;
                                         to="__1";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"(_group call VCM_fnc_CheckSituation) isEqualTo ""CQC"" || behaviour _unit isEqualTo ""STEALTH"""/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_group call VCM_fnc_CheckSituation) isEqualTo ""CQC"" || " \n
+                                         "{behaviour _unit isEqualTo ""STEALTH""} ||" \n
+                                         "{!isNull (_unit getVariable [""bis_fnc_moduleRemoteControl_owner"", objNull])}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"_unit setUnitPos ""AUTO"";" \n
                                          "" \n
                                          "_t = time;"/*%FSM</ACTION""">*/;
@@ -222,8 +224,7 @@ class FSM
                                         priority = 40.000000;
                                         to="__1";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_slowSuppression > 0.9" \n
-                                         ""/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_slowSuppression > 0.9"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"if ((_stance isEqualTo ""STAND"" || _stance isEqualTo ""CROUCH"") && !(_isGarrison)) then " \n
                                          "{" \n
                                          "	if (_stance isEqualTo ""STAND"") then " \n
@@ -289,7 +290,8 @@ class FSM
                                         priority = 30.000000;
                                         to="__1";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_slowSuppression > 0.5"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_slowSuppression > 0.5 ||" \n
+                                         "{_unit getVariable [""VCM_MGGUNNER"", false] && {((_unit getVariable [""VCMLASTFIRED"", -7]) + 7) > time}}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"if ((_stance isEqualTo ""STAND"" || _stance isEqualTo ""CROUCH"") && !(_isGarrison)) then " \n
                                          "{" \n
                                          "	if (_stance isEqualTo ""STAND"") then " \n
