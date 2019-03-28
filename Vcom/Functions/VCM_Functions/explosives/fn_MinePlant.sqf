@@ -79,7 +79,7 @@ else
 	};
 };
 
-_unitSide = (side _unit);
+private _unitSide = (side _unit);
 
 
 if (_mine isEqualTo "") exitWith {};

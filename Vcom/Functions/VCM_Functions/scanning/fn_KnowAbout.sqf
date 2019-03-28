@@ -17,7 +17,7 @@
 
 params ["_snda","_unit","_toAdd", "_limit"];
 if (isNil "_toAdd") then {_toAdd = 0.25};
-if (isNil "_limit") then {_limit = 1.5};
+if (isNil "_limit") then {_limit = 2.5};
 {
 	if (local _x) then
 	{

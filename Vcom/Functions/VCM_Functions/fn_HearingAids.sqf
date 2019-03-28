@@ -53,19 +53,21 @@ if ((_timeShot + 20) < time) then
 	{
 		private _array1 = _unit call VCM_fnc_EnemyArray;
 		private _snda = [];
+		private _Grps = [];
 		{
 			if ((_x distance2D _unit) < VCM_HEARINGDISTANCE) then
 			{
 				_snda pushback _x;
+				_Grps pushBackUnique (group _x);
 			};
 		} foreach _array1;
 		
 		if (count _snda > 0) then
 		{
-			[_snda,_unit, random 0.15 + 0.1, 0.5] remoteExec ["VCM_fnc_KnowAbout",0];
+			[_snda,_unit, random 0.25 + 0.15, 10] remoteExec ["VCM_fnc_KnowAbout",_unit];
 			{
 				if (behaviour _x isEqualTo "SAFE") then {_x setBehaviour "AWARE"};
-			} foreach _snda;
+			} foreach _Grps;
 			
 		};
 		

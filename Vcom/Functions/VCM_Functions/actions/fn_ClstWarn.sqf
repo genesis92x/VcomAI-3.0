@@ -16,6 +16,7 @@
 params ["_unit","_killer"];
 
 private _grp = (group _unit);
+_grp setBehaviour "COMBAT";
 
 //If the squad is a TOUGH SQUAD, we just exit here.
 if (_grp getVariable ["VCM_TOUGHSQUAD",false] || _grp getVariable ["Vcm_Disable",false] || _grp getVariable ["VCM_NOFLANK",false]) exitWith {};

@@ -63,11 +63,12 @@ if ((_unit distance _point) < 200) then
 			private _mine = _satchelObj createVehicle (getposATL _unit);
 			_mine setDir ([_mine, _nBuilding] call BIS_fnc_dirTo);
 			[_unit,"AinvPknlMstpSnonWnonDnon_Putdown_AmovPknlMstpSnonWnonDnon"] remoteExec ["Vcm_PMN",0];
-			 _unit action ["SetTimer", _unit, _mine];
 			
 			private _plantPosition = getpos _mine;
 			private _notSafe = true;
 			private _unitSide = (side _unit);
+			private _closestFriendly = [0,0,0];
+			private _array1 = [];
 			_unit doMove (getpos (leader _Group));
 			_unit enableAI "TARGET";
 			_unit enableAI "AUTOTARGET";
@@ -75,16 +76,17 @@ if ((_unit distance _point) < 200) then
 			_unit enableAI "COVER";
 			_unit enableAI "AUTOCOMBAT";			
 
+			
 			while {_notSafe} do
 			{
-				private _array1 = [];
+				_array1 = [];
 				{
 					_array1 pushback _x;
 				} foreach (allUnits select {(side _x) isEqualTo _unitSide && (alive _x)});			
 				_closestFriendly = [_array1,_plantPosition,true,"Satch1"] call VCM_fnc_ClstObj;
 				if !(isNil "_closestFriendly") then
 				{
-					if (_closestFriendly distance2D _plantPosition > 10) then {_notSafe = false;};
+					if (_closestFriendly distance2D _plantPosition > 10) then {1 = false;};
 				}
 				else
 				{
