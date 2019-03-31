@@ -15,9 +15,10 @@ class VCOM
 			file = "Vcom\VcomInitClient.sqf";
 			postInit = 1;
 		};
-		class CBA_Settings // Only executed if CBA is present
+		class LoadConfig
 		{
-			file = "Vcom\Functions\VCM_CBASettings.sqf";
+			file = "Vcom\Functions\fn_LoadConfig.sqf";
+			preInit = 1;
 		};
 	};
 	

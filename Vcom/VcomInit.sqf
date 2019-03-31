@@ -20,12 +20,7 @@ if
 */
 
 //Parameters
-[] call compile preprocessFileLineNumbers "Vcom\Functions\VCOMAI_DefaultSettings.sqf"; //Load default settings
-if (isFilePatchingEnabled && {"" != loadFile "\userconfig\VCOM_AI\AISettingsV4.hpp"}) then
-{
-	[] call compile preprocessFileLineNumbers "\userconfig\VCOM_AI\AISettingsV4.hpp"; //Overwrite with userconfig
-};
-if (isClass (configfile >> "CfgPatches" >> "cba_settings")) then {[] call VCM_fnc_CBA_Settings}; //Overwrite with CBA settings
+
 
 //Mod checks
 //ACE CHECK
