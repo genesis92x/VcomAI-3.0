@@ -113,11 +113,13 @@ params ["_allArty"];
 					{
 						_ammo = getText (configfile >> "CfgMagazines" >> _x >> "ammo");
 						_ammoC = configfile >> "CfgAmmo" >> _ammo;
-						_subAmmo = _ammoC >> "subMunitionAmmo";
+						_subAmmoC = _ammoC >> "subMunitionAmmo";
 						
-						if ((isText _subAmmo) and {not ((getText _subAmmo) isEqualTo "")}) then
+						
+						if ((isText _subAmmoC) and {not ((getArray _subAmmoC) isEqualTo [])}) then
 						{
-							_ammoC = configfile >> "CfgAmmo" >> _subAmmo;
+							private _submunition = (getArray _subAmmoC) select 0;
+							_ammoC = configfile >> "CfgAmmo" >> _submunition;
 						};
 					
 						_actHit = getNumber (_ammoC >> "indirectHit");
