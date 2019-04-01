@@ -77,6 +77,9 @@ class VCOM
 		// group call VCM_fnc_SquadExc;
 		class SquadExc {};
 		
+		// unit call VCM_fnc_UnitSetSkill
+		class UnitSetSkill {};
+		
 		// group call VCM_fnc_WyptChk;
 		class WyptChk {};	
 		

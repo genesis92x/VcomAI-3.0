@@ -38,7 +38,7 @@ if
 	]
 ) exitWith {};
 
-if VCM_Debug then {systemChat format ["VCOM: %1 clearing out %2", _group, _enemy]};
+if VCM_DEBUG then {systemChat format ["VCOM: %1 clearing out %2", _group, _enemy]};
 
 private _finalPositions = [];
 _finalPositions = (_buildingPositions inAreaArray [getPosATL _enemy, 3, 3, 0, false, 1.5]);

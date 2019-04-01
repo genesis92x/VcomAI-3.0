@@ -12,7 +12,7 @@
 		NOTHING
 */
 
-private _magLimit = VCM_AIMagLimit;
+private _magLimit = VCM_MAGLIMIT;
 
 {
 	private _orgUnit = _x;

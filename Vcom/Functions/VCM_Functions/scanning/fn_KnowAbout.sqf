@@ -25,7 +25,7 @@ if (isNil "_limit") then {_limit = 2.5};
 		if (_kv < _limit) then 
 		{
 			_x reveal [_unit,(_kv + _toAdd)];
-			if (VCM_Debug) then {diag_log (format ["VCOM: %1 knowledge of %2 is at %3",_x,_unit,(_kv + _toAdd)])};
+			if (VCM_DEBUG) then {diag_log (format ["VCOM: %1 knowledge of %2 is at %3",_x,_unit,(_kv + _toAdd)])};
 		};
 	};
 } foreach _snda;

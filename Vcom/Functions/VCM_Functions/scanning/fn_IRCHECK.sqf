@@ -12,7 +12,7 @@
 		NOTHING
 */
 
-while {alive player && {Vcm_ActivateAI}} do
+while {alive player && {VCM_ACTIVE}} do
 {
 	if (player isIRLaserOn currentWeapon player) then
 	{

@@ -1,5 +1,5 @@
-#define true 1
-#define false 0
+
+#include "vcom\defines.hpp"
 class CfgFunctions 
 {
 	#include "vcom\cfgFunctions.hpp"
@@ -26,26 +26,26 @@ class CfgRemoteExec
 
 class CfgVcomSettings
 {
-	VcomActive = true;
-	Debug = false;
-	EnabledSides[] = {"west", "east", "resistance"};
-	SuppressionActive = true;
-	HealingActive = true;
-	WaypointGeneration = true;
-	FormationChange = true;
+	VcomActive = true; // Set to false to disable VCOM. Can be reenabled by changing to true
+	Debug = false; //Enable debug mode
+	EnabledSides[] = {west, east, resistance}; // Which sides vcom affects. civilian can be added if they are hostile
+	SuppressionActive = true; // AI Suppression system
+	HealingActive = true; // AI Healing system
+	WaypointGeneration = true; // Generate flanking/reinforcement waypoints
+	FormationChange = true; // Whether AI should change formation depending on surroundings
 	FFEArtillery = true; //Fire For Effect Artillery handling.
-	FullSpeed = true;
+	FullSpeed = true; // AI will enforce "FULL" speed mode
 	
-	MagLimit = 2;
-	MineChance = 10;
-	LightGarrisonChance = 20; 
-	RagdollChance = 50;
-	VehicleStealing = true;
-	StealingDistance = 100;
-	HearingDistance = 800;
-	WarnDistance = 1000;
-	WarnDelay = 30;
-	TurretTime = 300; //How long AI will stay mounted on a turret
+	MagLimit = 2; // AI will search for ammo when at or below this limit
+	MineChance = 10; // % chance of AI placing mines
+	LightGarrisonChance = 20;  // % chance of AI temporarily garrisoning a structure
+	RagdollChance = 50; // % chance of AI ragdolling when hit
+	VehicleStealing = true; // Whether AI should consider stealing vehicles
+	StealingDistance = 100; // Search distance for vehicles
+	HearingDistance = 800; // Hearing distance
+	WarnDistance = 1000; // Reinforcement distance
+	WarnDelay = 30; // Delay for reinforcement calls
+	StaticArmTime = 300; //How long AI will stay mounted on a turret
 	
 	//VCOM DRIVING. Experimental feature
 	DrivingActivate = false;
@@ -106,42 +106,55 @@ class CfgVcomSettings
 			Active = false;
 			class west
 			{
-				aimingAccuracy = 100;
-				aimingShake = 100;
-				aimingSpeed = 100;
+				aimingAccuracy = 25;
+				aimingShake = 15;
+				aimingSpeed = 35;
 				commanding = 100;
 				courage = 100;
 				endurance = 100;
 				general = 100;
 				reloadSpeed = 100;
-				spotDistance = 100;
-				spotTime = 100;
+				spotDistance = 85;
+				spotTime = 85;
 			};
 			class east
 			{
-				aimingAccuracy = 100;
-				aimingShake = 100;
-				aimingSpeed = 100;
+				aimingAccuracy = 25;
+				aimingShake = 15;
+				aimingSpeed = 35;
 				commanding = 100;
 				courage = 100;
 				endurance = 100;
 				general = 100;
 				reloadSpeed = 100;
-				spotDistance = 100;
-				spotTime = 100;
+				spotDistance = 85;
+				spotTime = 85;
 			};
 			class resistance
 			{
-				aimingAccuracy = 100;
-				aimingShake = 100;
-				aimingSpeed = 100;
+				aimingAccuracy = 25;
+				aimingShake = 15;
+				aimingSpeed = 35;
 				commanding = 100;
 				courage = 100;
 				endurance = 100;
 				general = 100;
 				reloadSpeed = 100;
-				spotDistance = 100;
-				spotTime = 100;
+				spotDistance = 85;
+				spotTime = 85;
+			};
+			class civilian
+			{
+				aimingAccuracy = 25;
+				aimingShake = 15;
+				aimingSpeed = 35;
+				commanding = 100;
+				courage = 100;
+				endurance = 100;
+				general = 100;
+				reloadSpeed = 100;
+				spotDistance = 85;
+				spotTime = 85;
 			};
 		};
 	};

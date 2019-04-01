@@ -74,7 +74,7 @@ class FSM
                                         priority = 100.000000;
                                         to="Waiting";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"!Vcm_DrivingActivated"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!VCM_DRIVING"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -85,7 +85,7 @@ class FSM
                                         priority = 1.000000;
                                         to="Base_Rotation";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"count _DriverArray > 0 && {time > _t + VCM_DrivingDelay}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"count _DriverArray > 0 && {time > _t + VCM_DDELAY}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"_DriverArray call VCM_fnc_VehicleDetection"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -96,7 +96,7 @@ class FSM
                                         priority = 0.000000;
                                         to="Base_Rotation";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"time > _t + VCM_DrivingDelay"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _t + VCM_DDELAY"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -119,7 +119,7 @@ class FSM
                                         priority = 100.000000;
                                         to="Base_Rotation";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"Vcm_DrivingActivated"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"VCM_DRIVING"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/

@@ -53,7 +53,7 @@ _unit spawn
 if (!(lifestate _unit isEqualTo "INCAPACITATED") && {5 < (random 10)}) then
 {
 	//Ragdoll chance
-	if (VCM_RAGDOLL && {VCM_RAGDOLLCHC > (random 100)}) then
+	if (VCM_RAGDOLL && {VCM_RGDL > (random 100)}) then
 	{
 		//Ragdoll unit
 		_unit setUnconscious true;

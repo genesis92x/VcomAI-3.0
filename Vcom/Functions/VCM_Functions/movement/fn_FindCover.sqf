@@ -41,7 +41,7 @@ if (_wPos isEqualTo [0,0,0]) then
 };
 
 private _movePosition = [_leader,_moveDist,([_leader, _dir] call BIS_fnc_dirTo)] call BIS_fnc_relPos;
-if (VCM_Debug) then
+if (VCM_DEBUG) then
 {
 	private _arrow = "Sign_Arrow_Green_F" createVehicle [0,0,0];
 	_arrow setposATL _movePosition;
@@ -124,7 +124,7 @@ if (_typeListFinal isEqualTo [] && _weakListFinal isEqualTo []) exitWith
 				private _FPos = [_nearestEnemy, (_posCON distance _nearestEnemy) + 2, ([_nearestEnemy, _posCON] call BIS_fnc_dirTo)] call BIS_fnc_relPos;
 				private _DistW = 2;
 				if (_posCON iskindof "AllVehicles") then {_DistW = 5;};
-				if (VCM_Debug) then
+				if (VCM_DEBUG) then
 				{
 					private _arrow = "VR_3DSelector_01_exit_F" createVehicle [0,0,0];
 					_arrow setposATL _FPos;

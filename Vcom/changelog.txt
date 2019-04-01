@@ -94,12 +94,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Removed
 
 ### Fixed
-- VCM_SKILLCHANGE had no effect
+- VCM_SKILLCHNG had no effect
 - AI taking control when player incapacitated
 - AI attempting to flank aircraft
 - Building clearing behaviour did not check distance to target
 - Civilians being affected by VCOM
-- VCM_SIDEENABLED had no effect
+- VCM_SIDES had no effect
 - VCM_ARTYENABLE had no effect
 
 ### Security

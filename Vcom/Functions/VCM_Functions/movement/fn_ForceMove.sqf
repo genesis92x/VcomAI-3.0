@@ -46,7 +46,7 @@ else
 };
 if ((_wPos distance2D _leader) > 20 && {(_wPos distance2D _leader) < 500}) then 
 {
-	if (VCM_Debug) then {systemchat format ["VCOM: %1 MOVING UP", _grp];};
+	if (VCM_DEBUG) then {systemchat format ["VCOM: %1 MOVING UP", _grp];};
 	{
 		if (isNull objectParent _x) then
 		{

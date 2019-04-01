@@ -1,13 +1,5 @@
 params [["_preInit", ""]];
 if (!isServer && _preInit isEqualTo "preInit") exitWith {};
-if !(["CfgVcomSettings"] call BIS_fnc_getCfgIsClass) exitWith 
-{
-	[] call compile preprocessFileLineNumbers "Vcom\Functions\VCOMAI_DefaultSettings.sqf";
-	if (isFilePatchingEnabled && {"" != loadFile "\userconfig\VCOM_AI\AISettingsV4.hpp"}) then
-	{
-		[] call compile preprocessFileLineNumbers "\userconfig\VCOM_AI\AISettingsV4.hpp"; //Overwrite with userconfig
-	};
-};
 
 VCM_ACTIVE = 		["CfgVcomSettings", "VcomActive"] call BIS_fnc_getCfgDataBool;
 VCM_DEBUG = 		["CfgVcomSettings", "Debug"] call BIS_fnc_getCfgDataBool;
@@ -27,7 +19,12 @@ VCM_STEALDIST = 	["CfgVcomSettings", "StealingDistance"] call BIS_fnc_getCfgData
 VCM_HEARDIST = 		["CfgVcomSettings", "HearingDistance"] call BIS_fnc_getCfgData;
 VCM_WARNDIST = 		["CfgVcomSettings", "WarnDistance"] call BIS_fnc_getCfgData;
 VCM_WARNDELAY = 	["CfgVcomSettings", "WarnDelay"] call BIS_fnc_getCfgData;
-VCM_STATARM = 		["CfgVcomSettings", "TurretTime"] call BIS_fnc_getCfgData;
+VCM_STATICARMT = 	["CfgVcomSettings", "StaticArmTime"] call BIS_fnc_getCfgData;
+
+VCM_DRIVING = 		["CfgVcomSettings", "DrivingActivate"] call BIS_fnc_getCfgDataBool;
+VCM_DLIMIT = 		["CfgVcomSettings", "DriverLimit"] call BIS_fnc_getCfgData;
+VCM_DDELAY = 		["CfgVcomSettings", "DrivingDelay"] call BIS_fnc_getCfgData;
+VCM_DDIST = 		["CfgVcomSettings", "DrivingDist"] call BIS_fnc_getCfgData;
 
 VCM_SKILLCHNG = 	["CfgVcomSettings", "SkillPresets", "Active"] call BIS_fnc_getCfgDataBool;
 if VCM_SKILLCHNG then
@@ -42,35 +39,18 @@ if VCM_SKILLCHNG then
 VCM_SIDESKILL = ["CfgVcomSettings", "SkillPresets", "SideSkill", "Active"] call BIS_fnc_getCfgDataBool;
 if VCM_SIDESKILL then
 {
-	if VCM_SKILLCHNG then
+	VCM_WESTSKILL = [];
 	{
-		VCM_WESTSKILL = [];
-		{
-			VCM_WESTSKILL pushBack (VCM_SKILL select _forEachIndex) * (0.01 * (["CfgVcomSettings", "SkillPresets", "SideSkill", "west", _x] call BIS_fnc_getCfgData));
-		} forEach ["aimingAccuracy", "aimingShake", "aimingSpeed", "commanding", "courage", "endurance", "general", "reloadSpeed", "spotDistance", "spotTime"];
-		VCM_EASTSKILL = [];
-		{
-			VCM_EASTSKILL pushBack (VCM_SKILL select _forEachIndex) * (0.01 * (["CfgVcomSettings", "SkillPresets", "SideSkill", "east", _x] call BIS_fnc_getCfgData));
-		} forEach ["aimingAccuracy", "aimingShake", "aimingSpeed", "commanding", "courage", "endurance", "general", "reloadSpeed", "spotDistance", "spotTime"];
-		VCM_INDSKILL = [];
-		{
-			VCM_INDSKILL pushBack (VCM_SKILL select _forEachIndex) * (0.01 * (["CfgVcomSettings", "SkillPresets", "SideSkill", "resistance", _x] call BIS_fnc_getCfgData));
-		} forEach ["aimingAccuracy", "aimingShake", "aimingSpeed", "commanding", "courage", "endurance", "general", "reloadSpeed", "spotDistance", "spotTime"];
-	} else
+		VCM_WESTSKILL pushBack (0.01 * (["CfgVcomSettings", "SkillPresets", "SideSkill", "west", _x] call BIS_fnc_getCfgData));
+	} forEach ["aimingAccuracy", "aimingShake", "aimingSpeed", "commanding", "courage", "endurance", "general", "reloadSpeed", "spotDistance", "spotTime"];
+	VCM_EASTSKILL = [];
 	{
-		VCM_WESTSKILL = [];
-		{
-			VCM_WESTSKILL pushBack (0.01 * (["CfgVcomSettings", "SkillPresets", "SideSkill", "west", _x] call BIS_fnc_getCfgData));
-		} forEach ["aimingAccuracy", "aimingShake", "aimingSpeed", "commanding", "courage", "endurance", "general", "reloadSpeed", "spotDistance", "spotTime"];
-		VCM_EASTSKILL = [];
-		{
-			VCM_EASTSKILL pushBack (0.01 * (["CfgVcomSettings", "SkillPresets", "SideSkill", "east", _x] call BIS_fnc_getCfgData));
-		} forEach ["aimingAccuracy", "aimingShake", "aimingSpeed", "commanding", "courage", "endurance", "general", "reloadSpeed", "spotDistance", "spotTime"];
-		VCM_INDSKILL = [];
-		{
-			VCM_INDSKILL pushBack (0.01 * (["CfgVcomSettings", "SkillPresets", "SideSkill", "resistance", _x] call BIS_fnc_getCfgData));
-		} forEach ["aimingAccuracy", "aimingShake", "aimingSpeed", "commanding", "courage", "endurance", "general", "reloadSpeed", "spotDistance", "spotTime"];
-	};
+		VCM_EASTSKILL pushBack (0.01 * (["CfgVcomSettings", "SkillPresets", "SideSkill", "east", _x] call BIS_fnc_getCfgData));
+	} forEach ["aimingAccuracy", "aimingShake", "aimingSpeed", "commanding", "courage", "endurance", "general", "reloadSpeed", "spotDistance", "spotTime"];
+	VCM_INDSKILL = [];
+	{
+		VCM_INDSKILL pushBack (0.01 * (["CfgVcomSettings", "SkillPresets", "SideSkill", "resistance", _x] call BIS_fnc_getCfgData));
+	} forEach ["aimingAccuracy", "aimingShake", "aimingSpeed", "commanding", "courage", "endurance", "general", "reloadSpeed", "spotDistance", "spotTime"];
 };
 
 VCM_CLASSSKILL = ["CfgVcomSettings", "SkillPresets", "classnameSkill", "Active"] call BIS_fnc_getCfgDataBool;
@@ -87,38 +67,56 @@ if VCM_CLASSSKILL then
 	} forEach (["CfgVcomSettings", "SkillPresets", "classnameSkill"] call BIS_fnc_getCfgSubClasses);
 };
 
-if (isFilePatchingEnabled && {"" != loadFile "\userconfig\VCOM_AI\AISettingsV4.hpp"}) then
+diag_log "VCOM: Loaded config";
+
+if (isFilePatchingEnabled && {"" != loadFile "\userconfig\VCOM_AI\AISettingsV5.hpp"}) then
 {
-	[] call compile preprocessFileLineNumbers "\userconfig\VCOM_AI\AISettingsV4.hpp"; //Overwrite with userconfig
+	[] call compile preprocessFileLineNumbers "\userconfig\VCOM_AI\AISettingsV5.hpp"; //Overwrite with userconfig
 };
 
-publicVariable "VCM_ACTIVE";
-publicVariable "VCM_DEBUG";
-publicVariable "VCM_SIDES";
-publicVariable "VCM_SUPPRESS";
-publicVariable "VCM_HEALING";
-publicVariable "VCM_WPGEN";
-publicVariable "VCM_FRMCHNG";
-publicVariable "VCM_FFE";
-publicVariable "VCM_FULLSPEED";
-publicVariable "VCM_MAGLIMIT";
-publicVariable "VCM_MINECHNC";
-publicVariable "VCM_LGARR";
-publicVariable "VCM_RGDL";
-publicVariable "VCM_STEAL";
-publicVariable "VCM_STEALDIST";
-publicVariable "VCM_HEARDIST";
-publicVariable "VCM_WARNDIST";
-publicVariable "VCM_WARNDELAY";
-publicVariable "VCM_SKILLCHNG";
-publicVariable "VCM_SPRESET";
-publicVariable "VCM_SKILL";
-publicVariable "VCM_SIDESKILL";
-publicVariable "VCM_WESTSKILL";
-publicVariable "VCM_EASTSKILL";
-publicVariable "VCM_INDSKILL";
-publicVariable "VCM_CLASSSKILL";
-publicVariable "VCM_SKILLCLASSES";
+{
+	if (_x isEqualType 0) then
+	{
+		VCM_SIDES set [_forEachIndex, _x call BIS_fnc_sideType];
+	};
+} forEach VCM_SIDES;
 
-VCM_SETTINGS = true;
-publicVariable "VCM_SETTINGS";
+if (_preInit isEqualTo "preInit") then {
+	publicVariable "VCM_ACTIVE";
+	publicVariable "VCM_DEBUG";
+	publicVariable "VCM_SIDES";
+	publicVariable "VCM_SUPPRESS";
+	publicVariable "VCM_HEALING";
+	publicVariable "VCM_WPGEN";
+	publicVariable "VCM_FRMCHNG";
+	publicVariable "VCM_FFE";
+	publicVariable "VCM_FULLSPEED";
+	publicVariable "VCM_MAGLIMIT";
+	publicVariable "VCM_MINECHNC";
+	publicVariable "VCM_LGARR";
+	publicVariable "VCM_RGDL";
+	publicVariable "VCM_STEAL";
+	publicVariable "VCM_STEALDIST";
+	publicVariable "VCM_HEARDIST";
+	publicVariable "VCM_WARNDIST";
+	publicVariable "VCM_WARNDELAY";
+	publicVariable "VCM_STATICARMT";
+	publicVariable "VCM_SKILLCHNG";
+	publicVariable "VCM_SPRESET";
+	publicVariable "VCM_SKILL";
+	publicVariable "VCM_SIDESKILL";
+	publicVariable "VCM_WESTSKILL";
+	publicVariable "VCM_EASTSKILL";
+	publicVariable "VCM_INDSKILL";
+	publicVariable "VCM_CLASSSKILL";
+	publicVariable "VCM_SKILLCLASSES";
+	publicVariable "VCM_DRIVING";
+	publicVariable "VCM_DLIMIT";
+	publicVariable "VCM_DDELAY";
+	publicVariable "VCM_DDIST";
+
+	VCM_SETTINGS = true;
+	publicVariable "VCM_SETTINGS";
+
+	diag_log "VCOM: Pushed variables to clients";
+};
