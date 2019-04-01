@@ -31,6 +31,7 @@ VCM_WARNDELAY = 30; //How long the AI have to survive before they can call in fo
 VCM_STATICARMT = 300; //How long AI stay on static weapons when initially arming them. This is just for AI WITHOUT static bags. They will stay for this duration when NO ENEMIES ARE SEEN, or their group gets FAR away.
 VCM_StealVeh = true; //Will the AI steal vehicles.
 VCM_AIDISTANCEVEHPATH = 100; //Distance AI check from the squad leader to steal vehicles
+VCM_AI_VEH_CLASS_STEAL = true; //If true, crewmen can steal tanks/tracked vehicles. pilots can steal aircraft. Everyone else can steal wheeled vehicles. False = Any AI class can steal anything.
 VCM_ADVANCEDMOVEMENT = true; //True means AI will actively generate waypoints if no other waypoints are generated for the AI group (2 or more). False disables this advanced movements.
 VCM_FRMCHANGE = true; //AI GROUPS WILL CHANGE FORMATIONS TO THEIR BEST GUESS.
 VCM_SKILLCHANGE = true; //AI Groups will have their skills changed by Vcom.
@@ -71,9 +72,9 @@ VCM_AISKILL_AIMINGSPEED_R = 0.35;
 VCM_AISIDESPEC =
 {
 	//Reallocates skill variables before group skill settings are applied
-	VCM_AIDIFWEST = [['aimingAccuracy',VCM_AISKILL_AIMINGACCURACY_W],['aimingShake',VCM_AISKILL_AIMINGSHAKE_W],['aimingSpeed',VCM_AISKILL_AIMINGSPEED_W],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
-	VCM_AIDIFEAST = [['aimingAccuracy',VCM_AISKILL_AIMINGACCURACY_E],['aimingShake',VCM_AISKILL_AIMINGSHAKE_E],['aimingSpeed',VCM_AISKILL_AIMINGSPEED_E],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
-	VCM_AIDIFRESISTANCE = [['aimingAccuracy',VCM_AISKILL_AIMINGACCURACY_R],['aimingShake',VCM_AISKILL_AIMINGSHAKE_R],['aimingSpeed',VCM_AISKILL_AIMINGSPEED_R],['commanding',1],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
+	VCM_AIDIFWEST = [['aimingAccuracy',VCM_AISKILL_AIMINGACCURACY_W],['aimingShake',VCM_AISKILL_AIMINGSHAKE_W],['aimingSpeed',VCM_AISKILL_AIMINGSPEED_W],['commanding',0.7],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
+	VCM_AIDIFEAST = [['aimingAccuracy',VCM_AISKILL_AIMINGACCURACY_E],['aimingShake',VCM_AISKILL_AIMINGSHAKE_E],['aimingSpeed',VCM_AISKILL_AIMINGSPEED_E],['commanding',0.7],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
+	VCM_AIDIFRESISTANCE = [['aimingAccuracy',VCM_AISKILL_AIMINGACCURACY_R],['aimingShake',VCM_AISKILL_AIMINGSHAKE_R],['aimingSpeed',VCM_AISKILL_AIMINGSPEED_R],['commanding',0.7],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
 	
 	private _Side = (side (group _this));
 	switch (_Side) do {

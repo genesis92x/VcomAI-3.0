@@ -19,7 +19,7 @@ private _totalSuppression = 0;
 {
 	if (!isNull _x && alive _x) then
 	{
-		_totalSuppression = (_totalSuppression + getSuppression _x);
+		_totalSuppression = (_totalSuppression + (getSuppression _x));
 	};
 } forEach _units;
 

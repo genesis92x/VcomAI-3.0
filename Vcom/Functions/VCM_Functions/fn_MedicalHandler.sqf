@@ -21,7 +21,7 @@ if (isNil "_medics") then {_medics = []};
 {
 	if (isNull objectParent _x && {damage _x != 0}) then 
 	{
-		[_x, _medics] spawn 
+		[_x, _medics] spawn
 		{
 			params ["_unit", "_medicArr"];
 			sleep random 10;

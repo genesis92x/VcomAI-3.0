@@ -1,4 +1,4 @@
-/*%FSM<COMPILE "D:\Games\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, SQUADBEH">*/
+/*%FSM<COMPILE "C:\Program Files (x86)\Steam\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, SQUADBEH">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"Begin_State",0,250,50.000000,700.000000,150.000000,750.000000,0.000000,"Begin State"};
@@ -23,7 +23,7 @@ item18[] = {"Continue2StartPo",8,218,0.000000,300.000000,100.000000,350.000000,0
 item19[] = {"Continue2StartPo",4,218,100.000000,300.000000,200.000000,350.000000,0.000000,"Continue2StartPoint2"};
 item20[] = {"Leader_Cycle_Beg",3,250,508.062805,372.976349,608.062805,422.976349,0.000000,"Leader" \n "Cycle" \n "Beginning"};
 item21[] = {"Combat",4,218,671.022705,372.075439,761.022705,422.075439,100.000000,"Combat"};
-item22[] = {"Combat_Brain",2,4346,870.650879,303.704590,970.650879,353.704590,0.000000,"Combat Brain"};
+item22[] = {"Combat_Brain",2,250,870.650879,303.704590,970.650879,353.704590,0.000000,"Combat Brain"};
 item23[] = {"Combat_BEGIN",4,218,665.427063,321.335602,765.427063,371.335632,110.000000,"Combat BEGIN"};
 item24[] = {"Return",8,218,573.508484,193.429855,673.508484,243.429855,0.000000,"Return"};
 item25[] = {"",7,210,1258.500000,21.000000,1266.500000,29.000000,0.000000,""};
@@ -106,8 +106,8 @@ link58[] = {39,25};
 link59[] = {40,16};
 link60[] = {41,6};
 link61[] = {42,38};
-globals[] = {0.000000,0,0,0,0,640,480,2,624,6316128,1,466.160522,1044.199585,803.867859,-53.867435,998,884,1};
-window[] = {2,-1,-1,-1,-1,1029,86,831,75,3,1016};
+globals[] = {0.000000,0,0,0,0,640,480,2,624,6316128,1,-501.875488,580.172913,970.238281,11.791321,998,884,1};
+window[] = {2,-1,-1,-1,-1,980,26,771,26,3,1016};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -468,7 +468,9 @@ class FSM
                          "if (VCM_FRMCHANGE && {!(_group getVariable [""VCM_DisableForm"",false])}) then" \n
                          "{" \n
                          "	_leader call VCM_fnc_FrmChnge;" \n
-                         "};	"/*%FSM</STATEINIT""">*/;
+                         "};	" \n
+                         "" \n
+                         "_group call VCM_fnc_VehicleCommandeer;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -517,14 +519,14 @@ class FSM
                          "	_situation = ""READY"";" \n
                          "};" \n
                          "" \n
-                         "if (_situation == ""CQC"" && {_suppression < 0.3} && {isNull _nearestEnemy || {_leader distance2D _nearestEnemy > 175}}) then " \n
+                         "if (_situation isEqualTo ""CQC"" && {_suppression < 0.3} && {isNull _nearestEnemy || {_leader distance2D _nearestEnemy > 175}}) then " \n
                          "{" \n
-                         "	if (_situation == ""CQC"") then {_situation = ""READY""};" \n
+                         "	if (_situation isEqualTo ""CQC"") then {_situation = ""READY""};" \n
                          "	_group enableAttack false;" \n
                          "	{" \n
                          "		_x disableAI ""AUTOCOMBAT"";" \n
                          "	} forEach _CurUnits;" \n
-                         "	if (_CurUnits findIf {behaviour _x == ""COMBAT""} != -1) then " \n
+                         "	if (_CurUnits findIf {behaviour _x isEqualTo ""COMBAT""} != -1) then " \n
                          "	{" \n
                          "		{_x setBehaviour ""AWARE""} forEach _CurUnits;" \n
                          "	};" \n

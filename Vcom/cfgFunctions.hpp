@@ -84,6 +84,7 @@ class VCOM
 		
 		// group call VCM_fnc_GroupValue
 		class GroupValue {};
+		
 	};
 	
 	// Acttions that can be undertaken by groups/units
@@ -117,6 +118,9 @@ class VCOM
 		
 		// group call VCM_fnc_RqstReinforce
 		class RqstReinforce {};
+		
+		//group call VCM_fnc_VehicleCommandeer;
+		class VehicleCommandeer {};		
 	};
 	
 	// Driving related functions
