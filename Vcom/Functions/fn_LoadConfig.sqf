@@ -16,6 +16,7 @@ VCM_LGARR = 		["CfgVcomSettings", "LightGarrisonChance"] call BIS_fnc_getCfgData
 VCM_RGDL = 			["CfgVcomSettings", "RagdollChance"] call BIS_fnc_getCfgData;
 VCM_STEAL = 		["CfgVcomSettings", "VehicleStealing"] call BIS_fnc_getCfgDataBool;
 VCM_STEALDIST = 	["CfgVcomSettings", "StealingDistance"] call BIS_fnc_getCfgData;
+VCM_STEALCLASS = 	["CfgVcomSettings", "VehicleStealClassnames"] call BIS_fnc_getCfgData;
 VCM_HEARDIST = 		["CfgVcomSettings", "HearingDistance"] call BIS_fnc_getCfgData;
 VCM_WARNDIST = 		["CfgVcomSettings", "WarnDistance"] call BIS_fnc_getCfgData;
 VCM_WARNDELAY = 	["CfgVcomSettings", "WarnDelay"] call BIS_fnc_getCfgData;
@@ -25,6 +26,7 @@ VCM_DRIVING = 		["CfgVcomSettings", "DrivingActivate"] call BIS_fnc_getCfgDataBo
 VCM_DLIMIT = 		["CfgVcomSettings", "DriverLimit"] call BIS_fnc_getCfgData;
 VCM_DDELAY = 		["CfgVcomSettings", "DrivingDelay"] call BIS_fnc_getCfgData;
 VCM_DDIST = 		["CfgVcomSettings", "DrivingDist"] call BIS_fnc_getCfgData;
+
 
 VCM_SKILLCHNG = 	["CfgVcomSettings", "SkillPresets", "Active"] call BIS_fnc_getCfgDataBool;
 if VCM_SKILLCHNG then

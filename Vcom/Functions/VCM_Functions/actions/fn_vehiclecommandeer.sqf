@@ -23,7 +23,7 @@ private _Pilots = [];
 private _Crewmen = [];
 
 
-if (VCM_AI_VEH_CLASS_STEAL) then
+if (VCM_STEALCLASS) then
 {
 	
 	
@@ -54,7 +54,7 @@ if (VCM_AI_VEH_CLASS_STEAL) then
 	
 		if (count _Crewmen > 0) then
 		{
-			if (_x iskindof "Tank" && {crew _x isEqualTo []} && {_x distance _Leader < VCM_AIDISTANCEVEHPATH} && {locked _x != 2}) then
+			if (_x iskindof "Tank" && {crew _x isEqualTo []} && {_x distance _Leader < VCM_STEALDIST} && {locked _x != 2}) then
 			{
 				_this addvehicle _x;
 			};				
@@ -62,14 +62,14 @@ if (VCM_AI_VEH_CLASS_STEAL) then
 		
 		if (count _Pilots > 0) then
 		{
-			if (_x iskindof "Air" && {crew _x isEqualTo []} && {_x distance _Leader < VCM_AIDISTANCEVEHPATH} && {locked _x != 2}) then
+			if (_x iskindof "Air" && {crew _x isEqualTo []} && {_x distance _Leader < VCM_STEALDIST} && {locked _x != 2}) then
 			{
 				_this addvehicle _x;
 			};			
 		};
 
 	
-		if (_x iskindof "Car" && {crew _x isEqualTo []} && {_x distance _Leader < VCM_AIDISTANCEVEHPATH} && {locked _x != 2}) then
+		if (_x iskindof "Car" && {crew _x isEqualTo []} && {_x distance _Leader < VCM_STEALDIST} && {locked _x != 2}) then
 		{
 			_this addvehicle _x;
 		};
@@ -81,7 +81,7 @@ else
 	
 	{
 	
-		if (_x iskindof "LandVehicle" && {crew _x isEqualTo []} && {_x distance _Leader < VCM_AIDISTANCEVEHPATH} && {locked _x != 2}) then
+		if (_x iskindof "LandVehicle" && {crew _x isEqualTo []} && {_x distance _Leader < VCM_STEALDIST} && {locked _x != 2}) then
 		{
 			_this addvehicle _x;
 		};

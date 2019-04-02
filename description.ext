@@ -42,6 +42,7 @@ class CfgVcomSettings
 	RagdollChance = 50; // % chance of AI ragdolling when hit
 	VehicleStealing = true; // Whether AI should consider stealing vehicles
 	StealingDistance = 100; // Search distance for vehicles
+	VehicleStealClassnames = true; //If true, crewmen can steal tanks/tracked vehicles. pilots can steal aircraft. Everyone else can steal wheeled vehicles. False = Any AI class can steal anything.	
 	HearingDistance = 800; // Hearing distance
 	WarnDistance = 1000; // Reinforcement distance
 	WarnDelay = 30; // Delay for reinforcement calls
