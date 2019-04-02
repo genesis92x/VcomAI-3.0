@@ -16,7 +16,7 @@
 {
 	private _PredictPos = [_x,3] call VCM_fnc_MovePrediction;
 	_PredictPos set [2,0.1];
-	if (VCM_Debug) then 
+	if (VCM_DEBUG) then 
 	{
 		_PredictPos spawn 
 		{
@@ -26,7 +26,7 @@
 	
 	//Lets check for obstacles and make sure the vehicle does not hit them
 	//Create an array of objects near predicted path
-	private _obstacles = _predictPos nearObjects ["ALL", VCM_DrivingDist]; // VCM_DrivingDist is search distance
+	private _obstacles = _predictPos nearObjects ["ALL", VCM_DDIST]; // VCM_DDIST is search distance
 	
 	
 	//Remove gates, bridges and units vehicle from obstacles
@@ -88,7 +88,7 @@
 			} forEach _hlpPosArray;
 			
 			//Spawn debug objects
-			if (VCM_Debug) then
+			if (VCM_DEBUG) then
 			{
 				
 				{

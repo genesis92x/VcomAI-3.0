@@ -46,7 +46,7 @@ if ((_timeShot + 20) < time) then
 	private _atch = _unit weaponAccessories _mzl param [0, ""];
 	private _return = (!(_atch isEqualTo "")) && {getNumber(configFile >> "CfgWeapons" >> _atch >> "ItemInfo" >> "AmmoCoef" >> "audibleFire") < 1};
 	
-	if (VCM_Debug) then {diag_log (format ["VCOM: %2: WEAPON SUPRRESSED - %1",_return,_unit])};
+	if (VCM_DEBUG) then {diag_log (format ["VCOM: %2: WEAPON SUPRRESSED - %1",_return,_unit])};
 	
 	//systemchat format ["%1",_sup];
 	if !(_return) then 
@@ -55,7 +55,7 @@ if ((_timeShot + 20) < time) then
 		private _snda = [];
 		private _Grps = [];
 		{
-			if ((_x distance2D _unit) < VCM_HEARINGDISTANCE) then
+			if ((_x distance2D _unit) < VCM_HEARDIST) then
 			{
 				_snda pushback _x;
 				_Grps pushBackUnique (group _x);

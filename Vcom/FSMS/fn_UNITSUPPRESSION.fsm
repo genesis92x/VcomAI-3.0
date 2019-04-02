@@ -97,7 +97,7 @@ class FSM
                                          "{!isNull objectParent _unit} || // Unit is inside a vehicle" \n
                                          "{isPlayer _unit} || // Is a player" \n
                                          "{!local _unit} || // Not local" \n
-                                         "{!((side _group) in VCM_SIDEENABLED)} || // Not in an enabled side" \n
+                                         "{!((side _group) in VCM_SIDES)} || // Not in an enabled side" \n
                                          "{_group getVariable [""Vcm_Disable"", false]} // Group has VCOM disabled"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
@@ -197,7 +197,7 @@ class FSM
                                          "{!isNull objectParent _unit} || // Unit is inside a vehicle" \n
                                          "{isPlayer _unit} || // Is a player" \n
                                          "{!local _unit} || // Not local" \n
-                                         "{!((side _group) in VCM_SIDEENABLED)} || // Not in an enabled side" \n
+                                         "{!((side _group) in VCM_SIDES)} || // Not in an enabled side" \n
                                          "{_group getVariable [""Vcm_Disable"", false]} // Group has VCOM disabled"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };

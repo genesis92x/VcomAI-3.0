@@ -1,13 +1,10 @@
+
+#include "vcom\defines.hpp"
 class CfgFunctions 
 {
 	#include "vcom\cfgFunctions.hpp"
 };
 
-class Extended_PreInit_EventHandlers {
-	class VCM_CBASettings {
-		init = "call VCM_fnc_CBA_Settings";
-	};
-};
 class CfgRemoteExec
 {
 	// List of script functions allowed to be sent from client via remoteExec
@@ -16,14 +13,169 @@ class CfgRemoteExec
 		mode = 2;
 		jip = 1;		
 		
-		class vcm_serverask { allowedTargets = 0;jip = 1; };
-		class VCM_PublicScript { allowedTargets = 0;jip = 1; };
-		class BIS_fnc_debugConsoleExec { allowedTargets = 0;jip = 1; };
-		class SpawnScript { allowedTargets = 0;jip = 1; };
-		class enableSimulationGlobal { allowedTargets = 0;jip = 1; };
-		class VCM_fnc_KnowAbout { allowedTargets = 0;jip = 1; };
+		class vcm_serverask { allowedTargets = false;jip = true; };
+		class VCM_PublicScript { allowedTargets = false;jip = true; };
+		class BIS_fnc_debugConsoleExec { allowedTargets = false;jip = true; };
+		class SpawnScript { allowedTargets = false;jip = true; };
+		class enableSimulationGlobal { allowedTargets = false;jip = true; };
+		class VCM_fnc_KnowAbout { allowedTargets = false;jip = true; };
 		
 	};
 	
+};
+
+class CfgVcomSettings
+{
+	VcomActive = true; // Set to false to disable VCOM. Can be reenabled by changing to true
+	Debug = false; //Enable debug mode
+	EnabledSides[] = {west, east, resistance}; // Which sides vcom affects. civilian can be added if they are hostile
+	SuppressionActive = true; // AI Suppression system
+	HealingActive = true; // AI Healing system
+	WaypointGeneration = true; // Generate flanking/reinforcement waypoints
+	FormationChange = true; // Whether AI should change formation depending on surroundings
+	FFEArtillery = true; //Fire For Effect Artillery handling.
+	FullSpeed = true; // AI will enforce "FULL" speed mode
 	
+	MagLimit = 2; // AI will search for ammo when at or below this limit
+	MineChance = 10; // % chance of AI placing mines
+	LightGarrisonChance = 20;  // % chance of AI temporarily garrisoning a structure
+	RagdollChance = 50; // % chance of AI ragdolling when hit
+	VehicleStealing = true; // Whether AI should consider stealing vehicles
+	StealingDistance = 100; // Search distance for vehicles
+	HearingDistance = 800; // Hearing distance
+	WarnDistance = 1000; // Reinforcement distance
+	WarnDelay = 30; // Delay for reinforcement calls
+	StaticArmTime = 300; //How long AI will stay mounted on a turret
+	
+	//VCOM DRIVING. Experimental feature
+	DrivingActivate = false;
+	DriverLimit = 4; // How many drivers per cycle can be processed
+	DrivingDelay = 750; // Cycle delay in milliseconds
+	DrivingDist = 10; // Distance to search for obstacles
+	
+	// Max 100 - 0 minimum skill
+	// https://community.bistudio.com/wiki/Arma_3_AI_Skill
+	class SkillPresets
+	{
+		Active = true;
+		SkillPreset = "AIPresetMed";
+		class AIPresetLow
+		{
+			aimingAccuracy = 15;
+			aimingShake = 10;
+			aimingSpeed = 25;
+			commanding = 100;
+			courage = 100;
+			endurance = 100;
+			general = 100;
+			reloadSpeed = 100;
+			spotDistance = 85;
+			spotTime = 85;
+		};
+		class AIPresetMed
+		{
+			aimingAccuracy = 25;
+			aimingShake = 15;
+			aimingSpeed = 35;
+			commanding = 100;
+			courage = 100;
+			endurance = 100;
+			general = 100;
+			reloadSpeed = 100;
+			spotDistance = 85;
+			spotTime = 85;
+		};
+		class AIPresetHigh
+		{
+			aimingAccuracy = 35;
+			aimingShake = 40;
+			aimingSpeed = 45;
+			commanding = 100;
+			courage = 100;
+			endurance = 100;
+			general = 100;
+			reloadSpeed = 100;
+			spotDistance = 85;
+			spotTime = 85;
+		};
+		
+		// This acts as a percentage modifier for the above preset
+		// Alternatively, if SkillChange is false it replaces it the way listed
+		class SideSkill
+		{
+			Active = false;
+			class west
+			{
+				aimingAccuracy = 25;
+				aimingShake = 15;
+				aimingSpeed = 35;
+				commanding = 100;
+				courage = 100;
+				endurance = 100;
+				general = 100;
+				reloadSpeed = 100;
+				spotDistance = 85;
+				spotTime = 85;
+			};
+			class east
+			{
+				aimingAccuracy = 25;
+				aimingShake = 15;
+				aimingSpeed = 35;
+				commanding = 100;
+				courage = 100;
+				endurance = 100;
+				general = 100;
+				reloadSpeed = 100;
+				spotDistance = 85;
+				spotTime = 85;
+			};
+			class resistance
+			{
+				aimingAccuracy = 25;
+				aimingShake = 15;
+				aimingSpeed = 35;
+				commanding = 100;
+				courage = 100;
+				endurance = 100;
+				general = 100;
+				reloadSpeed = 100;
+				spotDistance = 85;
+				spotTime = 85;
+			};
+			class civilian
+			{
+				aimingAccuracy = 25;
+				aimingShake = 15;
+				aimingSpeed = 35;
+				commanding = 100;
+				courage = 100;
+				endurance = 100;
+				general = 100;
+				reloadSpeed = 100;
+				spotDistance = 85;
+				spotTime = 85;
+			};
+		};
+	};
+	
+	// Classname specific skill settings, if active overwrites the above two, same format as AI presets
+	class classnameSkill
+	{
+		Active = false;
+		//Example
+		class  B_Story_SF_Captain_F
+		{
+			aimingAccuracy = 35;
+			aimingShake = 40;
+			aimingSpeed = 45;
+			commanding = 100;
+			courage = 100;
+			endurance = 100;
+			general = 100;
+			reloadSpeed = 100;
+			spotDistance = 85;
+			spotTime = 85;
+		};
+	};
 };

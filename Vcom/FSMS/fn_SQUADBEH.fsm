@@ -4,7 +4,7 @@
 item0[] = {"Begin_State",0,250,50.000000,700.000000,150.000000,750.000000,0.000000,"Begin State"};
 item1[] = {"Cond",4,218,-100.000000,700.000000,0.000000,750.000000,50.000000,"Cond"};
 item2[] = {"Exit_FSM",1,250,-250.000000,700.000000,-175.000000,750.000000,0.000000,"Exit FSM"};
-item3[] = {"Continue",8,218,50.000000,575.000000,150.000000,625.000000,0.000000,"Continue"};
+item3[] = {"Continue",8,4314,50.000000,575.000000,150.000000,625.000000,0.000000,"Continue"};
 item4[] = {"Start_Point",2,250,50.000000,400.000000,150.000000,450.000000,0.000000,"Start Point"};
 item5[] = {"Exit_Cond",4,218,147.598297,530.021851,247.598297,580.021851,700.000000,"Exit Cond"};
 item6[] = {"Exit_FSM_1",1,250,610.862549,661.845093,685.862671,711.845093,0.000000,"Exit FSM"};
@@ -136,7 +136,7 @@ class FSM
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"((units _group) findIf {isPlayer _x} != -1) || //Do not execute code on player groups" \n
                                          "{_Group getvariable [""Vcm_Disable"",false]} || " \n
-                                         "{!(side _group in VCM_SIDEENABLED)}"/*%FSM</CONDITION""">*/;
+                                         "{!(side _group in VCM_SIDES)}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -172,8 +172,8 @@ class FSM
                                          "_group setVariable [""VCM_SQUADFSM"", _thisFSM, VCM_DEBUG]; // Script handle, global if debug is on" \n
                                          "VcmAI_ActiveList pushBackUnique _this;" \n
                                          "" \n
-                                         "private _isskilldisabled = _Group getVariable ""VCM_Skilldisable"";" \n
-                                         "if (VCM_SKILLCHANGE && isnil ""_isskilldisabled"") then {_Group call VCM_AIDIFSET};" \n
+                                         "private _isSkillDisabled = _Group getVariable [""VCM_Skilldisable"", false];" \n
+                                         "if (VCM_SKILLCHNG && isnil ""_isskilldisabled"") then {_Group call VCM_AIDIFSET};" \n
                                          "" \n
                                          "_group allowFleeing 0; // Disable fleeing" \n
                                          "_group enableAttack false; // Disable units individually moving to engage" \n
@@ -181,6 +181,10 @@ class FSM
                                          "{" \n
                                          "	if (!(isPlayer _x)) then" \n
                                          "	{" \n
+                                         "		if (!_isSkillDisabled && (VCM_SKILLCHNG || VCM_SIDESKILL || VCM_CLASSSKILL)) then " \n
+                                         "		{" \n
+                                         "			_x call VCM_fnc_UnitSetSkill;" \n
+                                         "		};" \n
                                          "		_x disableAI ""AUTOCOMBAT"";" \n
                                          "		_x setSkill [""COURAGE"", 0]; //Make AI more susceptible to suppression" \n
                                          "		_x setSkill [""COMMANDING"", 0]; //Make AI take longer to share information" \n
@@ -192,7 +196,7 @@ class FSM
                                          "	};" \n
                                          "} foreach (units _Group);" \n
                                          "" \n
-                                         "if (VCM_Debug) then {diag_log (format [""%1: VCOM INITILZIED SCRIPTS"",_Group])};"/*%FSM</ACTION""">*/;
+                                         "if (VCM_DEBUG) then {diag_log (format [""%1: VCOM INITILZIED SCRIPTS"",_Group])};"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                         };
@@ -206,7 +210,7 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"private _N = VcmAI_ActiveList findIf {_x isEqualTo _Group};" \n
                          "VcmAI_ActiveList deleteAt _N;" \n
                          "" \n
-                         "if (VCM_Debug) then {diag_log (format [""%1: EXITED VCOM SCRIPTS"",_Group])};"/*%FSM</STATEINIT""">*/;
+                         "if (VCM_DEBUG) then {diag_log (format [""%1: EXITED VCOM SCRIPTS"",_Group])};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -321,8 +325,8 @@ class FSM
                                         condition=/*%FSM<CONDITION""">*/"((units _group) findIf {isPlayer _x} != -1) || " \n
                                          "{_Group getvariable [""Vcm_Disable"",false]} || " \n
                                          "{(((units _Group) findIf {alive _x}) isEqualTo -1)} || " \n
-                                         "{!(side _group in VCM_SIDEENABLED)} ||" \n
-                                         "{!(VCM_ActivateAI)}"/*%FSM</CONDITION""">*/;
+                                         "{!(side _group in VCM_SIDES)} ||" \n
+                                         "{!(VCM_ACTIVE)}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -348,7 +352,7 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"private _N = VcmAI_ActiveList findIf {_x isEqualTo _Group};" \n
                          "VcmAI_ActiveList deleteAt _N;" \n
                          "" \n
-                         "if (VCM_Debug) then {diag_log (format [""%1: EXITED VCOM SCRIPTS"",_Group])};" \n
+                         "if (VCM_DEBUG) then {diag_log (format [""%1: EXITED VCOM SCRIPTS"",_Group])};" \n
                          "" \n
                          "//Remove eventhandlers" \n
                          "{" \n
@@ -408,7 +412,7 @@ class FSM
                 {
                         name = "RearmCheck";
                         itemno = 15;
-                        init = /*%FSM<STATEINIT""">*/"if (VCM_AIMagLimit > 0) then " \n
+                        init = /*%FSM<STATEINIT""">*/"if (VCM_MAGLIMIT > 0) then " \n
                          "{" \n
                          "	_Group call VCM_fnc_RearmSelf;" \n
                          "};" \n
@@ -463,9 +467,9 @@ class FSM
                          "_L1 params [""_StaticList"",""_SatchelList"",""_MineList""];" \n
                          "_BackbkC = time;" \n
                          "" \n
-                         "if VCM_AIHEALING then {_group call VCM_fnc_MedicalHandler;};" \n
+                         "if VCM_HEALING then {_group call VCM_fnc_MedicalHandler;};" \n
                          "" \n
-                         "if (VCM_FRMCHANGE && {!(_group getVariable [""VCM_DisableForm"",false])}) then" \n
+                         "if (VCM_FRMCHNG && {!(_group getVariable [""VCM_DisableForm"",false])}) then" \n
                          "{" \n
                          "	_leader call VCM_fnc_FrmChnge;" \n
                          "};	" \n
@@ -569,7 +573,7 @@ class FSM
                                          "	{	deleteWaypoint ((waypoints (group _this)) select 0);	};" \n
                                          "};" \n
                                          "" \n
-                                         "if (VCM_Debug) then {systemchat ""VCOM: COMBAT END"";};"/*%FSM</ACTION""">*/;
+                                         "if (VCM_DEBUG) then {systemchat ""VCOM: COMBAT END"";};"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                                 /*%FSM<LINK "Combat_BEGIN">*/
@@ -684,7 +688,7 @@ class FSM
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"_WaypointGen + 900 < time && " \n
                                          "{_situation isEqualTo ""READY"" || _situation isEqualTo ""REINFORCE""} &&" \n
-                                         "{VCM_ADVANCEDMOVEMENT} &&" \n
+                                         "{VCM_WPGEN} &&" \n
                                          "{" \n
                                          "	isNil {(waypoints _Group) select 1} ||" \n
                                          "	{!(((waypoints _Group) select 1) in VCM_IGNOREWAYPOINTS)}" \n
@@ -693,7 +697,7 @@ class FSM
                                          "_WaypointGen = time;" \n
                                          "_situation = ""FLANKING"";" \n
                                          "" \n
-                                         "if (VCM_Debug) then {systemchat ""VCOM: WAYPOINT GENERATION"";};"/*%FSM</ACTION""">*/;
+                                         "if (VCM_DEBUG) then {systemchat ""VCOM: WAYPOINT GENERATION"";};"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                                 /*%FSM<LINK "CheckIfStatic">*/
@@ -706,7 +710,7 @@ class FSM
                                         condition=/*%FSM<CONDITION""">*/"(count _StaticList > 0) && {_BackbkC4 + 120 < time}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"//[_x,_CurrentBackPack,_VCOM_HASUAV]" \n
                                          "" \n
-                                         "if (VCM_Debug) then {diag_log ""VCOM: Static Weapon Check""};" \n
+                                         "if (VCM_DEBUG) then {diag_log ""VCOM: Static Weapon Check""};" \n
                                          "" \n
                                          "private [""_t"", ""_wait""];" \n
                                          "_t = time;" \n
@@ -781,7 +785,7 @@ class FSM
                                          "{[_Group] call VCM_fnc_EmptyStatic};"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"_Group call VCM_fnc_ArmStatics;_BackbkC7 = time;" \n
                                          "" \n
-                                         "if (VCM_Debug) then {systemchat ""VCOM: ARM STATICS"";};"/*%FSM</ACTION""">*/;
+                                         "if (VCM_DEBUG) then {systemchat ""VCOM: ARM STATICS"";};"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                                 /*%FSM<LINK "Light_Garrison">*/
@@ -791,11 +795,11 @@ class FSM
                                         priority = 88.000000;
                                         to="Return";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"!(VCM_LGARRISONCHANCE isEqualTo 0) &&" \n
+                                        condition=/*%FSM<CONDITION""">*/"!(VCM_LGARR isEqualTo 0) &&" \n
                                          "{(_BackbkC9 + 300) < time} &&" \n
                                          "{" \n
                                          "	private _rtrn = false;" \n
-                                         "	if ((random 100) > VCM_LGARRISONCHANCE) then" \n
+                                         "	if ((random 100) > VCM_LGARR) then" \n
                                          "	{" \n
                                          "		_Bacbk9 = time;" \n
                                          "	} else" \n
@@ -825,11 +829,11 @@ class FSM
                                         priority = 86.000000;
                                         to="Return";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"!(VCM_MINECHANCE isEqualTo 0) &&" \n
+                                        condition=/*%FSM<CONDITION""">*/"!(VCM_MINECHNC isEqualTo 0) &&" \n
                                          "{_BackbkC6 + 30 < time} &&" \n
                                          "{" \n
                                          "	private _rtrn = false;" \n
-                                         "	if ((random 100) > VCM_MINECHANCE) then" \n
+                                         "	if ((random 100) > VCM_MINECHNC) then" \n
                                          "	{" \n
                                          "		_BackbkC6 = time;" \n
                                          "	} else" \n
@@ -867,7 +871,7 @@ class FSM
                                          "} foreach _SatchelList;" \n
                                          "_BackbkC5 = time;" \n
                                          "" \n
-                                         "if (VCM_Debug) then {systemchat ""VCOM: SATCHEL PLACE"";};"/*%FSM</ACTION""">*/;
+                                         "if (VCM_DEBUG) then {systemchat ""VCOM: SATCHEL PLACE"";};"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                                 /*%FSM<LINK "Clear_Building">*/

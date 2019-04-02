@@ -16,7 +16,7 @@ params ["_unit", "_mineArray"];
 
 if ((lifeState _unit != "HEALTHY") || {isPlayer _unit}) exitWith {};
 
-if (VCM_Debug) then {systemchat format ["VCOM: %1 PLACING MINE", _unit];};
+if (VCM_DEBUG) then {systemchat format ["VCOM: %1 PLACING MINE", _unit];};
 
 private _mineType = _mineArray select 0;
 
