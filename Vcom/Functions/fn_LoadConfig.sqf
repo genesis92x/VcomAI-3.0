@@ -4,21 +4,21 @@ if (!isServer && _preInit isEqualTo "preInit") exitWith {};
 VCM_ACTIVE = 		["CfgVcomSettings", "VcomActive"] call BIS_fnc_getCfgDataBool;
 VCM_DEBUG = 		["CfgVcomSettings", "Debug"] call BIS_fnc_getCfgDataBool;
 VCM_SIDES = 		["CfgVcomSettings", "EnabledSides"] call BIS_fnc_getCfgDataArray;
-VCM_SUPPRESS = 		["CfgVcomSettings", "SuppressionActive"] call BIS_fnc_getCfgDataBool;
+VCM_SUPPRESS = 	["CfgVcomSettings", "SuppressionActive"] call BIS_fnc_getCfgDataBool;
 VCM_HEALING = 		["CfgVcomSettings", "HealingActive"] call BIS_fnc_getCfgDataBool;
 VCM_WPGEN = 		["CfgVcomSettings", "WaypointGeneration"] call BIS_fnc_getCfgDataBool;
 VCM_FRMCHNG = 		["CfgVcomSettings", "FormationChange"] call BIS_fnc_getCfgDataBool;
 VCM_FFE = 			["CfgVcomSettings", "FFEArtillery"] call BIS_fnc_getCfgDataBool;
 VCM_FULLSPEED = 	["CfgVcomSettings", "FullSpeed"] call BIS_fnc_getCfgDataBool;
-VCM_MAGLIMIT = 		["CfgVcomSettings", "MagLimit"] call BIS_fnc_getCfgData;
-VCM_MINECHNC = 		["CfgVcomSettings", "MineChange"] call BIS_fnc_getCfgData;
+VCM_MAGLIMIT = 	["CfgVcomSettings", "MagLimit"] call BIS_fnc_getCfgData;
+VCM_MINECHNC = 	["CfgVcomSettings", "MineChance"] call BIS_fnc_getCfgData;
 VCM_LGARR = 		["CfgVcomSettings", "LightGarrisonChance"] call BIS_fnc_getCfgData;
 VCM_RGDL = 			["CfgVcomSettings", "RagdollChance"] call BIS_fnc_getCfgData;
 VCM_STEAL = 		["CfgVcomSettings", "VehicleStealing"] call BIS_fnc_getCfgDataBool;
 VCM_STEALDIST = 	["CfgVcomSettings", "StealingDistance"] call BIS_fnc_getCfgData;
-VCM_STEALCLASS = 	["CfgVcomSettings", "VehicleStealClassnames"] call BIS_fnc_getCfgData;
-VCM_HEARDIST = 		["CfgVcomSettings", "HearingDistance"] call BIS_fnc_getCfgData;
-VCM_WARNDIST = 		["CfgVcomSettings", "WarnDistance"] call BIS_fnc_getCfgData;
+VCM_STEALCLASS = 	["CfgVcomSettings", "VehicleStealClassnames"] call BIS_fnc_getCfgDataBool;
+VCM_HEARDIST = 	["CfgVcomSettings", "HearingDistance"] call BIS_fnc_getCfgData;
+VCM_WARNDIST = 	["CfgVcomSettings", "WarnDistance"] call BIS_fnc_getCfgData;
 VCM_WARNDELAY = 	["CfgVcomSettings", "WarnDelay"] call BIS_fnc_getCfgData;
 VCM_STATICARMT = 	["CfgVcomSettings", "StaticArmTime"] call BIS_fnc_getCfgData;
 
@@ -29,36 +29,36 @@ VCM_DDIST = 		["CfgVcomSettings", "DrivingDist"] call BIS_fnc_getCfgData;
 
 
 VCM_SKILLCHNG = 	["CfgVcomSettings", "SkillPresets", "Active"] call BIS_fnc_getCfgDataBool;
+VCM_SKILL = [];
 if VCM_SKILLCHNG then
 {
 	VCM_SPRESET = ["CfgVcomSettings", "SkillPresets", "SkillPreset"] call BIS_fnc_getCfgData;
-	VCM_SKILL = [];
 	{
 		VCM_SKILL pushBack (0.01 * (["CfgVcomSettings", "SkillPresets", VCM_SPRESET, _x] call BIS_fnc_getCfgData));
 	} forEach ["aimingAccuracy", "aimingShake", "aimingSpeed", "commanding", "courage", "endurance", "general", "reloadSpeed", "spotDistance", "spotTime"];
 };
 
 VCM_SIDESKILL = ["CfgVcomSettings", "SkillPresets", "SideSkill", "Active"] call BIS_fnc_getCfgDataBool;
+VCM_WESTSKILL = [];
+VCM_EASTSKILL = [];
+VCM_INDSKILL = [];
 if VCM_SIDESKILL then
 {
-	VCM_WESTSKILL = [];
 	{
 		VCM_WESTSKILL pushBack (0.01 * (["CfgVcomSettings", "SkillPresets", "SideSkill", "west", _x] call BIS_fnc_getCfgData));
 	} forEach ["aimingAccuracy", "aimingShake", "aimingSpeed", "commanding", "courage", "endurance", "general", "reloadSpeed", "spotDistance", "spotTime"];
-	VCM_EASTSKILL = [];
 	{
 		VCM_EASTSKILL pushBack (0.01 * (["CfgVcomSettings", "SkillPresets", "SideSkill", "east", _x] call BIS_fnc_getCfgData));
 	} forEach ["aimingAccuracy", "aimingShake", "aimingSpeed", "commanding", "courage", "endurance", "general", "reloadSpeed", "spotDistance", "spotTime"];
-	VCM_INDSKILL = [];
 	{
 		VCM_INDSKILL pushBack (0.01 * (["CfgVcomSettings", "SkillPresets", "SideSkill", "resistance", _x] call BIS_fnc_getCfgData));
 	} forEach ["aimingAccuracy", "aimingShake", "aimingSpeed", "commanding", "courage", "endurance", "general", "reloadSpeed", "spotDistance", "spotTime"];
 };
 
 VCM_CLASSSKILL = ["CfgVcomSettings", "SkillPresets", "classnameSkill", "Active"] call BIS_fnc_getCfgDataBool;
+VCM_SKILLCLASSES = [];
 if VCM_CLASSSKILL then
 {
-	VCM_SKILLCLASSES = [];
 	{
 		private _arr = [_x];
 		private _class = _x;
@@ -99,6 +99,7 @@ if (_preInit isEqualTo "preInit") then {
 	publicVariable "VCM_RGDL";
 	publicVariable "VCM_STEAL";
 	publicVariable "VCM_STEALDIST";
+	publicVariable "VCM_STEALCLASS";
 	publicVariable "VCM_HEARDIST";
 	publicVariable "VCM_WARNDIST";
 	publicVariable "VCM_WARNDELAY";

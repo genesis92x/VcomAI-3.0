@@ -16,7 +16,7 @@ private _unit = _this;
 if VCM_CLASSSKILL then
 {
 	private _typeOf = typeOf _unit;
-	private _index = VCM_SKILLCLASSES findIf {_x select 0 == _typeOf}; // isEqualTo is case sensitive
+	private _index = VCM_SKILLCLASSES findIf {_x select 0 isEqualTo _typeOf}; // isEqualTo is case sensitive - so they better type if correctly
 	if (_index != -1) exitWith 
 	{
 		{

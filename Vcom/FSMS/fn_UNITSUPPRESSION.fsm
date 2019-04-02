@@ -1,10 +1,10 @@
-/*%FSM<COMPILE "D:\Games\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, fn_UNITSUPPRESSION">*/
+/*%FSM<COMPILE "C:\Program Files (x86)\Steam\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, fn_UNITSUPPRESSION">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"START",0,250,75.331299,-78.655457,165.331299,-28.655457,0.000000,"START"};
 item1[] = {"EXIT_CHECKS",4,218,75.378906,-169.575836,165.378906,-119.575844,90.000000,"EXIT" \n "CHECKS"};
 item2[] = {"TRUE",8,218,-37.326294,-78.338959,52.673706,-28.338959,0.000000,"TRUE"};
-item3[] = {"EXIT",1,250,181.850510,-172.492142,271.850525,-122.492157,0.000000,"EXIT"};
+item3[] = {"EXIT",1,250,200.000000,-175.000000,300.000000,-125.000000,0.000000,"EXIT"};
 item4[] = {"CHECK_SUPPRESSIO",2,250,-37.794777,-170.197464,52.205238,-120.197456,0.000000,"CHECK" \n "SUPPRESSION"};
 item5[] = {"_",-1,250,-107.927109,-146.077637,0.000000,-146.077637,0.000000,""};
 item6[] = {"UP",8,218,-219.143295,-290.917419,-129.143295,-240.917435,10.000000,"UP"};
@@ -13,7 +13,7 @@ item8[] = {"DOWN",4,218,-37.522278,-291.324860,52.477722,-241.324860,30.000000,"
 item9[] = {"CQC",4,218,144.832779,-290.831512,234.832764,-240.831512,80.000000,"CQC"};
 item10[] = {"PINNED",4,218,53.253540,-291.423279,143.253540,-241.423279,40.000000,"PINNED"};
 item11[] = {"TIMER",2,250,144.795547,-403.282227,234.795578,-353.282227,0.000000,"TIMER"};
-item12[] = {"EXIT_TIMER",4,218,287.142822,-289.414276,377.142822,-239.414276,1.000000,"EXIT" \n "TIMER"};
+item12[] = {"EXIT_TIMER",4,4314,287.142822,-289.414276,377.142822,-239.414276,1.000000,"EXIT" \n "TIMER"};
 item13[] = {"DO_NOTHING",8,218,144.796112,-510.575348,234.796112,-460.575378,0.000000,"DO" \n "NOTHING"};
 item14[] = {"VCOM_SUPPRESSION",-1,250,-275.000000,-150.000000,-125.000000,150.000000,0.000000,"VCOM SUPPRESSION" \n "" \n "//TODO - INSERT INFO"};
 item15[] = {"__1",2,250,-128.349396,-401.721527,-38.349380,-351.721527,0.000000,""};
@@ -65,8 +65,8 @@ link19[] = {15,16};
 link20[] = {15,17};
 link21[] = {16,11};
 link22[] = {17,11};
-globals[] = {0.000000,0,0,0,0,640,480,1,27,6316128,1,-340.748230,447.733398,46.027222,-682.309021,536,828,1};
-window[] = {2,-1,-1,-1,-1,817,-1228,-554,100,3,554};
+globals[] = {0.000000,0,0,0,0,640,480,1,27,6316128,1,-169.683044,342.466461,168.918396,-677.324463,535,884,1};
+window[] = {2,-1,-1,-1,-1,982,410,1084,265,3,553};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -212,7 +212,7 @@ class FSM
                                         condition=/*%FSM<CONDITION""">*/"(_group call VCM_fnc_CheckSituation) isEqualTo ""CQC"" || " \n
                                          "{behaviour _unit isEqualTo ""STEALTH""} ||" \n
                                          "{!isNull (_unit getVariable [""bis_fnc_moduleRemoteControl_owner"", objNull])}"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/"_unit setUnitPos ""AUTO"";" \n
+                                        action=/*%FSM<ACTION""">*/"//_unit setUnitPos ""AUTO"";" \n
                                          "" \n
                                          "_t = time;"/*%FSM</ACTION""">*/;
                                 };
@@ -246,11 +246,11 @@ class FSM
                                          "			case ""handgun"": {_unit playMoveNow ""AmovPercMsprSlowWpstDf_AmovPpneMstpSrasWpstDnon""};" \n
                                          "		};" \n
                                          "	};" \n
-                                         "	_unit setUnitPos ""DOWN"";" \n
+                                         "	//_unit setUnitPos ""DOWN"";" \n
                                          "}" \n
                                          "else" \n
                                          "{" \n
-                                         "	_unit setUnitPos ""DOWN"";" \n
+                                         "	//_unit setUnitPos ""DOWN"";" \n
                                          "};" \n
                                          "/*" \n
                                          "_animationState = animationState _unit;" \n
@@ -326,11 +326,11 @@ class FSM
                                          "			case ""handgun"": {_unit playMoveNow ""AmovPercMsprSlowWpstDf_AmovPpneMstpSrasWpstDnon""};" \n
                                          "		};" \n
                                          "	};" \n
-                                         "	_unit setUnitPos ""DOWN"";" \n
+                                         "	//_unit setUnitPos ""DOWN"";" \n
                                          "}" \n
                                          "else" \n
                                          "{" \n
-                                         "	_unit setUnitPos ""DOWN""" \n
+                                         "	//_unit setUnitPos ""DOWN""" \n
                                          "};" \n
                                          "" \n
                                          "_t = time;"/*%FSM</ACTION""">*/;
@@ -354,11 +354,11 @@ class FSM
                                          "			_unit playMoveNow selectRandom [""AmovPercMevaSrasWrflDfr_AmovPknlMstpSrasWrflDnon"", ""AmovPercMevaSrasWrflDf_AmovPknlMstpSrasWrflDnon"", ""AmovPercMevaSrasWrflDfl_AmovPknlMstpSrasWrflDnon""]" \n
                                          "		};" \n
                                          "	};" \n
-                                         "	_unit setUnitPos ""Middle"";" \n
+                                         "	//_unit setUnitPos ""Middle"";" \n
                                          "}" \n
                                          "else" \n
                                          "{" \n
-                                         "	_unit setUnitPos ""Middle""" \n
+                                         "	//_unit setUnitPos ""Middle""" \n
                                          "};" \n
                                          "" \n
                                          "_t = time;"/*%FSM</ACTION""">*/;
@@ -440,9 +440,11 @@ class FSM
                                          "{_suppression < 0.3} &&" \n
                                          "/*{isNull objectParent _unit} &&*///already checked for" \n
                                          "{_unit distance (_unit findNearestEnemy _unit) > 150}"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/"_unit disableAI ""AUTOTARGET"";" \n
+                                        action=/*%FSM<ACTION""">*/"/*" \n
+                                         "_unit disableAI ""AUTOTARGET"";" \n
                                          "_unit disableAI ""TARGET"";" \n
-                                         "_unit doWatch ObjNull;"/*%FSM</ACTION""">*/;
+                                         "_unit doWatch ObjNull;" \n
+                                         "*/"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                                 /*%FSM<LINK "REGROUPED">*/

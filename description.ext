@@ -47,6 +47,7 @@ class CfgVcomSettings
 	WarnDistance = 1000; // Reinforcement distance
 	WarnDelay = 30; // Delay for reinforcement calls
 	StaticArmTime = 300; //How long AI will stay mounted on a turret
+	SkillClasses = [];
 	
 	//VCOM DRIVING. Experimental feature
 	DrivingActivate = false;
@@ -70,8 +71,8 @@ class CfgVcomSettings
 			endurance = 100;
 			general = 100;
 			reloadSpeed = 100;
-			spotDistance = 85;
-			spotTime = 85;
+			spotDistance = 90;
+			spotTime = 90;
 		};
 		class AIPresetMed
 		{
@@ -83,8 +84,8 @@ class CfgVcomSettings
 			endurance = 100;
 			general = 100;
 			reloadSpeed = 100;
-			spotDistance = 85;
-			spotTime = 85;
+			spotDistance = 90;
+			spotTime = 90;
 		};
 		class AIPresetHigh
 		{
@@ -96,8 +97,8 @@ class CfgVcomSettings
 			endurance = 100;
 			general = 100;
 			reloadSpeed = 100;
-			spotDistance = 85;
-			spotTime = 85;
+			spotDistance = 90;
+			spotTime = 90;
 		};
 		
 		// This acts as a percentage modifier for the above preset
@@ -115,8 +116,8 @@ class CfgVcomSettings
 				endurance = 100;
 				general = 100;
 				reloadSpeed = 100;
-				spotDistance = 85;
-				spotTime = 85;
+				spotDistance = 90;
+				spotTime = 90;
 			};
 			class east
 			{
@@ -128,8 +129,8 @@ class CfgVcomSettings
 				endurance = 100;
 				general = 100;
 				reloadSpeed = 100;
-				spotDistance = 85;
-				spotTime = 85;
+				spotDistance = 90;
+				spotTime = 90;
 			};
 			class resistance
 			{
@@ -141,8 +142,8 @@ class CfgVcomSettings
 				endurance = 100;
 				general = 100;
 				reloadSpeed = 100;
-				spotDistance = 85;
-				spotTime = 85;
+				spotDistance = 90;
+				spotTime = 90;
 			};
 			class civilian
 			{
@@ -154,7 +155,7 @@ class CfgVcomSettings
 				endurance = 100;
 				general = 100;
 				reloadSpeed = 100;
-				spotDistance = 85;
+				spotDistance = 80;
 				spotTime = 85;
 			};
 		};
