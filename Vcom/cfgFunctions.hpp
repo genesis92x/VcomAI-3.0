@@ -26,8 +26,14 @@ class VCOM
 	{
 		file = "Vcom\FSMS";
 		
-		// group spawn VCM_fnc_SQUADBEH
-		class SQUADBEH 
+		// group spawn VCM_fnc_SQUADTACTICS
+		class SQUADTACTICS 
+		{
+			ext = ".fsm";
+		};
+		
+		// group spawn VCM_fnc_SQUADBEHAVIOUR
+		class SQUADBEHAVIOUR
 		{
 			ext = ".fsm";
 		};
@@ -215,19 +221,19 @@ class VCOM
 	{
 		file = "Vcom\Functions\VCM_Functions\scanning";
 		
-		// [entity, unit] call VCM_fnc_BoxNrst;
+		// [entity, unit] call VCM_fnc_BoxNrst
 		class BoxNrst {};
 		
-		// [array, unitToReveal, revealAmount, _revealLimit] call VCM_fnc_KnowAbout;
+		// [array, unitToReveal, revealAmount, _revealLimit] call VCM_fnc_KnowAbout
 		class KnowAbout {};
 		
 		// group call VCM_fnc_CanReinforce
 		class CanReinforce {};
 		
-		// unit call VCM_fnc_ClstEmy;
+		// unit call VCM_fnc_ClstEmy
 		class ClstEmy {};
 		
-		// [list, object, order, script] call VCM_fnc_ClstObj;
+		// [list, object, order, script] call VCM_fnc_ClstObj
 		class ClstObj {};
 		
 		// unit call VCM_fnc_EnemyArray;
@@ -245,7 +251,7 @@ class VCOM
 		// unit call VCM_fnc_KnownEnemyGroupArray
 		class KnownEnemyGroupArray {};
 		
-		// unit call VCM_fnc_FriendlyArray;
+		// unit call VCM_fnc_FriendlyArray
 		class FriendlyArray {};
 		
 		// [unit, boolean] call VCM_fnc_FriendlyGroupArray
@@ -254,19 +260,22 @@ class VCOM
 		// [unit, distance] call VCM_fnc_FriendlyValue
 		class FriendlyValue {};
 		
-		// [] call VCM_fnc_IRCHECK;
+		// [] call VCM_fnc_IRCHECK
 		class IRCHECK {};
 		
-		// unit call VCM_fnc_HasRadio;
+		// [] call VCM_fnc_IsCQC
+		class IsCQC {};
+		
+		// unit call VCM_fnc_HasRadio
 		class HasRadio {};
 		
-		// group call VCM_fnc_GroupHasRadio;
+		// group call VCM_fnc_GroupHasRadio
 		class GroupHasRadio {};
 		
-		// [object, searchRadius, precision, sortingOrder] call VCM_fnc_Heights;
+		// [object, searchRadius, precision, sortingOrder] call VCM_fnc_Heights
 		class Heights {};
 		
-		// [group, searchDistance] call VCM_fnc_EmptyStatic;
+		// [group, searchDistance] call VCM_fnc_EmptyStatic
 		class EmptyStatic {};
 	};
 	
@@ -284,6 +293,9 @@ class VCOM
 		// [unit, source, damage, instigator] call VCM_fnc_AIHIT;
 		class AIHIT {};
 		
+		// unit spawn VCM_fnc_AISUPPRESSION
+		class AISUPPRESSION {};
+		
 		// _group call VCM_fnc_FSMGetSuppression;
 		class FSMGetSuppression {};
 		
@@ -298,6 +310,15 @@ class VCOM
 	};
 };
 
+class KK
+{
+	// Killzone_Kid functions
+	class KK_Functions
+	{
+		file = "Vcom\Functions\KK_Functions";
+		class inString {};
+	};
+};
 
 class RYD
 {

@@ -1,0 +1,366 @@
+/*%FSM<COMPILE "D:\Games\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, SQUADBEHAVIOUR">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"BEGIN",0,250,-42.938965,-108.784554,47.061035,-58.784554,0.000000,"BEGIN"};
+item1[] = {"EXIT_CHECKS",4,218,-140.587189,-19.607719,-50.587189,30.392281,100.000000,"EXIT" \n "CHECKS"};
+item2[] = {"EXIT",1,250,-288.964264,-19.804794,-198.964233,30.195175,0.000000,"EXIT"};
+item3[] = {"CONTINUE",8,218,-42.260162,-19.432175,47.739838,30.567825,0.000000,"CONTINUE"};
+item4[] = {"SITREP",2,250,-41.971741,64.335068,48.028275,114.335068,0.000000,"SITREP"};
+item5[] = {"NORMAL",4,218,-133.149765,145.657944,-43.149765,195.657944,20.000000,"NORMAL"};
+item6[] = {"UNDER_FIRE",4,218,50.216606,144.790146,140.216614,194.790146,40.000000,"UNDER FIRE"};
+item7[] = {"CQC",4,218,141.991913,144.624390,231.991913,194.624390,50.000000,"CQC"};
+item8[] = {"WAIT",4,218,-41.510422,327.461853,48.489578,377.461853,0.000000,"WAIT"};
+item9[] = {"AWARE",2,250,-133.352570,229.765625,-43.352539,279.765625,0.000000,"AWARE"};
+item10[] = {"COMBAT",2,250,49.976898,229.708115,139.976913,279.708130,0.000000,"COMBAT"};
+item11[] = {"COMBAT__LIMIT_SP",2,4346,142.024902,229.758530,232.024902,279.758575,0.000000,"COMBAT," \n "LIMIT SPEED"};
+item12[] = {"",7,210,234.363281,348.426697,242.363281,356.426666,0.000000,""};
+item13[] = {"",7,210,234.778503,85.319016,242.778503,93.319016,0.000000,""};
+item14[] = {"SAFE",8,218,-224.273315,146.031937,-134.273315,196.031937,10.000000,"SAFE"};
+item15[] = {"STARTING_BEHAVIO",2,250,-223.788803,229.820999,-133.788773,279.820984,0.000000,"STARTING" \n "BEHAVIOUR"};
+item16[] = {"ENEMY_AIR",4,218,-41.383606,145.079788,48.616394,195.079788,30.000000,"ENEMY" \n "AIR"};
+item17[] = {"STEALTH",2,250,-41.711273,229.268814,48.288742,279.268799,0.000000,"STEALTH"};
+link0[] = {0,1};
+link1[] = {0,3};
+link2[] = {1,2};
+link3[] = {3,4};
+link4[] = {4,1};
+link5[] = {4,5};
+link6[] = {4,6};
+link7[] = {4,7};
+link8[] = {4,14};
+link9[] = {4,16};
+link10[] = {5,9};
+link11[] = {6,10};
+link12[] = {7,11};
+link13[] = {8,12};
+link14[] = {9,8};
+link15[] = {10,8};
+link16[] = {11,8};
+link17[] = {12,13};
+link18[] = {13,4};
+link19[] = {14,15};
+link20[] = {15,8};
+link21[] = {16,17};
+link22[] = {17,8};
+globals[] = {0.000000,0,0,0,0,640,480,1,21,6316128,1,-144.801666,378.629730,768.677002,-53.716152,527,828,1};
+window[] = {2,-1,-1,-32180,-32000,818,-1101,-276,59,3,545};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "SQUADBEHAVIOUR";
+        class States
+        {
+                /*%FSM<STATE "BEGIN">*/
+                class BEGIN
+                {
+                        name = "BEGIN";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"private _group = _this;" \n
+                         "private _leader = leader _group;" \n
+                         "private _units = units _group;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "EXIT_CHECKS">*/
+                                class EXIT_CHECKS
+                                {
+                                        itemno = 1;
+                                        priority = 100.000000;
+                                        to="EXIT";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_units findIf {isPlayer _x} != -1 ||" \n
+                                         "{_group getVariable [""VCM_DISABLE"", false]} ||" \n
+                                         "{_units findIf {alive _x} isEqualTo -1} ||" \n
+                                         "{!(VCM_ACTIVE) || !(side _group in VCM_SIDES)}"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "CONTINUE">*/
+                                class CONTINUE
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="SITREP";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"private _startingBehaviour = behaviour _leader;" \n
+                                         "private _t = time;" \n
+                                         "private _lastContact = -600;" \n
+                                         "private _lastCasualty = -600;" \n
+                                         "private _prevSituation = """";" \n
+                                         "private _situation = """";" \n
+                                         "" \n
+                                         "_group setVariable [""VCM_BEHAVIOURFSM"", _thisFSM, VCM_DEBUG];" \n
+                                         "" \n
+                                         "_group enableAttack false;" \n
+                                         "{_x disableAI ""AUTOCOMBAT""} forEach _units;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "EXIT">*/
+                class EXIT
+                {
+                        name = "EXIT";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/"{_x enableAI ""AUTOCOMBAT""} forEach _units;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "SITREP">*/
+                class SITREP
+                {
+                        name = "SITREP";
+                        itemno = 4;
+                        init = /*%FSM<STATEINIT""">*/"_units = units _group;" \n
+                         "_leader = leader _group;" \n
+                         "_t = time;" \n
+                         "_prevSituation = _situation;" \n
+                         "_situation = _group call VCM_fnc_CheckSituation;" \n
+                         "" \n
+                         "// Regroup, get back up to speed" \n
+                         "if (!(_prevSituation isEqualTo _situation) && {_prevSituation isEqualTo ""CQC""}) then " \n
+                         "{" \n
+                         "	_group enableAttack false;" \n
+                         "	systemChat format [""VCOM: %1 EXITING CQC"", _group];" \n
+                         "	{" \n
+                         "		if (random 10 > 8) then " \n
+                         "		{" \n
+                         "			_x commandFollow _leader" \n
+                         "		}" \n
+                         "		else" \n
+                         "		{" \n
+                         "			_x doFollow _leader" \n
+                         "		};" \n
+                         "		_x forceSpeed -1;" \n
+                         "	} forEach _units;" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "EXIT_CHECKS">*/
+                                class EXIT_CHECKS
+                                {
+                                        itemno = 1;
+                                        priority = 100.000000;
+                                        to="EXIT";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_units findIf {isPlayer _x} != -1 ||" \n
+                                         "{_group getVariable [""VCM_DISABLE"", false]} ||" \n
+                                         "{_units findIf {alive _x} isEqualTo -1} ||" \n
+                                         "{!(VCM_ACTIVE) || !(side _group in VCM_SIDES)}"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "CQC">*/
+                                class CQC
+                                {
+                                        itemno = 7;
+                                        priority = 50.000000;
+                                        to="COMBAT__LIMIT_SP";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!(_situation isEqualTo ""GARRISON"" || _situation isEqualTo ""LGARRISON"" || _situation isEqualTo ""PREGARRISON"") &&" \n
+                                         "{_group call VCM_fnc_isCQC}"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "UNDER_FIRE">*/
+                                class UNDER_FIRE
+                                {
+                                        itemno = 6;
+                                        priority = 40.000000;
+                                        to="COMBAT";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_units findIf {[getSuppression _x] param [0, 1] > 0.05} != -1) ||" \n
+                                         "{_units findIf {(_x getVariable [""VCMLASTFIRED"", -60]) + 5 > time} != -1} ||" \n
+                                         "{!alive _leader}"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "ENEMY_AIR">*/
+                                class ENEMY_AIR
+                                {
+                                        itemno = 16;
+                                        priority = 30.000000;
+                                        to="STEALTH";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_leader call VCM_fnc_KnownEnemyArray) findIf {vehicle _x isKindOf ""AIR"" && {canFire vehicle _x}}"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "NORMAL">*/
+                                class NORMAL
+                                {
+                                        itemno = 5;
+                                        priority = 20.000000;
+                                        to="AWARE";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time < _lastContact + 300"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "SAFE">*/
+                                class SAFE
+                                {
+                                        itemno = 14;
+                                        priority = 10.000000;
+                                        to="STARTING_BEHAVIO";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "AWARE">*/
+                class AWARE
+                {
+                        name = "AWARE";
+                        itemno = 9;
+                        init = /*%FSM<STATEINIT""">*/"_group setBehaviour ""AWARE"";"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "WAIT">*/
+                                class WAIT
+                                {
+                                        itemno = 8;
+                                        priority = 0.000000;
+                                        to="SITREP";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _t + 5"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "COMBAT">*/
+                class COMBAT
+                {
+                        name = "COMBAT";
+                        itemno = 10;
+                        init = /*%FSM<STATEINIT""">*/"private _lastContact = time;" \n
+                         "_group setBehaviour ""COMBAT"";" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "WAIT">*/
+                                class WAIT
+                                {
+                                        itemno = 8;
+                                        priority = 0.000000;
+                                        to="SITREP";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _t + 5"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "COMBAT__LIMIT_SP">*/
+                class COMBAT__LIMIT_SP
+                {
+                        name = "COMBAT__LIMIT_SP";
+                        itemno = 11;
+                        init = /*%FSM<STATEINIT""">*/"private _lastContact = time;" \n
+                         "{" \n
+                         "	private _oP = objectParent _x;" \n
+                         "	if (isNull _oP) then" \n
+                         "	{" \n
+                         "		_x forceSpeed 2.5; // Move in tactical pace (weapons raised)" \n
+                         "	} else" \n
+                         "	{" \n
+                         "		if (_oP isKindOf ""LAND"") then" \n
+                         "		{" \n
+                         "			_x forceSpeed 2; // Move vehicles slowly" \n
+                         "		};" \n
+                         "	};" \n
+                         "} forEach _units;" \n
+                         "if (!(_situation isEqualTo ""CQC"") && {!(_situation isEqualTo ""GARRISON"") && !(_situation isEqualTo ""LGARRISON"") && !(_situation isEqualTo ""PREGARRISON"")}) then " \n
+                         "{" \n
+                         "	[_group, ""CQC""] call VCM_fnc_SetSituation;" \n
+                         "	_group call VCM_fnc_SetCQC;" \n
+                         "	systemchat ""here"";" \n
+                         "};" \n
+                         "_group setBehaviour ""COMBAT"";" \n
+                         "_group enableAttack true;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "WAIT">*/
+                                class WAIT
+                                {
+                                        itemno = 8;
+                                        priority = 0.000000;
+                                        to="SITREP";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _t + 5"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "STARTING_BEHAVIO">*/
+                class STARTING_BEHAVIO
+                {
+                        name = "STARTING_BEHAVIO";
+                        itemno = 15;
+                        init = /*%FSM<STATEINIT""">*/"_group setBehaviour _startingBehaviour;" \n
+                         "if ((speedMode _group) isEqualTo ""FULL"") then {_group setSpeedMode ""NORMAL""};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "WAIT">*/
+                                class WAIT
+                                {
+                                        itemno = 8;
+                                        priority = 0.000000;
+                                        to="SITREP";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _t + 5"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "STEALTH">*/
+                class STEALTH
+                {
+                        name = "STEALTH";
+                        itemno = 17;
+                        init = /*%FSM<STATEINIT""">*/"_group setBehaviour ""STEALTH"";"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "WAIT">*/
+                                class WAIT
+                                {
+                                        itemno = 8;
+                                        priority = 0.000000;
+                                        to="SITREP";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _t + 5"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="BEGIN";
+        finalStates[] =
+        {
+                "EXIT",
+        };
+};
+/*%FSM</COMPILE>*/

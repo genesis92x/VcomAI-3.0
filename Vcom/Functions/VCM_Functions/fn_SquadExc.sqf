@@ -13,5 +13,5 @@
 		NOTHING
 */
 private _fsmHandle = _this getVariable "VCM_SQUADFSM";
-if (isNil "_fsmHandle") then {_this spawn VCM_fnc_SQUADBEH};
+if (isNil "_fsmHandle") then {_this spawn VCM_fnc_SQUADTACTICS};
 VcmAI_ActiveList pushback _this;

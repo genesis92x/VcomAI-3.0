@@ -6,13 +6,14 @@
 
 	Parameter(s):
 		0: GROUP - Group to generate waypoints for
-		1: OBJECT - Closest enemy
+		1: OBJECT - OPTIONAL Closest enemy
 
 	Returns:
 		NOTHING
 */
 params ["_group", "_closestEnemy"];
 private _leader = leader _group;
+
 if (isNil "_closestEnemy") then 
 {
 	_closestEnemy = _leader findNearestEnemy _leader;

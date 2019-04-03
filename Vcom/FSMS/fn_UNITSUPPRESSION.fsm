@@ -1,4 +1,4 @@
-/*%FSM<COMPILE "C:\Program Files (x86)\Steam\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, fn_UNITSUPPRESSION">*/
+/*%FSM<COMPILE "D:\Games\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, fn_UNITSUPPRESSION">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"START",0,250,75.331299,-78.655457,165.331299,-28.655457,0.000000,"START"};
@@ -7,18 +7,16 @@ item2[] = {"TRUE",8,218,-37.326294,-78.338959,52.673706,-28.338959,0.000000,"TRU
 item3[] = {"EXIT",1,250,200.000000,-175.000000,300.000000,-125.000000,0.000000,"EXIT"};
 item4[] = {"CHECK_SUPPRESSIO",2,250,-37.794777,-170.197464,52.205238,-120.197456,0.000000,"CHECK" \n "SUPPRESSION"};
 item5[] = {"_",-1,250,-107.927109,-146.077637,0.000000,-146.077637,0.000000,""};
-item6[] = {"UP",8,218,-219.143295,-290.917419,-129.143295,-240.917435,10.000000,"UP"};
-item7[] = {"MIDDLE",4,218,-128.628998,-290.745880,-38.628998,-240.745880,20.000000,"MIDDLE"};
-item8[] = {"DOWN",4,218,-37.522278,-291.324860,52.477722,-241.324860,30.000000,"DOWN"};
-item9[] = {"CQC",4,218,144.832779,-290.831512,234.832764,-240.831512,80.000000,"CQC"};
-item10[] = {"PINNED",4,218,53.253540,-291.423279,143.253540,-241.423279,40.000000,"PINNED"};
-item11[] = {"TIMER",2,250,144.795547,-403.282227,234.795578,-353.282227,0.000000,"TIMER"};
-item12[] = {"EXIT_TIMER",4,4314,287.142822,-289.414276,377.142822,-239.414276,1.000000,"EXIT" \n "TIMER"};
-item13[] = {"DO_NOTHING",8,218,144.796112,-510.575348,234.796112,-460.575378,0.000000,"DO" \n "NOTHING"};
-item14[] = {"VCOM_SUPPRESSION",-1,250,-275.000000,-150.000000,-125.000000,150.000000,0.000000,"VCOM SUPPRESSION" \n "" \n "//TODO - INSERT INFO"};
-item15[] = {"__1",2,250,-128.349396,-401.721527,-38.349380,-351.721527,0.000000,""};
-item16[] = {"REGROUP",4,218,11.324982,-453.061310,101.324982,-403.061310,10.000000,"REGROUP"};
-item17[] = {"REGROUPED",8,218,11.624779,-402.561615,101.624786,-352.561646,0.000000,"REGROUPED"};
+item6[] = {"TRUE",8,218,-219.143295,-290.917419,-129.143295,-240.917435,10.000000,"TRUE"};
+item7[] = {"Continue",8,218,-37.334290,-439.916870,52.665710,-389.916901,0.000000,"Continue"};
+item8[] = {"UNDER_FIRE",4,218,-37.522278,-291.324860,52.477722,-241.324860,30.000000,"UNDER FIRE"};
+item9[] = {"IN_CQC",4,218,-127.994553,-290.831512,-37.994568,-240.831512,80.000000,"IN CQC"};
+item10[] = {"",7,210,-129.233978,-418.856445,-121.233978,-410.856445,0.000000,""};
+item11[] = {"TIMER",2,250,147.667435,-440.616486,237.667465,-390.616486,0.000000,"TIMER"};
+item12[] = {"EXIT_TIMER",4,218,147.378662,-284.627838,237.378662,-234.627838,1.000000,"EXIT" \n "TIMER"};
+item13[] = {"VCOM_SUPPRESSION",-1,250,-275.000000,-150.000000,-125.000000,150.000000,0.000000,"VCOM SUPPRESSION" \n "" \n "CURRENTLY NOT ACTIVE"};
+item14[] = {"GO_AUTO",2,250,-169.447540,-373.017090,-79.447510,-323.017090,0.000000,"GO AUTO"};
+item15[] = {"GO_PRONE",2,250,-36.384399,-372.059784,53.615616,-322.059784,0.000000,"GO PRONE"};
 version=1;
 class LayoutItems
 {
@@ -31,7 +29,7 @@ class LayoutItems
 			lStyle=1;
 		};
 	};
-	class Item14
+	class Item13
 	{
 		class ItemInfo
 		{
@@ -48,25 +46,19 @@ link2[] = {1,3};
 link3[] = {2,4};
 link4[] = {4,1};
 link5[] = {4,6};
-link6[] = {4,7};
-link7[] = {4,8};
-link8[] = {4,9};
-link9[] = {4,10};
-link10[] = {6,15};
-link11[] = {7,15};
-link12[] = {8,15};
-link13[] = {9,15};
-link14[] = {10,15};
-link15[] = {11,12};
-link16[] = {11,13};
-link17[] = {12,4};
-link18[] = {13,11};
-link19[] = {15,16};
-link20[] = {15,17};
-link21[] = {16,11};
-link22[] = {17,11};
-globals[] = {0.000000,0,0,0,0,640,480,1,27,6316128,1,-169.683044,342.466461,168.918396,-677.324463,535,884,1};
-window[] = {2,-1,-1,-1,-1,982,410,1084,265,3,553};
+link6[] = {4,8};
+link7[] = {4,9};
+link8[] = {6,14};
+link9[] = {7,11};
+link10[] = {8,15};
+link11[] = {9,14};
+link12[] = {10,7};
+link13[] = {11,12};
+link14[] = {12,4};
+link15[] = {14,10};
+link16[] = {15,7};
+globals[] = {0.000000,0,0,0,0,640,480,1,32,6316128,1,-327.392792,184.756744,168.918396,-677.324463,535,884,1};
+window[] = {2,-1,-1,-1,-1,925,208,882,208,3,553};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -202,174 +194,37 @@ class FSM
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
-                                /*%FSM<LINK "CQC">*/
-                                class CQC
+                                /*%FSM<LINK "IN_CQC">*/
+                                class IN_CQC
                                 {
                                         itemno = 9;
                                         priority = 80.000000;
-                                        to="__1";
+                                        to="GO_AUTO";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"(_group call VCM_fnc_CheckSituation) isEqualTo ""CQC"" || " \n
+                                        condition=/*%FSM<CONDITION""">*/"_isGarrison ||" \n
+                                         "{(_group call VCM_fnc_CheckSituation) isEqualTo ""CQC""} || " \n
                                          "{behaviour _unit isEqualTo ""STEALTH""} ||" \n
                                          "{!isNull (_unit getVariable [""bis_fnc_moduleRemoteControl_owner"", objNull])}"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/"//_unit setUnitPos ""AUTO"";" \n
-                                         "" \n
-                                         "_t = time;"/*%FSM</ACTION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
-                                /*%FSM<LINK "PINNED">*/
-                                class PINNED
-                                {
-                                        itemno = 10;
-                                        priority = 40.000000;
-                                        to="__1";
-                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_slowSuppression > 0.9"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/"if (random 10 > 3 && (_stance isEqualTo ""STAND"" || _stance isEqualTo ""CROUCH"") && !(_isGarrison)) then " \n
-                                         "{" \n
-                                         "	if (_stance isEqualTo ""STAND"") then " \n
-                                         "	{" \n
-                                         "		//Standing" \n
-                                         "		switch _weaponType do" \n
-                                         "		{" \n
-                                         "			case ""primary"": {_unit playMoveNow ""AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon""};" \n
-                                         "			case ""handgun"": {_unit playMoveNow ""AmovPercMsprSlowWpstDf_AmovPpneMstpSrasWpstDnon""};" \n
-                                         "		};" \n
-                                         "		" \n
-                                         "	}" \n
-                                         "	else" \n
-                                         "	{" \n
-                                         "		// Crouched" \n
-                                         "		switch _weaponType do" \n
-                                         "		{" \n
-                                         "			case ""primary"": {_unit playMoveNow ""AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon""};" \n
-                                         "			case ""handgun"": {_unit playMoveNow ""AmovPercMsprSlowWpstDf_AmovPpneMstpSrasWpstDnon""};" \n
-                                         "		};" \n
-                                         "	};" \n
-                                         "	//_unit setUnitPos ""DOWN"";" \n
-                                         "}" \n
-                                         "else" \n
-                                         "{" \n
-                                         "	//_unit setUnitPos ""DOWN"";" \n
-                                         "};" \n
-                                         "/*" \n
-                                         "_animationState = animationState _unit;" \n
-                                         "if !(_animationState == ""AadjPpneMstpSrasWrflDdown"" || _animationState == ""AadjPpneMstpSrasWpstDdown"") then" \n
-                                         "{" \n
-                                         "	// Go as low as possible" \n
-                                         "	switch _weaponType do" \n
-                                         "	{" \n
-                                         "		case ""primary"": {_unit playMoveNow ""AadjPpneMstpSrasWrflDdown""};" \n
-                                         "		case ""sidearm"": {_unit playMoveNow ""AadjPpneMstpSrasWpstDdown""};" \n
-                                         "	};" \n
-                                         "	" \n
-                                         "	//return to normal animation" \n
-                                         "	_unit spawn " \n
-                                         "	{" \n
-                                         "		sleep 5 + random 10;" \n
-                                         "		private _animationState = animationState _this;" \n
-                                         "		if (_animationState == ""AadjPpneMstpSrasWrflDdown"") then" \n
-                                         "		{" \n
-                                         "			_this playMoveNow ""AmovPpneMevaSlowWrflDf"";" \n
-                                         "		};" \n
-                                         "		if (_animationState == ""AadjPpneMstpSrasWpstDdown"") then" \n
-                                         "		{" \n
-                                         "			_this playMoveNow ""AmovPpneMrunSlowWpstDf"";" \n
-                                         "		}" \n
-                                         "	};" \n
-                                         "};" \n
-                                         "*/" \n
-                                         "" \n
-                                         "_t = time;"/*%FSM</ACTION""">*/;
-                                };
-                                /*%FSM</LINK>*/
-                                /*%FSM<LINK "DOWN">*/
-                                class DOWN
+                                /*%FSM<LINK "UNDER_FIRE">*/
+                                class UNDER_FIRE
                                 {
                                         itemno = 8;
                                         priority = 30.000000;
-                                        to="__1";
+                                        to="GO_PRONE";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_slowSuppression > 0.5 ||" \n
-                                         "{_unit getVariable [""VCM_MGGUNNER"", false] && {((_unit getVariable [""VCMLASTFIRED"", -7]) + 7) > time}}"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/"if (random 10 > 3 && (_stance isEqualTo ""STAND"" || _stance isEqualTo ""CROUCH"") && !(_isGarrison)) then " \n
-                                         "{" \n
-                                         "	if (_stance isEqualTo ""STAND"") then " \n
-                                         "	{" \n
-                                         "		//Standing" \n
-                                         "		switch _weapontype do" \n
-                                         "		{" \n
-                                         "			case ""primary"": " \n
-                                         "			{" \n
-                                         "				if (random 10 > 3) then" \n
-                                         "				{" \n
-                                         "					// Dive forward" \n
-                                         "					_unit playMoveNow ""AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon"";" \n
-                                         "				}" \n
-                                         "				else" \n
-                                         "				{" \n
-                                         "					// Fall to the side" \n
-                                         "					_unit playMoveNow selectRandom [""AmovPercMstpSrasWrflDnon_AadjPpneMstpSrasWrflDright"", ""AmovPercMstpSrasWrflDnon_AadjPpneMstpSrasWrflDleft""];" \n
-                                         "					_unit spawn {sleep 3 + random 3; _this playMoveNow ""AmovPpneMevaSlowWrflDf""};" \n
-                                         "				};" \n
-                                         "			};" \n
-                                         "			case ""handgun"": {_unit playMoveNow ""AmovPercMsprSlowWpstDf_AmovPpneMstpSrasWpstDnon""};" \n
-                                         "		};" \n
-                                         "		" \n
-                                         "	}" \n
-                                         "	else" \n
-                                         "	{" \n
-                                         "		// Crouched" \n
-                                         "		switch _weapontype do" \n
-                                         "		{" \n
-                                         "			case ""primary"": {_unit playMoveNow ""AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon""};" \n
-                                         "			case ""handgun"": {_unit playMoveNow ""AmovPercMsprSlowWpstDf_AmovPpneMstpSrasWpstDnon""};" \n
-                                         "		};" \n
-                                         "	};" \n
-                                         "	//_unit setUnitPos ""DOWN"";" \n
-                                         "}" \n
-                                         "else" \n
-                                         "{" \n
-                                         "	//_unit setUnitPos ""DOWN""" \n
-                                         "};" \n
-                                         "" \n
-                                         "_t = time;"/*%FSM</ACTION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_slowSuppression > 0.5 "/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
-                                /*%FSM<LINK "MIDDLE">*/
-                                class MIDDLE
-                                {
-                                        itemno = 7;
-                                        priority = 20.000000;
-                                        to="__1";
-                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_slowSuppression > 0.1 ||" \n
-                                         "{((_unit getVariable [""VCMLASTFIRED"", -7]) + 7) > time}"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/"if (random 10 > 3 && _stance isEqualTo ""STAND"" && !(_isGarrison)) then " \n
-                                         "{" \n
-                                         "	switch _weapontype do" \n
-                                         "	{" \n
-                                         "		case ""primary"": " \n
-                                         "		{" \n
-                                         "			_unit playMoveNow selectRandom [""AmovPercMevaSrasWrflDfr_AmovPknlMstpSrasWrflDnon"", ""AmovPercMevaSrasWrflDf_AmovPknlMstpSrasWrflDnon"", ""AmovPercMevaSrasWrflDfl_AmovPknlMstpSrasWrflDnon""]" \n
-                                         "		};" \n
-                                         "	};" \n
-                                         "	//_unit setUnitPos ""Middle"";" \n
-                                         "}" \n
-                                         "else" \n
-                                         "{" \n
-                                         "	//_unit setUnitPos ""Middle""" \n
-                                         "};" \n
-                                         "" \n
-                                         "_t = time;"/*%FSM</ACTION""">*/;
-                                };
-                                /*%FSM</LINK>*/
-                                /*%FSM<LINK "UP">*/
-                                class UP
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
                                 {
                                         itemno = 6;
                                         priority = 10.000000;
-                                        to="__1";
+                                        to="GO_AUTO";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"if (random 10 > 7 && {!(_isGarrison)} && {_stance isEqualTo ""PRONE""} && {_weaponType isEqualTo ""primary""}) then " \n
@@ -406,10 +261,24 @@ class FSM
                                         action=/*%FSM<ACTION""">*/"_slowSuppression = _slowSuppression - (0.025 + random 0.025);"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
-                                /*%FSM<LINK "DO_NOTHING">*/
-                                class DO_NOTHING
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "GO_AUTO">*/
+                class GO_AUTO
+                {
+                        name = "GO_AUTO";
+                        itemno = 14;
+                        init = /*%FSM<STATEINIT""">*/"_unit setUnitPos ""AUTO"";" \n
+                         "" \n
+                         "_t = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Continue">*/
+                                class Continue
                                 {
-                                        itemno = 13;
+                                        itemno = 7;
                                         priority = 0.000000;
                                         to="TIMER";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
@@ -420,43 +289,65 @@ class FSM
                         };
                 };
                 /*%FSM</STATE>*/
-                /*%FSM<STATE "__1">*/
-                class __1
+                /*%FSM<STATE "GO_PRONE">*/
+                class GO_PRONE
                 {
-                        name = "__1";
+                        name = "GO_PRONE";
                         itemno = 15;
-                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        init = /*%FSM<STATEINIT""">*/"if (random 10 > 3 && {!(velocityModelSpace _unit isEqualTo [0,0,0])} && {_stance isEqualTo ""STAND"" || _stance isEqualTo ""CROUCH""} && !(_isGarrison)) then " \n
+                         "{" \n
+                         "	if (_stance isEqualTo ""STAND"") then " \n
+                         "	{" \n
+                         "		//Standing" \n
+                         "		switch _weapontype do" \n
+                         "		{" \n
+                         "			case ""primary"": " \n
+                         "			{" \n
+                         "				if (random 10 > 3) then" \n
+                         "				{" \n
+                         "					// Dive forward" \n
+                         "					_unit playMoveNow ""AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon"";" \n
+                         "				}" \n
+                         "				else" \n
+                         "				{" \n
+                         "					// Fall to the side" \n
+                         "					_unit playMoveNow selectRandom [""AmovPercMstpSrasWrflDnon_AadjPpneMstpSrasWrflDright"", ""AmovPercMstpSrasWrflDnon_AadjPpneMstpSrasWrflDleft""];" \n
+                         "					_unit spawn {sleep 3 + random 3; _this playMoveNow ""AmovPpneMevaSlowWrflDf""};" \n
+                         "				};" \n
+                         "			};" \n
+                         "			case ""handgun"": {_unit playMoveNow ""AmovPercMsprSlowWpstDf_AmovPpneMstpSrasWpstDnon""};" \n
+                         "		};" \n
+                         "		" \n
+                         "	}" \n
+                         "	else" \n
+                         "	{" \n
+                         "		// Crouched" \n
+                         "		switch _weapontype do" \n
+                         "		{" \n
+                         "			case ""primary"": {_unit playMoveNow ""AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon""};" \n
+                         "			case ""handgun"": {_unit playMoveNow ""AmovPercMsprSlowWpstDf_AmovPpneMstpSrasWpstDnon""};" \n
+                         "		};" \n
+                         "	};" \n
+                         "	_unit setUnitPos ""DOWN"";" \n
+                         "}" \n
+                         "else" \n
+                         "{" \n
+                         "	_unit setUnitPos ""DOWN""" \n
+                         "};" \n
+                         "" \n
+                         "_t = time;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
-                                /*%FSM<LINK "REGROUP">*/
-                                class REGROUP
+                                /*%FSM<LINK "Continue">*/
+                                class Continue
                                 {
-                                        itemno = 16;
-                                        priority = 10.000000;
-                                        to="TIMER";
-                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"(_unit distance _leader) > 70 && " \n
-                                         "{_suppression < 0.3} &&" \n
-                                         "/*{isNull objectParent _unit} &&*///already checked for" \n
-                                         "{_unit distance (_unit findNearestEnemy _unit) > 150}"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/"/*" \n
-                                         "_unit disableAI ""AUTOTARGET"";" \n
-                                         "_unit disableAI ""TARGET"";" \n
-                                         "_unit doWatch ObjNull;" \n
-                                         "*/"/*%FSM</ACTION""">*/;
-                                };
-                                /*%FSM</LINK>*/
-                                /*%FSM<LINK "REGROUPED">*/
-                                class REGROUPED
-                                {
-                                        itemno = 17;
+                                        itemno = 7;
                                         priority = 0.000000;
                                         to="TIMER";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/"_unit enableAI ""AUTOTARGET"";" \n
-                                         "_unit enableAI ""TARGET"";"/*%FSM</ACTION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                         };

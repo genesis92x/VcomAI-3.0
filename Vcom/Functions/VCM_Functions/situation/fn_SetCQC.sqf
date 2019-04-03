@@ -6,14 +6,18 @@
 
 	Parameter(s):
 		0: GROUP - Group to set the situation of
-		1: OBJECT - Nearest enemy
+		1: OBJECT - OPTIONAL Nearest enemy
 
 	Returns:
 		NOTHING
 */
 params ["_group", "_nearestEnemy"];
 private _units = units _group;
-{_x enableAI "AUTOCOMBAT"} forEach _units;
+
+if (isNil "_nearestEnemy") then 
+{
+	_nearestEnemy = _leader findNearestEnemy _leader;
+};
 
 [_group, _nearestEnemy] call VCM_fnc_CQCMovement;
 
@@ -32,14 +36,12 @@ _group spawn //Handle to eventually exit script
 			_group enableAttack false; 
 			{_x doFollow _leader} forEach _units;
 		};
-		private _nearestEnemy = _leader findNearestEnemy _leader;
-		if (!isNull _nearestEnemy && {_nearestEnemy distance _leader > 120}) exitWith 
+		if !(_group call VCM_fnc_IsCQC) exitWith 
 		{
 			[_group, "READY"] call VCM_fnc_SetSituation;
 			_group enableAttack false;
 			{
 				_x doFollow (leader _group);
-				_x disableAI "AUTOCOMBAT";
 			} forEach _units;
 			_group setSpeedMode "NORMAL";
 		};
