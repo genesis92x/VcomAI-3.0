@@ -31,7 +31,7 @@ if (_this isEqualType []) then
 		private _unitSide = side (group _unit);
 		{
 			
-			if ([_unitSide, (side _x)] call BIS_fnc_sideIsEnemy && {(_unit distance2D _x) < _range}) then 
+			if ((_unitSide getFriend side _x) < 0.6 && {(_unit distance2D _x) < _range}) then 
 			{
 				_array pushback _x;
 			};
@@ -50,7 +50,7 @@ if (_this isEqualType []) then
 		// Find eligible units
 		{
 			
-			if ([_unitSide, (side _x)] call BIS_fnc_sideIsEnemy) then 
+			if ((_unitSide getFriend side _x) < 0.6) then 
 			{
 				_range2d = (_unit distance2D _x);
 				if (_range2d < _range) then
@@ -71,7 +71,7 @@ else
 	private _unitSide = side (group _this);
 	{
 		
-		if ([_unitSide, (side _x)] call BIS_fnc_sideIsEnemy) then 
+		if ((_unitSide getFriend side _x) < 0.6) then 
 		{
 			_array pushback _x;
 		};
