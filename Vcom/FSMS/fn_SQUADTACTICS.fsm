@@ -4,7 +4,7 @@
 item0[] = {"Begin_State",0,250,50.000000,700.000000,150.000000,750.000000,0.000000,"Begin State"};
 item1[] = {"Cond",4,218,-100.000000,700.000000,0.000000,750.000000,50.000000,"Cond"};
 item2[] = {"Exit_FSM",1,250,-250.000000,700.000000,-175.000000,750.000000,0.000000,"Exit FSM"};
-item3[] = {"Continue",8,218,50.000000,575.000000,150.000000,625.000000,0.000000,"Continue"};
+item3[] = {"Continue",8,4314,50.000000,575.000000,150.000000,625.000000,0.000000,"Continue"};
 item4[] = {"Start_Point",2,250,50.000000,400.000000,150.000000,450.000000,0.000000,"Start Point"};
 item5[] = {"Exit_Cond",4,218,147.598297,530.021851,247.598297,580.021851,700.000000,"Exit Cond"};
 item6[] = {"Exit_FSM_1",1,250,610.862549,661.845093,685.862671,711.845093,0.000000,"Exit FSM"};
@@ -37,7 +37,7 @@ item32[] = {"TwoMinuteChecks",4,218,-400.000000,300.000000,-300.000000,350.00000
 item33[] = {"Two_Minute_Check",2,250,-400.000000,150.000000,-300.000000,200.000000,0.000000,"Two Minute Checks"};
 item34[] = {"SatchelPlant",4,218,900.000000,150.000000,1000.000000,200.000000,85.000000,"SatchelPlant"};
 item35[] = {"MinePlant",4,218,850.000000,125.000000,950.000000,175.000000,86.000000,"MinePlant"};
-item36[] = {"ArmStatics",4,4314,800.000000,100.000000,900.000000,150.000000,91.000000,"ArmStatics"};
+item36[] = {"ArmStatics",4,218,800.000000,100.000000,900.000000,150.000000,91.000000,"ArmStatics"};
 item37[] = {"Exit_Cond",4,218,675.000000,475.000000,775.000000,525.000000,700.000000,"Exit Cond"};
 item38[] = {"MOVE_UP",4,218,1100.717041,249.445923,1200.717041,299.445923,104.000000,"MOVE UP"};
 item39[] = {"Clear_Building",4,218,1150.770508,274.212921,1250.770508,324.212921,50.000000,"Clear Building"};
@@ -105,8 +105,8 @@ link58[] = {38,25};
 link59[] = {39,25};
 link60[] = {40,16};
 link61[] = {41,6};
-globals[] = {0.000000,0,0,0,0,640,480,2,624,6316128,1,291.900238,1475.590210,791.772583,-224.132294,1030,884,1};
-window[] = {2,-1,-1,-32000,-32000,1188,234,979,234,3,1048};
+globals[] = {0.000000,0,0,0,0,640,480,2,624,6316128,1,-384.986542,798.703369,791.772583,-224.132294,1030,884,1};
+window[] = {2,-1,-1,-1,-1,1110,156,901,156,3,1048};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -182,8 +182,6 @@ class FSM
                                          "			_x call VCM_fnc_UnitSetSkill;" \n
                                          "		};" \n
                                          "		" \n
-                                         "		_x setSkill [""COURAGE"", 0]; //Make AI more susceptible to suppression" \n
-                                         "		_x setSkill [""COMMANDING"", 0]; //Make AI take longer to share information" \n
                                          "		// Eventhandlers are added to the array _ehList in the format [unit, type, index] for later removal" \n
                                          "		_ehList pushBack [_x, ""Killed"", _x addEventHandler [""Killed"",{_this spawn VCM_fnc_ClstWarn;}]];" \n
                                          "		_ehList pushBack [_x, ""Hit"", _x addEventHandler [""Hit"",{_this call VCM_fnc_AIHIT;}]];" \n

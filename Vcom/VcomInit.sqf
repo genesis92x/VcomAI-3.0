@@ -65,46 +65,6 @@ VCMINITHANDLE = [] spawn
 			};
 		} foreach allGroups;
 		
-		{
-			private _fsmHandle = _x getVariable "VCM_BEHAVIOURFSM";
-			if 
-			(
-				(isNil {completedFSM _fsmHandle} || {completedFSM _fsmHandle}) && 
-				{local _x} && 
-				{simulationEnabled (leader _x)} && 
-				{(units _x) findIf {isPlayer _x} isEqualTo -1} && 
-				{(leader _x) isKindOf "Man"}
-			) then
-			{
-				private _grp = _x;
-				if !(((units _grp) findIf {alive _x}) isEqualTo -1) then
-				{
-					_grp spawn VCM_fnc_SQUADBEHAVIOUR;
-				};
-			};
-		} foreach allGroups;
-		
-		/*if (VCM_SUPPRESS) then
-		{
-			{
-				private _scriptHandle = _x getVariable "VCMSUPPRESSION";
-				if
-				(
-					(isNil {scriptDone _scriptHandle} || {scriptDone _scriptHandle}) &&
-					{isNull objectParent _x} &&
-					{local _x} &&
-					{simulationEnabled _x} &&
-					{!isPlayer _x} &&
-					{_x isKindOf "Man"} &&
-					{alive _x}
-				) then
-				{
-					private _handle = _x spawn VCM_fnc_AISUPPRESSION;
-					_x setVariable ["VCMSUPPRESSION", _handle, VCM_DEBUG];
-				};
-			} foreach allUnits;
-		};*/
-		
 		sleep 15;
 	};
 };

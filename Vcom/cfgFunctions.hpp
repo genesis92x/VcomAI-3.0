@@ -32,12 +32,6 @@ class VCOM
 			ext = ".fsm";
 		};
 		
-		// group spawn VCM_fnc_SQUADBEHAVIOUR
-		class SQUADBEHAVIOUR
-		{
-			ext = ".fsm";
-		};
-		
 		// [] spawn VCM_fnc_AIDRIVEBEHAVIOR
 		class AIDRIVEBEHAVIOR
 		{
@@ -50,11 +44,6 @@ class VCOM
 			ext = ".fsm";
 		};
 		
-		// unit spawn VCM_fnc_UNITSUPPRESSION
-		class UNITSUPPRESSION
-		{
-			ext = ".fsm";
-		};
 	};
 	
 	// Generic functions
@@ -287,23 +276,8 @@ class VCOM
 		// [unit, number] call VCM_fnc_AddSuppression;
 		class AddSuppression {};
 		
-		// [unit, number] call VCM_fnc_AddSuppressionNow;
-		class AddSuppressionNow {};
-		
 		// [unit, source, damage, instigator] call VCM_fnc_AIHIT;
 		class AIHIT {};
-		
-		// unit spawn VCM_fnc_AISUPPRESSION
-		class AISUPPRESSION {};
-		
-		// _group call VCM_fnc_FSMGetSuppression;
-		class FSMGetSuppression {};
-		
-		// _unit call VCM_fnc_GetSuppression
-		class GetSuppression {};
-		
-		// _group call VCM_fnc_GroupGetSuppression;
-		class GroupGetSuppression {};
 		
 		// _unit spawn VCM_fnc_SuppressionDebug;
 		class SuppressionDebug {};
