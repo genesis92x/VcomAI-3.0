@@ -4,10 +4,9 @@ class CfgFunctions
 };
 
 class Extended_PreInit_EventHandlers {
-	class VCM_CBASettings {
-		init = "call VCM_fnc_CBA_Settings";
-	};
+	VCM_CBASettings = call compile preprocessFileLineNumbers "Vcom\Functions\VCM_CBASettings.sqf";
 };
+
 class CfgRemoteExec
 {
 	// List of script functions allowed to be sent from client via remoteExec

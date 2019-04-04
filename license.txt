@@ -1,7 +1,0 @@
-Copyright 2018 genesis92x
-
-This work (VcomAI or the like) uses the license Arma Public License Share Alike (APL-SA)
-
-https://www.bohemia.net/community/licenses/arma-public-license-share-alike
-
-Addon was created "by player for players", source scripts you can freely modify, copy, "cannibalize", to use in your projects. It is released under APL-SA license. I'll be grateful for notification about each such usage.
