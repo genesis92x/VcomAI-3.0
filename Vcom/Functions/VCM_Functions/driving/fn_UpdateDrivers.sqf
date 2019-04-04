@@ -18,7 +18,7 @@ scopeName "main"; // Used to breakOut
 private _driverList = [];
 {
 	// Exit if limit for drivers have been reached
-	if (count _driverList > VCM_DLIMIT) then {_driverList breakOut "main";};
+	if ((count _driverList) > VCM_DLIMIT) then {_driverList breakOut "main";};
 	
 	private _driver = (driver _x);
 	
