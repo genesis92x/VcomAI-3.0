@@ -23,8 +23,8 @@ VCM_WARNDELAY = 	["CfgVcomSettings", "WarnDelay"] call BIS_fnc_getCfgData;
 VCM_STATICARMT = 	["CfgVcomSettings", "StaticArmTime"] call BIS_fnc_getCfgData;
 
 VCM_DRIVING = 		["CfgVcomSettings", "DrivingActivate"] call BIS_fnc_getCfgDataBool;
-VCM_DLIMIT = 		["CfgVcomSettings", "DriverLimit"] call BIS_fnc_getCfgData;
-VCM_DDELAY = 		["CfgVcomSettings", "DrivingDelay"] call BIS_fnc_getCfgData;
+VCM_DLIMIT = 		["CfgVcomSettings", "DriverLimit"] call BIS_fnc_getCfgData ; 
+VCM_DDELAY = 		(["CfgVcomSettings", "DrivingDelay"] call BIS_fnc_getCfgData / 1000); //Variable is in milliseconds due to absence of decimals
 VCM_DDIST = 		["CfgVcomSettings", "DrivingDist"] call BIS_fnc_getCfgData;
 
 
