@@ -134,6 +134,9 @@ class VCOM
 		// group call VCM_fnc_WyptChk;
 		class WyptChk {};	
 		
+		//group call VCM_fnc_VehicleCommandeer;
+		class vehiclecommandeer {};
+		
 	};		
 
 };
