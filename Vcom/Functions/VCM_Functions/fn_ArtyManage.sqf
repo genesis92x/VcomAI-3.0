@@ -10,10 +10,9 @@
 
 	Returns:
 		NOTHING
-	
-	Note: 
-		Deprecated in favour of Rydigiers "Fire for Effect: The God Of War"
 */
+
+private _ArtyGroupBool = false;
 
 {
 	private _veh = (vehicle _x);
@@ -27,7 +26,15 @@
 			if (_artyChk isEqualTo 1) then
 			{
 				VCM_ARTYLST pushback _veh;
+				_ArtyGroupBool = true;
 			};
 		};
+	}
+	else
+	{
+		_ArtyGroupBool = true;
 	};
 } foreach (units _this);
+
+
+_ArtyGroupBool

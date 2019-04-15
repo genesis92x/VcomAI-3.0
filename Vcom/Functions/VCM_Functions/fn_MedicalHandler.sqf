@@ -1,5 +1,5 @@
 /*
-	Author: Freddo
+	Author: Genesis
 
 	Description:
 		Makes group check medical status, and order medics about
@@ -13,27 +13,39 @@
 
 if !(VCM_MEDICALACTIVE) exitWith {};
 
-params ["_group"];
+params ["_group","_MedList"];
 private _units = units _group;
-private _medics = _group call VCM_fnc_RMedics;
-if (isNil "_medics") then {private _medics = []};
+private _Medics = _MedList;
 
 {
-	if (isNull objectParent _x && {damage _x != 0}) then 
+	if (getDammage _x > 0) then
 	{
-		[_x, _medics] spawn 
+		if !(_x call VCM_fnc_HealSelf) then
 		{
-			params ["_unit", "_medicArr"];
-			sleep random 10;
-			if !(_unit call VCM_fnc_HealSelf) then // VCM_fnc_HealSelf returns false if unit unable to heal self
+			if (count _Medics > 0) then
 			{
-				if (count _medicArr == 0) exitWith {};
-				private _medic = selectRandom _medicArr;
-				if !(_medic getVariable ["VCM_MBUSY", false]) then // Check if medic is busy
+			
+				private _FinalMedics = [];
 				{
-					[_medic ,_unit] call VCM_fnc_MedicHeal;
-				};
+					if !(_x getVariable ["VCM_MBUSY", false]) then
+					{
+						_FinalMedics pushback _x;
+					};
+				} foreach _Medics;
+				
+				private _Medic = [_FinalMedics,_x,true,"MedicalHandler"] call VCM_fnc_ClstObj;
+				[_Medic,_x] spawn VCM_fnc_MedicHeal;	
+			
 			};
 		};
 	};
-} forEach _units;
+} foreach _units;
+
+
+
+
+
+
+
+
+

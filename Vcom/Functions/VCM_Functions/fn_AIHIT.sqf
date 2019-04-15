@@ -38,8 +38,6 @@ if !(_GetUnitStance isEqualTo "DOWN") then
 		if (alive _unit) then 
 		{
 			_unit setUnitPos _Pos;
-			sleep 5;
-			if (alive _unit) then {_Unit setUnitPos "AUTO";};
 		};
 	};
 };

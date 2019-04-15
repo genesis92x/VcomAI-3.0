@@ -3,9 +3,6 @@ class CfgFunctions
 	#include "vcom\cfgFunctions.hpp"
 };
 
-class Extended_PreInit_EventHandlers {
-	VCM_CBASettings = call compile preprocessFileLineNumbers "Vcom\Functions\VCM_CBASettings.sqf";
-};
 
 class CfgRemoteExec
 {
@@ -25,4 +22,8 @@ class CfgRemoteExec
 	};
 	
 	
+};
+
+class Extended_PreInit_EventHandlers {
+	VCM_CBASettings = call compile preprocessFileLineNumbers "Vcom\Functions\VCM_CBASettings.sqf";
 };

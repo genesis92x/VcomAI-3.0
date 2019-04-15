@@ -23,7 +23,7 @@ private _buildingPositions = [];
 //Exit if no compatible buildings found
 if (_buildingPositions isEqualTo []) exitWith {};
 
-private _tempA = [selectRandom _buildingPositions] call BIS_fnc_buildingPositions;
+private _tempA = [(selectRandom _buildingPositions)] call BIS_fnc_buildingPositions;
 private _groupUnits = units _this;
 if (count _tempA > 0) then
 {
@@ -37,16 +37,10 @@ if (count _tempA > 0) then
 			{
 				params ["_leader","_buildingLocation"];
 				if (isNil "_buildingLocation") exitWith {};
-				while {(alive _leader) && {_leader distance _buildingLocation < 1.3}} do
+				while {(alive _leader) && {_leader distance2D _buildingLocation < 1.3}} do
 				{
 					sleep 3;
 					_leader doMove _buildingLocation;
-				};
-				_leader disableAI "PATH";
-				sleep 120;
-				if (alive _leader) then
-				{
-					_leader enableAI "PATH";
 				};
 			};
 			private _rmv = _tempA findIf {_buildingLocation isEqualTo _x};

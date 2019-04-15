@@ -23,7 +23,7 @@ private _Pilots = [];
 private _Crewmen = [];
 
 
-if (VCM_AI_VEH_CLASS_STEAL) then
+if (VCM_StealVeh) then
 {
 	
 	

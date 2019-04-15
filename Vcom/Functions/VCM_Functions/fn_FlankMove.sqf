@@ -29,7 +29,6 @@ if (isNull _nearestEnemy) then
 if (isNil "_nearestEnemy" || _nearestEnemy isEqualTo [0,0,0]) exitWith {};
 if ((vehicle _nearestEnemy) isKindOf "Air") exitWith {};
 
-_grp setBehaviour "COMBAT";
 //If they don't know about the enemy position, then just exit the function
 private _knows = _grp knowsAbout _nearestEnemy;
 if (_knows < 2) exitwith 

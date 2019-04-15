@@ -12,14 +12,30 @@
 	Returns:
 		NOTHING
 		
-	Note:
-		Deprecated in favour of Rydigiers "Fire for Effect: The God Of War"
+		
+		
+		
+		
+west reportRemoteTarget [TARGET, 3600];
+TARGET confirmSensorTarget [west, true];
+VLS fireAtTarget [TARGET, "weapon_vls_01"];		
+		
 */
 
-params ["_callGrp","_enemyGrp"];
+params ["_callGrp","_enemyGrp","_AvgKnw"];
 private _CallSide = (side _callGrp);
 
-//First let's remove any AI not actively in artillery pieces. Just in case something changed for them.
+private _LazClass = "LaserTargetE";
+switch (_CallSide) do 
+{
+	case (west): {_LazClass = "LaserTargetE";};
+	case (east): {_LazClass = "LaserTargetW";};
+	case (resistance): {_LazClass = "LaserTargetE";};
+};
+
+
+//First let's go ahead and make sure we clear any dead artillery units.
+private _RemoveList = [];
 
 {
 	private _veh = _x;
@@ -27,15 +43,20 @@ private _CallSide = (side _callGrp);
 	if !(isNil ("_class")) then 
 	{
 		private _artyChk = getNumber(configfile/"CfgVehicles"/_class/"artilleryScanner");	
-		if !(_artyChk isEqualTo 1) then
+		if (!(_artyChk isEqualTo 1) || !(alive _x)) then
 		{
-			VCM_ARTYLST deleteAt (VCM_ARTYLST findif {_veh isEqualTo _x});
+			_RemoveList pushBack _x;
 		};
 	};
-	
 } foreach VCM_ARTYLST;
 
-//Next let's only select AI units who are on our side or friendly.
+{
+		private _Num = _x;
+		private _Index = VCM_ARTYLST findIf {_x isEqualTo _Num};
+		VCM_ARTYLST deleteAt _Index;
+} foreach _RemoveList;
+
+//Let's find an artillery group that can provide support.
 private _artyArray = [];
 {
 	if ([(side _x),_CallSide] call BIS_fnc_sideIsFriendly && {side _x in VCM_ARTYSIDES}) then
@@ -44,38 +65,157 @@ private _artyArray = [];
 	};	
 } foreach VCM_ARTYLST;
 
+//There are no artillery units available!
 if (_artyArray isEqualTo []) exitWith {};
 
 //Now with our completed array, lets find positions that can support.
 private _clstGrp = [_artyArray,(leader _callGrp),true,"Arty1"] call VCM_fnc_ClstObj;
 if (isNil "_clstGrp") exitWith {};
 
-private _aGrpUnits = units (group _clstGrp);
-private _aVehGrpUnits = [];
-{_aVehGrpUnits pushback (vehicle _x)} foreach _aGrpUnits;
+//Now we need to see how much we know about the enemy.
 
-private _ammoArray = getArtilleryAmmo _aVehGrpUnits;
-if (isNil "_ammoArray") exitWith {};
+private _EnemyGrpLeader = leader _enemyGrp;
+//Find any friendlies within 50 meters.
+private _AllEmyUnits = _EnemyGrpLeader nearEntities [["Man","LandVehicle"], 50];
 
-private _randomAmmoArray = selectRandom _ammoArray;
-if (isNil "_randomAmmoArray") exitWith {};
+if (count _AllEmyUnits < 1) exitWith {};
 
 
-private _leaderE = leader _enemyGrp;
-private _continueFiring = (getPos _leaderE) inRangeOfArtillery [_aVehGrpUnits,_randomAmmoArray];
+//Now that we passed basic checks, let's collect more information to do the damage.
+private _VCnt = [];
+private _MinRDist = 0;
+private _MaxRDist = 0;
 
-if !(_continueFiring) exitWith {};
+private _RndNumber = 0;
 
-private _enemyGrproup = _enemyGrp;
-private _RoundsToFire = round (count (units _enemyGrproup)/4);
 
-if (_RoundsToFire < 2) then {_RoundsToFire = 2};
+switch (true) do 
+{
+	case (_AvgKnw >= 0 && {_AvgKnw < 10}): {_MinRDist = 100;_MaxRDist = 300;_RndNumber = 1;};
+	case (_AvgKnw >= 10 && {_AvgKnw < 20}): {_MinRDist = 90;_MaxRDist = 250;_RndNumber = 1;};
+	case (_AvgKnw >= 20 && {_AvgKnw < 30}): {_MinRDist = 80;_MaxRDist = 200;_RndNumber = 1;};
+	case (_AvgKnw >= 30 && {_AvgKnw < 40}): {_MinRDist = 70;_MaxRDist = 150;_RndNumber = 1;};
+	case (_AvgKnw >= 40 && {_AvgKnw < 50}): {_MinRDist = 60;_MaxRDist = 120;_RndNumber = 2;};
+	case (_AvgKnw >= 50 && {_AvgKnw < 60}): {_MinRDist = 50;_MaxRDist = 100;_RndNumber = 2;};
+	case (_AvgKnw >= 60 && {_AvgKnw < 70}): {_MinRDist = 40;_MaxRDist = 80;_RndNumber = 2;};
+	case (_AvgKnw >= 70 && {_AvgKnw < 80}): {_MinRDist = 30;_MaxRDist = 60;_RndNumber = 2;};
+	case (_AvgKnw >= 80 && {_AvgKnw < 90}): {_MinRDist = 20;_MaxRDist = 50;_RndNumber = 3;};
+	case (_AvgKnw >= 90 && {_AvgKnw <= 100}): {_MinRDist = 0;_MaxRDist = 25;_RndNumber = 3;};
+	case (_AvgKnw > 100): {_MinRDist = 0;_MaxRDist = 25;_RndNumber = 3;};
+};
+
+	if (VCM_Debug) then {systemChat (format ["_AvgKnw: %1  _RndNumber: %2",_AvgKnw,_RndNumber])};
 
 {
-	private _dist = random (15 + (random VCM_ARTYSPREAD));
-	private _dir = random 360;
-	private _pos = getpos _leaderE;
-	private _positions = [(_pos select 0) + (sin _dir) * _dist, (_pos select 1) + (cos _dir) * _dist, 0];
-	_x doArtilleryFire [_positions,_randomAmmoArray,_RoundsToFire];
+	if (_x isKindOf "LandVehicle") then
+	{
+		_Vcnt pushBack _x;
+	};	
+} foreach _AllEmyUnits;
 	
-} foreach _aVehGrpUnits;
+
+
+//Define what rounds we are using at the enemies.
+//["HE","Guided","Laser Guided","Cluster Shells","Mine Cluster","White Smoke","AT Mine Cluster"]
+//_Finallist pushbackunique (getText(configfile/"CfgMagazines"/_x/"displayNameShort"));	
+private _FinalArtyArray = [];
+private _FinalAmmoType = [];
+private _SmokeArray = [];
+if (VCM_Debug) then {systemChat (format ["count _VCnt: %1",(count _VCnt)])};
+if (count _VCnt > 0) then
+{
+	{
+		private _Unit = _x;
+		private _ammoArray = getArtilleryAmmo [vehicle _Unit];
+		if !(isNil "_ammoArray") then
+		{
+			{
+				private _Type = getText(configfile/"CfgMagazines"/_x/"displayNameShort");
+				if (["AT", _Type] call BIS_fnc_inString || ["Guided", _Type] call BIS_fnc_inString) then {_FinalArtyArray pushBackUnique _Unit;_FinalAmmoType pushBackUnique _x;};
+				if (["Smoke", _Type] call BIS_fnc_inString) then {_SmokeArray pushBackUnique _x;};
+			} foreach _ammoArray;		
+		};	
+	} foreach (units _clstGrp);
+	private _VAttached = selectRandom _VCnt;
+	private _LazTarget = _LazClass createVehicle [0,0,0];_LazTarget attachto [_VAttached,[0,0,4]]; _LazTarget spawn {sleep 120; deleteVehicle _this;};
+	_CallSide reportRemoteTarget [_VAttached, 120];
+	_VAttached confirmSensorTarget [_CallSide, true];	
+	
+	if (VCM_Debug) then {systemChat (format ["_LazTarget: %1 Attached To: %2",_LazTarget,(typeOf _VAttached)])};
+}
+else
+{
+	{
+		private _Unit = _x;
+		private _ammoArray = getArtilleryAmmo [vehicle _Unit];
+		if !(isNil "_ammoArray") then
+		{
+			{
+				private _Type = getText(configfile/"CfgMagazines"/_x/"displayNameShort");
+				if (["HE", _Type] call BIS_fnc_inString || ["Cluster", _Type] call BIS_fnc_inString && !(["AT", _Type] call BIS_fnc_inString)) then {_FinalArtyArray pushBackUnique _Unit;_FinalAmmoType pushBackUnique _x;};
+				if (["Smoke", _Type] call BIS_fnc_inString) then {_SmokeArray pushBackUnique _x;};
+			} foreach _ammoArray;		
+		};	
+	} foreach (units _clstGrp);	
+	
+};
+
+
+if (VCM_Debug) then {systemChat (format ["_clstGrp: %1  _FinalAmmoType: %2",_clstGrp,_FinalAmmoType])};
+
+//Now let's fire
+private _RndSelEnmy = selectRandom _AllEmyUnits;
+
+private _aVehGrpUnits = [];
+{_aVehGrpUnits pushback (vehicle _x)} foreach _FinalArtyArray;
+private _randomAmmoArray = selectRandom _FinalAmmoType;
+if (isNil "_randomAmmoArray") exitWith {};
+
+//Exit if group cannot reach.
+private _continueFiring = (getPos _RndSelEnmy) inRangeOfArtillery [_aVehGrpUnits,_randomAmmoArray];
+if !(_continueFiring) exitWith {};
+
+
+//Make sure we do minimal friendly fire.
+private _FriendlyArray = (leader _clstGrp) call VCM_fnc_FriendlyArray;
+
+
+if (_RndNumber isEqualTo 1) then
+{
+		private _FireUnit = selectRandom _aVehGrpUnits;
+		private _dist = (_MinRDist + (random _MaxRDist));
+		private _pos = getpos _RndSelEnmy;		
+		private _positions = _pos getPos [_dist,(random 360)];
+		private _CF = [_FriendlyArray,_positions,true,"Arty1"] call VCM_fnc_ClstObj;
+		if (_CF distance2D _positions > 100) then
+		{
+			_FireUnit doArtilleryFire [_positions,_randomAmmoArray,_RndNumber];	
+		}
+		else
+		{
+			if (count _SmokeArray > 0) then
+			{
+				_FireUnit doArtilleryFire [_positions,(selectRandom _SmokeArray),_RndNumber];	
+			};
+		};
+}
+else
+{
+	{
+		private _dist = (_MinRDist + (random _MaxRDist));
+		private _pos = getpos _RndSelEnmy;
+		private _positions = _pos getPos [_dist,(random 360)];
+		private _CF = [_FriendlyArray,_positions,true,"Arty1"] call VCM_fnc_ClstObj;
+		if (_CF distance2D _positions > 50) then
+		{
+			_x doArtilleryFire [_positions,_randomAmmoArray,_RndNumber];	
+		}
+		else
+		{
+			if (count _SmokeArray > 0) then
+			{
+				_x doArtilleryFire [_positions,(selectRandom _SmokeArray),_RndNumber];	
+			};
+		};
+	} foreach _aVehGrpUnits;
+};
