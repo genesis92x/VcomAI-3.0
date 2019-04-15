@@ -32,8 +32,6 @@ params ["_unit","_weapon","_muzzle","_mode","_ammo","_magazine","_bullet","_gunn
 if (_weapon isEqualTo "Put" || {_weapon isEqualTo "Throw"}) exitwith {};
 
 private _timeShot = _unit getVariable ["VCM_FTH",-60];
-_unit setVariable ["VCMLASTFIRED", time, false];
-[_unit, 0] call VCM_fnc_AddSuppressionNow; //Immediately set stance
 
 if ((_timeShot + 20) < time) then 
 {
@@ -46,31 +44,23 @@ if ((_timeShot + 20) < time) then
 	private _atch = _unit weaponAccessories _mzl param [0, ""];
 	private _return = (!(_atch isEqualTo "")) && {getNumber(configFile >> "CfgWeapons" >> _atch >> "ItemInfo" >> "AmmoCoef" >> "audibleFire") < 1};
 	
-	if (VCM_DEBUG) then {diag_log (format ["VCOM: %2: WEAPON SUPRRESSED - %1",_return,_unit])};
+	if (VCM_Debug) then {diag_log (format ["%2: WEAPON SUPRRESSED - %1",_return,_unit])};
 	
 	//systemchat format ["%1",_sup];
 	if !(_return) then 
 	{
 		private _array1 = _unit call VCM_fnc_EnemyArray;
 		private _snda = [];
-		private _Grps = [];
 		{
-			if ((_x distance2D _unit) < VCM_HEARDIST) then
+			if ((_x distance2D _unit) < VCM_HEARINGDISTANCE) then
 			{
 				_snda pushback _x;
-				_Grps pushBackUnique (group _x);
 			};
 		} foreach _array1;
 		
 		if (count _snda > 0) then
 		{
-			[_snda,_unit, random 0.25 + 0.15, 10] remoteExec ["VCM_fnc_KnowAbout",_unit];
-			{
-				if (behaviour (leader _x) isEqualTo "SAFE") then
-				{
-					_x setBehaviour "AWARE"
-				};
-			} foreach _Grps;
+			[_snda,_unit,0.1] remoteExec ["VCM_fnc_KnowAbout",0];	
 		};
 		
 		_unit setVariable ["VCM_FTH",time];

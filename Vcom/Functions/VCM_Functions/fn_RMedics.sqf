@@ -1,27 +1,14 @@
-
-/*
-	Author: Genesis
-
-	Description:
-		Function to find all medics within a group.
-
-	Parameter(s):
-		0: GROUP
-
-	Returns:
-		ARRAY
-*/
-
-private _mList = [];
+//Function to find all medics within a group.
+private _MList = [];
 {
 	if (isNull objectParent _x) then
 	{
 		if (_x getUnitTrait "Medic") then
 		{
-			_mList pushBack _x;
+			_MList pushBack _x;
 		};
 	};
 	true;
 } count (units _this);
 
-_mList
+_MList
