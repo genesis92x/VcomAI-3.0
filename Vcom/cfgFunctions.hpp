@@ -137,6 +137,17 @@ class VCOM
 		//group call VCM_fnc_VehicleCommandeer;
 		class vehiclecommandeer {};
 		
+		//group call VCM_fnc_VehicleCheck;
+		class VehicleCheck {};
+
+		//group call VCM_fnc_VehicleMove;
+		class VehicleMove {};	
+
+		//group call VCM_fnc_IsTransport;
+		class IsTransport {};
+
+		//[_pos,_dist,_params] call VCM_fnc_isFlatEmpty;
+		class isFlatEmpty {};	
 	};		
 
 };

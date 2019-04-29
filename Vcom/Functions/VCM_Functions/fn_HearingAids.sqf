@@ -33,7 +33,7 @@ if (_weapon isEqualTo "Put" || {_weapon isEqualTo "Throw"}) exitwith {};
 
 private _timeShot = _unit getVariable ["VCM_FTH",-60];
 
-if ((_timeShot + 20) < time) then 
+if ((_timeShot + 10) < time) then 
 {
 	
 	if ((group _unit) getVariable ["VCM_NOFLANK",false]) exitWith {};
