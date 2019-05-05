@@ -1,6 +1,6 @@
 //Parameters
 VCM_PublicScript = compileFinal "[] call (_this select 0);";
-VCM_ServerAsk = compileFinal "if (isServer) then {publicvariable (_this select 0);};";
+VCM_ServerAsk = compileFinal "(_this select 1) publicVariableClient (_this select 0);";
 
 if (isServer) then
 {
@@ -27,7 +27,8 @@ if (isServer) then
 }
 else
 {
-	["Vcm_Settings"] remoteExec ["VCM_ServerAsk",0,false];
+	private _id = clientOwner;
+	["Vcm_Settings",_id] remoteExec ["VCM_ServerAsk",2,false];
 	waitUntil {!(isNil "Vcm_Settings")};
 	[] call Vcm_Settings;
 };
