@@ -45,21 +45,21 @@ while {_waypointIs isEqualTo "HOLD"} do
 		{
 			private _foot = isNull objectParent _x;
 			if (_foot) then
-			{		
-			private _buildingLocation = selectRandom _tempA;
-			if !(isNil "_buildingLocation") then
-			{
-				_x doMove _buildingLocation;
-				_x setUnitPos "UP";
-				[_x,_buildingLocation] spawn 
+			{	
+				private _buildingLocation = selectRandom _tempA;
+				if !(isNil "_buildingLocation") then
 				{
-					params ["_unit","_buildingLocation"];
-					if (isNil "_buildingLocation") exitWith {};
-					waitUntil {!alive _unit || {_unit distance _buildingLocation < 1.3}};
-					_unit disableAI "PATH";
-				};
-				private _RMV = _tempA findIf {_buildingLocation isEqualTo _x};
-				_tempA deleteAt _RMV;
+					_x doMove _buildingLocation;
+					_x setUnitPos "UP";
+					[_x,_buildingLocation] spawn 
+					{
+						params ["_unit","_buildingLocation"];
+						if (isNil "_buildingLocation") exitWith {};
+						waitUntil {!alive _unit || {_unit distance _buildingLocation < 1.3}};
+						_unit disableAI "PATH";
+					};
+					private _RMV = _tempA findIf {_buildingLocation isEqualTo _x};
+					_tempA deleteAt _RMV;
 				};
 			};
 		} forEach _groupUnits;		

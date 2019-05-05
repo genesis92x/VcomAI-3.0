@@ -33,7 +33,7 @@ if (count _tempA > 0) then
 		{
 			private _buildingLocation = selectRandom _tempA;
 			if !(isNil "_buildingLocation") then
-			{			
+			{
 				_x doMove _buildingLocation;
 				[_x,_buildingLocation] spawn 
 				{
