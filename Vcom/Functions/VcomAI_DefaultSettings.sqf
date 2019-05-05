@@ -14,23 +14,18 @@ Vcm_Settings =
 	Vcm_ActivateAI = true; //Set this to false to disable VcomAI. It can be set to true at any time to re-enable Vcom AI
 	VcmAI_ActiveList = []; //Leave this alone.
 	Vcm_ArtilleryArray = []; //Leave this alone
-	VCM_ARTYENABLE = true; //Enable improved artillery handling.
-	VCM_AIMagLimit = 5; //Number of mags remaining before AI looks for ammo.
-	VCM_Debug = false; //Enable debug mode.
-	VCM_MINECHANCE = 75; //Chance to lay a mine
 	
 	//VCOM ARTILLERY. Only one kind of advanced artillery can be used at a time.
-	VCM_ARTYENABLE = false; //Enable improved artillery handling from Vcom.
-	VCM_ARTYSIDES = [west,east,resistance];  //Sides that will use VCOM/FFE artillery
+	VCM_ARTYENABLE = true; //Enable improved artillery handling from Vcom.
 	VCM_ARTYLST = []; //List of all AI inside of artillery pieces, leave this alone.
 	VCM_ARTYDELAY = 30; //Delay between squads requesting artillery
 	VCM_ARTYWT = -(VCM_ARTYDELAY);
 	VCM_ARTYET = -(VCM_ARTYDELAY);
 	VCM_ARTYRT = -(VCM_ARTYDELAY);
-	
-	//Fire For Effect Artillery handling. Only one kind of advanced artillery can be used at a time. - https://forums.bohemia.net/forums/topic/159152-fire-for-effect-the-god-of-war-smart-simple-ai-artillery/
-	VCM_FFEARTILLERY = true;
-	
+	VCM_ARTYSIDES = [west,east,resistance];  //Sides that will use VCOM/FFE artillery
+	VCM_AIMagLimit = 5; //Number of mags remaining before AI looks for ammo.
+	VCM_Debug = false; //Enable debug mode.
+	VCM_MINECHANCE = 75; //Chance to lay a mine
 	VCM_SIDEENABLED = [west,east,resistance]; //Sides that will activate Vcom AI
 	VCM_RAGDOLL = true; //Should AI ragdoll when hit
 	VCM_RAGDOLLCHC = 50; //CHANCE AI RAGDOLL	
@@ -45,21 +40,24 @@ Vcm_Settings =
 	VCM_FRMCHANGE = true; //AI GROUPS WILL CHANGE FORMATIONS TO THEIR BEST GUESS.
 	VCM_SKILLCHANGE = true; //AI Groups will have their skills changed by Vcom.
 	VCM_USECBASETTINGS = true;//If CBA is enabled on the host, use the CBA default settings. If false, use the filepatching settings instead.
-		
+	VCM_CARGOCHNG = true; //If true, Vcom will handle disembarking/re-embarking orders instead of vanilla. This is with the intention to prevent the endless embark/disembark loops AI are given.	
+	VCM_TURRETUNLOAD = true;//If true, AI will automatically disembark turret positions in vehicles, if the vehicle is badly damaged. This is to prevent AI leaving a tank, when the tracks are damaged.	
+	VCM_DISEMBARKRANGE = 200; //How far AI will disembark from their enemies. If the vehicle is damaged, they will disembark.
+	
 	//AI SKILL SETTINGS HERE!!!!!!!!!!!!
 	//LOW DIFFICULTY
 	//VCM_AIDIFA = [['aimingAccuracy',0.15],['aimingShake',0.1],['aimingSpeed',0.25],['commanding',1],['courage',1],['endurance',1],['general',0.5],['reloadSpeed',1],['spotDistance',0.8],['spotTime',0.8]];
 		
 	//MEDIUM DIFFICULTY
-	VCM_AIDIFA = [['aimingAccuracy',0.25],['aimingShake',0.15],['aimingSpeed',0.35],['commanding',0.85],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
+	VCM_AIDIFA = [['aimingAccuracy',0.25],['aimingShake',0.15],['aimingSpeed',0.35],['commanding',0.85],['courage',0.5],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
 	
 	//HIGH DIFFICULTY
 	//VCM_AIDIFA = [['aimingAccuracy',0.35],['aimingShake',0.4],['aimingSpeed',0.45],['commanding',1],['courage',1],['endurance',1],['general',0.5],['reloadSpeed',1],['spotDistance',0.8],['spotTime',0.8]];
 	
 	//SIDE SPECIFIC
-	VCM_AIDIFWEST = [['aimingAccuracy',0.25],['aimingShake',0.15],['aimingSpeed',0.35],['commanding',0.85],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
-	VCM_AIDIFEAST = [['aimingAccuracy',0.25],['aimingShake',0.15],['aimingSpeed',0.35],['commanding',0.85],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
-	VCM_AIDIFRESISTANCE = [['aimingAccuracy',0.25],['aimingShake',0.15],['aimingSpeed',0.35],['commanding',0.85],['courage',1],['endurance',1],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
+	VCM_AIDIFWEST = [['aimingAccuracy',0.25],['aimingShake',0.15],['aimingSpeed',0.35],['commanding',0.85],['courage',0.5],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
+	VCM_AIDIFEAST = [['aimingAccuracy',0.25],['aimingShake',0.15],['aimingSpeed',0.35],['commanding',0.85],['courage',0.5],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
+	VCM_AIDIFRESISTANCE = [['aimingAccuracy',0.25],['aimingShake',0.15],['aimingSpeed',0.35],['commanding',0.85],['courage',0.5],['general',1],['reloadSpeed',1],['spotDistance',0.85],['spotTime',0.85]];
 		
 	VCM_AISIDESPEC =
 	{
@@ -102,11 +100,9 @@ Vcm_Settings =
 	
 	*/
 
-	//Set AI Skill levels
+		
 	VCM_AIDIFSET =
 	{
-		//Skip if Vcom Skillchange is disabled
-		if (!VCM_SKILLCHANGE) exitWith {};
 		{
 			private _unit = _x;
 			_unit setSkill 0.9;
@@ -133,7 +129,13 @@ Vcm_Settings =
 			};
 			
 		} forEach (units _this);
-	};	
+	};
 	
 	diag_log "VCOM: Loaded Default Settings";
+
+if (VCM_USECBASETTINGS) then {
+    [] call compile preprocessFileLineNumbers "Vcom\Functions\VCM_CBASettings.sqf";
+};
+
+
 };

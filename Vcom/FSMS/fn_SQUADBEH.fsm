@@ -9,7 +9,7 @@ item4[] = {"Start_Point",2,250,50.000000,400.000000,150.000000,450.000000,0.0000
 item5[] = {"Exit_Cond",4,218,-100.000000,475.000000,0.000000,525.000000,700.000000,"Exit Cond"};
 item6[] = {"Exit_FSM_1",1,250,-250.000000,475.000000,-175.000000,525.000000,0.000000,"Exit FSM"};
 item7[] = {"Simulation_Pause",4,218,250.000000,475.000000,350.000000,525.000000,990.000000,"Simulation Pause"};
-item8[] = {"Simulation_Pause",2,250,325.000000,525.000000,425.000000,575.000000,0.000000,"Simulation Pause"};
+item8[] = {"Simulation_Pause",2,250,350.000000,500.000000,450.000000,550.000000,0.000000,"Simulation Pause"};
 item9[] = {"Simulation_Enabl",4,218,200.000000,500.000000,300.000000,550.000000,980.000000,"Simulation Enable"};
 item10[] = {"Wait",4,218,325.000000,600.000000,425.000000,650.000000,0.000000,"Wait"};
 item11[] = {"Frequent_Checks",4,218,-100.000000,300.000000,0.000000,350.000000,970.000000,"Frequent Checks"};
@@ -23,8 +23,8 @@ item18[] = {"Continue2StartPo",8,218,0.000000,300.000000,100.000000,350.000000,0
 item19[] = {"Continue2StartPo",4,218,100.000000,300.000000,200.000000,350.000000,0.000000,"Continue2StartPoint2"};
 item20[] = {"Leader_Cycle_Beg",3,250,475.000000,275.000000,575.000000,325.000000,0.000000,"Leader Cycle Beginning"};
 item21[] = {"Continue2Return",8,218,350.000000,275.000000,450.000000,325.000000,0.000000,"Continue2Return"};
-item22[] = {"Combat",4,4314,675.000000,225.000000,775.000000,275.000000,100.000000,"Combat"};
-item23[] = {"Combat_Brain",2,250,900.000000,300.000000,1000.000000,350.000000,0.000000,"Combat Brain"};
+item22[] = {"Combat",4,218,675.000000,225.000000,775.000000,275.000000,100.000000,"Combat"};
+item23[] = {"Inf_Combat_Brain",2,250,875.000000,250.000000,975.000000,300.000000,0.000000,"Inf Combat Brain"};
 item24[] = {"Combat_BEGIN",4,218,675.000000,325.000000,775.000000,375.000000,110.000000,"Combat BEGIN"};
 item25[] = {"Return",8,218,475.000000,75.000000,575.000000,125.000000,0.000000,"Return"};
 item26[] = {"Arty_Check",4,218,1100.000000,250.000000,1200.000000,300.000000,84.000000,"Arty Check"};
@@ -45,12 +45,22 @@ item40[] = {"Exit_Cond",4,218,675.000000,475.000000,775.000000,525.000000,700.00
 item41[] = {"Exit_FSM_2",1,250,700.000000,600.000000,775.000000,650.000000,0.000000,"Exit FSM"};
 item42[] = {"COVER2COVER",4,218,1150.000000,275.000000,1250.000000,325.000000,104.000000,"COVER2COVER"};
 item43[] = {"Clear_Building",4,218,1200.000000,300.000000,1300.000000,350.000000,50.000000,"Clear Building"};
-item44[] = {"Combat_END",4,218,675.000000,375.000000,775.000000,425.000000,90.000000,"Combat END"};
-item45[] = {"Exit_Cond",4,218,500.000000,675.000000,600.000000,725.000000,700.000000,"Exit Cond"};
+item44[] = {"Combat_END",4,218,675.000000,400.000000,775.000000,450.000000,90.000000,"Combat END"};
+item45[] = {"Exit_Cond",4,218,525.000000,700.000000,625.000000,750.000000,700.000000,"Exit Cond"};
 item46[] = {"Arty_Pause",4,218,150.000000,525.000000,250.000000,575.000000,930.000000,"Arty Pause"};
 item47[] = {"Artillery_Pause",2,250,225.000000,625.000000,325.000000,675.000000,0.000000,"Artillery Pause"};
 item48[] = {"Wait",4,218,225.000000,700.000000,325.000000,750.000000,0.000000,"Wait"};
 item49[] = {"Arty_Disabled",4,218,100.000000,550.000000,200.000000,600.000000,1.000000,"Arty Disabled"};
+item50[] = {"Veh",4,218,925.000000,375.000000,1025.000000,425.000000,10.000000,"Veh"};
+item51[] = {"Veh_Combat_Brain",2,250,1075.000000,475.000000,1175.000000,525.000000,0.000000,"Veh Combat Brain"};
+item52[] = {"Checks",2,250,800.000000,325.000000,900.000000,375.000000,0.000000,"Checks"};
+item53[] = {"Not_All_Vehicle",8,218,950.000000,325.000000,1050.000000,375.000000,0.000000,"Not All Vehicle"};
+item54[] = {"True",8,218,1300.000000,575.000000,1400.000000,625.000000,0.000000,"True"};
+item55[] = {"Transport_Orders",4,218,1150.000000,600.000000,1250.000000,650.000000,105.000000,"Transport Orders"};
+item56[] = {"Attack_Orders",4,218,1050.000000,600.000000,1150.000000,650.000000,100.000000,"Attack Orders"};
+item57[] = {"",7,210,1221.000000,771.000000,1229.000000,779.000000,0.000000,""};
+item58[] = {"",7,210,1658.500000,771.000061,1666.500000,779.000000,0.000000,""};
+item59[] = {"",7,210,1583.500000,21.000002,1591.500000,28.999998,0.000000,""};
 link0[] = {0,1};
 link1[] = {0,3};
 link2[] = {1,2};
@@ -87,7 +97,7 @@ link32[] = {20,25};
 link33[] = {20,40};
 link34[] = {20,44};
 link35[] = {21,16};
-link36[] = {22,23};
+link36[] = {22,52};
 link37[] = {23,26};
 link38[] = {23,28};
 link39[] = {23,30};
@@ -99,7 +109,7 @@ link44[] = {23,39};
 link45[] = {23,40};
 link46[] = {23,42};
 link47[] = {23,43};
-link48[] = {24,23};
+link48[] = {24,52};
 link49[] = {25,16};
 link50[] = {26,27};
 link51[] = {27,29};
@@ -126,8 +136,22 @@ link71[] = {47,48};
 link72[] = {47,49};
 link73[] = {48,47};
 link74[] = {49,4};
-globals[] = {0.000000,0,0,0,0,640,480,2,631,6316128,1,173.987000,821.772522,510.059662,-22.135590,1076,884,1};
-window[] = {2,-1,-1,-1,-1,989,234,1535,234,3,1094};
+link75[] = {50,51};
+link76[] = {51,40};
+link77[] = {51,54};
+link78[] = {51,55};
+link79[] = {51,56};
+link80[] = {52,50};
+link81[] = {52,53};
+link82[] = {53,23};
+link83[] = {54,27};
+link84[] = {55,57};
+link85[] = {56,57};
+link86[] = {57,58};
+link87[] = {58,59};
+link88[] = {59,27};
+globals[] = {0.000000,0,0,0,0,640,480,2,644,6316128,1,-669.355347,240.777466,650.498169,-121.214569,1006,853,1};
+window[] = {0,-1,-1,-32000,-32000,1047,25,1843,22,1,1024};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -143,7 +167,7 @@ class FSM
                          "private _leader = leader _group;" \n
                          "" \n
                          "" \n
-                         "" \n
+                         "//missionNamespace getVariable [""bis_fnc_moduleRemoteControl_unit"", player]" \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -155,7 +179,7 @@ class FSM
                                         priority = 50.000000;
                                         to="Exit_FSM";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_Group getvariable [""Vcm_Disable"",false] || {!(side _group in VCM_SIDEENABLED)}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_Group getvariable [""Vcm_Disable"",false] || {!(side _group in VCM_SIDEENABLED)} || {!(local _group)}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -334,7 +358,7 @@ class FSM
                                         priority = 700.000000;
                                         to="Exit_FSM_1";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"(_Group getvariable [""Vcm_Disable"",false]) || {(((units _Group) findIf {alive _x}) isEqualTo -1)} || {!(side _group in VCM_SIDEENABLED)}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_Group getvariable [""Vcm_Disable"",false]) || {(((units _Group) findIf {alive _x}) isEqualTo -1)} || {!(side _group in VCM_SIDEENABLED)} || {!(local _group)}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -474,6 +498,9 @@ class FSM
                          "_BackbkC = time;" \n
                          "" \n
                          "[_group,_MedList] call VCM_fnc_MedicalHandler;" \n
+                         "_PullVehInfo = _group call VCM_fnc_VehicleCheck;" \n
+                         "" \n
+                         "_PullVehInfo params [""_GroupInVeh"",""_VehFullArr""];" \n
                          "" \n
                          "if (VCM_FRMCHANGE && {!(_group getVariable [""VCM_DisableForm"",false])}) then" \n
                          "{" \n
@@ -534,7 +561,7 @@ class FSM
                                 {
                                         itemno = 24;
                                         priority = 110.000000;
-                                        to="Combat_Brain";
+                                        to="Checks";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"((behaviour _leader) isEqualTo ""COMBAT"") && {!(_Beh isEqualTo ""COMBAT"")} && {!(_VCOM_GARRISONED)}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"//[_Leader,50] call VCM_fnc_FindCover;" \n
@@ -548,7 +575,7 @@ class FSM
                                 {
                                         itemno = 22;
                                         priority = 100.000000;
-                                        to="Combat_Brain";
+                                        to="Checks";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"((behaviour _leader) isEqualTo ""COMBAT"") && {!(_VCOM_GARRISONED)}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"_CNOW = true;"/*%FSM</ACTION""">*/;
@@ -620,10 +647,10 @@ class FSM
                         };
                 };
                 /*%FSM</STATE>*/
-                /*%FSM<STATE "Combat_Brain">*/
-                class Combat_Brain
+                /*%FSM<STATE "Inf_Combat_Brain">*/
+                class Inf_Combat_Brain
                 {
-                        name = "Combat_Brain";
+                        name = "Inf_Combat_Brain";
                         itemno = 23;
                         init = /*%FSM<STATEINIT""">*/"private _t = time;" \n
                          "_Wait = 5;" \n
@@ -701,7 +728,7 @@ class FSM
                                         priority = 105.000000;
                                         to="Return";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_WaypointGen + 900 < time && {VCM_ADVANCEDMOVEMENT}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_WaypointGen + 600 < time && {VCM_ADVANCEDMOVEMENT}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"[_Leader] spawn VCM_fnc_FlankMove;" \n
                                          "_WaypointGen = time;" \n
                                          "" \n
@@ -1020,6 +1047,103 @@ class FSM
                                         to="Artillery_Pause";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"time > _t + 10"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Veh_Combat_Brain">*/
+                class Veh_Combat_Brain
+                {
+                        name = "Veh_Combat_Brain";
+                        itemno = 51;
+                        init = /*%FSM<STATEINIT""">*/"private _t = time;" \n
+                         "_Wait = 5;" \n
+                         "" \n
+                         "private _IsTransportAt = _VehFullArr call VCM_fnc_IsTransport;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Exit_Cond">*/
+                                class Exit_Cond
+                                {
+                                        itemno = 40;
+                                        priority = 700.000000;
+                                        to="Exit_FSM_2";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_Group getvariable [""Vcm_Disable"",false]) || (((units _Group) findIf {alive _x}) isEqualTo -1)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Transport_Orders">*/
+                                class Transport_Orders
+                                {
+                                        itemno = 55;
+                                        priority = 105.000000;
+                                        to="Return";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_WaypointGen + 900 < time && {VCM_ADVANCEDMOVEMENT} && {_IsTransportAt}"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"[_group,true,_VehFullArr] spawn VCM_fnc_VehicleMove;" \n
+                                         "_WaypointGen = time;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Attack_Orders">*/
+                                class Attack_Orders
+                                {
+                                        itemno = 56;
+                                        priority = 100.000000;
+                                        to="Return";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_WaypointGen + 900 < time && {VCM_ADVANCEDMOVEMENT}"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"[_group,false,_VehFullArr] spawn VCM_fnc_VehicleMove;" \n
+                                         "_WaypointGen = time;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "True">*/
+                                class True
+                                {
+                                        itemno = 54;
+                                        priority = 0.000000;
+                                        to="Return";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Checks">*/
+                class Checks
+                {
+                        name = "Checks";
+                        itemno = 52;
+                        init = /*%FSM<STATEINIT""">*/"private _t = time;" \n
+                         "_Wait = 5;" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Veh">*/
+                                class Veh
+                                {
+                                        itemno = 50;
+                                        priority = 10.000000;
+                                        to="Veh_Combat_Brain";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_GroupInVeh"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Not_All_Vehicle">*/
+                                class Not_All_Vehicle
+                                {
+                                        itemno = 53;
+                                        priority = 0.000000;
+                                        to="Inf_Combat_Brain";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/

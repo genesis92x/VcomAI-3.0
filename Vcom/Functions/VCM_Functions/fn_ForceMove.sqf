@@ -1,7 +1,6 @@
 
 /*
 	Author: Genesis
-
 	Description:
 		Forces AI to move towards enemies, failing that move towards waypoint.
 
