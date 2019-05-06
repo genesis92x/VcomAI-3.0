@@ -35,6 +35,7 @@ Vcm_Settings =
 	VCM_WARNDELAY = 30; //How long the AI have to survive before they can call in for support. This activates once the AI enter combat.
 	VCM_STATICARMT = 300; //How long AI stay on static weapons when initially arming them. This is just for AI WITHOUT static bags. They will stay for this duration when NO ENEMIES ARE SEEN, or their group gets FAR away.	
 	VCM_StealVeh = true; //Will the AI steal vehicles.
+	VCM_ClassSteal = true; //If true, crewmen are required to steal tracked vehicles. Pilots are required to steal aircraft. false = anyone can steal any vehicle.
 	VCM_AIDISTANCEVEHPATH = 100; //Distance AI check from the squad leader to steal vehicles
 	VCM_ADVANCEDMOVEMENT = true; //True means AI will actively generate waypoints if no other waypoints are generated for the AI group (2 or more). False disables this advanced movements.
 	VCM_FRMCHANGE = true; //AI GROUPS WILL CHANGE FORMATIONS TO THEIR BEST GUESS.
@@ -134,7 +135,7 @@ Vcm_Settings =
 	diag_log "VCOM: Loaded Default Settings";
 
 if (VCM_USECBASETTINGS) then {
-    [] call compile preprocessFileLineNumbers "Vcom\Functions\VCM_CBASettings.sqf";
+    [] call VCM_fnc_CBASettings;
 };
 
 
