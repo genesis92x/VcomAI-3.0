@@ -135,7 +135,7 @@ Vcm_Settings =
 	diag_log "VCOM: Loaded Userconfig";
 
 if (VCM_USECBASETTINGS) then {
-    [] call compile preprocessFileLineNumbers "Vcom\Functions\VCM_CBASettings.sqf";
+    [] call VCM_fnc_CBASettings;
 };
 
 };
