@@ -93,7 +93,7 @@ if (_aliveCount > 0) then
 													_waypoint2 setwaypointtype "MOVE";
 													_waypoint2 setWaypointSpeed "NORMAL";
 													_waypoint2 setWaypointBehaviour "AWARE";	
-													[(group _Driver), _waypoint2] setWaypointCompletionRadius 25;											
+													[(group _Driver), (_waypoint2 select 1)] setWaypointCompletionRadius 25;											
 											}
 											else
 											{
@@ -103,13 +103,13 @@ if (_aliveCount > 0) then
 													_waypoint2 setwaypointtype "MOVE";
 													_waypoint2 setWaypointSpeed "NORMAL";
 													_waypoint2 setWaypointBehaviour "AWARE";
-													[(group _Driver), _waypoint2] setWaypointCompletionRadius 25;
+													[(group _Driver), (_waypoint2 select 1)] setWaypointCompletionRadius 25;
 														private _Driver = Driver (vehicle _x);
 														_waypoint2 = (group _Driver) addwaypoint[_trgtPos,15,150];
 														_waypoint2 setwaypointtype "MOVE";
 														_waypoint2 setWaypointSpeed "NORMAL";
 														_waypoint2 setWaypointBehaviour "AWARE";
-														[(group _Driver), _waypoint2] setWaypointCompletionRadius 25;												
+														[(group _Driver), (_waypoint2 select 1)] setWaypointCompletionRadius 25;												
 											};
 
 
