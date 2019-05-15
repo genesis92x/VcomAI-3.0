@@ -215,7 +215,7 @@ class FSM
                                          "private _ArtyGroupBool = _Group call VCM_fnc_ArtyManage;" \n
                                          "private _LocKnown = 0;" \n
                                          "" \n
-                                         "if (VCM_SKILLCHANGE && {_Group getVariable [""VCM_Skilldisable"", false]}) then {_Group call VCM_AIDIFSET};" \n
+                                         "if (VCM_SKILLCHANGE && !(_Group getVariable [""VCM_SkillDisable"", false])) then {_Group call VCM_AIDIFSET};" \n
                                          "" \n
                                          "" \n
                                          "{" \n
