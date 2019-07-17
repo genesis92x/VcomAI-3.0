@@ -14,7 +14,7 @@
 
 params ["_unit", "_mineArray"];
 
-if (VCM_MINECHANCE < (round (random 100)) || {isPlayer _unit}) exitWith {};
+if (VCM_MINECHANCE > (round (random 100)) || {isPlayer _unit}) exitWith {};
 
 private _mineType = _mineArray select 0;
 

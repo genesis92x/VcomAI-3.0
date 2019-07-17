@@ -51,6 +51,7 @@ VCOM_MINEARRAY = [];
 ["VCMMINEMONITOR", "onEachFrame", {[] call VCM_fnc_MineMonitor}] call BIS_fnc_addStackedEventHandler;
 
 //Below is loop to check for new AI spawning in to be added to the list
+
 [] spawn
 {
 	sleep 2;
@@ -60,7 +61,10 @@ VCOM_MINEARRAY = [];
 		player addEventHandler ["Fired",{_this call VCM_fnc_HearingAids;}];
 		player spawn VCM_fnc_IRCHECK;
 		player addEventHandler ["Respawn",{_this spawn VCM_fnc_IRCHECK;}];
+		if (Vcm_PlayerAISkills) then {[] spawn VCM_fnc_PLAYERSQUAD;};
 	};
+	
+	[] spawn VCM_fnc_AIDRIVEBEHAVIOR;
 	
 	while {true} do 
 	{
