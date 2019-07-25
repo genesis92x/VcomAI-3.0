@@ -100,5 +100,4 @@ if (count _NearestEnemys > 0) then
 		} foreach _Snipers;
 	
 	};
-
 };
