@@ -189,6 +189,8 @@ class VCOM
 		//[] call VCM_fnc_UpdateDrivers;
 		class UpdateDrivers {};
 		
+		//[side1, side2] call VCM_fnc_SideIsEnemy
+		class SideIsEnemy {};
 	};		
 
 };
