@@ -35,7 +35,7 @@ waitUntil {isNull _unit || {!alive _unit} || {_nBuilding distance2D _unit < 50}}
 _groupUnits = units _this;
 _this setVariable ["VCOM_GARRISONED",true,false];	
 private _waypointIs = "HOLD";
-while {_waypointIs isEqualTo "HOLD"} do
+while {_waypointIs isEqualTo "HOLD" && ({ alive _x } count units _this isEqualTo 0)} do
 {
 	private _index = currentWaypoint _this;
 	private _waypointIs = waypointType [_this,_index];		
@@ -49,6 +49,7 @@ while {_waypointIs isEqualTo "HOLD"} do
 				private _buildingLocation = selectRandom _tempA;
 				if !(isNil "_buildingLocation") then
 				{
+					_x enableAI "PATH";
 					_x doMove _buildingLocation;
 					_x setUnitPos "UP";
 					[_x,_buildingLocation] spawn 

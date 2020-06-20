@@ -21,11 +21,23 @@ if (VCM_DEBUG) then {systemChat format ["%1 attempting to heal %2", _medic, _uni
 
 _medic setVariable ["VCM_MBUSY", true];
 
+
+_medic disableAI "WEAPONAIM";
+_medic disableAI "COVER";
+_medic disableAI "FSM";
+
 while {alive _medic && {alive _unit} && {_unit distance2D _medic > 3}} do 
 {
 	_medic doMove getPos _unit;
+	_medic domove getPos _unit;
 	sleep 3;
 };
+
+_medic enableAI "WEAPONAIM";
+_medic enableAI "COVER";
+_medic enableAI "FSM";
+
+
 
 if (!(alive _medic) || {!(alive _unit)} || {_unit distance2D _medic > 75}) exitWith {};
 

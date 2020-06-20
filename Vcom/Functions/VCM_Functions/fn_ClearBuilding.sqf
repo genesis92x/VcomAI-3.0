@@ -15,7 +15,10 @@
 
 params ["_group","_enemy"];
 
-private _nBuildingLst = nearestObjects [_enemy, ["House", "Building"], 25];
+
+if (_enemy distance2D (leader _Group) > 50) exitWith {};
+
+private _nBuildingLst = nearestObjects [_enemy, ["House", "Building"], 25,true];
 if (count _nBuildingLst < 1) exitWith {};
 
 private _buildingPositions = [];
@@ -45,6 +48,9 @@ if (_tempA isEqualTo []) then {_tempA = _tempB;};
 private _clstP = [_tempA,_enemy,true,"Clear1"] call VCM_fnc_ClstObj;
 
 {
-	doStop _x;
-	_x doMove _clstP;	
+	_x domove (getpos _x);
+	_x moveto (getpos _X);
+	doStop _x;_x forcespeed -1;
+	_x doMove _clstP;
+	_x moveTo _clstP;
 } foreach (units _group);

@@ -26,6 +26,22 @@ params ["_unit", "_source", "_damage", "_instigator"];
 
 if (VCM_MEDICALACTIVE) exitWith {};
 
+if (VCM_RAGDOLL && {_unit distance2D _instigator < 101} && {_damage > 0.05} && {!(lifestate _unit isEqualTo "INCAPACITATED")} && {VCM_RAGDOLLCHC > (random 100)}) then
+{
+
+	_unit setUnconscious true;
+	_unit spawn 
+	{
+		sleep (0.5 + (random 1));
+		_this setUnconscious false;
+		//A check if the unit is still unconscious after a 30 second time. Sometimes AI remain unconscious - this should hopefully prevent this.
+		sleep 30;
+		if (alive _this && {lifeState _this isEqualTo "INCAPACITATED"}) then {_this setUnconscious false;};
+	};
+};
+
+
+
 //Lay down
 private _GetUnitStance = unitPos _unit;
 if !(_GetUnitStance isEqualTo "DOWN") then
@@ -37,20 +53,8 @@ if !(_GetUnitStance isEqualTo "DOWN") then
 		sleep 5;
 		if (alive _unit) then 
 		{
-			_unit setUnitPos _Pos;
+			_unit setUnitPos "AUTO";
 		};
 	};
 };
 
-if (VCM_RAGDOLL && {_damage > 0.1} && {!(lifestate _unit isEqualTo "INCAPACITATED")} && {VCM_RAGDOLLCHC > (random 100)}) then
-{
-	_unit setUnconscious true;
-	_unit spawn 
-	{
-		sleep 2;
-		_this setUnconscious false;
-		//A check if the unit is still unconscious after a 30 second time. Sometimes AI remain unconscious - this should hopefully prevent this.
-		sleep 30;
-		if (alive _this && {lifeState _this isEqualTo "INCAPACITATED"}) then {_this setUnconscious false;};
-	};
-};

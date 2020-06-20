@@ -29,11 +29,11 @@
 
 params ["_unit","_weapon","_muzzle","_mode","_ammo","_magazine","_bullet","_gunner"];
 
-if (_weapon isEqualTo "Put" || {_weapon isEqualTo "Throw"}) exitwith {};
+if (_weapon isEqualTo "Put" || {_weapon isEqualTo "Throw"} || {!(Vcm_ActivateAI)}) exitwith {};
 
 private _timeShot = _unit getVariable ["VCM_FTH",-60];
 
-if ((_timeShot + 10) < time) then 
+if ((_timeShot + 2) < time) then 
 {
 	
 	if ((group _unit) getVariable ["VCM_NOFLANK",false]) exitWith {};
@@ -60,7 +60,8 @@ if ((_timeShot + 10) < time) then
 		
 		if (count _snda > 0) then
 		{
-			[_snda,_unit,0.1] remoteExec ["VCM_fnc_KnowAbout",0];	
+			[_snda,_unit,1] remoteExec ["VCM_fnc_KnowAbout",0];	
+			[_snda] remoteExec ["VCM_fnc_ResetAnimation",0];	
 		};
 		
 		_unit setVariable ["VCM_FTH",time];

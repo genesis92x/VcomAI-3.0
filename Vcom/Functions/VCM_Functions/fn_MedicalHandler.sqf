@@ -18,9 +18,10 @@ private _units = units _group;
 private _Medics = _MedList;
 
 {
-	if (getDammage _x > 0) then
+	if (damage _x > 0) then
 	{
-		if !(_x call VCM_fnc_HealSelf) then
+		private _CanHealSelf = _x call VCM_fnc_HealSelf; 
+		if !(_CanHealSelf) then
 		{
 			if (count _Medics > 0) then
 			{
