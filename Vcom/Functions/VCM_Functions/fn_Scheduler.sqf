@@ -1,18 +1,18 @@
-private _T1 = serverTime + 1;
-private _T2 = serverTime + 10;
+private _T1 = diag_ticktime + 1;
+private _T2 = diag_ticktime + 10;
 
 waituntil
 {
 
 	//Every 1 second
-	if (serverTime > _T1) then
+	if (diag_ticktime > _T1) then
 	{
 		[] call VCM_fnc_CoverControl;
-		_T1 = serverTime + 1;
+		_T1 = diag_ticktime + 1;
 	};
 	
 	//Every 10 seconds
-	if (serverTime > _T2) then
+	if (diag_ticktime > _T2) then
 	{
 		if (Vcm_ActivateAI) then
 		{
@@ -30,7 +30,7 @@ waituntil
 				};
 			} foreach allGroups;
 		};
-		_T2 = serverTime + 10;
+		_T2 = diag_ticktime + 10;
 	};	
 	sleep 1;
 	false;

@@ -52,6 +52,10 @@ if (_NearbyCover isEqualTo []) exitWith
 				doStop _unit;_unit domove (getposATL _Unit);
 				_Unit enableAI "CHECKVISIBLE";
 				_Unit enableAI "AUTOCOMBAT";
+				_Unit enableAI "COVER";
+				_Unit enableAI "SUPPRESSION";
+				_Unit enableAI "WEAPONAIM";
+				_Unit enableAI "TARGET";
 				_Unit doWatch _TargetE;
 				_Unit doSuppressiveFire _TargetE;
 			};
@@ -114,6 +118,10 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 					
 					_Unit disableAI "CHECKVISIBLE";
 					_Unit disableAI "AUTOCOMBAT";
+					_Unit disableAI "COVER";
+					_Unit disableAI "SUPPRESSION";
+					_Unit disableAI "WEAPONAIM";
+					_Unit disableAI "TARGET";
 					_Unit doWatch ObjNull;
 					doStop _unit;_unit domove (getposATL _Unit);
 					_Unit forceSpeed -1;				
@@ -190,6 +198,10 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 						_Unit setUnitPos "Middle";
 						_Unit disableAI "CHECKVISIBLE";
 						_Unit disableAI "AUTOCOMBAT";
+						_Unit disableAI "COVER";
+						_Unit disableAI "SUPPRESSION";
+						_Unit disableAI "WEAPONAIM";
+						_Unit disableAI "TARGET";
 						_Unit doWatch ObjNull;
 						doStop _unit;_unit domove (getposATL _Unit);
 						_unit forceSpeed -1;
@@ -216,6 +228,10 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 				doStop _unit;_unit domove (getposATL _Unit);
 				_Unit enableAI "CHECKVISIBLE";
 				_Unit enableAI "AUTOCOMBAT";
+				_Unit enableAI "COVER";
+				_Unit enableAI "SUPPRESSION";
+				_Unit enableAI "WEAPONAIM";
+				_Unit enableAI "TARGET";
 				_Unit doWatch _TargetE;
 				_Unit doSuppressiveFire _TargetE;
 			};
@@ -228,10 +244,19 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 	_MoveArray spawn
 	{
 		sleep 5;
-		private _Timer = serverTime + 20;
+		private _Timer = diag_ticktime + 20;
+		{
+			_x params ["_Unit","_Pos"];
+			doStop _unit;_unit domove (getposATL _Unit);
+			_Unit setUnitPos "Middle";
+			_Unit forcespeed -1;
+			_Unit domove _Pos;
+			_Unit moveto _Pos;			
+		} foreach _this;
 
 		waituntil
 		{
+
 			{
 				_x params ["_Unit","_Pos"];
 				If (VCM_Debug) then {[_Unit,(format ["MOVING: %1 M",(_Unit distance2D _Pos)])] call VCM_fnc_DebugText;};
@@ -239,24 +264,30 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 				private _EnemyList = _Unit targets [true,1000];
 				{
 					private _cansee = [_Unit, "VIEW"] checkVisibility [eyePos _Unit, eyePos _x];
-					if (_Cansee > 0) exitWith
+					if (_Cansee > 0 && (_x distance2D _Unit < 100)) exitWith
 					{
 						doStop _unit;_unit domove (getposATL _Unit);
 						_Unit enableAI "CHECKVISIBLE";
 						_Unit enableAI "AUTOCOMBAT";
+						_Unit enableAI "COVER";
+						_Unit enableAI "SUPPRESSION";
+						_Unit enableAI "WEAPONAIM";
+						_Unit enableAI "TARGET";
 						_Unit doWatch _x;
+						If (VCM_Debug) then {[_Unit,"STOP TO RETURN FIRE"] call VCM_fnc_DebugText;};
 					};
 				} foreach _EnemyList;
-				
-				doStop _unit;_unit domove (getposATL _Unit);
-				_Unit setUnitPos "Middle";
-				_Unit forcespeed -1;
-				_Unit domove _Pos;
-				_Unit moveto _Pos;
-				
+				if (speed _Unit < 0.1) then
+				{
+					doStop _unit;_unit domove (getposATL _Unit);
+					_Unit setUnitPos "Middle";
+					_Unit forcespeed -1;
+					_Unit domove _Pos;
+					_Unit moveto _Pos;
+				};
 			} foreach _this;
-			sleep 1;
-			ServerTime > _Timer
+			sleep 2;
+			diag_ticktime > _Timer
 		};
 	};
 
@@ -282,6 +313,10 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 						_this forceSpeed 0;
 						_this enableAI "CHECKVISIBLE";
 						_this enableAI "AUTOCOMBAT";
+						_this enableAI "COVER";
+						_this enableAI "SUPPRESSION";
+						_this enableAI "WEAPONAIM";
+						_this enableAI "TARGET";
 						if (vcm_Debug) then {[_this,"SET"] call VCM_fnc_DebugText;};
 					};
 					_MoveArray deleteAt _foreachIndex;
@@ -321,6 +356,10 @@ else
 				doStop _unit;_unit domove (getposATL _Unit);
 				_Unit enableAI "CHECKVISIBLE";
 				_Unit enableAI "AUTOCOMBAT";
+				_Unit enableAI "COVER";
+				_Unit enableAI "SUPPRESSION";
+				_Unit enableAI "WEAPONAIM";
+				_Unit enableAI "TARGET";				
 				_Unit doWatch _TargetE;
 				_Unit doSuppressiveFire _TargetE;
 			};

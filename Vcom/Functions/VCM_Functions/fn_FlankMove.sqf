@@ -62,7 +62,7 @@ if (count _AssignedWaypoints > 0) then
 {
 	//If the waypoint is 2 minutes old, remove it from the group.
 	{
-		if ((_x#1) > (servertime - 120)) then
+		if ((_x#1) > (diag_ticktime - 120)) then
 		{
 			_wayPointTypes = _wayPointTypes - [_x#0];
 		}
@@ -79,7 +79,7 @@ if (count _wayPointTypes isEqualTo 0) then
 };
 
 private _WayPointType = selectRandom _waypointTypes;
-_AssignedWaypoints pushback [_waypointtype,serverTime];
+_AssignedWaypoints pushback [_waypointtype,diag_ticktime];
 _EnemyGroup setVariable ["VCM_WAYPOINTS",_AssignedWaypoints,true];
 
 switch (_wayPointType) do {
