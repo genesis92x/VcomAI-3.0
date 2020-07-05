@@ -14,16 +14,24 @@
 
 params ["_unit", "_mineArray"];
 
-if (VCM_MINECHANCE > (round (random 100)) || {isPlayer _unit}) exitWith {};
+if (!(VCM_MINECHANCE > (round (random 100))) || {isPlayer _unit} || {lifeState _Unit isEqualTo "INCAPACITATED"}) exitWith {};
 
 private _mineType = _mineArray select 0;
 
 //Let's see if we can place a scripted version of the item.
 private _testName = _mineType + "_scripted";
+
+switch (_mineType) do {
+    case "APERSMine_Range_Ammo_scripted": {_testName = "APERSMineDispenser_Mine_Ammo_Scripted"};
+    default {};
+};
+
+
 private _testMine = _testName createVehiclelocal [0,0,0];
 if !(isNull _testMine) then
 {
 	_mineType = _testName;
+	deleteVehicle _testMine;
 };
 
 private _magazineName = _mineArray select 1;

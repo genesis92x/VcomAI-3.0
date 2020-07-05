@@ -152,7 +152,11 @@ else
 		{
 			{
 				private _Type = getText(configfile/"CfgMagazines"/_x/"displayNameShort");
-				if (["HE", _Type] call BIS_fnc_inString || ["Cluster", _Type] call BIS_fnc_inString && !(["AT", _Type] call BIS_fnc_inString)) then {_FinalArtyArray pushBackUnique _Unit;_FinalAmmoType pushBackUnique _x;};
+				if (!(["AT", _Type] call BIS_fnc_inString) && !(["Smoke", _Type] call BIS_fnc_inString)) then 
+				{
+					_FinalArtyArray pushBackUnique _Unit;
+					_FinalAmmoType pushBackUnique _x;
+				};
 				if (["Smoke", _Type] call BIS_fnc_inString) then {_SmokeArray pushBackUnique _x;};
 			} foreach _ammoArray;		
 		};	
@@ -190,7 +194,7 @@ if (_RndNumber isEqualTo 1) then
 		private _pos = _PredictedLoc2;		
 		private _positions = _pos getPos [_dist,(random 360)];
 		private _CF = [_FriendlyArray,_positions,true,"Arty1"] call VCM_fnc_ClstObj;
-		if (_CF distance2D _positions > 100) then
+		if (_CF distance2D _positions > 50) then
 		{
 			_FireUnit doArtilleryFire [_positions,_randomAmmoArray,_RndNumber];	
 			If (VCM_Debug) then {[(leader _clstGrp),"DO FIRE"] call VCM_fnc_DebugText;};
@@ -214,7 +218,7 @@ else
 		If (VCM_Debug) then {[(leader _clstGrp),"DO FIRE 2"] call VCM_fnc_DebugText;};
 		if (_CF distance2D _positions > 50) then
 		{
-			_x doArtilleryFire [_positions,_randomAmmoArray,_RndNumber];	
+			_x doArtilleryFire [_positions,_randomAmmoArray,_RndNumber];
 		}
 		else
 		{
