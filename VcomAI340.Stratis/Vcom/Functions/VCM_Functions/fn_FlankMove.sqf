@@ -80,6 +80,8 @@ private _WayPointType = selectRandom _waypointTypes;
 _AssignedWaypoints pushback [_waypointtype,diag_ticktime];
 _EnemyGroup setVariable ["VCM_WAYPOINTS",_AssignedWaypoints,true];
 
+if ((getpos _nearestEnemy) isEqualTo [0,0,0]) exitWith {};
+
 switch (_wayPointType) do {
     case "Assault": 
 		{
