@@ -41,7 +41,7 @@ else
 	{
 		if (isNull objectParent _x) then
 		{
-			_x forcespeed 1;
+			_x forcespeed -1;
 		};
 	} foreach (units (group _SquadLead));
 };

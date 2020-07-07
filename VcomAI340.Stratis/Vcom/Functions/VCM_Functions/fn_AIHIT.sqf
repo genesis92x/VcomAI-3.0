@@ -38,23 +38,34 @@ if (VCM_RAGDOLL && {_unit distance2D _instigator < 101} && {_damage > 0.05} && {
 		sleep 30;
 		if (alive _this && {lifeState _this isEqualTo "INCAPACITATED"}) then {_this setUnconscious false;};
 	};
-};
-
-
-
-//Lay down
-private _GetUnitStance = unitPos _unit;
-if !(_GetUnitStance isEqualTo "DOWN") then
+}
+else
 {
-	_unit setUnitPos "DOWN";
-	[_unit,_GetUnitStance] spawn 
+	
+	
+	
+	//Lay down
+	private _GetUnitStance = unitPos _unit;
+	if !(_GetUnitStance isEqualTo "DOWN") then
 	{
-		params ["_Unit","_Pos"];
-		sleep 5;
-		if (alive _unit) then 
+		_Unit enableAI "FSM";
+		_Unit enableAI "TARGET";
+		_Unit enableAI "WEAPONAIM";
+		_Unit enableAI "AUTOTARGET";
+		_Unit enableAI "SUPPRESSION";
+		_Unit enableAI "CHECKVISIBLE";
+		_Unit enableAI "COVER";		
+		_Unit call VCM_fnc_HealSelf; 
+
+		_unit setUnitPos "DOWN";
+		[_unit,_GetUnitStance] spawn 
 		{
-			_unit setUnitPos "AUTO";
+			params ["_Unit","_Pos"];
+			sleep 5;
+			if (alive _unit) then 
+			{
+				_unit setUnitPos "AUTO";
+			};
 		};
 	};
 };
-

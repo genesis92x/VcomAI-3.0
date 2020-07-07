@@ -22,6 +22,7 @@ Vcm_Settings =
 	VCM_ARTYWT = -(VCM_ARTYDELAY);
 	VCM_ARTYET = -(VCM_ARTYDELAY);
 	VCM_ARTYRT = -(VCM_ARTYDELAY);
+	VCM_MEDICALACTIVE = true; // AI will heal themselves, and medics will heal others in their squad.
 	VCM_ARTYSIDES = [west,east,resistance];  //Sides that will use VCOM artillery
 	VCM_AIMagLimit = 5; //Number of mags remaining before AI looks for ammo.
 	VCM_Debug = false; //Enable debug mode.

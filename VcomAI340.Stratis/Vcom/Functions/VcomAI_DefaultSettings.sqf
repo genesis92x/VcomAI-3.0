@@ -19,6 +19,7 @@ Vcm_Settings =
 	VCM_ARTYENABLE = true; //Enable improved artillery handling from Vcom.
 	VCM_ARTYLST = []; //List of all AI inside of artillery pieces, leave this alone.
 	VCM_ARTYDELAY = 60; //Delay between squads requesting artillery
+	VCM_MEDICALACTIVE = true; // AI will heal themselves, and medics will heal others in their squad.
 	VCM_ARTYWT = -(VCM_ARTYDELAY);
 	VCM_ARTYET = -(VCM_ARTYDELAY);
 	VCM_ARTYRT = -(VCM_ARTYDELAY);

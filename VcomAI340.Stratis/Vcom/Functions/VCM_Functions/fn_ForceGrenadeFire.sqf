@@ -1,4 +1,4 @@
-params ["_Unit","_Grenade"];
+params ["_Unit","_Grenade",["_Override",false]];
 //First we need to find our neastest known enemy.
 private _NEnemies = (leader _unit) call VCM_fnc_ClstKnwnEnmy;
 
@@ -15,7 +15,7 @@ if (count _NEnemies > 0) then
 	} foreach _NEnemies;
 
 	//Target is close enough to consider for grenade range.
-	if (count _TargetArray > 0 && {_Grenade}) then
+	if (count _TargetArray > 0 && {(_Grenade || _Override)}) then
 	{
 			private _NE = [_TargetArray,_Unit,true,""] call VCM_fnc_ClstObj;
 			private _PotentialGrenades = ((configfile >> "CfgWeapons" >> "Throw") call BIS_fnc_getCfgSubClasses);
@@ -97,14 +97,14 @@ if (count _NEnemies > 0) then
 			_TargetArray pushback (_x # 1);
 		} foreach _NEnemies;
 		
-		if (count _TargetArray > 0 && {!(_Grenade)}) then
+		if (count _TargetArray > 0 && {!(_Grenade) || _Override}) then
 		{
 			//Smoke grenade use
 			private _NE = [_TargetArray,_Unit,true,""] call VCM_fnc_ClstObj;
 			private _PotentialGrenades = ((configfile >> "CfgWeapons" >> "Throw") call BIS_fnc_getCfgSubClasses);
 			private _CurrentGear = magazines _unit;
 			private _ExitNow = false;
-			if (_NE distance2D _Unit < 200) then
+			if (_NE distance2D _Unit < 200 || _Override) then
 			{
 				{
 					if (["smoke",_x] call BIS_fnc_inString) then

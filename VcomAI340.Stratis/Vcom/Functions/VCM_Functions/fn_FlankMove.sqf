@@ -12,12 +12,10 @@
 		NOTHING
 */
 
-params ["_leader"];
+params ["_leader","_MedList"];
 
 private _grp = group _leader;
 if (_grp getVariable ["VCM_NOFLANK",false]) exitWith {};
-
-
 
 
 private _nearestEnemy = _leader findNearestEnemy _leader;
