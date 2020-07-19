@@ -35,7 +35,7 @@ if (_knows < 2) exitwith
 	[_leader] spawn VCM_fnc_FlankMove;
 };
 
-
+if (getpos _nearestEnemy isEqualTo [0,0,0]) exitWith {};
 if !((waypointPosition [_grp,(currentWaypoint _grp)]) isEqualTo [0,0,0]) exitWith {};
 //If first waypoint is DESTROY, DO NOT change waypoints.
 private _index = currentWaypoint _grp;

@@ -55,16 +55,16 @@ if (_NearbyCover isEqualTo []) exitWith
 				if (count _EnemyArray > 0) then
 				{
 					private _TargetE = ((_EnemyArray#0)#1);
-					doStop _unit;
-					_unit disableAI "FSM";
-					_unit disableAI "TARGET";
-					_unit disableAI "WEAPONAIM";
-					_unit disableAI "AUTOTARGET";
-					_unit disableAI "SUPPRESSION";
-					_unit disableAI "CHECKVISIBLE";
-					_unit disableAI "COVER";
+					_unit enableAI "FSM";
+					_unit enableAI "TARGET";
+					_unit enableAI "WEAPONAIM";
+					_unit enableAI "AUTOTARGET";
+					_unit enableAI "SUPPRESSION";
+					_unit enableAI "CHECKVISIBLE";
+					_unit enableAI "COVER";
 					_Unit doWatch _TargetE;
-					doStop _Unit;
+					_Unit lookat _TargetE; 
+					_Unit doTarget _TargetE;					
 					_Unit forceSpeed -1;				
 					_Unit setDestination [(getpos _Unit), "FORMATION PLANNED", true];						
 					_Unit doSuppressiveFire _TargetE;
@@ -136,8 +136,7 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 						_Unit disableAI "SUPPRESSION";
 						_Unit disableAI "CHECKVISIBLE";
 						_Unit disableAI "COVER";
-						_Unit doWatch ObjNull;
-						doStop _unit;
+						//_Unit doWatch ObjNull;
 						_Unit forceSpeed -1;				
 						_Unit setDestination [_Pos, "FORMATION PLANNED", true];
 						
@@ -181,7 +180,6 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 							params ["_Unit","_Pos"];
 							sleep (2 + (random 5));
 							
-							doStop _unit;_unit domove (getposATL _Unit);
 							_unit forceSpeed -1;				
 							_Unit disableAI "FSM";
 							_Unit disableAI "TARGET";
@@ -190,7 +188,7 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 							_Unit disableAI "SUPPRESSION";
 							_Unit disableAI "CHECKVISIBLE";
 							_Unit disableAI "COVER";
-							_Unit doWatch ObjNull;
+							//_Unit doWatch ObjNull;
 							_Unit setDestination [_Pos, "FORMATION PLANNED", true];
 							
 							If (VCM_Debug) then {[_Unit,"MOVING TO POSITION - B"] call VCM_fnc_DebugText;};
@@ -222,8 +220,7 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 							_Unit disableAI "SUPPRESSION";
 							_Unit disableAI "CHECKVISIBLE";
 							_Unit disableAI "COVER";
-							_Unit doWatch ObjNull;
-							doStop _unit;
+							//_Unit doWatch ObjNull;
 							_unit forceSpeed -1;
 							_Unit setDestination [_Pos, "FORMATION PLANNED", true];
 							If (VCM_Debug) then {[_unit,"MOVING TO POSITION - C"] call VCM_fnc_DebugText;};
@@ -252,7 +249,8 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 					_Unit enableAI "CHECKVISIBLE";
 					_Unit enableAI "COVER";
 					_Unit doWatch _TargetE;
-					doStop _unit;
+					_Unit lookat _TargetE; 
+					_Unit doTarget _TargetE;						
 					_Unit forceSpeed -1;				
 					_Unit setDestination [_Pos, "FORMATION PLANNED", true];					
 					_Unit doSuppressiveFire _TargetE;
@@ -270,7 +268,6 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 		private _Timer = diag_ticktime + 20;
 		{
 			_x params ["_Unit","_Pos"];
-			doStop _unit;
 			_Unit setUnitPos "Middle";
 			_Unit forcespeed -1;
 			_Unit setDestination [_Pos, "FORMATION PLANNED", true];		
@@ -288,7 +285,6 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 					private _cansee = [_Unit, "VIEW"] checkVisibility [eyePos _Unit, eyePos _x];
 					if (_Cansee > 0 && (_x distance2D _Unit < 100)) exitWith
 					{
-						doStop _unit;
 						_Unit enableAI "FSM";
 						_Unit enableAI "TARGET";
 						_Unit enableAI "WEAPONAIM";
@@ -297,12 +293,13 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 						_Unit enableAI "CHECKVISIBLE";
 						_Unit enableAI "COVER";
 						_Unit doWatch _x;
+						_Unit lookat _x; 
+						_Unit doTarget _x;						
 						If (VCM_Debug) then {[_Unit,"STOP TO RETURN FIRE"] call VCM_fnc_DebugText;};
 					};
 				} foreach _EnemyList;
 				if (speed _Unit < 0.1) then
 				{
-					doStop _unit;
 					_Unit setUnitPos "AUTO";
 					_Unit forcespeed -1;
 					_Unit setDestination [_Pos, "FORMATION PLANNED", true];	
@@ -315,7 +312,7 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 
 	waituntil
 	{
-		_LGroup setBehaviourStrong "AWARE";
+		//_LGroup setBehaviourStrong "AWARE";
 		_LGroup setCombatMode "YELLOW";
 		//_LGroup setBehaviour "AWARE";
 		private _CurrentWaypoint = currentWaypoint _LGroup;
@@ -331,7 +328,6 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 					{
 						sleep 1;
 						_this setUnitPos "Auto";
-						doStop _this;
 						_this forceSpeed 0;
 						_this enableAI "FSM";
 						_this enableAI "TARGET";
@@ -350,7 +346,6 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 						if (count _EnemyArray > 0) then
 						{		
 							private _TargetE = ((_EnemyArray#0)#1);
-							doStop _this;
 							_this forceSpeed -1;				
 							_this setDestination [(getpos _this), "FORMATION PLANNED", true];								
 							_this doSuppressiveFire _TargetE;
@@ -365,7 +360,7 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 		(count _MoveArray < 1 || _Cntr > 30 || !(_WPos isEqualTo _wPos2))
 	};
 	
-	_LGroup setBehaviourStrong "COMBAT";
+	//_LGroup setBehaviourStrong "COMBAT";
 	_LGroup setCombatMode "YELLOW";
 	//_LGroup setBehaviour "COMBAT";
 	
@@ -381,7 +376,6 @@ else
 			};
 			_x forceSpeed -1;
 			_x setUnitPos "Auto";
-			doStop _x;
 			_x setDestination [_WPos, "FORMATION PLANNED", true];	
 			If (VCM_Debug) then {[_x,"MOVING TO POSITION - D"] call VCM_fnc_DebugText;};
 			if (random 100 < 50) then
@@ -396,7 +390,6 @@ else
 				if (count _EnemyArray > 0) then
 				{
 					private _TargetE = ((_EnemyArray#0)#1);
-					doStop _unit;
 					_Unit enableAI "FSM";
 					_Unit enableAI "TARGET";
 					_Unit enableAI "WEAPONAIM";
@@ -405,7 +398,8 @@ else
 					_Unit enableAI "CHECKVISIBLE";
 					_Unit enableAI "COVER";				
 					_Unit doWatch _TargetE;
-					doStop _Unit;
+					_Unit lookat _TargetE; 
+					_Unit doTarget _TargetE;					
 					_Unit forceSpeed -1;				
 					_Unit setDestination [(getpos _Unit), "FORMATION PLANNED", true];						
 					_Unit doSuppressiveFire _TargetE;

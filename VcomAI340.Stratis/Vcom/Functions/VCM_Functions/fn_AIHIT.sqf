@@ -41,10 +41,10 @@ if (VCM_RAGDOLL && {_unit distance2D _instigator < 101} && {_damage > 0.05} && {
 }
 else
 {
-	
-	
-	
+		
 	//Lay down
+	[_Unit,false,true] spawn VCM_fnc_ForceGrenadeFire;
+	
 	private _GetUnitStance = unitPos _unit;
 	if !(_GetUnitStance isEqualTo "DOWN") then
 	{

@@ -104,7 +104,9 @@ if (count _NEnemies > 0) then
 			private _PotentialGrenades = ((configfile >> "CfgWeapons" >> "Throw") call BIS_fnc_getCfgSubClasses);
 			private _CurrentGear = magazines _unit;
 			private _ExitNow = false;
-			if (_NE distance2D _Unit < 200 || _Override) then
+			systemchat "OVERRIDE AND THROW THAT GRENADE";
+			systemchat str _Override;
+			if ((_NE distance2D _Unit < 200) || _Override) then
 			{
 				{
 					if (["smoke",_x] call BIS_fnc_inString) then
