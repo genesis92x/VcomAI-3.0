@@ -1,7 +1,6 @@
 params ["_Unit","_Grenade","_Override"];
 if (isNil "_Override") then {_Override = false;};
 
-systemchat format ["_Override: %1",_Override];
 
 //First we need to find our neastest known enemy.
 private _NEnemies = (leader _unit) call VCM_fnc_ClstKnwnEnmy;
