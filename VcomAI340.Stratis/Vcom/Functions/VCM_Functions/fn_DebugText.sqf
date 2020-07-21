@@ -32,7 +32,8 @@ if (VCM_Debug) then
 			,_pos,(str _text)
 		];
 		if !(alive _Unit) then {[(str _Unit), "onEachFrame"] call BIS_fnc_removeStackedEventHandler;};
+		if (isNull _Unit) then {[(str _Unit), "onEachFrame"] call BIS_fnc_removeStackedEventHandler;};
 	},
 	[_Unit,_text]
-	] call BIS_fnc_addStackedEventHandler;	
+	] call BIS_fnc_addStackedEventHandler;
 };

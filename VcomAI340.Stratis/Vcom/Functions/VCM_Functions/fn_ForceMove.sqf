@@ -55,13 +55,13 @@ if (_NearbyCover isEqualTo []) exitWith
 				if (count _EnemyArray > 0) then
 				{
 					private _TargetE = ((_EnemyArray#0)#1);
-					_unit enableAI "FSM";
-					_unit enableAI "TARGET";
-					_unit enableAI "WEAPONAIM";
-					_unit enableAI "AUTOTARGET";
-					_unit enableAI "SUPPRESSION";
-					_unit enableAI "CHECKVISIBLE";
-					_unit enableAI "COVER";
+					//_unit enableAI "FSM";
+					//_unit enableAI "TARGET";
+					//_unit enableAI "WEAPONAIM";
+					//_unit enableAI "AUTOTARGET";
+					//_unit enableAI "SUPPRESSION";
+					//_unit enableAI "CHECKVISIBLE";
+					//_unit enableAI "COVER";
 					_Unit doWatch _TargetE;
 					_Unit lookat _TargetE; 
 					_Unit doTarget _TargetE;					
@@ -101,7 +101,7 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 	{
 		if (isNull objectParent _x) then
 		{
-			if (random 100 > 30) then
+			if (random 100 < 30) then
 			{
 				if (count _CoverHardObjects > 0) then
 				{	_CoverObj = [_CoverHardObjects,_WPos] call BIS_fnc_nearestPosition;
@@ -129,26 +129,25 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 						params ["_Unit","_Pos"];
 						sleep (2 + (random 5));
 						
-						_Unit disableAI "FSM";
-						_Unit disableAI "TARGET";
-						_Unit disableAI "WEAPONAIM";
-						_Unit disableAI "AUTOTARGET";
-						_Unit disableAI "SUPPRESSION";
-						_Unit disableAI "CHECKVISIBLE";
-						_Unit disableAI "COVER";
-						//_Unit doWatch ObjNull;
+						//_Unit disableAI "FSM";
+						//_Unit disableAI "TARGET";
+						//_Unit disableAI "WEAPONAIM";
+						//_Unit disableAI "AUTOTARGET";
+						//_Unit disableAI "SUPPRESSION";
+						//_Unit disableAI "CHECKVISIBLE";
+						//_Unit disableAI "COVER";
+						_Unit doWatch ObjNull;
 						_Unit forceSpeed -1;				
 						_Unit setDestination [_Pos, "FORMATION PLANNED", true];
+						doStop _Unit;
+						_Unit domove _Pos;
 						
-						If (VCM_Debug) then {[_unit,"MOVING TO POSITION - A"] call VCM_fnc_DebugText;};
-					};
-						if (VCM_Debug) then
+						If (VCM_Debug) then 
 						{
-							private _CustomPos = [(_FinalPos#0),(_FinalPos#1),((_FinalPos#2)+10)];
-							private _veh = createVehicle ["Sign_Arrow_Large_Green_F", _CustomPos, [], 0, "CAN_COLLIDE"];
-							_veh spawn {sleep 30; deleteVehicle _this;};
-			
-						};	
+							[_unit,"MOVING TO POSITION - A"] call VCM_fnc_DebugText;
+							[_Unit,_Pos,[0.71,0.09,0,1]] spawn VCM_fnc_DebugLine;
+						};
+					};
 		
 				}
 				else
@@ -156,6 +155,8 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 					_CoverObj = [_CoverObjects,_WPos] call BIS_fnc_nearestPosition;
 					if (count _CoverObjects > 0) then
 					{
+						private _CoverObjects = _NearbyCover#1;
+					};
 						if (count _CoverObjects > 2) then
 						{			
 							_CoverObjects deleteAt (_CoverObjects findif {_CoverObj isEqualTo _x});
@@ -181,29 +182,25 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 							sleep (2 + (random 5));
 							
 							_unit forceSpeed -1;				
-							_Unit disableAI "FSM";
-							_Unit disableAI "TARGET";
-							_Unit disableAI "WEAPONAIM";
-							_Unit disableAI "AUTOTARGET";
-							_Unit disableAI "SUPPRESSION";
-							_Unit disableAI "CHECKVISIBLE";
-							_Unit disableAI "COVER";
-							//_Unit doWatch ObjNull;
+							//_Unit disableAI "FSM";
+							//_Unit disableAI "TARGET";
+							//_Unit disableAI "WEAPONAIM";
+							//_Unit disableAI "AUTOTARGET";
+							//_Unit disableAI "SUPPRESSION";
+							//_Unit disableAI "CHECKVISIBLE";
+							//_Unit disableAI "COVER";
+							_Unit doWatch ObjNull;
 							_Unit setDestination [_Pos, "FORMATION PLANNED", true];
+							doStop _Unit;
+							_Unit doMove _Pos;
 							
-							If (VCM_Debug) then {[_Unit,"MOVING TO POSITION - B"] call VCM_fnc_DebugText;};
+							If (VCM_Debug) then 
+							{
+								[_Unit,"MOVING TO POSITION - B"] call VCM_fnc_DebugText;
+								[_Unit,_Pos,[0.71,0.09,0,1]] spawn VCM_fnc_DebugLine;
+							};
 						};
-			
-		
-						
-						if (VCM_Debug) then
-						{		
-							private _CustomPos = [(_FinalPos#0),(_FinalPos#1),((_FinalPos#2)+10)];
-							private _veh = createVehicle ["Sign_Arrow_Large_Green_F", _CustomPos, [], 0, "CAN_COLLIDE"];
-							_veh spawn {sleep 30; deleteVehicle _this;};
-		
-						};
-					}
+					/*
 					else
 					{
 						_MoveArray pushback [_x,_Pos];
@@ -213,20 +210,27 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 							sleep (2 + (random 5));
 							
 							_Unit setUnitPos "Middle";
-							_Unit disableAI "FSM";
-							_Unit disableAI "TARGET";
-							_Unit disableAI "WEAPONAIM";
-							_Unit disableAI "AUTOTARGET";
-							_Unit disableAI "SUPPRESSION";
-							_Unit disableAI "CHECKVISIBLE";
-							_Unit disableAI "COVER";
-							//_Unit doWatch ObjNull;
+							//_Unit disableAI "FSM";
+							//_Unit disableAI "TARGET";
+							//_Unit disableAI "WEAPONAIM";
+							//_Unit disableAI "AUTOTARGET";
+							//_Unit disableAI "SUPPRESSION";
+							//_Unit disableAI "CHECKVISIBLE";
+							//_Unit disableAI "COVER";
+							_Unit doWatch ObjNull;
 							_unit forceSpeed -1;
 							_Unit setDestination [_Pos, "FORMATION PLANNED", true];
-							If (VCM_Debug) then {[_unit,"MOVING TO POSITION - C"] call VCM_fnc_DebugText;};
+							_Unit doMove _Pos;
+							
+							If (VCM_Debug) then 
+							{
+								[_unit,"MOVING TO POSITION - C"] call VCM_fnc_DebugText;
+								[_Unit,_Pos,[0.71,0.09,0,1]] spawn VCM_fnc_DebugLine;
+							};
 						};			
 						
 					};
+					*/
 				};
 			}
 			else
@@ -241,21 +245,33 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 				if (count _EnemyArray > 0) then
 				{
 					private _TargetE = ((_EnemyArray#0)#1);
-					_Unit enableAI "FSM";
-					_Unit enableAI "TARGET";
-					_Unit enableAI "WEAPONAIM";
-					_Unit enableAI "AUTOTARGET";
-					_Unit enableAI "SUPPRESSION";
-					_Unit enableAI "CHECKVISIBLE";
-					_Unit enableAI "COVER";
+					//_Unit enableAI "FSM";
+					//_Unit enableAI "TARGET";
+					//_Unit enableAI "WEAPONAIM";
+					//_Unit enableAI "AUTOTARGET";
+					//_Unit enableAI "SUPPRESSION";
+					//_Unit enableAI "CHECKVISIBLE";
+					//_Unit enableAI "COVER";
+					dostop _Unit;
 					_Unit doWatch _TargetE;
 					_Unit lookat _TargetE; 
 					_Unit doTarget _TargetE;						
-					_Unit forceSpeed -1;				
-					_Unit setDestination [_Pos, "FORMATION PLANNED", true];					
+					_Unit forceSpeed -1;
+					private _RndPos = (leader _LGroup) getPos [(random 20),360];
+					if (_Unit isEqualTo (leader _LGroup)) then
+					{
+						_RndPos = _WPos;
+					};
+					_Unit setDestination [_RndPos, "FORMATION PLANNED", true];
 					_Unit doSuppressiveFire _TargetE;
+					_Unit domove _RndPos;
+					if (vcm_Debug) then 
+					{
+						[_Unit,"LOOKING TO FIRE - ZD"] call VCM_fnc_DebugText;
+						[_Unit,(getpos _TargetE),[0.71,0.09,0,1],true] spawn VCM_fnc_DebugLine;
+					};					
 				};
-				if (vcm_Debug) then {[_Unit,"LOOKING TO FIRE"] call VCM_fnc_DebugText;};
+
 			};
 		};
 	} foreach (units _LGroup);
@@ -264,15 +280,8 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 
 	_MoveArray spawn
 	{
-		sleep 5;
-		private _Timer = diag_ticktime + 20;
-		{
-			_x params ["_Unit","_Pos"];
-			_Unit setUnitPos "Middle";
-			_Unit forcespeed -1;
-			_Unit setDestination [_Pos, "FORMATION PLANNED", true];		
-		} foreach _this;
-
+		sleep 1;
+		private _Timer = diag_ticktime + 30;
 		waituntil
 		{
 
@@ -285,27 +294,33 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 					private _cansee = [_Unit, "VIEW"] checkVisibility [eyePos _Unit, eyePos _x];
 					if (_Cansee > 0 && (_x distance2D _Unit < 100)) exitWith
 					{
-						_Unit enableAI "FSM";
-						_Unit enableAI "TARGET";
-						_Unit enableAI "WEAPONAIM";
-						_Unit enableAI "AUTOTARGET";
-						_Unit enableAI "SUPPRESSION";
-						_Unit enableAI "CHECKVISIBLE";
-						_Unit enableAI "COVER";
+						//_Unit enableAI "FSM";
+						//_Unit enableAI "TARGET";
+						//_Unit enableAI "WEAPONAIM";
+						//_Unit enableAI "AUTOTARGET";
+						//_Unit enableAI "SUPPRESSION";
+						//_Unit enableAI "CHECKVISIBLE";
+						//_Unit enableAI "COVER";
 						_Unit doWatch _x;
 						_Unit lookat _x; 
 						_Unit doTarget _x;						
-						If (VCM_Debug) then {[_Unit,"STOP TO RETURN FIRE"] call VCM_fnc_DebugText;};
+						If (VCM_Debug) then {[_Unit,"STOP TO RETURN FIRE"] call VCM_fnc_DebugText;[_Unit,(getpos _x),[0.71,0.09,0,1],true] spawn VCM_fnc_DebugLine;};
 					};
 				} foreach _EnemyList;
 				if (speed _Unit < 0.1) then
 				{
-					_Unit setUnitPos "AUTO";
 					_Unit forcespeed -1;
-					_Unit setDestination [_Pos, "FORMATION PLANNED", true];	
+					_Unit setDestination [_Pos, "FORMATION PLANNED", true];
+					doStop _Unit;
+					_Unit doMove _Pos;
+					If (VCM_Debug) then 
+					{
+						[_Unit,format ["FORCE MOVE! %1",_Pos]] call VCM_fnc_DebugText;
+						[_Unit,_Pos,[0.71,0.09,0,1]] spawn VCM_fnc_DebugLine;
+					};
 				};
 			} foreach _this;
-			sleep 5;
+			sleep 2;
 			diag_ticktime > _Timer
 		};
 	};
@@ -329,13 +344,14 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 						sleep 1;
 						_this setUnitPos "Auto";
 						_this forceSpeed 0;
-						_this enableAI "FSM";
-						_this enableAI "TARGET";
-						_this enableAI "WEAPONAIM";
-						_this enableAI "AUTOTARGET";
-						_this enableAI "SUPPRESSION";
-						_this enableAI "CHECKVISIBLE";
-						_this enableAI "COVER";
+						doStop _this;
+						//_this enableAI "FSM";
+						//_this enableAI "TARGET";
+						//_this enableAI "WEAPONAIM";
+						//_this enableAI "AUTOTARGET";
+						//_this enableAI "SUPPRESSION";
+						//_this enableAI "CHECKVISIBLE";
+						//_this enableAI "COVER";
 						private _EnemyList = _this targets [true,1000];
 						private _EnemyArray = [];
 						{
@@ -344,11 +360,11 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 						} foreach _EnemyList;
 						_EnemyArray sort true;
 						if (count _EnemyArray > 0) then
-						{		
+						{
 							private _TargetE = ((_EnemyArray#0)#1);
-							_this forceSpeed -1;				
-							_this setDestination [(getpos _this), "FORMATION PLANNED", true];								
+							_this forceSpeed -1;						
 							_this doSuppressiveFire _TargetE;
+							if (vcm_Debug) then {[_this,"RETURN FIRE - Z"] call VCM_fnc_DebugText;[_this,(getpos _TargetE),[0.71,0.09,0,1],true] spawn VCM_fnc_DebugLine;};
 						};
 						if (vcm_Debug) then {[_this,"SET"] call VCM_fnc_DebugText;};
 					};
@@ -390,13 +406,13 @@ else
 				if (count _EnemyArray > 0) then
 				{
 					private _TargetE = ((_EnemyArray#0)#1);
-					_Unit enableAI "FSM";
-					_Unit enableAI "TARGET";
-					_Unit enableAI "WEAPONAIM";
-					_Unit enableAI "AUTOTARGET";
-					_Unit enableAI "SUPPRESSION";
-					_Unit enableAI "CHECKVISIBLE";
-					_Unit enableAI "COVER";				
+					//_Unit enableAI "FSM";
+					//_Unit enableAI "TARGET";
+					//_Unit enableAI "WEAPONAIM";
+					//_Unit enableAI "AUTOTARGET";
+					//_Unit enableAI "SUPPRESSION";
+					//_Unit enableAI "CHECKVISIBLE";
+					//_Unit enableAI "COVER";				
 					_Unit doWatch _TargetE;
 					_Unit lookat _TargetE; 
 					_Unit doTarget _TargetE;					
@@ -404,7 +420,7 @@ else
 					_Unit setDestination [(getpos _Unit), "FORMATION PLANNED", true];						
 					_Unit doSuppressiveFire _TargetE;
 				};
-				if (vcm_Debug) then {[_Unit,"LOOKING TO FIRE"] call VCM_fnc_DebugText;};
+				if (vcm_Debug) then {[_Unit,"LOOKING TO FIRE - NO COVER"] call VCM_fnc_DebugText;};
 			};
 		};
 	} foreach (units _LGroup);
