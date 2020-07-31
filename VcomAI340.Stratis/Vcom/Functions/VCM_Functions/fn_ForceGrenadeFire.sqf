@@ -1,4 +1,7 @@
-params ["_Unit","_Grenade",["_Override",false]];
+params ["_Unit","_Grenade","_Override"];
+if (isNil "_Override") then {_Override = false;};
+
+
 //First we need to find our neastest known enemy.
 private _NEnemies = (leader _unit) call VCM_fnc_ClstKnwnEnmy;
 
@@ -104,7 +107,7 @@ if (count _NEnemies > 0) then
 			private _PotentialGrenades = ((configfile >> "CfgWeapons" >> "Throw") call BIS_fnc_getCfgSubClasses);
 			private _CurrentGear = magazines _unit;
 			private _ExitNow = false;
-			if (_NE distance2D _Unit < 200 || _Override) then
+			if ((_NE distance2D _Unit < 200) || _Override) then
 			{
 				{
 					if (["smoke",_x] call BIS_fnc_inString) then

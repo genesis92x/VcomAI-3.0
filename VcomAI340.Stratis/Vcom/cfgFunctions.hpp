@@ -216,8 +216,11 @@ class VCOM
 		//[squadleader] call VCM_fnc_AISpeed;
 		class AISpeed {};
 				
-		//[_StaticList] call VCM_fnc_StaticCheck.sqf;
+		//[_StaticList] call VCM_fnc_StaticCheck;
 		class StaticCheck {};
+		
+		//[_Unit,_Pos OR Obj] spawn VCM_fnc_DebugLine;
+		class DebugLine {};
 				
 	};		
 
