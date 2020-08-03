@@ -222,6 +222,14 @@ class VCOM
 		//[_Unit,_Pos OR Obj] spawn VCM_fnc_DebugLine;
 		class DebugLine {};
 				
+		//[_unit, true] spawn VCM_fnc_BabeOver; 
+		class BabeOver {};
+		
+		//_Group spawn VCM_fnc_UseEM;
+		class UseEM {};
+		
+		//["_Unit","_Array"] spawn VCM_fnc_3DPathDebug;
+		class 3DPathDebug {};
 	};		
 
 };

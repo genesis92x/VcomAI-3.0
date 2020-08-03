@@ -4,7 +4,7 @@
 item0[] = {"Begin_State",0,250,0.000000,700.000000,100.000000,750.000000,0.000000,"Begin State"};
 item1[] = {"Cond",4,218,-125.000000,700.000000,-25.000000,750.000000,50.000000,"Cond"};
 item2[] = {"Exit_FSM",1,250,-250.000000,700.000000,-175.000000,750.000000,0.000000,"Exit FSM"};
-item3[] = {"Continue",8,218,0.000000,575.000000,100.000000,625.000000,0.000000,"Continue"};
+item3[] = {"Continue",8,4314,0.000000,575.000000,100.000000,625.000000,0.000000,"Continue"};
 item4[] = {"Start_Point",2,250,50.000000,400.000000,150.000000,450.000000,0.000000,"Start Point"};
 item5[] = {"Exit_Cond",4,218,-100.000000,475.000000,0.000000,525.000000,700.000000,"Exit Cond"};
 item6[] = {"Exit_FSM_1",1,250,-250.000000,475.000000,-175.000000,525.000000,0.000000,"Exit FSM"};
@@ -150,8 +150,8 @@ link85[] = {56,26};
 link86[] = {57,26};
 link87[] = {58,26};
 link88[] = {59,26};
-globals[] = {0.000000,0,0,0,0,640,480,2,650,6316128,1,811.340088,1447.905518,657.360962,72.878448,660,606,1};
-window[] = {2,-1,-1,-32000,-32000,810,503,1845,32,1,678};
+globals[] = {0.000000,0,0,0,0,640,480,2,650,6316128,1,-304.725769,384.903229,854.377380,221.172607,660,606,1};
+window[] = {0,-1,-1,-1,-1,1012,234,1576,234,1,678};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -229,11 +229,22 @@ class FSM
                                          "		_x addEventHandler [""Hit"",{_this call VCM_fnc_AIHIT;}];" \n
                                          "		_x setAnimSpeedCoef 1.15;" \n
                                          "		_x disableAI ""RADIOPROTOCOL"";" \n
-                                         "" \n
+                                         "		_x setVariable [""babe_em_vars"", [false, false, true]];  " \n
+                                         "		_x addEventHandler [""PathCalculated""," \n
+                                         "		{" \n
+                                         "			(_This#0) setVariable [""VCM_MVWP"",(_this#1)];" \n
+                                         "			if (VCM_Debug) then {_this spawn VCM_fnc_3DPathDebug;};" \n
+                                         "		}];" \n
                                          "	};" \n
                                          "} foreach (units _Group);" \n
                                          "" \n
-                                         "if (VCM_Debug) then {diag_log (format [""%1: VCOM INITILZIED SCRIPTS"",_Group])};"/*%FSM</ACTION""">*/;
+                                         "if (VCM_Debug) then {diag_log (format [""%1: VCOM INITILZIED SCRIPTS"",_Group])};" \n
+                                         "" \n
+                                         "if (VCOM_EM_ENABLED && {Vcm_AI_EM}) then " \n
+                                         "{" \n
+                                         "	_Group spawn VCM_fnc_UseEM;" \n
+                                         "};" \n
+                                         ""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                         };
@@ -276,6 +287,13 @@ class FSM
                          "			_x addEventHandler [""Fired"",{_this call VCM_fnc_HearingAids;}];" \n
                          "			_x addEventHandler [""Hit"",{_this call VCM_fnc_AIHIT;}];" \n
                          "			_x setAnimSpeedCoef 1.15;" \n
+                         "			_x setVariable [""babe_em_vars"", [false, false, true]];  " \n
+                         "			_x addEventHandler [""PathCalculated""," \n
+                         "			{" \n
+                         "				(_This#0) setVariable [""VCM_MVWP"",(_this#1)];" \n
+                         "				if (VCM_Debug) then {_this spawn VCM_fnc_3DPathDebug;};" \n
+                         "			}];" \n
+                         "" \n
                          "" \n
                          "		};" \n
                          "	} foreach (units _Group);" \n

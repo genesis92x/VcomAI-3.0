@@ -51,7 +51,8 @@ Vcm_Settings =
 	Vcm_PlayerAISkills = true; //AI in a group, that a players leads, can have their skills changed separately.
 	Vcm_GrenadeChance = 10; //Chance the AI will throw a grenade.
 	Vcm_SmokeChance = 10; //Chance the AI will throw a smoke grenade.
-		
+	Vcm_AI_EM = true; //Will the AI use enhanced movement to navigate around.
+	
 	//AI SKILL SETTINGS HERE!!!!!!!!!!!!
 	//LOW DIFFICULTY
 	//VCM_AIDIFA = [['aimingAccuracy',0.15],['aimingShake',0.1],['aimingSpeed',0.25],['commanding',1],['courage',1],['endurance',1],['general',0.5],['reloadSpeed',1],['spotDistance',0.8],['spotTime',0.8]];

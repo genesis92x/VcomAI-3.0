@@ -141,6 +141,7 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 						_Unit setDestination [_Pos, "FORMATION PLANNED", true];
 						doStop _Unit;
 						_Unit domove _Pos;
+						_Unit doFollow (leader (group _Unit));
 						
 						If (VCM_Debug) then 
 						{
@@ -193,6 +194,7 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 							_Unit setDestination [_Pos, "FORMATION PLANNED", true];
 							doStop _Unit;
 							_Unit doMove _Pos;
+							_Unit doFollow (leader (group _Unit));
 							
 							If (VCM_Debug) then 
 							{
@@ -265,6 +267,7 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 					_Unit setDestination [_RndPos, "FORMATION PLANNED", true];
 					_Unit doSuppressiveFire _TargetE;
 					_Unit domove _RndPos;
+					_Unit doFollow (leader (group _Unit));
 					if (vcm_Debug) then 
 					{
 						[_Unit,"LOOKING TO FIRE - ZD"] call VCM_fnc_DebugText;
@@ -313,6 +316,7 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 					_Unit setDestination [_Pos, "FORMATION PLANNED", true];
 					doStop _Unit;
 					_Unit doMove _Pos;
+					_Unit doFollow (leader (group _Unit));
 					If (VCM_Debug) then 
 					{
 						[_Unit,format ["FORCE MOVE! %1",_Pos]] call VCM_fnc_DebugText;
