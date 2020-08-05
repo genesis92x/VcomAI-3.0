@@ -41,7 +41,7 @@ item36[] = {"ArmStatics",4,218,800.000000,100.000000,900.000000,150.000000,106.0
 item37[] = {"True",8,218,750.000000,75.000000,850.000000,125.000000,0.000000,"True"};
 item38[] = {"Exit_Cond",4,218,675.000000,475.000000,775.000000,525.000000,700.000000,"Exit Cond"};
 item39[] = {"Exit_FSM_2",1,250,700.000000,600.000000,775.000000,650.000000,0.000000,"Exit FSM"};
-item40[] = {"Clear_Building",4,218,1200.000000,300.000000,1300.000000,350.000000,50.000000,"Clear Building"};
+item40[] = {"Clear_Building",4,4314,1200.000000,300.000000,1300.000000,350.000000,50.000000,"Clear Building"};
 item41[] = {"Combat_END",4,218,675.000000,400.000000,775.000000,450.000000,120.000000,"Combat END"};
 item42[] = {"Exit_Cond",4,218,525.000000,700.000000,625.000000,750.000000,700.000000,"Exit Cond"};
 item43[] = {"Arty_Pause",4,218,150.000000,525.000000,250.000000,575.000000,930.000000,"Arty Pause"};
@@ -150,8 +150,8 @@ link85[] = {56,26};
 link86[] = {57,26};
 link87[] = {58,26};
 link88[] = {59,26};
-globals[] = {0.000000,0,0,0,0,640,480,2,650,6316128,1,811.340088,1447.905518,657.360962,72.878448,660,606,1};
-window[] = {2,-1,-1,-32000,-32000,810,503,1845,32,1,678};
+globals[] = {0.000000,0,0,0,0,640,480,2,650,6316128,1,678.954224,1368.583740,499.458832,-133.746307,969,884,1};
+window[] = {2,-1,-1,-1,-1,830,146,1488,52,3,987};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -229,11 +229,22 @@ class FSM
                                          "		_x addEventHandler [""Hit"",{_this call VCM_fnc_AIHIT;}];" \n
                                          "		_x setAnimSpeedCoef 1.15;" \n
                                          "		_x disableAI ""RADIOPROTOCOL"";" \n
-                                         "" \n
+                                         "		_x setVariable [""babe_em_vars"", [false, false, true]];  " \n
+                                         "		_x addEventHandler [""PathCalculated""," \n
+                                         "		{" \n
+                                         "			(_This#0) setVariable [""VCM_MVWP"",(_this#1)];" \n
+                                         "			if (VCM_Debug) then {_this spawn VCM_fnc_3DPathDebug;};" \n
+                                         "		}];" \n
                                          "	};" \n
                                          "} foreach (units _Group);" \n
                                          "" \n
-                                         "if (VCM_Debug) then {diag_log (format [""%1: VCOM INITILZIED SCRIPTS"",_Group])};"/*%FSM</ACTION""">*/;
+                                         "if (VCM_Debug) then {diag_log (format [""%1: VCOM INITILZIED SCRIPTS"",_Group])};" \n
+                                         "" \n
+                                         "if (VCOM_EM_ENABLED && {Vcm_AI_EM}) then " \n
+                                         "{" \n
+                                         "	_Group spawn VCM_fnc_UseEM;" \n
+                                         "};" \n
+                                         ""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                         };
@@ -276,6 +287,13 @@ class FSM
                          "			_x addEventHandler [""Fired"",{_this call VCM_fnc_HearingAids;}];" \n
                          "			_x addEventHandler [""Hit"",{_this call VCM_fnc_AIHIT;}];" \n
                          "			_x setAnimSpeedCoef 1.15;" \n
+                         "			_x setVariable [""babe_em_vars"", [false, false, true]];  " \n
+                         "			_x addEventHandler [""PathCalculated""," \n
+                         "			{" \n
+                         "				(_This#0) setVariable [""VCM_MVWP"",(_this#1)];" \n
+                         "				if (VCM_Debug) then {_this spawn VCM_fnc_3DPathDebug;};" \n
+                         "			}];" \n
+                         "" \n
                          "" \n
                          "		};" \n
                          "	} foreach (units _Group);" \n
@@ -887,7 +905,7 @@ class FSM
                                         priority = 50.000000;
                                         to="Return";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_BackbkC8 + 25 < time && {!_CurLGar} && {_ClearCnc < 51} && {leader _Group distance2D _NearestEnemy < 200}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_BackbkC8 + 30 < time && {!_CurLGar} && {_ClearCnc < 51} && {leader _Group distance2D _NearestEnemy < 100}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"[_Group,_NearestEnemy] call VCM_fnc_ClearBuilding;" \n
                                          "private _t = time;" \n
                                          "_Wait = 10;" \n
