@@ -285,12 +285,10 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 	{
 		sleep 1;
 		private _Timer = diag_ticktime + 30;
-		private _SelUnit = ((_this#0)#0);
-		(group _SelUnit) disableAI "AUTOCOMBAT";
-		(group _SelUnit) setBehaviourStrong "AWARE";
 		{
 			_x params ["_Unit","_Pos"];
 			_Unit disableAI "AUTOCOMBAT";
+			_Unit setBehaviour "AWARE";
 		} foreach _this;
 		waituntil
 		{

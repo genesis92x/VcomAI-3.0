@@ -58,7 +58,6 @@ if (count _NEnemyA > 0) then
 		if (behaviour _SquadLead isEqualTo "COMBAT" && {((_SquadGroup getVariable ["VCM_STM",-60]) +  5) < diag_tickTime}) then
 		{
 			_SquadGroup setBehaviourStrong "AWARE";
-			systemchat "AWARE MODE SET";
 		};
 	}
 	else
@@ -78,7 +77,6 @@ else
 	if ((_SquadGroup getVariable ["VCM_STM",-60]) +  5 < diag_tickTime) then
 	{
 		_SquadGroup setBehaviourStrong "AWARE";
-		systemchat "AWARE MODE SET";
 	};
 };
 

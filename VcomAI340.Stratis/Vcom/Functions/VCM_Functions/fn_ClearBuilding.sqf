@@ -15,6 +15,7 @@
 
 params ["_group","_enemy"];
 
+
 private _nBuildingLst = nearestObjects [_enemy, ["House", "Building"], 25,true];
 if (count _nBuildingLst < 1) exitWith {};
 
@@ -32,12 +33,15 @@ if (count _buildingPositions < 1) exitWith {};
 private _finalSel = [_buildingPositions,_enemy,true,"Clear0"] call VCM_fnc_ClstObj; 
 
 //Check to see if the enemy is within the bounds of the building, and not just outside of it
-private _corners = _finalSel call BIS_fnc_boundingBoxCorner; //[[_x2, _y2, 0], [_x2, _y1, 0], [_x1, _y1, 0], [_x1, _y2, 0]]
-_corners params ["_topright","_bottomright","_bottomleft","_Bottomright"];
+
 
 private _unitPosition = getposATL _enemy; //[x,y,z]
 
-if ((_unitPosition#0 > _bottomleft#0 && {_unitPosition#0 < _bottomright#0}) && (_unitPosition#1 > _bottomleft#1 && {_unitPosition#1 < _topright#1})) then
+
+private _XnY = (3 boundingBox _finalSel);
+
+
+if (_unitPosition inArea [(getPosATL _finalSel), ((_XnY#1)#0),((_XnY#1)#1), (getdir _finalSel), true]) then
 {
 	//Unit is inside the hitbox of a building. Or close enough.
 	private _tempA = _finalSel call BIS_fnc_buildingPositions;
@@ -57,12 +61,25 @@ if ((_unitPosition#0 > _bottomleft#0 && {_unitPosition#0 < _bottomright#0}) && (
 	
 	private _clstP = [_tempA,_enemy,true,"Clear1"] call VCM_fnc_ClstObj;
 	
+	
+	
+	
+	private _Timer = diag_ticktime + 30;
+	waitUntil
 	{
-		_x domove (getposATL _x);
-		_x moveto (getposATL _X);
-		doStop _x;_x forcespeed -1;
-		_x doMove _clstP;
-		_x moveTo _clstP;
-		_x setDestination [_clstP, "FORMATION PLANNED", true];
-	} foreach (units _group);
+		{
+			_x domove (getposATL _x);
+			_x moveto (getposATL _X);
+			doStop _x;_x forcespeed -1;
+			_x doMove _clstP;
+			_x moveTo _clstP;
+			_x setDestination [_clstP, "FORMATION PLANNED", true];
+		} foreach (units _group);
+	
+		sleep 5;
+		diag_ticktime > _Timer
+	};
+	
+	
+	
 }; 
