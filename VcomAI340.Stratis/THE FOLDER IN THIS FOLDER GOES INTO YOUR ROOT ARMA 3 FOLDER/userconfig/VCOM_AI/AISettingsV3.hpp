@@ -31,6 +31,7 @@ Vcm_Settings =
 	VCM_RAGDOLLCHC = 100; //CHANCE AI RAGDOLL	
 	VCM_FullSpeed = false; //Enforce full speedmode during combat (Does not reset after combat end)
 	VCM_HEARINGDISTANCE = 1200; //Distance AI hear unsuppressed gunshots.
+	VCM_SUPDIST = 100; //Distance AI will hear suppressed gunshots.
 	VCM_WARNDIST = 1000; //How far AI can request help from other groups.
 	VCM_WARNDELAY = 30; //How long the AI have to survive before they can call in for support. This activates once the AI enter combat.
 	VCM_STATICARMT = 300; //How long AI stay on static weapons when initially arming them. This is just for AI WITHOUT static bags. They will stay for this duration when NO ENEMIES ARE SEEN, or their group gets FAR away.	

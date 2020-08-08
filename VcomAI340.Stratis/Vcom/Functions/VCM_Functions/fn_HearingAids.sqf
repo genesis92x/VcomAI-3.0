@@ -37,7 +37,7 @@ if ((_timeShot + 2) < time) then
 {
 	
 	if ((group _unit) getVariable ["VCM_NOFLANK",false]) exitWith {};
-	
+	(group _unit) setVariable ["VCM_STM",diag_tickTime];
 	//Check if unit has suppressor on weapon.
 	private _mzl = currentMuzzle _unit;
 	private _mzl = if (_mzl isEqualType "") then {_mzl} else {""};
@@ -65,8 +65,26 @@ if ((_timeShot + 2) < time) then
 		};
 		
 		_unit setVariable ["VCM_FTH",time];
-	};
-	
+	}
+	else
+	{
+		private _array1 = _unit call VCM_fnc_EnemyArray;
+		private _snda = [];
+		{
+			if ((_x distance2D _unit) < VCM_SUPDIST) then
+			{
+				_snda pushback _x;
+			};
+		} foreach _array1;
+		
+		if (count _snda > 0) then
+		{
+			[_snda,_unit,1] remoteExec ["VCM_fnc_KnowAbout",0];	
+			[_snda] remoteExec ["VCM_fnc_ResetAnimation",0];	
+		};
+		
+		_unit setVariable ["VCM_FTH",time];		
+	};	
 };
 
 

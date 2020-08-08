@@ -41,7 +41,7 @@ item36[] = {"ArmStatics",4,218,800.000000,100.000000,900.000000,150.000000,106.0
 item37[] = {"True",8,218,750.000000,75.000000,850.000000,125.000000,0.000000,"True"};
 item38[] = {"Exit_Cond",4,218,675.000000,475.000000,775.000000,525.000000,700.000000,"Exit Cond"};
 item39[] = {"Exit_FSM_2",1,250,700.000000,600.000000,775.000000,650.000000,0.000000,"Exit FSM"};
-item40[] = {"Clear_Building",4,4314,1200.000000,300.000000,1300.000000,350.000000,50.000000,"Clear Building"};
+item40[] = {"Clear_Building",4,218,1200.000000,300.000000,1300.000000,350.000000,50.000000,"Clear Building"};
 item41[] = {"Combat_END",4,218,675.000000,400.000000,775.000000,450.000000,120.000000,"Combat END"};
 item42[] = {"Exit_Cond",4,218,525.000000,700.000000,625.000000,750.000000,700.000000,"Exit Cond"};
 item43[] = {"Arty_Pause",4,218,150.000000,525.000000,250.000000,575.000000,930.000000,"Arty Pause"};
@@ -58,7 +58,7 @@ item53[] = {"Attack_Orders",4,218,1050.000000,600.000000,1150.000000,650.000000,
 item54[] = {"",7,210,1221.000000,771.000000,1229.000000,779.000000,0.000000,""};
 item55[] = {"",7,210,1658.500000,771.000061,1666.500000,779.000000,0.000000,""};
 item56[] = {"",7,210,1583.500000,21.000002,1591.500000,28.999998,0.000000,""};
-item57[] = {"Too_Far",4,218,1250.000000,325.000000,1350.000000,375.000000,1.000000,"Too Far"};
+item57[] = {"Too_Far",4,4314,1250.000000,325.000000,1350.000000,375.000000,1.000000,"Too Far"};
 item58[] = {"Combat_Movement",4,218,1150.000000,275.000000,1250.000000,325.000000,104.000000,"Combat" \n "Movement"};
 item59[] = {"Grenade_Check",4,218,1000.000000,200.000000,1100.000000,250.000000,60.000000,"Grenade" \n "Check"};
 link0[] = {0,1};
@@ -150,8 +150,8 @@ link85[] = {56,26};
 link86[] = {57,26};
 link87[] = {58,26};
 link88[] = {59,26};
-globals[] = {0.000000,0,0,0,0,640,480,2,650,6316128,1,678.954224,1368.583740,499.458832,-133.746307,969,884,1};
-window[] = {2,-1,-1,-1,-1,830,146,1488,52,3,987};
+globals[] = {0.000000,0,0,0,0,640,480,2,650,6316128,1,742.133545,1338.142578,577.308350,65.720032,706,606,1};
+window[] = {0,-1,-1,-1,-1,908,130,1472,130,1,724};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -590,8 +590,6 @@ class FSM
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"(((behaviour _leader) isEqualTo ""AWARE"") || ((behaviour _leader) isEqualTo ""SAFE"")) && _CNOW"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"// return behaviour and speed to normal" \n
-                                         "_leader setBehaviourStrong _StartingBehavior;" \n
-                                         "(group _leader) setSpeedMode ""NORMAL"";" \n
                                          "" \n
                                          "if (VCM_Debug) then {systemchat ""COMBAT END"";};" \n
                                          "" \n
@@ -787,7 +785,7 @@ class FSM
                                         priority = 104.000000;
                                         to="Return";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_Cover2Cover + 60 < time"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_Cover2Cover + 40 < time && {leader _Group distance2D _NearestEnemy < 800}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"{" \n
                                          "	if (Vcm_SmokeChance > (random 100)) then" \n
                                          "	{" \n
@@ -923,7 +921,7 @@ class FSM
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"_NearestEnemy distance2D _leader > 1000"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"_CNOW = true;" \n
-                                         "_leader setBehaviour _StartingBehavior;"/*%FSM</ACTION""">*/;
+                                         "_Group setBehaviourStrong ""SAFE"";"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                                 /*%FSM<LINK "True">*/

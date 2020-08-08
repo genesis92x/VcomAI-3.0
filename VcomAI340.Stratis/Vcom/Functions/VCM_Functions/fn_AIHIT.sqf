@@ -24,7 +24,7 @@
 */
 params ["_unit", "_source", "_damage", "_instigator"];
 
-if (VCM_MEDICALACTIVE) exitWith {};
+if !(VCM_MEDICALACTIVE) exitWith {};
 
 if (VCM_RAGDOLL && {_unit distance2D _instigator < 101} && {_damage > 0.05} && {!(lifestate _unit isEqualTo "INCAPACITATED")} && {VCM_RAGDOLLCHC > (random 100)}) then
 {
@@ -47,14 +47,7 @@ else
 	
 	private _GetUnitStance = unitPos _unit;
 	if !(_GetUnitStance isEqualTo "DOWN") then
-	{
-		_Unit enableAI "FSM";
-		_Unit enableAI "TARGET";
-		_Unit enableAI "WEAPONAIM";
-		_Unit enableAI "AUTOTARGET";
-		_Unit enableAI "SUPPRESSION";
-		_Unit enableAI "CHECKVISIBLE";
-		_Unit enableAI "COVER";		
+	{	
 		_Unit call VCM_fnc_HealSelf; 
 
 		_unit setUnitPos "DOWN";

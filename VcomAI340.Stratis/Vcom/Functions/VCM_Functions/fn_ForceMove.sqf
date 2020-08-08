@@ -141,7 +141,7 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 						_Unit setDestination [_Pos, "FORMATION PLANNED", true];
 						doStop _Unit;
 						_Unit domove _Pos;
-						_Unit doFollow (leader (group _Unit));
+						//_Unit doFollow (leader (group _Unit));
 						
 						If (VCM_Debug) then 
 						{
@@ -191,10 +191,10 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 							//_Unit disableAI "CHECKVISIBLE";
 							//_Unit disableAI "COVER";
 							_Unit doWatch ObjNull;
-							_Unit setDestination [_Pos, "FORMATION PLANNED", true];
 							doStop _Unit;
 							_Unit doMove _Pos;
-							_Unit doFollow (leader (group _Unit));
+							_Unit setDestination [_Pos, "FORMATION PLANNED", true];
+							//_Unit doFollow (leader (group _Unit));
 							
 							If (VCM_Debug) then 
 							{
@@ -264,10 +264,10 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 					{
 						_RndPos = _WPos;
 					};
-					_Unit setDestination [_RndPos, "FORMATION PLANNED", true];
 					_Unit doSuppressiveFire _TargetE;
 					_Unit domove _RndPos;
-					_Unit doFollow (leader (group _Unit));
+					//_Unit doFollow (leader (group _Unit));
+					_Unit setDestination [_RndPos, "FORMATION PLANNED", true];
 					if (vcm_Debug) then 
 					{
 						[_Unit,"LOOKING TO FIRE - ZD"] call VCM_fnc_DebugText;
@@ -285,6 +285,13 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 	{
 		sleep 1;
 		private _Timer = diag_ticktime + 30;
+		private _SelUnit = ((_this#0)#0);
+		(group _SelUnit) disableAI "AUTOCOMBAT";
+		(group _SelUnit) setBehaviourStrong "AWARE";
+		{
+			_x params ["_Unit","_Pos"];
+			_Unit disableAI "AUTOCOMBAT";
+		} foreach _this;
 		waituntil
 		{
 
@@ -312,11 +319,11 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 				} foreach _EnemyList;
 				if (speed _Unit < 0.1) then
 				{
-					_Unit forcespeed -1;
-					_Unit setDestination [_Pos, "FORMATION PLANNED", true];
 					doStop _Unit;
 					_Unit doMove _Pos;
-					_Unit doFollow (leader (group _Unit));
+					//_Unit doFollow (leader (group _Unit));
+					_Unit forcespeed -1;
+					_Unit setDestination [_Pos, "FORMATION PLANNED", true];					
 					If (VCM_Debug) then 
 					{
 						[_Unit,format ["FORCE MOVE! %1",_Pos]] call VCM_fnc_DebugText;
@@ -327,6 +334,10 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 			sleep 2;
 			diag_ticktime > _Timer
 		};
+		{
+			_x params ["_Unit","_Pos"];
+			_Unit enableAI "AUTOCOMBAT";
+		} foreach _this;
 	};
 
 	waituntil
