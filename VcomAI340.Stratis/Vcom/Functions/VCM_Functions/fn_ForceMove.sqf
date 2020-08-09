@@ -101,6 +101,7 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 	{
 		if (isNull objectParent _x) then
 		{
+			_x forcespeed -1;
 			if (random 100 < 30) then
 			{
 				if (count _CoverHardObjects > 0) then
@@ -357,7 +358,6 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 						sleep 1;
 						_this setUnitPos "Auto";
 						_this forceSpeed 0;
-						doStop _this;
 						//_this enableAI "FSM";
 						//_this enableAI "TARGET";
 						//_this enableAI "WEAPONAIM";
