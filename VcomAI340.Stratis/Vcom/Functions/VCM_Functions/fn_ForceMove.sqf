@@ -357,7 +357,7 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 					{
 						sleep 1;
 						_this setUnitPos "Auto";
-						_this forceSpeed 0;
+						//_this forceSpeed 0;
 						//_this enableAI "FSM";
 						//_this enableAI "TARGET";
 						//_this enableAI "WEAPONAIM";

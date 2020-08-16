@@ -14,7 +14,7 @@
 
 params ["_unit", "_mineArray"];
 
-if (!(VCM_MINECHANCE > (round (random 100))) || {isPlayer _unit} || {lifeState _Unit isEqualTo "INCAPACITATED"}) exitWith {};
+if ((VCM_MINECHANCE > (random 100)) || {isPlayer _unit} || {lifeState _Unit isEqualTo "INCAPACITATED"}) exitWith {};
 
 private _mineType = _mineArray select 0;
 
