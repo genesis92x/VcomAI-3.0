@@ -342,7 +342,7 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 	waituntil
 	{
 		//_LGroup setBehaviourStrong "AWARE";
-		_LGroup setCombatMode "YELLOW";
+		//_LGroup setCombatMode "YELLOW";
 		//_LGroup setBehaviour "AWARE";
 		private _CurrentWaypoint = currentWaypoint _LGroup;
 		private _wPos2 = waypointPosition [_LGroup,_CurrentWaypoint];	
@@ -390,7 +390,7 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 	};
 	
 	//_LGroup setBehaviourStrong "COMBAT";
-	_LGroup setCombatMode "YELLOW";
+	//_LGroup setCombatMode "YELLOW";
 	//_LGroup setBehaviour "COMBAT";
 	
 }

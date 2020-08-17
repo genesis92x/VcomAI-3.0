@@ -4,7 +4,7 @@
 item0[] = {"Begin_State",0,250,0.000000,700.000000,100.000000,750.000000,0.000000,"Begin State"};
 item1[] = {"Cond",4,218,-125.000000,700.000000,-25.000000,750.000000,50.000000,"Cond"};
 item2[] = {"Exit_FSM",1,250,-250.000000,700.000000,-175.000000,750.000000,0.000000,"Exit FSM"};
-item3[] = {"Continue",8,4314,0.000000,575.000000,100.000000,625.000000,0.000000,"Continue"};
+item3[] = {"Continue",8,218,0.000000,575.000000,100.000000,625.000000,0.000000,"Continue"};
 item4[] = {"Start_Point",2,250,50.000000,400.000000,150.000000,450.000000,0.000000,"Start Point"};
 item5[] = {"Exit_Cond",4,218,-100.000000,475.000000,0.000000,525.000000,700.000000,"Exit Cond"};
 item6[] = {"Exit_FSM_1",1,250,-250.000000,475.000000,-175.000000,525.000000,0.000000,"Exit FSM"};
@@ -36,7 +36,7 @@ item31[] = {"CheckIfStatic",4,218,950.000000,175.000000,1050.000000,225.000000,9
 item32[] = {"TwoMinuteChecks",4,218,-400.000000,300.000000,-300.000000,350.000000,940.000000,"TwoMinuteChecks"};
 item33[] = {"Two_Minute_Check",2,250,-400.000000,150.000000,-300.000000,200.000000,0.000000,"Two Minute Checks"};
 item34[] = {"SatchelPlant",4,218,900.000000,150.000000,1000.000000,200.000000,85.000000,"SatchelPlant"};
-item35[] = {"MinePlant",4,218,850.000000,125.000000,950.000000,175.000000,86.000000,"MinePlant"};
+item35[] = {"MinePlant",4,4314,850.000000,125.000000,950.000000,175.000000,86.000000,"MinePlant"};
 item36[] = {"ArmStatics",4,218,800.000000,100.000000,900.000000,150.000000,106.000000,"ArmStatics"};
 item37[] = {"True",8,218,750.000000,75.000000,850.000000,125.000000,0.000000,"True"};
 item38[] = {"Exit_Cond",4,218,675.000000,475.000000,775.000000,525.000000,700.000000,"Exit Cond"};
@@ -150,8 +150,8 @@ link85[] = {56,26};
 link86[] = {57,26};
 link87[] = {58,26};
 link88[] = {59,26};
-globals[] = {0.000000,0,0,0,0,640,480,2,651,6316128,1,-404.205353,993.400269,968.292236,-231.352310,706,606,1};
-window[] = {0,-1,-1,-1,-1,804,3026,4368,26,1,724};
+globals[] = {0.000000,0,0,0,0,640,480,2,651,6316128,1,532.447327,1174.577759,644.187683,114.036407,734,606,1};
+window[] = {0,-1,-1,-1,-1,1106,105,1447,328,1,752};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -567,7 +567,6 @@ class FSM
                          "{" \n
                          "	_VCOM_GARRISONED = false;" \n
                          "};" \n
-                         "_Group setCombatMode ""YELLOW"";" \n
                          "//See if we can take any vehicles." \n
                          "if (VCM_StealVeh) then {group call VCM_fnc_VehicleCommandeer};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -844,7 +843,7 @@ class FSM
                                         priority = 86.000000;
                                         to="Return";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"(count _MineList > 0) && {_BackbkC6 + 30 < time}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"VCM_MINEENABLED && {(count _MineList > 0)} && {_BackbkC6 + 30 < time}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/"//[_x,(_Vcom_MineObject select 0)]" \n
                                          "{" \n
                                          "private _Foot = isNull objectParent (_x select 0);" \n

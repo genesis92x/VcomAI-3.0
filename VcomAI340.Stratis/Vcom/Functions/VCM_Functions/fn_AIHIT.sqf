@@ -48,7 +48,7 @@ else
 	private _GetUnitStance = unitPos _unit;
 	if !(_GetUnitStance isEqualTo "DOWN") then
 	{	
-		_Unit call VCM_fnc_HealSelf; 
+		_Unit spawn {sleep 5;sleep (random 3);_this call VCM_fnc_HealSelf;}; 
 
 		_unit setUnitPos "DOWN";
 		[_unit,_GetUnitStance] spawn 

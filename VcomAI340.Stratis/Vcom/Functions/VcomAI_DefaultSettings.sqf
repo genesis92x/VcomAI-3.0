@@ -27,6 +27,7 @@ Vcm_Settings =
 	VCM_AIMagLimit = 5; //Number of mags remaining before AI looks for ammo.
 	VCM_Debug = false; //Enable debug mode.
 	VCM_MINECHANCE = 75; //Chance to lay a mine every 30 seconds or so
+	VCM_MINEENABLED = true; //Enable AI placing mines
 	VCM_SIDEENABLED = [west,east,resistance]; //Sides that will activate Vcom AI
 	VCM_RAGDOLL = true; //Should AI have a chance to ragdoll when hit
 	VCM_RAGDOLLCHC = 100; //CHANCE AI RAGDOLL	
