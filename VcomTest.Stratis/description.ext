@@ -1,0 +1,6 @@
+allowFunctionsRecompile = 1;
+
+class CfgFunctions 
+{
+	#include "vcom\cfgFunctions.hpp"	
+};

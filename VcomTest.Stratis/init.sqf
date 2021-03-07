@@ -1,0 +1,1 @@
+[] spawn VCM_fnc_VcomInit;
