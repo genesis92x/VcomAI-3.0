@@ -48,8 +48,12 @@ Vcm_Settings =
 	VCM_AISUPPRESS = true; //AI will attack from further away with primary weapons to suppress enemies
 	Vcm_DrivingActivated = false; //AI will use experimental driving improvements.
 	Vcm_PlayerAISkills = true; //AI in a group, that a players leads, can have their skills changed separately.
-	Vcm_GrenadeChance = 10; //Chance the AI will throw a grenade.
-	Vcm_SmokeChance = 10; //Chance the AI will throw a smoke grenade.
+	Vcm_GrenadeChance = 10; 	//Chance the AI will throw a grenade.
+	Vcm_GrenadeCoolDown = 60; 	//Cooldown between each grenade throw. This does not impact vanilla throwing.	
+	Vcm_SmokeChance = 10; 		//Chance the AI will throw a smoke grenade.
+	Vcm_SmokeCooldown = 60;		//Cooldown between each smoke grenade throw. This does not impact vanilla throwing.
+	Vcm_DisableAIRadio = false; //Setting this to true will disable AI talking to each other via the radio. This is only a sound effect, and will make the AI execute orders faster if disabled.	
+	Vcm_UseStaticWeapons = false; //AI will deploy/garrison static weapons	
 		
 	//AI SKILL SETTINGS HERE!!!!!!!!!!!!
 	//LOW DIFFICULTY
@@ -146,6 +150,7 @@ Vcm_Settings =
 	diag_log "VCOM: Loaded Default Settings";
 
 if (VCM_USECBASETTINGS) then {
+	diag_log "VCOM: Load CBA settings from filepatching settings";
     [] call VCM_fnc_CBASettings;
 };
 

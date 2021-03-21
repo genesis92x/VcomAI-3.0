@@ -11,17 +11,18 @@ if (isServer) then
 {
 	if (isFilePatchingEnabled) then
 	{
-		private _Filecheck = loadFile "\userconfig\VCOM_AI\AISettingsV3.hpp";
-
-		if !(_FileCheck isEqualTo "") then
+		
+		private _path = "\userconfig\VCOM_AI\AISettingsV3.4.1.hpp";
+		
+		if (fileExists _path) then
 		{
-			[] call compile preprocessFileLineNumbers "\userconfig\VCOM_AI\AISettingsV3.hpp";
-			[Vcm_Settings] remoteExec ["VCM_PublicScript",0,false];
+			[] call compile preprocessFileLineNumbers "\userconfig\VCOM_AI\AISettingsV3.4.1.hpp";
+			[Vcm_Settings] remoteExec ["VCM_PublicScript",0,false];		
 		}
 		else
 		{
 			[] call compile preprocessFileLineNumbers "Vcom\Functions\VCOMAI_DefaultSettings.sqf";
-			[Vcm_Settings] remoteExec ["VCM_PublicScript",0,false];
+			[Vcm_Settings] remoteExec ["VCM_PublicScript",0,false];			
 		};
 	}
 	else

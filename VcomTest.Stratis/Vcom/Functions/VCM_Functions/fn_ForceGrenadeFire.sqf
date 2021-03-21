@@ -1,5 +1,14 @@
 params ["_Unit","_Grenade"];
 
+
+//Get group FSM EH
+private _FSMID = (group _Unit) getVariable "VCOM_FSMH";
+
+private _SmokeGrenadeCoolDownChk = _FSMID getFSMVariable "_SmokeGrenadeCoolDownChk";
+ 
+
+
+
 //Do zeus control check - the AI unit has to be local to the machine that is doing this check.
 private _RemoteControlled = false;
 if (local _Unit) then
@@ -34,6 +43,8 @@ if (count _NEnemies > 0) then
 			private _ExitNow = false;
 			if (_NE distance2D _Unit < 100) then
 			{
+
+				
 				{
 					if (!(["smoke",_x] call BIS_fnc_inString) && !(["IR",_x] call BIS_fnc_inString)) then
 					{
@@ -108,8 +119,9 @@ if (count _NEnemies > 0) then
 			_TargetArray pushback (_x # 1);
 		} foreach _NEnemies;
 		
-		if (count _TargetArray > 0 && {!(_Grenade)}) then
+		if (count _TargetArray > 0 && {!(_Grenade)} && {(_SmokeGrenadeCoolDownChk + Vcm_SmokeChance) < time}) then
 		{
+
 			//Smoke grenade use
 			private _NE = [_TargetArray,_Unit,true,""] call VCM_fnc_ClstObj;
 			private _PotentialGrenades = ((configfile >> "CfgWeapons" >> "Throw") call BIS_fnc_getCfgSubClasses);
@@ -118,6 +130,9 @@ if (count _NEnemies > 0) then
 			if (_NE distance2D _Unit < 200) then
 			{
 				{
+					//Set FSM variable back to current time, to reset cooldown.
+					_FSMID setFSMVariable ["_SmokeGrenadeCoolDownChk",time];		
+						
 					if (["smoke",_x] call BIS_fnc_inString) then
 					{
 						private _CfgPath = (configFile >> "CfgWeapons" >> "Throw" >> _x >> "magazines");

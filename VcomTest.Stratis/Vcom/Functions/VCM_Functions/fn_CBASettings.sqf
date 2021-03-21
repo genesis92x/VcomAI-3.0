@@ -1,7 +1,17 @@
 [] spawn
 {
-	sleep 1;
-	waitUntil {!(isNil "CBAACT")};
+	sleep 5;
+	waitUntil 
+	{
+		//CBA CHECK
+		if (isClass(configFile >> "CfgPatches" >> "cba_main")) then {CBAACT = true;} else {CBAACT = false;};
+		sleep 1;
+		!(isNil "CBAACT")
+	};
+	waituntil
+	{
+		time > 1
+	};
 	if (CBAACT && VCM_USECBASETTINGS) then
 	{
 		[
@@ -947,7 +957,7 @@
 	
 	};
 	
-	diag_log "VCOM: Loaded CBA settings";
+	diag_log "VCOM: Finished loading CBA settings";
 	
 	
 	
