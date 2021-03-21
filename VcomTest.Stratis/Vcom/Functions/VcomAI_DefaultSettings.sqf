@@ -10,7 +10,7 @@ Vcm_Settings =
 		(group this) setVariable ["VCM_Skilldisable",true]; //This command will disable an AI group from being impacted by Vcom AI skill changes.	
 		
 	*/	
-
+	Vcm_ConfigVersion="3.4.1";
 	Vcm_ActivateAI = true; //Set this to false to disable VcomAI. It can be set to true at any time to re-enable Vcom AI
 	VcmAI_ActiveList = []; //Leave this alone.
 	Vcm_ArtilleryArray = []; //Leave this alone
