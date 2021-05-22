@@ -1,0 +1,152 @@
+/*%FSM<COMPILE "C:\Program Files (x86)\Steam\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, ForceMoveFSM">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"Begin_State",0,250,0.000000,700.000000,100.000000,750.000000,0.000000,"Begin State"};
+item1[] = {"True",8,218,0.000000,600.000000,100.000000,650.000000,0.000000,"True"};
+item2[] = {"Check_State",2,250,0.000000,500.000000,100.000000,550.000000,0.000000,"Check State"};
+item3[] = {"Wait",4,218,125.000000,500.000000,225.000000,550.000000,1.000000,"Wait"};
+item4[] = {"At_Point",4,218,0.000000,400.000000,100.000000,450.000000,3.000000,"At" \n "Point"};
+item5[] = {"Dead",4,218,-100.000000,400.000000,0.000000,450.000000,4.000000,"Dead"};
+item6[] = {"End",1,4346,0.000000,225.000000,100.000000,275.000000,0.000000,"End"};
+item7[] = {"Timeout",4,218,100.000000,400.000000,200.000000,450.000000,2.000000,"Timeout"};
+link0[] = {0,1};
+link1[] = {1,2};
+link2[] = {2,3};
+link3[] = {2,4};
+link4[] = {2,5};
+link5[] = {2,7};
+link6[] = {3,2};
+link7[] = {4,6};
+link8[] = {5,6};
+link9[] = {7,6};
+globals[] = {0.000000,0,0,0,0,640,480,2,664,6316128,1,-385.270233,528.919678,846.860107,141.673279,1144,894,1};
+window[] = {2,-1,-1,-1,-1,960,182,1420,182,3,1162};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "ForceMoveFSM";
+        class States
+        {
+                /*%FSM<STATE "Begin_State">*/
+                class Begin_State
+                {
+                        name = "Begin_State";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"params [""_Unit"",""_Position"",""_Perc"",""_Timeout"",[""_forcespeed"",-1]];" \n
+                         "private _TimeOut = time + _Timeout;" \n
+                         "" \n
+                         "doStop _Unit;" \n
+                         "" \n
+                         "_Unit disableAI ""AUTOCOMBAT"";" \n
+                         "_Unit forcespeed _forcespeed;" \n
+                         "_Unit domove _Position;" \n
+                         "_Unit moveto _Position;" \n
+                         "_Unit setCombatBehaviour ""AWARE""; " \n
+                         "_Unit setUnitCombatMode ""BLUE"";" \n
+                         "		"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "True">*/
+                                class True
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Check_State";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Check_State">*/
+                class Check_State
+                {
+                        name = "Check_State";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/"private [""_t""];" \n
+                         "_t = time;" \n
+                         "" \n
+                         "if (VCM_Debug) then" \n
+                         "{" \n
+                         "	_CustomPos = [(_Position#0),(_Position#1),((_Position#2)+15)];" \n
+                         "	private _veh = createVehicle [""Sign_Arrow_Large_Green_F"", _CustomPos, [], 0, ""CAN_COLLIDE""];" \n
+                         "	_veh enablesimulation false;" \n
+                         "	_veh spawn {sleep 30;deletevehicle _this};" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Dead">*/
+                                class Dead
+                                {
+                                        itemno = 5;
+                                        priority = 4.000000;
+                                        to="End";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!(alive _Unit)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "At_Point">*/
+                                class At_Point
+                                {
+                                        itemno = 4;
+                                        priority = 3.000000;
+                                        to="End";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_Unit distance2d _Position < _Perc"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Timeout">*/
+                                class Timeout
+                                {
+                                        itemno = 7;
+                                        priority = 2.000000;
+                                        to="End";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _TimeOut"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Wait">*/
+                                class Wait
+                                {
+                                        itemno = 3;
+                                        priority = 1.000000;
+                                        to="Check_State";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _t + 1"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "End">*/
+                class End
+                {
+                        name = "End";
+                        itemno = 6;
+                        init = /*%FSM<STATEINIT""">*/"_Unit forcespeed 0;" \n
+                         "_Unit setCombatBehaviour ""COMBAT""; " \n
+                         "_Unit setUnitCombatMode ""YELLOW"";" \n
+                         "_Unit enableAI ""AUTOCOMBAT"";" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="Begin_State";
+        finalStates[] =
+        {
+                "End",
+        };
+};
+/*%FSM</COMPILE>*/

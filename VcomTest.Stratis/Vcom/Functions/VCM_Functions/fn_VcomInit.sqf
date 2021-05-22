@@ -39,13 +39,17 @@ else
 	[] call Vcm_Settings;
 };
 
-waitUntil {!(isNil "VCM_AIMagLimit")};
+//waitUntil {!(isNil "VCM_AIMagLimit")};
 
 //Mod checks
 //ACE CHECK
 if (!(isNil "ACE_Medical_enableFor") && {ACE_Medical_enableFor isEqualTo 1}) then {VCM_MEDICALACTIVE = true;} else {VCM_MEDICALACTIVE = false;};
 //CBA CHECK
 if (isClass(configFile >> "CfgPatches" >> "cba_main")) then {CBAACT = true;} else {CBAACT = false;};
+//ENHANCED MOVEMENT CHECK
+if !(isNil "EM_debug") then {VCOM_EM_ENABLED = true;} else {VCOM_EM_ENABLED = false;};
+if !(isNil "emr_main_climbingenabled") then {VCOM_EMR_ENABLED = true;} else {VCOM_EMR_ENABLED = false;};
+
 
 //Global actions compiles
 Vcm_PMN = compileFinal "(_this select 0) playMoveNow (_this select 1);";

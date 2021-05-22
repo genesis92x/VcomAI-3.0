@@ -98,7 +98,8 @@ switch (_wayPointType) do {
     case "High": 
 		{
 			private _highP = ([_leader,500,50,false] call VCM_fnc_Heights) select 0 select 1;
-			private _finalP = [[[_highP, 50]],["water"]] call BIS_fnc_randomPos;
+			//private _finalP = [[[_highP, 50]],["water"]] call BIS_fnc_randomPos;
+			private _finalP = _highp getpos [(random 50),(random 360)];
 			_finalP set [2,0];
 			private _waypoint0 = _grp addwaypoint [_finalP,0];
 			_waypoint0 setwaypointtype "MOVE";
@@ -113,7 +114,7 @@ switch (_wayPointType) do {
     case "Low": 
 		{
 			private _highP = ([_leader,500,50,true] call VCM_fnc_Heights) select 0 select 1;
-			private _finalP = [[[_highP, 50]],["water"]] call BIS_fnc_randomPos;
+			private _finalP = _highp getpos [(random 50),(random 360)];
 			_finalP set [2,0];
 			private _waypoint0 = _grp addwaypoint [_finalP,0];
 			_waypoint0 setwaypointtype "MOVE";
@@ -128,7 +129,7 @@ switch (_wayPointType) do {
     case "Retreat": 
 		{
 			private _MovePosition = [_nearestEnemy,(_nearestEnemy distance2D _leader),([_nearestEnemy, _leader] call BIS_fnc_dirTo)] call BIS_fnc_relPos;
-			private _finalP = [[[_MovePosition, 50]],["water"]] call BIS_fnc_randomPos;
+			private _finalP = _MovePosition getpos [(random 50),(random 360)];
 			_finalP set [2,0];
 			private _waypoint0 = _grp addwaypoint [_finalP,0];
 			_waypoint0 setwaypointtype "MOVE";
@@ -152,7 +153,7 @@ switch (_wayPointType) do {
 			private _RandomArray = _myPlaces call BIS_fnc_selectrandom;
 			private _RandomLocation = _RandomArray select 0;
 			_RandomLocation set [2,0];
-			private _finalP = [[[_RandomLocation, 50]],["water"]] call BIS_fnc_randomPos;
+			private _finalP = _RandomLocation getpos [(random 50),(random 360)];
 			_finalP set [2,0];
 			if (_finalP isEqualTo [0,0]) then {_finalP = _RandomLocation;};
 			_waypoint0 = _grp addwaypoint [_finalP,0];	
@@ -182,8 +183,8 @@ switch (_wayPointType) do {
 			private _RandomLocationL = _RandomArray2 select 0;
 			_RandomLocation set [2,0];
 			_RandomLocationL set [2,0];
-			private _finalP = [[[_RandomLocationL, 50]],["water"]] call BIS_fnc_randomPos;
-			private _finalP2 = [[[_RandomLocation, 50]],["water"]] call BIS_fnc_randomPos;
+			private _finalP = _RandomLocationL getpos [(random 50),(random 360)];
+			private _finalP2 = _RandomLocation getpos [(random 50),(random 360)];
 			_finalP set [2,0];
 			_finalP2 set [2,0];
 			_waypoint0 = _grp addwaypoint [_finalP,0];	

@@ -6,6 +6,7 @@ private _CombatCheck = _Group getVariable "VCOM_FSMH";
 //Incase the group is dead
 if (isNil "_CombatCheck") exitWith {};
 
+
 if !(_CombatCheck getFSMVariable ["_CNow",false]) then
 {
 	
@@ -40,9 +41,9 @@ if !(_CombatCheck getFSMVariable ["_CNow",false]) then
 	// && {((GetposATL _x)#2) < 0.1}
 	
 	{
-		if (10 > random 100) then
+		if (Vcm_IdleAnimationChnc > random 100) then
 		{
-			if (!(primaryWeapon _x isEqualTo "") && {speed _x < 5 }&& {_x isEqualTo (vehicle _x)} && {UnitPos _x isEqualTo "UP"}) then
+			if (!(primaryWeapon _x isEqualTo "") && {speed _x < 5 }&& {_x isEqualTo (vehicle _x)} && {stance _x isEqualTo "STAND"}) then
 			{
 				_x playmove (selectRandom _RndAnims);
 			};

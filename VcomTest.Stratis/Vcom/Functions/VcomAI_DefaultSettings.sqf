@@ -10,7 +10,7 @@ Vcm_Settings =
 		(group this) setVariable ["VCM_Skilldisable",true]; //This command will disable an AI group from being impacted by Vcom AI skill changes.	
 		
 	*/	
-	Vcm_ConfigVersion="3.4.1";
+	Vcm_ConfigVersion="3.4.1 Default Settings";
 	Vcm_ActivateAI = true; //Set this to false to disable VcomAI. It can be set to true at any time to re-enable Vcom AI
 	VcmAI_ActiveList = []; //Leave this alone.
 	Vcm_ArtilleryArray = []; //Leave this alone
@@ -54,6 +54,12 @@ Vcm_Settings =
 	Vcm_SmokeCooldown = 60;		//Cooldown between each smoke grenade throw. This does not impact vanilla throwing.
 	Vcm_DisableAIRadio = false; //Setting this to true will disable AI talking to each other via the radio. This is only a sound effect, and will make the AI execute orders faster if disabled.
 	Vcm_UseStaticWeapons = false; //AI will deploy/garrison static weapons
+	Vcm_AI_EM = true; //Will the AI use enhanced movement to navigate around.
+	Vcm_AI_EM_CHN = 10; //Chance a group will attempt to jump over an obstacle  - every 0.5 secs
+	VCM_AI_EM_CLDWN = 10; //Time in seconds before a group will consider jumping over obstacles;	
+	Vcm_IdleAnimationChnc = 2; //Chance an AI will play an idle animation.
+	Vcm_IdleAnimationsEnabled = true; //Enable or disable idle animations. Idle animations only play when AI are standing up and not in combat.
+	
 	
 	//AI SKILL SETTINGS HERE!!!!!!!!!!!!
 	//LOW DIFFICULTY

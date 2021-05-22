@@ -36,6 +36,7 @@ private _timeShot = _unit getVariable ["VCM_FTH",-60];
 if ((_timeShot + 2) < time) then 
 {
 	
+	_unit setVariable ["VCM_FTH",time];
 	if ((group _unit) getVariable ["VCM_NOFLANK",false]) exitWith {};
 	
 	//Check if unit has suppressor on weapon.
@@ -64,9 +65,8 @@ if ((_timeShot + 2) < time) then
 			[_snda] remoteExec ["VCM_fnc_ResetAnimation",0];	
 		};
 		
-		_unit setVariable ["VCM_FTH",time];
 	};
-	
+
 };
 
 

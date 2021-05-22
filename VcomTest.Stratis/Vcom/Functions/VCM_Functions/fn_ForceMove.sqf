@@ -11,326 +11,87 @@
 	Returns:
 		NOTHING
 */
-params ["_SquadLead"];
-private _NearbyCover = [_SquadLead] call VCM_fnc_CoverDetect;
-private _NEnemyA = [];
-private _EnemyList = _SquadLead targets [true,1000];
+params ["_SquadLeader"];
 
-private _NEnemies = _SquadLead call VCM_fnc_ClstKnwnEnmy;
+private _Squad = (group _SquadLeader);
 
-if (count _NEnemies > 0) then
+//_Squad setbehaviour "SAFE";
+_Squad setCombatMode "BLUE";
+
+private _Units = (units _Squad);
+
+//Let's see if any of the units have fired recently, if not, get them moving without taking cover.
+private _Engaged = false;
+
 {
+	if (((_x getvariable ["VCM_FTH",-60]) + 10) > time) exitwith {_Engaged = true;};
+} foreach _Units;
 
-	{
-		if (_x#0 < 100) then
-		{
-			_NEnemyA pushback (_x#1);
-		};
-	
-	} foreach _NEnemies;
-};	
 
-private _LGroup = group _SquadLead;
-if (_NearbyCover isEqualTo []) exitWith 
+//If we are engaged, then let's look for cover.
+if (_Engaged) then
 {
+	private _NearbyCoverArray = [_SquadLeader,30] call VCM_fnc_CoverDetect;
 
+
+	_NearbyCoverArray params ["_CenterUnitPos","_CoverObjects","_WPPos"];
+
+
+	private _SavedCoverArray = _CoverObjects;
+	private _NoCover = false;
+
+	//Not much cover?
+	if (count _CoverObjects < ((count _Units)/2)) then
 	{
-		doStop _x;_x domove (getposATL _x);
-		_x forcespeed -1;
-		if (random 100 < 50) then
+		_NoCover = true;
+	};
+	
+	private _ClstEnemy = _SquadLeader call VCM_fnc_ClstEmy;
+	{
+	
+		if (count _CoverObjects < 1 && {!(_NoCover)}) then
 		{
-			private _Unit = _x;
-			private _EnemyArray = [];
-			{
-				private _cansee = [_Unit, "VIEW"] checkVisibility [eyePos _Unit, eyePos _x];
-				_EnemyArray pushback [_cansee,_x];
-			} foreach _EnemyList;
-			_EnemyArray sort true;
-			if (count _EnemyArray > 0) then
-			{
-				private _TargetE = ((_EnemyArray#0)#1);
-				doStop _unit;_unit domove (getposATL _Unit);
-				_Unit enableAI "CHECKVISIBLE";
-				_Unit enableAI "AUTOCOMBAT";
-				_Unit doWatch _TargetE;
-				_Unit doSuppressiveFire _TargetE;
-			};
-			if (vcm_Debug) then {[_Unit,"LOOKING TO FIRE"] call VCM_fnc_DebugText;};
+			_CoverObjects = _SavedCoverArray;
 		};
-	} foreach (units _LGroup);
-};
-
-
-private _CoverObjects = _NearbyCover#1;
-private _WPos = _NearbyCover#2;
-
-if ((count (waypoints _LGroup)) == 0) exitWith {};
-
-if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
-{
-
-	
-	private _CoverHardObjects = [];
-	{
-		if (_x isKindOf "House" || {_x isKindOf "Wall"}) then
-		{
-			_CoverHardObjects pushback _x;
-		};
-	} foreach _CoverObjects;	
-	
-	private _Pos = _WPos;
-	private _MoveArray = [];
-
-	
-
-	{
-		if (random 100 > 30) then
-		{
-			if (count _CoverHardObjects > 0) then
-			{	_CoverObj = [_CoverHardObjects,_WPos] call BIS_fnc_nearestPosition;
-				if (count _CoverHardObjects > 2) then
-				{
-					_CoverHardObjects deleteAt (_CoverHardObjects findif {_CoverObj isEqualTo _x});
-				};
-				_Pos =  _CoverObj getPos [2,(_CoverObj getdir _SquadLead)];
-				_FinalPos = _Pos findEmptyPosition [0,10,"B_soldier_AT_F"];
-				if (_FinalPos isEqualTo []) then {_FinalPos = _Pos;};
-				
-	
-				private _nBuilding = nearestBuilding _FinalPos;
-				if ([_nBuilding] call BIS_fnc_isBuildingEnterable && {_nBuilding distance2D _FinalPos < 25}) then
-				{
-					private _BuildingPos = ([_nBuilding] call BIS_fnc_buildingPositions);
-					if (count _BuildingPos > 3) then
-					{
-						_FinalPos = selectRandom ([_nBuilding] call BIS_fnc_buildingPositions);
-					};
-				};			
-				_MoveArray pushback [_x,_FinalPos];	
-				[_x,_FinalPos] spawn
-				{
-					params ["_Unit","_Pos"];
-					sleep (2 + (random 5));
-					
-					_Unit disableAI "CHECKVISIBLE";
-					_Unit disableAI "AUTOCOMBAT";
-					_Unit doWatch ObjNull;
-					doStop _unit;_unit domove (getposATL _Unit);
-					_Unit forceSpeed -1;				
-					_Unit doMove _Pos;
-					_Unit moveTo _Pos;
-					If (VCM_Debug) then {[_unit,"MOVING TO POSITION - A"] call VCM_fnc_DebugText;};
-				};
-					if (VCM_Debug) then
-					{
-						private _CustomPos = [(_FinalPos#0),(_FinalPos#1),((_FinalPos#2)+10)];
-						private _veh = createVehicle ["Sign_Arrow_Large_Green_F", _CustomPos, [], 0, "CAN_COLLIDE"];
-						_veh spawn {sleep 30; deleteVehicle _this;};
 		
-					};	
-	
-			}
-			else
-			{
-				_CoverObj = [_CoverObjects,_WPos] call BIS_fnc_nearestPosition;
-				if (count _CoverObjects > 0) then
-				{
-					if (count _CoverObjects > 2) then
-					{			
-						_CoverObjects deleteAt (_CoverObjects findif {_CoverObj isEqualTo _x});
-					};
-					_Pos =  _CoverObj getPos [2,(_CoverObj getdir _SquadLead)];				
-					_FinalPos = _Pos findEmptyPosition [0,10,"B_soldier_AT_F"];
-					if (_FinalPos isEqualTo []) then {_FinalPos = _Pos;};				
-					
-	
-					private _nBuilding = nearestBuilding _FinalPos;
-					if ([_nBuilding] call BIS_fnc_isBuildingEnterable && {_nBuilding distance2D _FinalPos < 20}) then
-					{
-						private _BuildingPos = ([_nBuilding] call BIS_fnc_buildingPositions);
-						if (count _BuildingPos > 3) then
-						{
-							_FinalPos = selectRandom ([_nBuilding] call BIS_fnc_buildingPositions);
-						};
-					};	
-					_MoveArray pushback [_x,_FinalPos];
-					[_x,_FinalPos] spawn
-					{
-						params ["_Unit","_Pos"];
-						sleep (2 + (random 5));
-						
-						doStop _unit;_unit domove (getposATL _Unit);
-						_unit forceSpeed -1;				
-						_Unit disableAI "CHECKVISIBLE";
-						_Unit disableAI "AUTOCOMBAT";
-						_Unit doWatch ObjNull;
-						_Unit doMove _Pos;
-						_Unit moveTo _Pos;	
-						If (VCM_Debug) then {[_Unit,"MOVING TO POSITION - B"] call VCM_fnc_DebugText;};
-					};
+		_x setCombatBehaviour "SAFE"; 
+		_x setUnitCombatMode "BLUE";
 		
-	
-					
-					if (VCM_Debug) then
-					{		
-						private _CustomPos = [(_FinalPos#0),(_FinalPos#1),((_FinalPos#2)+10)];
-						private _veh = createVehicle ["Sign_Arrow_Large_Green_F", _CustomPos, [], 0, "CAN_COLLIDE"];
-						_veh spawn {sleep 30; deleteVehicle _this;};
-	
-					};
-				}
-				else
-				{
-					_MoveArray pushback [_x,_Pos];
-					[_x,_Pos] spawn
-					{
-						params ["_Unit","_Pos"];
-						sleep (2 + (random 5));
-						
-						_Unit setUnitPos "Middle";
-						_Unit disableAI "CHECKVISIBLE";
-						_Unit disableAI "AUTOCOMBAT";
-						_Unit doWatch ObjNull;
-						doStop _unit;_unit domove (getposATL _Unit);
-						_unit forceSpeed -1;
-						_Unit doMove _Pos;
-						_Unit moveTo _Pos;
-						If (VCM_Debug) then {[_unit,"MOVING TO POSITION - C"] call VCM_fnc_DebugText;};
-					};			
-					
-				};
+		
+		//Find closest cover		
+		private _Go2Pos = [0,0,0];
+		if !(_NoCover) then
+		{
+			private _ClstCover = [_CoverObjects,_ClstEnemy,true,"Test2"] call VCM_fnc_ClstObj;		
+			_CoverObjects = _CoverObjects - [_ClstCover];
+			_Go2Pos = [_ClstCover,_x] call VCM_fnc_BoxNrst;
+			if (VCM_Debug) then
+			{
+				systemchat "Cover found!";
 			};
 		}
 		else
 		{
-			private _Unit = _x;
-			private _EnemyArray = [];
+			_Go2Pos = _x getpos [(10 + (random 10)),(_x getdir _WPPos)];
+			if (VCM_Debug) then
 			{
-				private _cansee = [_Unit, "VIEW"] checkVisibility [eyePos _Unit, eyePos _x];
-				_EnemyArray pushback [_cansee,_x];
-			} foreach _EnemyList;
-			_EnemyArray sort true;
-			if (count _EnemyArray > 0) then
-			{
-				private _TargetE = ((_EnemyArray#0)#1);
-				doStop _unit;_unit domove (getposATL _Unit);
-				_Unit enableAI "CHECKVISIBLE";
-				_Unit enableAI "AUTOCOMBAT";
-				_Unit doWatch _TargetE;
-				_Unit doSuppressiveFire _TargetE;
-			};
-			if (vcm_Debug) then {[_Unit,"LOOKING TO FIRE"] call VCM_fnc_DebugText;};
+				systemchat "No Cover found!";
+			};			
 		};
-	} foreach (units _LGroup);
-	
-	private _Cntr = 0;
+		
+		[_x,_Go2Pos,1.5,60] spawn VCM_fnc_ForceMoveFSM;
 
-	_MoveArray spawn
-	{
-		sleep 5;
-		private _Timer = time + 20;
-
-		waituntil
-		{
-			{
-				_x params ["_Unit","_Pos"];
-				If (VCM_Debug) then {[_Unit,(format ["MOVING: %1 M",(_Unit distance2D _Pos)])] call VCM_fnc_DebugText;};
-				//private _EnemyList = ((getPos _Unit) nearEntities ["Man", 100]) select {[(side _x),(side _Unit)] call BIS_fnc_sideIsEnemy};
-				private _EnemyList = _Unit targets [true,1000];
-				{
-					private _cansee = [_Unit, "VIEW"] checkVisibility [eyePos _Unit, eyePos _x];
-					if (_Cansee > 0) exitWith
-					{
-						doStop _unit;_unit domove (getposATL _Unit);
-						_Unit enableAI "CHECKVISIBLE";
-						_Unit enableAI "AUTOCOMBAT";
-						_Unit doWatch _x;
-					};
-				} foreach _EnemyList;
-				
-				doStop _unit;_unit domove (getposATL _Unit);
-				_Unit setUnitPos "Middle";
-				_Unit forcespeed -1;
-				_Unit domove _Pos;
-				_Unit moveto _Pos;
-				
-			} foreach _this;
-			sleep 1;
-			time > _Timer
-		};
-	};
-
-	waituntil
-	{
-		_LGroup setBehaviourStrong "AWARE";
-		_LGroup setCombatMode "YELLOW";
-		//_LGroup setBehaviour "AWARE";
-		private _CurrentWaypoint = currentWaypoint _LGroup;
-		private _wPos2 = waypointPosition [_LGroup,_CurrentWaypoint];	
-		{
-				_x params ["_Unit","_Pos"];
-				
-				if !(alive _Unit) then {_MoveArray deleteAt _foreachIndex;};
-				
-				if (_Unit distance2D _Pos < 1.5) then
-				{
-					_unit spawn
-					{
-						sleep 1;
-						_this setUnitPos "Auto";
-						doStop _this;_this domove (getposATL _this);
-						_this forceSpeed 0;
-						_this enableAI "CHECKVISIBLE";
-						_this enableAI "AUTOCOMBAT";
-						if (vcm_Debug) then {[_this,"SET"] call VCM_fnc_DebugText;};
-					};
-					_MoveArray deleteAt _foreachIndex;
-				};
-		} foreach _MoveArray;
-		sleep 0.01;
-		_Cntr = _Cntr + 0.01;
-		(count _MoveArray < 1 || _Cntr > 20 || !(_WPos isEqualTo _wPos2))
-	};
-	
-	_LGroup setBehaviourStrong "COMBAT";
-	_LGroup setCombatMode "YELLOW";
-	//_LGroup setBehaviour "COMBAT";
-	
+		
+	} foreach (units _Squad);
 }
 else
 {
-	{
-		_x forceSpeed -1;
-		_x setUnitPos "Middle";
-		doStop _x;_x domove (getposATL _x);
-		_x domove _WPos;
-		_x moveTo _WPos;
-		If (VCM_Debug) then {[_x,"MOVING TO POSITION - D"] call VCM_fnc_DebugText;};
-		if (random 100 < 50) then
-		{
-			private _Unit = _x;
-			private _EnemyArray = [];
+			if (VCM_Debug) then
 			{
-				private _cansee = [_Unit, "VIEW"] checkVisibility [eyePos _Unit, eyePos _x];
-				_EnemyArray pushback [_cansee,_x];
-			} foreach _EnemyList;
-			_EnemyArray sort true;
-			if (count _EnemyArray > 0) then
-			{
-				private _TargetE = ((_EnemyArray#0)#1);
-				doStop _unit;_unit domove (getposATL _Unit);
-				_Unit enableAI "CHECKVISIBLE";
-				_Unit enableAI "AUTOCOMBAT";
-				_Unit doWatch _TargetE;
-				_Unit doSuppressiveFire _TargetE;
+				systemchat "Not engaged, let's move!";
 			};
-			if (vcm_Debug) then {[_Unit,"LOOKING TO FIRE"] call VCM_fnc_DebugText;};
-		};
-	} foreach (units _LGroup);
-};
-
-if (_WPos distance2D _SquadLead < 75) then
-{
-	_index = currentWaypoint (group _SquadLead);
-	deleteWaypoint [_LGroup,_index];
+	//Let's make sure everyone can move.
+	{	
+		_x forcespeed -1;		
+	} foreach (units _Squad);
 };

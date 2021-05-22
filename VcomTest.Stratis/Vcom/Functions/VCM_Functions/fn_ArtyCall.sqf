@@ -25,7 +25,7 @@ VLS fireAtTarget [TARGET, "weapon_vls_01"];
 params ["_callGrp","_enemyGrp","_AvgKnw","_PredictedLoc"];
 private _CallSide = (side _callGrp);
 
-private _LazClass = "LaserTargetE";
+private _LazClass = "";
 switch (_CallSide) do 
 {
 	case (west): {_LazClass = "LaserTargetE";};

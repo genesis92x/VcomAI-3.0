@@ -119,7 +119,7 @@ if (count _NEnemies > 0) then
 			_TargetArray pushback (_x # 1);
 		} foreach _NEnemies;
 		
-		if (count _TargetArray > 0 && {!(_Grenade)} && {(_SmokeGrenadeCoolDownChk + Vcm_SmokeChance) < time}) then
+		if (count _TargetArray > 0 && {!(_Grenade)} && {(_SmokeGrenadeCoolDownChk + Vcm_SmokeCooldown) < time}) then
 		{
 
 			//Smoke grenade use

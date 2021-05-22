@@ -23,7 +23,11 @@ class VCOM
 		{
 			ext = ".fsm";
 		};		
-		
+		// [] spawn VCM_fnc_ForceMoveFSM;
+		class ForceMoveFSM
+		{
+			ext = ".fsm";
+		};
 	};
 	
 	class Functions 
@@ -31,7 +35,7 @@ class VCOM
 		file = "Vcom\Functions\VCM_Functions";
 		
 		//[] spawn VCM_fnc_VcomInit;
-		class VcomInit {};
+		class VcomInit {preInit = 1;};
 		
 		// [unitToRearm, rearmLocation] spawn VCM_fnc_ActRearm
 		class ActRearm {};
@@ -218,7 +222,22 @@ class VCOM
 				
 		//[_StaticList] call VCM_fnc_StaticCheck.sqf;
 		class StaticCheck {};
+		
+		//[] spawn VCM_fnc_MonitorDist;
+		class MonitorDist {};
 				
+		//[] spawn VCM_fnc_3DPathDebug;
+		class 3DPathDebug {};
+		
+		//[] spawn VCM_fnc_UseEM;
+		class UseEM {};
+		
+		//[] spawn VCM_fnc_BabeOver;
+		class BabeOver {};
+		
+		//[] spawn VCM_fnc_UseEMExec;
+		class UseEMExec {};
+		
 	};		
 
 };

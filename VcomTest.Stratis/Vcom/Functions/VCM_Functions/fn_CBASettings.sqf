@@ -1,5 +1,4 @@
-[] spawn
-{
+	/*
 	sleep 5;
 	waitUntil 
 	{
@@ -12,8 +11,15 @@
 	{
 		time > 1
 	};
-	if (CBAACT && VCM_USECBASETTINGS) then
+	*/
+	
+	//CBA CHECK
+	if (isClass(configFile >> "CfgPatches" >> "cba_main")) then {CBAACT = true;} else {CBAACT = false;};	
+	if (CBAACT) then
 	{
+		Vcm_ConfigVersion="3.4.1 CBA Settings";
+
+		
 		[
 			"VCM_ActivateAI", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
 			"CHECKBOX", // setting type
@@ -134,6 +140,44 @@
 		] call CBA_Settings_fnc_init;
 		
 		
+		[
+			"VCM_AISkills_General_EM", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+			"CHECKBOX", // setting type
+			"AI will use Enhanced Movement", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+			"VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+			true,// data for this setting:
+			true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+			{  
+				params ["_value"];
+				Vcm_AI_EM = _value;
+			} // function that will be executed once on mission start and every time the setting is changed.
+		] call CBA_Settings_fnc_init;	
+		
+		[
+			"VCM_AISkills_General_EM_CHN", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+			"SLIDER", // setting type
+			"Chance AI use EM - checks every 0.5 secs", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+			"VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+			[0,100,10,0], // data for this setting: [min, max, default, number of shown trailing decimals]
+			true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+			{  
+				params ["_value"];
+				Vcm_AI_EM_CHN = _value;
+			} // function that will be executed once on mission start and every time the setting is changed.
+		] call CBA_Settings_fnc_init;		
+	
+		[
+			"VCM_AISkills_General_EM_CLDWN", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+			"SLIDER", // setting type
+			"Cool down on Enhanced Movement - in secs", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+			"VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+			[0,1000,10,0], // data for this setting: [min, max, default, number of shown trailing decimals]
+			true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+			{  
+				params ["_value"];
+				VCM_AI_EM_CLDWN = _value;
+			} // function that will be executed once on mission start and every time the setting is changed.
+		] call CBA_Settings_fnc_init;
 		
 		[
 			"VCM_StealVeh", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
@@ -186,6 +230,33 @@
 				VCM_ADVANCEDMOVEMENT = _value;
 			} // function that will be executed once on mission start and every time the setting is changed.
 		] call CBA_Settings_fnc_init;
+		
+		[
+			"Vcm_IdleAnimationsEnabled", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+			"CHECKBOX", // setting type
+			"AI use additional idle animations", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+			"VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+			true,// data for this setting:
+			true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+			{  
+				params ["_value"];
+				Vcm_IdleAnimationsEnabled = _value;
+			} // function that will be executed once on mission start and every time the setting is changed.
+		] call CBA_Settings_fnc_init;		
+	
+		[
+			"Vcm_IdleAnimationChnc", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+			"SLIDER", // setting type
+			"Chance an AI will play an idle animation.	", // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+			"VCOM SETTINGS", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+			[0,100,2,0], // data for this setting:
+			true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+			{  
+				params ["_value"];
+				Vcm_IdleAnimationChnc = _value;
+			} // function that will be executed once on mission start and every time the setting is changed.
+		] call CBA_Settings_fnc_init;	
+
 		
 		[
 			"VCM_FRMCHANGE", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
@@ -1012,6 +1083,3 @@
 	
 	
 	
-	
-	
-};

@@ -21,25 +21,24 @@ if (VCM_DEBUG) then {systemChat format ["%1 attempting to heal %2", _medic, _uni
 
 _medic setVariable ["VCM_MBUSY", true];
 
+_medic disableAI "AUTOCOMBAT";
+_medic setCombatBehaviour "SAFE"; 
+_medic setUnitCombatMode "BLUE";
 
-_medic disableAI "WEAPONAIM";
-_medic disableAI "COVER";
-_medic disableAI "FSM";
 
 while {alive _medic && {alive _unit} && {_unit distance2D _medic > 3}} do 
 {
+	_medic forcespeed -1;
 	_medic doMove getPos _unit;
-	_medic domove getPos _unit;
+	_medic moveTo getPos _unit;
 	sleep 3;
 };
 
-_medic enableAI "WEAPONAIM";
-_medic enableAI "COVER";
-_medic enableAI "FSM";
+_medic setCombatBehaviour "AWARE"; 
+_medic setUnitCombatMode "BLUE";
 
 
-
-if (!(alive _medic) || {!(alive _unit)} || {_unit distance2D _medic > 75}) exitWith {};
+if (!(alive _medic) || {!(alive _unit)} || {_unit distance2D _medic > 75}) exitWith {_medic setVariable ["VCM_MBUSY", false];};
 
 doStop _unit;
 doStop _medic;
