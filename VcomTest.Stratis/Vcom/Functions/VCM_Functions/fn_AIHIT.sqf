@@ -28,12 +28,16 @@ if (VCM_MEDICALACTIVE) exitWith {};
 
 if (VCM_RAGDOLL && {_unit distance2D _instigator < 101} && {_damage > 0.05} && {!(lifestate _unit isEqualTo "INCAPACITATED")} && {VCM_RAGDOLLCHC > (random 100)}) then
 {
-
-	_unit setUnconscious true;
-	_unit addForce [_unit vectorModelToWorld [0,-100,0], _unit selectionPosition "pelvis"];
+	private _relPos = [0,-200,0];
+	if !(isNull _instigator) then 
+	{
+	_relPos = _unit worldToModel ASLToAGL getPosASL _instigator;
+	_relPos = _relPos apply {_x*10};
+	};
+	_unit addForce [_unit vectorModelToWorld _relPos, _unit selectionPosition "pelvis"];
 	_unit spawn 
 	{
-		sleep 1.5;
+		sleep 2;
 		_this setUnconscious false;
 	};
 }
@@ -41,7 +45,10 @@ else
 {
 		
 	//Lay down
-	[_Unit,false,true] spawn VCM_fnc_ForceGrenadeFire;
+	if (Vcm_SmokeChance > (random 100)) then
+	{
+		[_Unit,false,true] spawn VCM_fnc_ForceGrenadeFire;
+	};
 	
 	private _GetUnitStance = Stance _unit;
 	if !(_GetUnitStance isEqualTo "PRONE") then

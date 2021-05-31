@@ -37,7 +37,14 @@ if ((_timeShot + 2) < time) then
 {
 	
 	_unit setVariable ["VCM_FTH",time];
-	if ((group _unit) getVariable ["VCM_NOFLANK",false]) exitWith {};
+	private _UnitGroup = (group _unit);
+	if !(_UnitGroup getvariable ["VCM_EngagedMovement",true]) then
+	{
+		private _FSMID = _UnitGroup getVariable "VCOM_FSMH";
+		_FSMID setFSMVariable ["_Cover2Cover",time];
+		[(leader _UnitGroup)] spawn VCM_fnc_ForceMove;
+	};
+	if (_UnitGroup getVariable ["VCM_NOFLANK",false]) exitWith {};
 	
 	//Check if unit has suppressor on weapon.
 	private _mzl = currentMuzzle _unit;
@@ -47,22 +54,17 @@ if ((_timeShot + 2) < time) then
 	
 	if (VCM_Debug) then {diag_log (format ["%2: WEAPON SUPRRESSED - %1",_return,_unit])};
 	
+
 	//systemchat format ["%1",_sup];
 	if !(_return) then 
 	{
-		private _array1 = _unit call VCM_fnc_EnemyArray;
-		private _snda = [];
-		{
-			if ((_x distance2D _unit) < VCM_HEARINGDISTANCE) then
-			{
-				_snda pushback _x;
-			};
-		} foreach _array1;
+
+		private _array1 = ((_unit call VCM_fnc_EnemyArray) select {(_x distance2D _unit) < VCM_HEARINGDISTANCE});
 		
-		if (count _snda > 0) then
+		if (count _array1 > 0) then
 		{
-			[_snda,_unit,1] remoteExec ["VCM_fnc_KnowAbout",0];	
-			[_snda] remoteExec ["VCM_fnc_ResetAnimation",0];	
+			[_array1,_unit,1] remoteExec ["VCM_fnc_KnowAbout",0];	
+			//[_array1] remoteExec ["VCM_fnc_ResetAnimation",0];	
 		};
 		
 	};

@@ -1,13 +1,15 @@
-params ["_Unit","_Text"];
+params ["_Unit","_Text",["_Timer",10]];
 
-if !(alive _Unit) exitWith {};
-if (isNil "_Unit") exitWith {};
 if (VCM_Debug) then
 {
+if !(alive _Unit) exitWith {};
+if (isNil "_Unit") exitWith {};
+
+	private _TimerEXP = time + _Timer;
 	[(str _Unit), "onEachFrame"] call BIS_fnc_removeStackedEventHandler;
 	[(str _Unit), "onEachFrame", 
 	{
-		params ["_Unit","_text"];
+		params ["_Unit","_text","_TimerEXP"];
 		private _pos = getposATL _Unit;
 		_pos set [2,3];
 		call compile format 
@@ -31,8 +33,8 @@ if (VCM_Debug) then
 			'
 			,_pos,(str _text)
 		];
-		if !(alive _Unit) then {[(str _Unit), "onEachFrame"] call BIS_fnc_removeStackedEventHandler;};
+		if (!(alive _Unit) || time > _TimerEXP) then {[(str _Unit), "onEachFrame"] call BIS_fnc_removeStackedEventHandler;};
 	},
-	[_Unit,_text]
+	[_Unit,_text,_TimerEXP]
 	] call BIS_fnc_addStackedEventHandler;	
 };

@@ -22,7 +22,7 @@ private _a1 = [];
 	if ([_unitSide, _targetSide] call BIS_fnc_sideIsEnemy && {!(vehicle _X isKindOf "Air")}) then {_a1 pushback _x;};
 } forEach allUnits;
 
-private _rtrn = [_a1,_this,true,"1"] call VCM_fnc_ClstObj;
+private _rtrn = [_a1,_this,true] call VCM_fnc_ClstObj;
 if (isNil "_rtrn") then {_rtrn = [0,0,0]};
 
 _rtrn

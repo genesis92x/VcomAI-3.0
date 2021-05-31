@@ -24,13 +24,14 @@ private _Units = (units _Squad);
 private _Engaged = false;
 
 {
-	if (((_x getvariable ["VCM_FTH",-60]) + 10) > time) exitwith {_Engaged = true;};
+	if (((_x getvariable ["VCM_FTH",-1000]) + 60) > time) exitwith {_Engaged = true;};
 } foreach _Units;
 
 
 //If we are engaged, then let's look for cover.
 if (_Engaged) then
 {
+	_Squad setvariable ["VCM_EngagedMovement",true];
 	private _NearbyCoverArray = [_SquadLeader,30] call VCM_fnc_CoverDetect;
 
 
@@ -62,7 +63,7 @@ if (_Engaged) then
 		private _Go2Pos = [0,0,0];
 		if !(_NoCover) then
 		{
-			private _ClstCover = [_CoverObjects,_ClstEnemy,true,"Test2"] call VCM_fnc_ClstObj;		
+			private _ClstCover = [_CoverObjects,_ClstEnemy,true] call VCM_fnc_ClstObj;		
 			_CoverObjects = _CoverObjects - [_ClstCover];
 			_Go2Pos = [_ClstCover,_x] call VCM_fnc_BoxNrst;
 			if (VCM_Debug) then
@@ -80,18 +81,24 @@ if (_Engaged) then
 		};
 		
 		[_x,_Go2Pos,1.5,60] spawn VCM_fnc_ForceMoveFSM;
-
+		sleep 1;
 		
 	} foreach (units _Squad);
 }
 else
 {
+	_Squad setvariable ["VCM_EngagedMovement",false];
 			if (VCM_Debug) then
 			{
 				systemchat "Not engaged, let's move!";
 			};
 	//Let's make sure everyone can move.
-	{	
-		_x forcespeed -1;		
+	_Squad setbehaviour "AWARE";
+	{
+		_x disableAI "AUTOCOMBAT";
+		_x doWatch objNull;
+		_x setCombatBehaviour "AWARE";
+		_x forcespeed -1;
 	} foreach (units _Squad);
+
 };

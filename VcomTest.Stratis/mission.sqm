@@ -8,14 +8,14 @@ class EditorData
 	toggles=9;
 	class ItemIDProvider
 	{
-		nextID=75;
+		nextID=97;
 	};
 	class Camera
 	{
-		pos[]={3083.1597,284.81262,6253.5254};
-		dir[]={-0.48462331,-0.72695988,-0.48648691};
-		up[]={-0.51305085,0.68667996,-0.51502377};
-		aside[]={-0.70846248,0,0.7057485};
+		pos[]={3325.5291,310.53348,5582.2876};
+		dir[]={0.42518029,-0.61101824,-0.66774476};
+		up[]={0.32818002,0.79161483,-0.51540685};
+		aside[]={-0.84352022,-9.4994903e-008,-0.53710246};
 	};
 };
 binarizationWanted=0;
@@ -46,22 +46,15 @@ class AddonsMetaData
 		};
 	};
 };
-class DynamicSimulation
-{
-	enable=0;
-};
-randomSeed=3126494;
+randomSeed=15432521;
 class ScenarioData
 {
 	author="Dominic";
-	wreckRemovalMaxTime=3600;
 };
 class Mission
 {
-	assetType="Free";
 	class Intel
 	{
-		resistanceWest=0;
 		timeOfChanges=1800.0002;
 		startWeather=0.30000001;
 		startWind=0.1;
@@ -93,20 +86,19 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={3585.5972,68.773254,6353.2695};
-						angles[]={0,5.842566,0};
+						position[]={1834.645,5.5014391,5667.4639};
+						angles[]={0,1.1220199,0};
 					};
 					side="West";
 					flags=7;
 					class Attributes
 					{
-						init="this allowdamage false;";
+						init="call{player allowdamage false;player setcaptive true;}";
 						name="P1";
 						isPlayer=1;
 					};
-					id=6;
-					type="B_support_AMort_F";
-					atlOffset=-7.6293945e-006;
+					id=80;
+					type="B_soldier_AR_F";
 					class CustomAttributes
 					{
 						class Attribute0
@@ -124,7 +116,7 @@ class Mission
 											"STRING"
 										};
 									};
-									value="Male11ENG";
+									value="Male04ENG";
 								};
 							};
 						};
@@ -143,7 +135,7 @@ class Mission
 											"SCALAR"
 										};
 									};
-									value=1.02;
+									value=0.98000002;
 								};
 							};
 						};
@@ -154,18 +146,16 @@ class Mission
 			class Attributes
 			{
 			};
-			id=5;
-			atlOffset=-7.6293945e-006;
+			id=79;
 		};
 		class Item1
 		{
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={3588.4043,68.586021,6353.3677};
-				angles[]={6.1934271,0,6.2656889};
+				position[]={1840.4183,5.5,5664.2852};
 			};
-			id=16;
+			id=81;
 			type="ModuleCurator_F";
 			class CustomAttributes
 			{

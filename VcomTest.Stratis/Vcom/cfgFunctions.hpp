@@ -238,6 +238,9 @@ class VCOM
 		//[] spawn VCM_fnc_UseEMExec;
 		class UseEMExec {};
 		
+		//[] spawn VCM_fnc_AISuppressed;
+		class AISuppressed {};
+		
 	};		
 
 };
