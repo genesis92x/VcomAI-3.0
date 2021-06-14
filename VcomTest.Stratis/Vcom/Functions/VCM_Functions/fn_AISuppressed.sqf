@@ -19,7 +19,12 @@
 
 params ["_unit", "_distance", "_shooter", "_instigator", "_ammoObject", "_ammoClassName", "_ammoConfig"];
 
-if (_distance < 2.1) then
+if (VCM_DebugSuppression) then 
+{
+	systemchat format ["Suppression _distance: %1",_distance];
+};
+
+if (_distance < 5) then
 {
 	[_Unit,"SUPPRESSED",10] call VCM_fnc_DebugText;
 	
@@ -28,9 +33,10 @@ if (_distance < 2.1) then
 	if (_UnitSupChk + 5 < time) then
 	{
 		_Unit setCombatBehaviour "COMBAT"; 
-		_Unit setUnitCombatMode "YELLOW";
+		_Unit setUnitCombatMode "RED";
 		_Unit enableAI "AUTOCOMBAT";
 		_Unit dotarget _shooter;
+		_Unit doSuppressiveFire _shooter;
 		_Unit setvariable ["VCM_Suptime",time];
 	};
 };

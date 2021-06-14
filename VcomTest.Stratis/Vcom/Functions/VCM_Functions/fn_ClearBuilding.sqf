@@ -28,7 +28,7 @@ if !((lineIntersects [ATLToASL _Start, ATLToASL _End])) exitwith{};
 private _Building = _nBuildingLst#0;
 
 
-if (VCM_Debug) then {systemchat format ["IS ENTERABLE: %2: %1",([_Building] call BIS_fnc_isBuildingEnterable),_Building];};
+if (VCM_DebugOld) then {systemchat format ["IS ENTERABLE: %2: %1",([_Building] call BIS_fnc_isBuildingEnterable),_Building];};
 
 private _SquadFSM = _Squad getvariable "VCOM_FSMH";
 _SquadFSM setFSMVariable ["_ActivelyClearing",true];
@@ -113,12 +113,12 @@ else
 	} foreach _DoorA;	
 };
 
-if (VCM_Debug) then {systemchat format ["_JustPositions: %1",(count _JustPositions)]};
+if (VCM_DebugOld) then {systemchat format ["_JustPositions: %1",(count _JustPositions)]};
 
 if (count _JustPositions < 1) exitwith {_SquadFSM setFSMVariable ["_ActivelyClearing",false];};
 
 
-if (VCM_Debug) then {systemchat format ["_JustPositions: %1",(count _JustPositions)]};
+if (VCM_DebugOld) then {systemchat format ["_JustPositions: %1",(count _JustPositions)]};
 
 
 //Order the 1st unit to go to the correct position

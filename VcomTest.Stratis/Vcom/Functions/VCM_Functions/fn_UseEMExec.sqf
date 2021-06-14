@@ -18,7 +18,7 @@ if (count _IObjA > 0) then
 	private _IObj = _IObjA#0#2;
 	
 	
-	if (VCM_Debug) then
+	if (VCM_DebugOld) then
 	{
 		_abcd2 = createVehicle ["Sign_Arrow_Green_F", _IPos, [], 0, "can_collide"];
 		_abcd2 setposasl _IPos;
@@ -63,7 +63,7 @@ if (count _IObjA > 0) then
 	} foreach _list2;					
 	
 	
-	if (VCM_Debug) then
+	if (VCM_DebugOld) then
 	{
 		[[_IObj],  [1,0,1,1], true] call BIS_fnc_drawBoundingBox;
 	};					
@@ -79,7 +79,7 @@ if (count _IObjA > 0) then
 			_IPos = AGLtoASL (_IPos getPos [0.5,(_IPos getDir _Unit)]);
 			
 			
-			if (VCM_Debug) then
+			if (VCM_DebugOld) then
 			{
 				_abcd = createVehicle ["Sign_Arrow_F", _IPos, [], 0, "can_collide"];
 				_abcd setposasl _IPos;

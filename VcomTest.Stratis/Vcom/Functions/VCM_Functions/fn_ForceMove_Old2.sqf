@@ -54,7 +54,7 @@ if (_NearbyCover isEqualTo []) exitWith
 				_Unit doWatch _TargetE;
 				_Unit doSuppressiveFire _TargetE;
 			};
-			if (vcm_Debug) then {[_Unit,"LOOKING TO FIRE"] call VCM_fnc_DebugText;};
+			if (VCM_DebugOld) then {[_Unit,"LOOKING TO FIRE"] call VCM_fnc_DebugText;};
 		};
 	} foreach (units _LGroup);
 };
@@ -115,9 +115,9 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 					doStop _unit;_unit domove (getposATL _Unit);
 					_Unit forceSpeed -1;				
 					_Unit doMove _Pos;
-					If (VCM_Debug) then {[_unit,"MOVING TO POSITION - A"] call VCM_fnc_DebugText;};
+					If (VCM_DebugOld) then {[_unit,"MOVING TO POSITION - A"] call VCM_fnc_DebugText;};
 				};
-					if (VCM_Debug) then
+					if (VCM_DebugOld) then
 					{
 						private _CustomPos = [(_FinalPos#0),(_FinalPos#1),((_FinalPos#2)+10)];
 						private _veh = createVehicle ["Sign_Arrow_Large_Green_F", _CustomPos, [], 0, "CAN_COLLIDE"];
@@ -160,12 +160,12 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 						_unit forceSpeed -1;				
 						_Unit doMove _Pos;
 						
-						If (VCM_Debug) then {[_Unit,"MOVING TO POSITION - B"] call VCM_fnc_DebugText;};
+						If (VCM_DebugOld) then {[_Unit,"MOVING TO POSITION - B"] call VCM_fnc_DebugText;};
 					};
 		
 	
 					
-					if (VCM_Debug) then
+					if (VCM_DebugOld) then
 					{		
 						private _CustomPos = [(_FinalPos#0),(_FinalPos#1),((_FinalPos#2)+10)];
 						private _veh = createVehicle ["Sign_Arrow_Large_Green_F", _CustomPos, [], 0, "CAN_COLLIDE"];
@@ -185,7 +185,7 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 						doStop _unit;_unit domove (getposATL _Unit);
 						_unit forceSpeed -1;
 						_Unit doMove _Pos;
-						If (VCM_Debug) then {[_unit,"MOVING TO POSITION - C"] call VCM_fnc_DebugText;};
+						If (VCM_DebugOld) then {[_unit,"MOVING TO POSITION - C"] call VCM_fnc_DebugText;};
 					};			
 					
 				};
@@ -208,7 +208,7 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 				_Unit doWatch _TargetE;
 				_Unit doSuppressiveFire _TargetE;
 			};
-			if (vcm_Debug) then {[_Unit,"LOOKING TO FIRE"] call VCM_fnc_DebugText;};
+			if (VCM_DebugOld) then {[_Unit,"LOOKING TO FIRE"] call VCM_fnc_DebugText;};
 		};
 	} foreach (units _LGroup);
 	
@@ -223,7 +223,7 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 		{
 			{
 				_x params ["_Unit","_Pos"];
-				If (VCM_Debug) then {[_Unit,(format ["MOVING: %1 M",(_Unit distance2D _Pos)])] call VCM_fnc_DebugText;};
+				If (VCM_DebugOld) then {[_Unit,(format ["MOVING: %1 M",(_Unit distance2D _Pos)])] call VCM_fnc_DebugText;};
 				//private _EnemyList = ((getPos _Unit) nearEntities ["Man", 100]) select {[(side _x),(side _Unit)] call BIS_fnc_sideIsEnemy};
 				private _EnemyList = _Unit targets [true,1000];
 				{
@@ -264,7 +264,7 @@ if (count _CoverObjects > 0 && {!(_WPos isEqualTo [0,0,0])}) then
 						_this setCombatBehaviour "COMBAT";
 						doStop _this;_this domove (getposATL _this);
 						_this forceSpeed 0;
-						if (vcm_Debug) then {[_this,"SET"] call VCM_fnc_DebugText;};
+						if (VCM_DebugOld) then {[_this,"SET"] call VCM_fnc_DebugText;};
 					};
 					_MoveArray deleteAt _foreachIndex;
 				};
@@ -283,7 +283,7 @@ else
 		_x forceSpeed -1;
 		doStop _x;_x domove (getposATL _x);
 		_x domove _WPos;
-		If (VCM_Debug) then {[_x,"MOVING TO POSITION - D"] call VCM_fnc_DebugText;};
+		If (VCM_DebugOld) then {[_x,"MOVING TO POSITION - D"] call VCM_fnc_DebugText;};
 		if (random 100 < 50) then
 		{
 			private _Unit = _x;
@@ -301,7 +301,7 @@ else
 				_Unit doWatch _TargetE;
 				_Unit doSuppressiveFire _TargetE;
 			};
-			if (vcm_Debug) then {[_Unit,"LOOKING TO FIRE"] call VCM_fnc_DebugText;};
+			if (VCM_DebugOld) then {[_Unit,"LOOKING TO FIRE"] call VCM_fnc_DebugText;};
 		};
 	} foreach (units _LGroup);
 };

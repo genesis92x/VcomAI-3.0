@@ -36,7 +36,7 @@ private _behind = _ent modelToWorld [0,(-(_maxLength)/_div),0];
 private _ClstPos = [[_left,_right,_front,_behind],_unit,true,"NrstPos"] call VCM_fnc_ClstObj;
 
 
-if (VCM_Debug) then
+if (VCM_DebugOld) then
 {
 	{
 		_CustomPos = [(_x#0),(_x#1),((_x#2)+15)];

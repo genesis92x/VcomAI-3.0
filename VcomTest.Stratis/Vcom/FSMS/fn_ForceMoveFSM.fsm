@@ -3,11 +3,11 @@
 /*
 item0[] = {"Begin_State",0,250,0.000000,700.000000,100.000000,750.000000,0.000000,"Begin State"};
 item1[] = {"True",8,218,0.000000,600.000000,100.000000,650.000000,0.000000,"True"};
-item2[] = {"Check_State",2,4346,0.000000,500.000000,100.000000,550.000000,0.000000,"Check State"};
+item2[] = {"Check_State",2,250,0.000000,500.000000,100.000000,550.000000,0.000000,"Check State"};
 item3[] = {"Wait",4,218,125.000000,500.000000,225.000000,550.000000,1.000000,"Wait"};
 item4[] = {"At_Point",4,218,0.000000,400.000000,100.000000,450.000000,3.000000,"At" \n "Point"};
 item5[] = {"Dead",4,218,-100.000000,400.000000,0.000000,450.000000,4.000000,"Dead"};
-item6[] = {"End",1,250,0.000000,225.000000,100.000000,275.000000,0.000000,"End"};
+item6[] = {"End",1,4346,0.000000,225.000000,100.000000,275.000000,0.000000,"End"};
 item7[] = {"Timeout",4,218,100.000000,400.000000,200.000000,450.000000,2.000000,"Timeout"};
 item8[] = {"Near_Enemy",4,218,200.000000,400.000000,300.000000,450.000000,1.000000,"Near" \n "Enemy"};
 item9[] = {"End_1",1,250,200.000000,225.000000,300.000000,275.000000,0.000000,"End"};
@@ -27,8 +27,8 @@ link10[] = {5,6};
 link11[] = {7,6};
 link12[] = {8,9};
 link13[] = {10,11};
-globals[] = {0.000000,0,0,0,0,640,480,2,668,6316128,1,-200.542877,408.265259,787.760315,186.267639,740,615,1};
-window[] = {0,-1,-1,-32000,-32000,906,218,1673,119,1,758};
+globals[] = {0.000000,0,0,0,0,640,480,2,668,6316128,1,-225.417191,475.136780,786.542908,204.325745,740,615,1};
+window[] = {0,-1,-1,-1,-1,1021,234,1689,234,1,758};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -88,7 +88,7 @@ class FSM
                          "};" \n
                          "" \n
                          "" \n
-                         "if (VCM_Debug) then" \n
+                         "if (VCM_DebugCombatMove) then" \n
                          "{" \n
                          "	_CustomPos = [(_Position#0),(_Position#1),((_Position#2)+15)];" \n
                          "	private _veh = createVehicle [""Sign_Arrow_Large_Green_F"", _CustomPos, [], 0, ""CAN_COLLIDE""];" \n
@@ -172,11 +172,11 @@ class FSM
                 {
                         name = "End";
                         itemno = 6;
-                        init = /*%FSM<STATEINIT""">*/"if !(_NoWait) then {_Unit spawn {sleep 5;_this forcespeed 0;};} else {_Unit forcespeed 0;};" \n
+                        init = /*%FSM<STATEINIT""">*/"if !(_NoWait) then {_Unit spawn {sleep 1.5;_this forcespeed 0;};} else {_Unit forcespeed 0;};" \n
                          "_Unit setCombatBehaviour ""COMBAT""; " \n
                          "_Unit setUnitCombatMode ""YELLOW"";" \n
                          "_Unit enableAI ""AUTOCOMBAT"";" \n
-                         "if (VCM_Debug) then {systemchat ""ForceMoveFSM: END2"";};"/*%FSM</STATEINIT""">*/;
+                         "if (VCM_DebugCombatMove) then{[_Unit,""MADE TO POSITION"",10] call VCM_fnc_DebugText;};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -193,7 +193,7 @@ class FSM
                          "_Unit enableAI ""AUTOCOMBAT"";" \n
                          "_Unit forcespeed -1;" \n
                          "_Unit dotarget _NrstEnemy;" \n
-                         "if (VCM_Debug) then {systemchat ""ForceMoveFSM: END3"";};"/*%FSM</STATEINIT""">*/;
+                         "if (VCM_DebugCombatMove) then{[_Unit,(format [""SEEN TARGET: %1"",_NrstEnemy]),10] call VCM_fnc_DebugText;};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -207,7 +207,7 @@ class FSM
                         itemno = 11;
                         init = /*%FSM<STATEINIT""">*/"_Unit setUnitCombatMode ""YELLOW"";" \n
                          "_Unit forcespeed -1;" \n
-                         "if (VCM_Debug) then {systemchat ""ForceMoveFSM: END1"";};"/*%FSM</STATEINIT""">*/;
+                         "if (VCM_DebugCombatMove) then{[_Unit,""CLEARING STRUCTURE"",10] call VCM_fnc_DebugText;};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {

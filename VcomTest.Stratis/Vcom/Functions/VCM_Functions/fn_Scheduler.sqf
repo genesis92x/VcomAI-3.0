@@ -3,14 +3,6 @@ private _T2 = time + 10;
 
 waituntil
 {
-
-	//Every 1 second
-	if (time > _T1) then
-	{
-		[] call VCM_fnc_CoverControl;
-		_T1 = time + 1;
-	};
-	
 	//Every 10 seconds
 	if (time > _T2) then
 	{

@@ -1,7 +1,29 @@
 Dev Build Changes
 
--V2.1-
-Fix: Small bugfixes
+-V4-
+ Fix: When a squad has VCOM deactived, their VCOM event handlers will also be removed.
+ Fix: Disabled VCOM from changing skills of AI in players group
+ Fix: More checks for Vcom exiting when the squad leader is a player
+ Fix: Removed AI Suppress Player function, as it was now replaced
+ Fix: Further imrpoved AI returning fire
+ Fix: Increased distance that bullets suppress AI (Suppression forces AI to return fire and break their current movement)
+ Removed: sniper AI, will be reworking and adding in back later
+ New: Combat Movement debug mode added
+ 
+ 
+-V3.1-
+Fix: Attempted fix for headless clients and AI not creating waypoints or engaging properly.
+
+-V3-
+New: Added new AI suppression script: This will make AI respond to fire quicker when being ordered to move
+Change: Improved AI behavior for clearing building
+Change: Optimized scripts for detecting closest enemies
+New: Added debug text for suppression
+Change: Tweak how AI throw grenades
+Fix: Grenade % throw chance implemented correctly. This % is checked when an AI is hit and when a squad is moving during combat
+New: Idle animations improved: Added two more animations, animations cancel when AI squad is engaged. Optimized idle animations script
+Change: Tweaked AI movement during combat.
+Change: Tweaked AI firing during combat, AI will respond quicker to close spotted targets or when getting suppressed at further distances.
 
 -V2-
 New: Reintroduced VCM_fnc_3DPathDebug function to track AI movement

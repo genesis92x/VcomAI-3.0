@@ -37,6 +37,9 @@ class VCOM
 		//[] spawn VCM_fnc_VcomInit;
 		class VcomInit {preInit = 1;};
 		
+		//[] spawn VCM_fnc_AfterInit;
+		class AfterInit {postInit = 1;};
+
 		// [unitToRearm, rearmLocation] spawn VCM_fnc_ActRearm
 		class ActRearm {};
 		
@@ -241,6 +244,8 @@ class VCOM
 		//[] spawn VCM_fnc_AISuppressed;
 		class AISuppressed {};
 		
+		//[] call VCM_fnc_WeaponDefine;
+		class WeaponDefine {postInit = 1;};
 	};		
 
 };
