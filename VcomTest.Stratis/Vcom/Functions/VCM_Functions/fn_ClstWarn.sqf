@@ -15,6 +15,8 @@
 
 params ["_unit","_killer"];
 
+if !(alive _killer ) exitWith {};
+
 private _unitGroup = (group _unit);
 
 //If the squad is a TOUGH SQUAD, we just exit here.
